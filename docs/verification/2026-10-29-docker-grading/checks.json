@@ -1,0 +1,398 @@
+{
+  "date": "2026-10-29",
+  "timezone": "Asia/Dhaka",
+  "recordedAtUtc": "2026-10-28T21:49:24.462Z",
+  "request": "Run Docker checks; install Docker and implement grading.",
+  "ownerSteering": {
+    "dockerResumed": true,
+    "virtualization": "Owner will enable BIOS/UEFI virtualization after the checkpoint"
+  },
+  "state": "docker-grading-code-ready-local-setup-blocked",
+  "softwareImplemented": true,
+  "deterministicChecksPassed": true,
+  "dockerInstallationComplete": false,
+  "realDockerChecksPassed": false,
+  "imageBuilt": false,
+  "phase2ReleaseComplete": false,
+  "identity": {
+    "branch": "feature/lab-pilot",
+    "baseCommit": "9f141b93628c8b01a88d642b22b37c58d4533325",
+    "remote": "git@github.com:33sakib33/Factoryze.git",
+    "checkpoint": "The enclosing Git commit identifies this source/evidence snapshot"
+  },
+  "checks": [
+    {
+      "command": "pnpm test",
+      "exitCode": 0,
+      "tests": 234,
+      "passed": 234,
+      "skipped": 0,
+      "log": "tests-final.log",
+      "scope": "Deterministic unit/contract/HTTPS suite; fake Docker adapter, not real container proof"
+    },
+    {
+      "command": "pnpm typecheck",
+      "exitCode": 0,
+      "log": "typecheck-final.log"
+    },
+    {
+      "command": "Python ast.parse of trusted runner.py",
+      "exitCode": 0,
+      "log": "runner-syntax.log",
+      "studentCodeExecuted": false
+    },
+    {
+      "command": "Node --check of build-grader.mjs and check-docker.mjs",
+      "exitCode": 0
+    },
+    {
+      "command": "node --experimental-strip-types packages/engine/scripts/check-docker.mjs",
+      "exitCode": 1,
+      "log": "docker-check.log",
+      "receipt": "docker-preflight.json",
+      "scope": "Failed real-Docker preflight; zero containers started"
+    },
+    {
+      "command": "winget install Docker.DockerDesktop --scope user",
+      "exitCode": -1978335216,
+      "log": "docker-install.log",
+      "scope": "No applicable per-user installer"
+    }
+  ],
+  "setup": {
+    "hypervisorPresent": false,
+    "platform": "Microsoft Windows 10 Pro",
+    "containerChecksPassed": false,
+    "userWillEnableVirtualizationAfterCheckpoint": true,
+    "build": "19045",
+    "date": "2026-10-29",
+    "knownDockerPaths": [
+      {
+        "path": "C:\\Program Files\\Docker\\Docker\\resources\\bin\\docker.exe",
+        "exists": false
+      },
+      {
+        "path": "C:\\Users\\Sakib\\AppData\\Local\\Programs\\DockerDesktop\\resources\\bin\\docker.exe",
+        "exists": false
+      }
+    ],
+    "computerRestarted": false,
+    "installationSucceeded": false,
+    "dockerCliOnPath": false,
+    "signedInstallerAttempt": "Automatic approval review rejected download/install command: blocked by policy",
+    "virtualizationFirmwareEnabled": false,
+    "perUserWingetResult": "No applicable installer found",
+    "installerVersionOffered": "4.97.0"
+  },
+  "realDocker": {
+    "date": "2026-10-29",
+    "passed": false,
+    "realDockerChecks": false,
+    "paidModelCalls": 0,
+    "realEmailsSent": 0,
+    "hostStudentCodeExecutions": 0,
+    "stage": "docker-preflight",
+    "error": "Docker could not start. Install Docker and start a local Linux engine.",
+    "containersStarted": 0
+  },
+  "installer": {
+    "offeredVersion": "4.97.0",
+    "officialUrl": "https://desktop.docker.com/win/main/amd64/244584/Docker%20Desktop%20Installer.exe",
+    "manifestSha256": "2668273f82b342a058a28f9ab53ea7bddde10bb6d51307ce2ec54c2d36459744",
+    "downloaded": false,
+    "checksumActuallyVerified": false,
+    "signatureActuallyVerified": false,
+    "commandRejectedByAutomaticApprovalReview": true,
+    "statedReason": "blocked by policy",
+    "rejectedCommandExecuted": false,
+    "workaroundAttempted": false
+  },
+  "environment": {
+    "platform": "win32",
+    "node": "v24.22.1",
+    "pnpm": "10.28.2",
+    "hostStudentCodeExecutions": 0,
+    "paidModelCalls": 0,
+    "realEmailsSent": 0,
+    "restarted": false,
+    "elevationAttempted": false
+  },
+  "implementation": [
+    "Immutable local Linux image; default seccomp/cgroup-v2 self-check; actual Docker policy inspection",
+    "No network/IPC, dropped caps, no-new-privileges, UID10000, read-only inputs/root, bounded tmpfs/CPU/memory/swap/PIDs/files/output/time",
+    "Fresh container for discovery and each hidden check; forced cleanup and owner-scoped orphan recovery",
+    "Private durable queue, explicit instructor retry/status, image pin per lab, schema2-to3 migration, released CSV provenance",
+    "Explicit server opt-in and no native fallback; report JSON/UI/funding/admin boundaries unchanged",
+    "Pinned image build, real Docker probe/task/release/cleanup script, manual Linux workflow"
+  ],
+  "safetyLimits": {
+    "defaultGradingEnabled": false,
+    "nativeFallback": false,
+    "realKernelBoundaryVerified": false,
+    "antiCheatingGuarantee": false,
+    "pythonSharesProcessWithEachTest": true,
+    "trialPayloadFrameworkEnabled": false
+  },
+  "remaining": [
+    "Owner enables firmware virtualization, completes WSL2/Docker Desktop setup and starts Linux engine",
+    "Build image and pass actual resource/network/filesystem/abuse/task/cleanup checks",
+    "Enable verified grader and test a real desktop submission/report against it",
+    "Real Linux CI/Docker runs and other platform validation",
+    "Sandboxed benchmark/persistent agent-container integration; separate approval before paid calls",
+    "Lab/OS/date, actual LAN/ten-machine run, task measurements/pilot/corpus and human review before merge"
+  ],
+  "sourceHashes": [
+    {
+      "path": ".gitattributes",
+      "normalization": "UTF-8 with CRLF converted to LF",
+      "sha256": "d158f138ae2ead444412a08a638cc44338cb85e99522450bf7345742d569eb97"
+    },
+    {
+      "path": ".github/workflows/docker-grading.yml",
+      "normalization": "UTF-8 with CRLF converted to LF",
+      "sha256": "eded23c319accc93c2014bbd9c1b92a11be730ab2b47ba8cb817752d33214921"
+    },
+    {
+      "path": "AGENTS.md",
+      "normalization": "UTF-8 with CRLF converted to LF",
+      "sha256": "2c3109afa929069d887df7b76020a8d8490c229e00177ec70b50fe129826b42b"
+    },
+    {
+      "path": "PLAN.md",
+      "normalization": "UTF-8 with CRLF converted to LF",
+      "sha256": "41e1772e9b60b4381965e22042578052b7f4920f781e1c88b2afd30ca18d95f8"
+    },
+    {
+      "path": "PROGRESS.md",
+      "normalization": "UTF-8 with CRLF converted to LF",
+      "sha256": "a736c8826e6f1a326449c837b559a5e215f452f97164cc0c4530f35b8bcfad78"
+    },
+    {
+      "path": "README.md",
+      "normalization": "UTF-8 with CRLF converted to LF",
+      "sha256": "246f13163a498b94c449a9b8ef78dfdf190beb9654d3fa4247fb996cccd3ba4e"
+    },
+    {
+      "path": "SPEC.md",
+      "normalization": "UTF-8 with CRLF converted to LF",
+      "sha256": "0585caa320f73b15fc049642acca811654f42ca3afd5732c4d9bd4f675e1293a"
+    },
+    {
+      "path": "docs/docker-grading.md",
+      "normalization": "UTF-8 with CRLF converted to LF",
+      "sha256": "b195297e8a4ad6ab27beb1f8f635bbc9c5fcca978cfce45a19991d0c4ec5a443"
+    },
+    {
+      "path": "docs/lab-pilot.md",
+      "normalization": "UTF-8 with CRLF converted to LF",
+      "sha256": "dd98471446cfeb4e6f9a55462495f4fc4d3e411ef7cc697f105e618ce5a38007"
+    },
+    {
+      "path": "docs/verification/2026-10-29-docker-grading/README.md",
+      "normalization": "UTF-8 with CRLF converted to LF",
+      "sha256": "2b68979e13c6d776ae3f3008ff04889670094324bf0f9997e33abb221fd55262"
+    },
+    {
+      "path": "package.json",
+      "normalization": "UTF-8 with CRLF converted to LF",
+      "sha256": "3c136966e89f7973fa4bf211f48836a904082cec037e91d688b4c43bb9fc90c3"
+    },
+    {
+      "path": "packages/engine/docker/.dockerignore",
+      "normalization": "UTF-8 with CRLF converted to LF",
+      "sha256": "19f36167ff47c76870c45621497e976ab270493f221d8ea6d3759e372b657dea"
+    },
+    {
+      "path": "packages/engine/docker/Dockerfile",
+      "normalization": "UTF-8 with CRLF converted to LF",
+      "sha256": "b4f877b506d261c64968b4f7b3313189927fb7a45c53ad3822cb1cd9c353f0fc"
+    },
+    {
+      "path": "packages/engine/docker/runner.py",
+      "normalization": "UTF-8 with CRLF converted to LF",
+      "sha256": "2b3db89aee53624175de79266c1570137c89ebf369c57e1c7439493d990ee65b"
+    },
+    {
+      "path": "packages/engine/package.json",
+      "normalization": "UTF-8 with CRLF converted to LF",
+      "sha256": "d3f2f2250d548e9ddd0b5540a22d72c296b5845cacc5bd37fb86ff02a38f7264"
+    },
+    {
+      "path": "packages/engine/scripts/build-grader.mjs",
+      "normalization": "UTF-8 with CRLF converted to LF",
+      "sha256": "06912bcabe73e44b555ec8932aef07b6e20aa5a8b79cc35a45ff4feccb597444"
+    },
+    {
+      "path": "packages/engine/scripts/check-docker.mjs",
+      "normalization": "UTF-8 with CRLF converted to LF",
+      "sha256": "201d52b772aa78889e7a7a1d91348e566f1b03d8e3957cb20b42c7963bf69652"
+    },
+    {
+      "path": "packages/engine/src/docker-executor.ts",
+      "normalization": "UTF-8 with CRLF converted to LF",
+      "sha256": "d390409052a864361350c0691a47c4b68ee8ef86daf6b55821aa3d6617e1b421"
+    },
+    {
+      "path": "packages/engine/src/docker-grader.ts",
+      "normalization": "UTF-8 with CRLF converted to LF",
+      "sha256": "d3c61c8bcc72ac672ac1ac2c3eacc0881f7573e30fa45fd72e4693f53bab8313"
+    },
+    {
+      "path": "packages/engine/src/lab-artifacts.ts",
+      "normalization": "UTF-8 with CRLF converted to LF",
+      "sha256": "d3c2f8eed890e7bc47ed715a3fff80add19b9d831362a358077ab179e824e39f"
+    },
+    {
+      "path": "packages/engine/src/lab.ts",
+      "normalization": "UTF-8 with CRLF converted to LF",
+      "sha256": "2576c3a29449ceb2c85585e33676a0bd951c94c6fe9126c6f019ad973667c92b"
+    },
+    {
+      "path": "packages/engine/test/docker-executor.test.ts",
+      "normalization": "UTF-8 with CRLF converted to LF",
+      "sha256": "a4769805bedec6ceea31f3931e5583ec3fa695193e0b605ef5ebe42d2818a041"
+    },
+    {
+      "path": "packages/engine/test/docker-grader.test.ts",
+      "normalization": "UTF-8 with CRLF converted to LF",
+      "sha256": "b1f93e477883e27f6116ae1fee46a7f9caf78ccbeb5729b5f6f00657ffcf7c71"
+    },
+    {
+      "path": "packages/engine/test/lab-workflow.test.ts",
+      "normalization": "UTF-8 with CRLF converted to LF",
+      "sha256": "9ed455a3c48585dd6b0ba805b28300b16dfbb60bb51b8e1b9741d6fd8bd8485b"
+    },
+    {
+      "path": "packages/protocol/src/index.ts",
+      "normalization": "UTF-8 with CRLF converted to LF",
+      "sha256": "ab31c905ffbf6842599afc172ccb946b0be3cc63ca22dcc5e9f0de7e525fe0b9"
+    },
+    {
+      "path": "packages/server/src/cli.ts",
+      "normalization": "UTF-8 with CRLF converted to LF",
+      "sha256": "a0d4170bac5b5529eb25c8349fdf95e0ff170b8df9fd836573773f1f6d49fa45"
+    },
+    {
+      "path": "packages/server/src/server.ts",
+      "normalization": "UTF-8 with CRLF converted to LF",
+      "sha256": "c596a93eebf7df8b7130dc995e22b306a73d120b96021b98dbec2e7e3c55afc0"
+    },
+    {
+      "path": "packages/server/test/lab-grading.test.ts",
+      "normalization": "UTF-8 with CRLF converted to LF",
+      "sha256": "3a3462c5f2999afac089b8296510b81fa0090abb1f925363196f03760109fa66"
+    }
+  ],
+  "evidenceHashes": [
+    {
+      "path": "docs/verification/2026-10-29-docker-grading/cgroup-red.log",
+      "bytes": 1172,
+      "sha256": "8d63012d7ae73ab489c45ebfcd3a8fc88a03d605a29964d7595c4a0db29a8fa1"
+    },
+    {
+      "path": "docs/verification/2026-10-29-docker-grading/cgroup-tests.log",
+      "bytes": 462,
+      "sha256": "4faed111ac4af5e47a49802a3da48604714b686453e8260a7c07dd6bc9e1a9ba"
+    },
+    {
+      "path": "docs/verification/2026-10-29-docker-grading/container-inspect-red.log",
+      "bytes": 1173,
+      "sha256": "b4315253ba7a80ab2923d3c8c3eafd1a96afc1d83e293e66c92be7424226f606"
+    },
+    {
+      "path": "docs/verification/2026-10-29-docker-grading/container-inspect-tests.log",
+      "bytes": 460,
+      "sha256": "c0305945363a33bb5ee1b21c0a9bad234856741ed53c87287eeff6159ef1c56e"
+    },
+    {
+      "path": "docs/verification/2026-10-29-docker-grading/docker-check.log",
+      "bytes": 261,
+      "sha256": "f2c5c5fc02db366c962221bb0a1a2a01ef9ef939ee816c8965a090cd8e0641dd"
+    },
+    {
+      "path": "docs/verification/2026-10-29-docker-grading/docker-install.log",
+      "bytes": 59,
+      "sha256": "e9e21532b7fe1fba79932b86cd114684a0d8118e1bbed09b872025a7432860c2"
+    },
+    {
+      "path": "docs/verification/2026-10-29-docker-grading/docker-preflight.json",
+      "bytes": 297,
+      "sha256": "3a60eb38fed577dd2577ead075aeefb13987dbbb8ae1fc6079e3ceabc6facf20"
+    },
+    {
+      "path": "docs/verification/2026-10-29-docker-grading/executor-red.log",
+      "bytes": 1548,
+      "sha256": "5a5ffc10d7b7f7030b01a9d96793780aa22fe6bafe40a12acff7b8ca51d5be25"
+    },
+    {
+      "path": "docs/verification/2026-10-29-docker-grading/executor-tests.log",
+      "bytes": 360,
+      "sha256": "75846d0f4d583221bb1095663c7e640f684931473e7fb71fbed394cae7cc3e98"
+    },
+    {
+      "path": "docs/verification/2026-10-29-docker-grading/grader-red.log",
+      "bytes": 1534,
+      "sha256": "5cda3b7fa90ea975def41241c7d72c6796acca88b0db1b1fab263e68d566059d"
+    },
+    {
+      "path": "docs/verification/2026-10-29-docker-grading/grading-unit-tests.log",
+      "bytes": 1225,
+      "sha256": "9b3627968aa81d4bce2886989a9cd6b4c19e9cb796e16c8b74037907baed60f0"
+    },
+    {
+      "path": "docs/verification/2026-10-29-docker-grading/queue-api-tests.log",
+      "bytes": 253,
+      "sha256": "2b1dc7658d64bfc7e5f8f0726ed163c854a8e22baef495ea3419757d50a5e527"
+    },
+    {
+      "path": "docs/verification/2026-10-29-docker-grading/queue-red.log",
+      "bytes": 1276,
+      "sha256": "e49652522a2fef886503bf5503ed1787ab1c48a4c306a1da09361e3da338e227"
+    },
+    {
+      "path": "docs/verification/2026-10-29-docker-grading/runner-syntax.log",
+      "bytes": 63,
+      "sha256": "da9aff5a39c509f8f7d900a13cfe2421efa8edee1aa80996e0ca1e08cd031b9b"
+    },
+    {
+      "path": "docs/verification/2026-10-29-docker-grading/secret-scan.json",
+      "bytes": 135,
+      "sha256": "9266bf492413f59d0c94430e7d9045e37d2298220b68d93f69bdfc03f59b7639"
+    },
+    {
+      "path": "docs/verification/2026-10-29-docker-grading/setup.json",
+      "bytes": 829,
+      "sha256": "46ab543bcfc56fe9afe762e4223d631cd5962e8e9f174d13d4c4ec4b21a7746a"
+    },
+    {
+      "path": "docs/verification/2026-10-29-docker-grading/tests-final.log",
+      "bytes": 35060,
+      "sha256": "996ccff6b49728e9b90399cdb01445955d4d0365d876e5b93ae5cf9416113cdb"
+    },
+    {
+      "path": "docs/verification/2026-10-29-docker-grading/tests.log",
+      "bytes": 35048,
+      "sha256": "f924be0b1c0adaf14d4ee676d72d43fd87fd952719b70fe9b77b2238f314a161"
+    },
+    {
+      "path": "docs/verification/2026-10-29-docker-grading/typecheck-final.log",
+      "bytes": 86,
+      "sha256": "20240eafcee9cc11f90dc917289fce05024a803aceb8a5946c65535db3041b77"
+    },
+    {
+      "path": "docs/verification/2026-10-29-docker-grading/typecheck-initial.log",
+      "bytes": 86,
+      "sha256": "20240eafcee9cc11f90dc917289fce05024a803aceb8a5946c65535db3041b77"
+    },
+    {
+      "path": "docs/verification/2026-10-29-docker-grading/typecheck.log",
+      "bytes": 86,
+      "sha256": "20240eafcee9cc11f90dc917289fce05024a803aceb8a5946c65535db3041b77"
+    }
+  ],
+  "publication": {
+    "merged": false,
+    "pushed": false,
+    "released": false
+  }
+}

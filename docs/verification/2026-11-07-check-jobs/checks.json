@@ -1,0 +1,115 @@
+{
+  "verifiedAt": "2026-11-07T05:40:38.665122+00:00",
+  "scope": "Disabled private-pilot saved-draft public checks: Astro \u2192 Go/MongoDB admission and leases \u2192 private TypeScript controller \u2192 Docker \u2192 private feedback",
+  "platform": "macOS arm64; local Linux arm64 Docker engine",
+  "passed": true,
+  "go": {
+    "command": "go test -count=1 -json ./...",
+    "testAndSubtestPassEvents": 99,
+    "topLevelTests": 72,
+    "failures": 0,
+    "skippedInteractiveTests": [
+      "TestBrowserPreview",
+      "TestInitializePreviewReplica"
+    ],
+    "vetPassed": true,
+    "browserFixtureExplicitlyRun": true
+  },
+  "base": {
+    "command": "pnpm test",
+    "tests": 261,
+    "passed": 261,
+    "failed": 0,
+    "typecheckPassed": true,
+    "node": "22.22.0",
+    "pnpm": "10.28.2"
+  },
+  "frontend": {
+    "regressionTests": 33,
+    "liveTests": 2,
+    "totalPassed": 35,
+    "build": {
+      "passed": true,
+      "errors": 0,
+      "warnings": 0,
+      "hints": 0,
+      "staticRoutes": 10
+    },
+    "automatedAccessibilityAndResponsiveChecks": true,
+    "screenshotsInspected": [
+      ".verification/checks-live.png",
+      ".verification/checks-mobile.png"
+    ]
+  },
+  "liveFlow": {
+    "realDocker": true,
+    "starter": {
+      "revision": 0,
+      "passed": 1,
+      "total": 2
+    },
+    "savedFix": {
+      "revision": 1,
+      "passed": 2,
+      "total": 2
+    },
+    "restoredAfterReload": true,
+    "foreignBrowserDenied": true,
+    "publicSourceUnchanged": true,
+    "cancelledAfterWorkerLease": true,
+    "cleanupAcknowledgedByWorker": true,
+    "draftDeletionRevokedResults": true,
+    "emailClaimAndAccountResumeRegressionPassed": true,
+    "rewardEligible": false,
+    "image": "sha256:7f36a9ff7bd392d95d44124709f6cff3244550eaa15c38ba87f3a7df9ccdf8ad"
+  },
+  "testIsolationCorrection": "The initial combined live run reused one synthetic administrator within the OTP cooldown. The check test now uses a distinct allowlisted synthetic administrator; both live tests pass together. Production OTP policy was unchanged.",
+  "cleanup": {
+    "executorContainersRemaining": 0,
+    "controllerStopped": true,
+    "apiFixtureStopped": true,
+    "astroPreviewStopped": true,
+    "temporaryMongoContainerRemoved": true
+  },
+  "paidModelCalls": 0,
+  "externalEmailsSent": 0,
+  "hostStudentCodeExecutions": 0,
+  "xpGranted": 0,
+  "deployed": false,
+  "merged": false,
+  "limitations": [
+    "Default flags remain off; no public rollout.",
+    "The existing Docker executor is private-pilot tooling, not reviewed hostile-multitenant infrastructure.",
+    "Public tests share the student interpreter; this feedback cannot establish a trusted grade or earn XP.",
+    "Human review of authorization, contract/data and operational boundaries remains before merge or public enablement.",
+    "New Linux/Windows verification, measured capacity, guided AI, immutable trusted submissions and reward accounting remain open."
+  ],
+  "sourceSHA256": {
+    "backend/cmd/server/main.go": "6b08b47dcb2498cae9a0ec7261664718240aa61bd5d61ea9621e83430afa89b3",
+    "backend/internal/checks/contracts.go": "0c189c889729fdcc1f6c930e0bda02b920476ba11f0eb235e78c7da141421076",
+    "backend/internal/checks/contracts_test.go": "db7cd9bc5cfeb27ff587cddbb0e3009d15d299e48b31fc4a5057eb15f1241ca9",
+    "backend/internal/checks/projection.go": "e6186e53c8ac19a440283439604f74c44795a86b82e02887c321442202c98afa",
+    "backend/internal/checks/store.go": "4b329179a265564f4caa170296ee0910554f3f718fde527bdfd465ff4f81bb25",
+    "backend/internal/checks/http.go": "e12a34afe88e0ae3a0337f988ba714a25de0cbc116417125c9a71109595c395d",
+    "backend/internal/trial/checks.go": "faf5c6c66d66cfb9ab8b9d7918de4dfe5a41f5517eeb93d059ca8fcb46808deb",
+    "backend/internal/trial/checks_test.go": "cf8ffc3d8c87bc39da5ce3dc45f47a3b93c599d648e9c549486670e80db56ec9",
+    "backend/internal/trial/attempts.go": "68ec586da3c48bce2cf317898f37606fdbbf45edd8136d6c14a74eaa2d0bf782",
+    "backend/internal/trial/service.go": "6dcf6dab453b32656644d809e62e9b97449b45ede046ff65b028cb656e3399ef",
+    "backend/internal/attempts/store.go": "6353a582f3a5e615035ce3eb6e3fd71c93b35b499afd34cb1895d19c68baa67a",
+    "backend/internal/trial/browser_test.go": "7b3422bd06beaaccbe09bbc7859dd31eea7ba946acf38b5971eb753b92cc8bc5",
+    "backend/internal/trial/community_test.go": "2837a04df29d6ed114a7451d58fc4d0bb3f58c9a5a315b97ca25942f03370a44",
+    "backend/docs/checks.openapi.json": "db1533961dd111dd9679915ffc4ae224d0390c5fba7282f0574091acdfab2c22",
+    "base/packages/protocol/src/browser-checks.ts": "f4267f17114aebacb28abdfaa3dc740d07b1f852031f39f7e0bff57d69569842",
+    "base/packages/engine/src/browser-queue.ts": "840fa6fa2071571ca41e3c557ffa1f23784945e4097d48ebb8fe7a0fa0d86854",
+    "base/packages/engine/test/browser-queue.test.ts": "7a6dc59e8b0edc080c25eb1d655c278b468d3ab30caea96cef06b2110a990674",
+    "base/packages/engine/test/browser-checks.test.ts": "41013ec18b3f13761ec3d5c1e6845d22033c4798af5aaaa46fda424126cfe075",
+    "base/packages/server/scripts/browser-queue-worker.mjs": "b479acfcc0247c9baef8c5f586f566ca7b195649338786fc60d083c76d02ec22",
+    "frontend/src/scripts/draft-checks.ts": "32569aa9e85ecb58c779392aa29ee9a2e0c028b320614e5ed43497cb4e63979f",
+    "frontend/src/scripts/draft.ts": "0084906da68e7b9abaabdda253c128df7c72e504b544f9e0c62e9990b21c916f",
+    "frontend/src/pages/challenges/attempt.astro": "f841698e43d7705e40eb3a173023be6a64e83ce794b800b56e7866d8ee636bf2",
+    "frontend/src/pages/challenges/task.astro": "59399423756dfb1acbc7aaf1957ce8b6a16df82929a4dbb1e79b29020cf4ac60",
+    "frontend/src/styles/draft.css": "d6c92abc079f9be52d147bd1bc42f08d2631ea329051292efd2f9ddf8f8d0fd9",
+    "frontend/tests/checks.spec.ts": "08635e29646e93019b6b864ada7ffd4c76bcb6e8269d2c787971612fd3ac1b51",
+    "frontend/tests/checks-live.spec.ts": "1c35d9fc93c42ee890a7e81f5ba31e9c3863d0061f21ea1a1293096e8e753996"
+  }
+}

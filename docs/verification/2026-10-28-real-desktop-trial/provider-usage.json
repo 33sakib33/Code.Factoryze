@@ -1,0 +1,7 @@
+{
+  "checkedAtUtc": "2026-10-27T23:31:38.616Z",
+  "providerKeyUsageDeltaUsd": 0.0004328,
+  "attribution": "Key-wide usage delta over the test interval; not a per-generation invoice. Other clients using the same key could affect it.",
+  "perGenerationInvoiceVerified": false,
+  "metadataRequestsAreNonInference": true
+}

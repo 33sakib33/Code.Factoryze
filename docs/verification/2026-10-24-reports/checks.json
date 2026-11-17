@@ -1,0 +1,24 @@
+{
+  "date": "2026-10-24",
+  "timezone": "Asia/Dhaka",
+  "baseCommit": "1102835",
+  "branch": "codex/phase1_finale",
+  "scope": "Local uncommitted report implementation and Docker deferral; not a release receipt",
+  "environment": { "platform": "win32", "node": "24.19.0", "pnpm": "8.7.5", "browser": "Chrome 155.0.8059.85" },
+  "checks": [
+    { "command": "pnpm test", "status": "failed_environment", "tests": 187, "passed": 185, "failed": 2, "skipped": 0,
+      "log": "unit-tests.log", "note": "Completed outside the sandbox after the sandboxed run hung at Windows process-tree cleanup. Two existing symlink-creation tests fail with EPERM: harness-tools.test.ts and task-import.test.ts. Tests were not weakened or skipped." },
+    { "command": "node --experimental-strip-types --test packages/engine/test/report-insights.test.ts packages/app/extensions/core/test/report-learning.test.ts packages/protocol/test/contracts.test.ts", "status": "passed", "tests": 19, "log": "focused-tests.log" },
+    { "command": "pnpm typecheck", "status": "passed", "log": "typecheck.log" },
+    { "command": "pnpm --filter @factoryze/app-core build", "status": "passed", "log": "app-core-build.log" },
+    { "command": "pnpm build:app", "status": "blocked_environment", "log": "app-build.log",
+      "note": "Extension compiles. Electron rebuild fails in node-pty with MSB8040: required Visual Studio Spectre-mitigated libraries are missing." },
+    { "command": "pnpm --filter @factoryze/app smoke:installer", "status": "blocked_artifact", "log": "installer-smoke.log",
+      "note": "No .exe installer exists in dist; installed application flow did not run." },
+    { "command": "node mockups/build-report.mjs && node mockups/check-report.mjs", "status": "passed", "receipt": "preview.json",
+      "note": "Shared production report sections/CSS, schema-validated synthetic examples, 1280/683/390 widths, complete/partial/older/manual states, light/dark, text escaping and keyboard controls; zero external requests or page errors." }
+  ],
+  "releaseGatesCleared": false,
+  "notRun": ["macOS and Linux tests/builds/smoke for this slice", "successful Windows packaged/installed smoke", "manual real-provider workflow", "paid benchmarks", "Docker installation or implementation", "human contract review", "workflow dispatch", "commit or release"],
+  "compatibility": { "optionalDraftReportField": "insights", "databaseMigration": false, "newEventType": false, "harnessVersion": "factoryze@0.1.0", "scoringVersionChanged": false, "addedModelCalls": false }
+}

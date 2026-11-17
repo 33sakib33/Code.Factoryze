@@ -1,0 +1,11 @@
+✔ real TLS clients join/reconnect, cannot administer or self-report usage, and observe closure (899.0184ms)
+✔ instructor CLI creates, watches, closes and exports over real HTTPS without leaking its token (2326.4162ms)
+✔ failed initialization does not overwrite an identity or leave partial keys (2.9418ms)
+ℹ tests 3
+ℹ suites 0
+ℹ pass 3
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 3463.6343

@@ -1,0 +1,49 @@
+(node:6864) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///E:/Projects/Factoryze/Factoryze/Factoryze/packages/app/extensions/core/test/harness-tools.test.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to \\?\E:\Projects\Factoryze\Factoryze\Factoryze\packages\app\extensions\core\package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ Windows shells retain OS module/cache locations without inheriting provider keys or another PowerShell module path (1.0526ms)
+✖ harness tools scope reads/searches to the workspace and require a reviewed diff for edits (8.9039ms)
+✔ shell denial never launches a command, approvals cannot overwrite edits made while reviewing (18.6374ms)
+✔ approved shell runs with the task package index and without provider environment credentials (449.2709ms)
+✔ Stop while waiting for approval cancels without a write even if approval arrives later (3.5789ms)
+✔ folder and ZIP imports retain a validated private task snapshot and declared budget (70.9918ms)
+✖ imports reject traversal, symlinks and missing starter files without writing outside the pack (14.8933ms)
+ℹ tests 7
+ℹ suites 0
+ℹ pass 5
+ℹ fail 2
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 3976.6666
+
+✖ failing tests:
+
+test at packages\app\extensions\core\test\harness-tools.test.ts:20:1
+✖ harness tools scope reads/searches to the workspace and require a reviewed diff for edits (8.9039ms)
+  Error: EPERM: operation not permitted, symlink 'C:\Users\Sakib\AppData\Local\Temp\factoryze-tools-BmX43m\outside' -> 'C:\Users\Sakib\AppData\Local\Temp\factoryze-tools-BmX43m\workspace\link'
+      at async symlink (node:internal/fs/promises:1714:10)
+      at async TestContext.<anonymous> (file:///E:/Projects/Factoryze/Factoryze/Factoryze/packages/app/extensions/core/test/harness-tools.test.ts:24:3)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    errno: -4048,
+    code: 'EPERM',
+    syscall: 'symlink',
+    path: 'C:\\Users\\Sakib\\AppData\\Local\\Temp\\factoryze-tools-BmX43m\\outside',
+    dest: 'C:\\Users\\Sakib\\AppData\\Local\\Temp\\factoryze-tools-BmX43m\\workspace\\link'
+  }
+
+test at packages\engine\test\task-import.test.ts:45:1
+✖ imports reject traversal, symlinks and missing starter files without writing outside the pack (14.8933ms)
+  Error: EPERM: operation not permitted, symlink 'C:\Users\Sakib\AppData\Local\Temp\factoryze-import-invalid-iHua5i\bad.zip' -> 'C:\Users\Sakib\AppData\Local\Temp\factoryze-import-invalid-iHua5i\source\workspace\link'
+      at async symlink (node:internal/fs/promises:1714:10)
+      at async TestContext.<anonymous> (file:///E:/Projects/Factoryze/Factoryze/Factoryze/packages/engine/test/task-import.test.ts:53:45)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    errno: -4048,
+    code: 'EPERM',
+    syscall: 'symlink',
+    path: 'C:\\Users\\Sakib\\AppData\\Local\\Temp\\factoryze-import-invalid-iHua5i\\bad.zip',
+    dest: 'C:\\Users\\Sakib\\AppData\\Local\\Temp\\factoryze-import-invalid-iHua5i\\source\\workspace\\link'
+  }

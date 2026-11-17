@@ -1,0 +1,5 @@
+npm WARN config global `--global`, `--local` are deprecated. Use `--location=global` instead.
+
+> factoryze@ typecheck E:\Projects\Factoryze\Factoryze\Factoryze
+> tsc --noEmit
+

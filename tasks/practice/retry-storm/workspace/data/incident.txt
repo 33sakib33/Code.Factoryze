@@ -1,0 +1,15 @@
+Synthetic incident: catalog-sync, 2026-10-09 (all figures invented)
+
+14:05 deployment changes a request field sent to the catalog upstream.
+14:06 upstream begins returning HTTP 400 for that field.
+14:07 inbound work stays near 30 requests/second, but upstream calls climb to
+      about 90 requests/second. Every rejected request is attempted three times.
+14:10 operators pause the deployment and inspect the retry policy.
+
+Sample correlation ID        statuses from one work item
+demo-001                     400, 400, 400
+demo-002                     503, 503, 200
+demo-003                     429, 200
+
+The intended behavior keeps bounded retries for 429 and 503, and returns other
+responses to the caller without amplifying them.

@@ -1,0 +1,14 @@
+{
+  "installerWrapper": {
+    "exitCode": 1,
+    "appFlowPassed": true,
+    "error": "EPERM removing its owned temporary install"
+  },
+  "optionalFollowUp": {
+    "status": "rejected_by_automatic_approval_review",
+    "reason": "blocked by policy",
+    "performed": false,
+    "target": "C:/Users/Sakib/AppData/Local/Temp/factoryze-installer-smoke-lmu9Z5"
+  },
+  "projectWorkCompleted": true
+}

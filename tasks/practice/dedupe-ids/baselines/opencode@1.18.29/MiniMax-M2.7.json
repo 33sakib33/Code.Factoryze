@@ -1,0 +1,40 @@
+{
+  "schema": 1,
+  "taskId": "dedupe-ids",
+  "profile": "opencode@1.18.29",
+  "model": "MiniMax-M2.7",
+  "promptsHash": "e6bb54d10af59d6c7694835a1126e491c81f3a1d344da251b425fc4ffdf8b8eb",
+  "recordedAt": "2026-10-21T06:46:13.377Z",
+  "expert": {
+    "correctness": {
+      "passed": 2,
+      "total": 2
+    },
+    "raw": {
+      "input": 208893,
+      "output": 3011,
+      "cacheRead": 178691,
+      "cacheWrite": 27741
+    },
+    "weightedTokens": 51082.1,
+    "requests": 10,
+    "turns": 1,
+    "elapsedMs": 272051
+  },
+  "naive": {
+    "correctness": {
+      "passed": 2,
+      "total": 2
+    },
+    "raw": {
+      "input": 190381,
+      "output": 1325,
+      "cacheRead": 156219,
+      "cacheWrite": 25580
+    },
+    "weightedTokens": 51108.9,
+    "requests": 8,
+    "turns": 1,
+    "elapsedMs": 151180
+  }
+}

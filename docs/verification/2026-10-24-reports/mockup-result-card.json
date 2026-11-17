@@ -1,0 +1,36 @@
+{
+  "passed": true,
+  "platform": "win32",
+  "browser": "155.0.8059.85",
+  "states": [
+    "complete",
+    "partial",
+    "older",
+    "manual"
+  ],
+  "widths": [
+    1280,
+    683,
+    390
+  ],
+  "lightAndDark": true,
+  "schemaValidation": true,
+  "legacyCostsUnknown": true,
+  "promptHtmlEscaped": true,
+  "keyboardControls": true,
+  "suggestionsRemoved": true,
+  "promptScoringRemoved": true,
+  "summaryLabelsExplained": true,
+  "analysisInFirstDesktopView": true,
+  "resultSticker": true,
+  "checkDetailsModal": true,
+  "failureReasons": true,
+  "failuresShownFirst": true,
+  "passedChecksExpandable": true,
+  "modalEscapeAndFocusReturn": true,
+  "modalBackdropClose": true,
+  "externalRequests": 0,
+  "consoleErrors": 0,
+  "scope": "Mockup-only result reward card and check-details modal",
+  "htmlSha256": "dfa0ffd193d645789cb71928e10f71167dd837be4011573c49e9871381284a94"
+}

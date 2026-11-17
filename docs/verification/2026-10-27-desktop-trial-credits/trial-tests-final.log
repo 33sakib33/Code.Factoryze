@@ -1,0 +1,20 @@
+(node:25660) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///E:/Projects/Factoryze/Factoryze/Factoryze/packages/app/extensions/core/test/trial-connection.test.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to \\?\E:\Projects\Factoryze\Factoryze\Factoryze\packages\app\extensions\core\package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ trial signup exposes only account data, preserves BYOK and survives a desktop restart (22.4453ms)
+✔ gateway renewal is single-flight, short-lived and never rewrites the saved BYOK key (3.9524ms)
+✔ revocation, lack of credit and paused service never fall back to BYOK (5.7074ms)
+✔ trial logout clears the device credential and keeps the saved BYOK connection (2.3347ms)
+✔ an unavailable trial service leaves an explicit BYOK route without selecting it automatically (2.3601ms)
+✔ trial transport uses short-lived authorization, unique idempotency and server output limits without retries (30.2871ms)
+✔ trial failures preserve a safe funding-specific error and never silently retry (0.5323ms)
+✔ program exhaustion is distinct from personal credit and unsafe trial URLs are rejected (1.1688ms)
+ℹ tests 8
+ℹ suites 0
+ℹ pass 8
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 584.1985

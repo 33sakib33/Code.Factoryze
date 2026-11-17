@@ -1,0 +1,5 @@
+{
+  "passed": false,
+  "platform": "win32",
+  "error": "Window controls must not cover or push toolbar buttons outside the window\n+ actual - expected\n\n+ [\n+   'replay (under div#theia-drag-panel.lm-Widget)',\n+   'Settings (under div#theia-drag-panel.lm-Widget)'\n+ ]\n- []\n"
+}

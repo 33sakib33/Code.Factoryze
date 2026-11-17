@@ -1,0 +1,8 @@
+
+> factoryze@ docker:check /Users/sakib/Projects/Factoryze/Factoryze/Factoryze
+> node --experimental-strip-types packages/engine/scripts/check-docker.mjs
+
+(node:40808) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+{"date":"2026-10-29","passed":true,"realDockerChecks":true,"paidModelCalls":0,"realEmailsSent":0,"hostStudentCodeExecutions":0,"image":"sha256:e79d20d59afa6a184267756ad3c87000efcb9ec031ad2471b853c5f6d9100e4d","python":"3.13.18","policy":{"uid":10000,"keyAbsent":true,"socketAbsent":true,"hostFileAbsent":true,"networkBlocked":true,"rootReadonly":true,"inputReadonly":true},"resourceAbuseContained":true,"correctness":{"starter":{"passed":5,"total":9},"fixed":{"passed":9,"total":9}},"queueReleaseCsvVerified":true,"ownedContainersRemaining":0,"containersStarted":26}
+exit=0

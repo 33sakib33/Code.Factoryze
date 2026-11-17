@@ -1,0 +1,5 @@
+{
+  "passed": false,
+  "platform": "win32",
+  "error": "Window controls must not cover or push toolbar buttons outside the window\n+ actual - expected\n\n+ [\n+   'replay (under div#theia-main-content-panel.lm-Widget.lm-DockPanel.lm-SplitPanel-child)',\n+   'Settings (under div.lm-TabBar-tabIcon.codicon.codicon-symbol-class)'\n+ ]\n- []\n"
+}

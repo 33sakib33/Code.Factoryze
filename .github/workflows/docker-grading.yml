@@ -1,0 +1,30 @@
+name: Docker grading
+# Manual, synthetic only. Never uses an upstream provider key or paid inference.
+on:
+  workflow_dispatch:
+jobs:
+  isolated-grader:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10.28.2
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: pnpm
+      - run: sudo apt-get update && sudo apt-get install -y build-essential pkg-config libx11-dev libxkbfile-dev libsecret-1-dev openssl
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm test
+      - run: pnpm typecheck
+      - run: pnpm docker:build
+      - run: pnpm docker:check
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: docker-grading-checks
+          path: |
+            dist/docker-grading-verification/checks.json
+            dist/docker-grader-image.txt

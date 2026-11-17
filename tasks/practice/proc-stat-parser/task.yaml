@@ -1,0 +1,15 @@
+schema: 1
+id: proc-stat-parser
+title: Read a Linux process snapshot
+brief: >
+  A host monitor reads Linux /proc/<pid>/stat records to show process CPU time
+  and startup order. One worker disappears from the dashboard when its process
+  name contains whitespace. Inspect the synthetic incident snapshot and repair
+  the parser without changing the reported field meanings.
+minimumPython: "3.11"
+topics: [linux, observability]
+recommendedKnowledge:
+  - Linux procfs process records
+  - Parsing fields with embedded whitespace
+timeHintMinutes: 25
+entryFile: monitor/proc_stat.py

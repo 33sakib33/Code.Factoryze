@@ -1,0 +1,109 @@
+
+> @factoryze/app@0.0.1 smoke:installer E:\Projects\Factoryze\Factoryze\Factoryze\packages\app
+> node --experimental-strip-types scripts/smoke-installer.mjs
+
+Started an attempt from Home; starter file opened; public tests ran.
+Budget refusal survived New session; raised budget recorded on the second submission.
+Retired tasks stay hidden from Practice; earlier attempts, usage, reports and resubmission survive.
+Folder and ZIP tasks imported and graded in the same window.
+Connected a model from Settings; the retained draft was sent and metered.
+Exhausted budget persisted across restart; reopening the attempt made no request.
+Factoryze
+replay
+File
+Edit
+Selection
+View
+Go
+Terminal
+Help
+0
+0
+Continue
+Show all attempts
+Monthly revenue report
+
+Attempt 2, started just now. Last worked on just now.
+
+Continue
+zip-assessment
+
+Attempt 1, started just now. Last submitted just now: 1 of 1 checks passed.
+
+Continue
+folder-assessment
+
+Attempt 1, started just now. Last submitted just now: 1 of 1 checks passed.
+
+Continue
+Practice tasks
+Open task folder…
+Open task ZIP…
+Library fines
+
+Riverside members say they're charged a day's fine when they return items on the due date in the evening. Morning returns are fine, and Central members haven't complained. Fines must follow each branch's local calendar day. Fix it without changing fine rates or loan periods.
+
+Start
+Monthly revenue report
+
+Finance says the monthly revenue report comes out too low, and the gap is bigger in busier months. Reprinting any single invoice with `python -m billing.cli invoice ORDER_ID` shows the right amount. Fix the report without changing how invoices are priced.
+
+Start
+Results
+Task	Hidden checks	Tokens
+zip-assessment Attempt 1	1 of 1	0
+folder-assessment Attempt 1	1 of 1	0
+Pagination API Attempt 1, submission 2	1 of 1	14
+Stable customer IDs Attempt 3, submission 2	2 of 2	14
+Pagination API Attempt 1, submission 1	1 of 1	14
+Stable customer IDs Attempt 3, submission 1	2 of 2	14
+Library fines Attempt 1, submission 2	9 of 9	3,046
+Library fines Attempt 1, submission 1	9 of 9	42
+node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+
+AssertionError [ERR_ASSERTION]: Window controls must not cover or push toolbar buttons outside the window
++ actual - expected
+
++ [
++   'replay (under div#theia-drag-panel.lm-Widget)',
++   'Settings (under div#theia-drag-panel.lm-Widget)'
++ ]
+- []
+
+    at toolbarAccessible (file:///E:/Projects/Factoryze/Factoryze/Factoryze/packages/app/scripts/smoke-solo.mjs:157:10)
+    at async goHome (file:///E:/Projects/Factoryze/Factoryze/Factoryze/packages/app/scripts/smoke-solo.mjs:170:3)
+    at async file:///E:/Projects/Factoryze/Factoryze/Factoryze/packages/app/scripts/smoke-solo.mjs:555:3 {
+  generatedMessage: false,
+  code: 'ERR_ASSERTION',
+  actual: [
+    'replay (under div#theia-drag-panel.lm-Widget)',
+    'Settings (under div#theia-drag-panel.lm-Widget)'
+  ],
+  expected: [],
+  operator: 'deepStrictEqual',
+  diff: 'simple'
+}
+
+Node.js v24.19.0
+node:fs:1283
+  return binding.rmSync(getValidatedPath(path), opts.maxRetries, opts.recursive, opts.retryDelay);
+                 ^
+
+Error: EPERM, Permission denied: \\?\C:\Users\Sakib\AppData\Local\Temp\factoryze-installer-smoke-y0h5W4 '\\?\C:\Users\Sakib\AppData\Local\Temp\factoryze-installer-smoke-y0h5W4'
+    at rmSync (node:fs:1283:18)
+    at file:///E:/Projects/Factoryze/Factoryze/Factoryze/packages/app/scripts/smoke-installer.mjs:46:3
+    at ModuleJob.run (node:internal/modules/esm/module_job:439:25)
+    at async node:internal/modules/esm/loader:643:26
+    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5) {
+  errno: 1,
+  code: 'EPERM',
+  path: '\\\\?\\C:\\Users\\Sakib\\AppData\\Local\\Temp\\factoryze-installer-smoke-y0h5W4',
+  syscall: 'rm'
+}
+
+Node.js v24.19.0
+E:\Projects\Factoryze\Factoryze\Factoryze\packages\app:
+ ERR_PNPM_RECURSIVE_RUN_FIRST_FAIL  @factoryze/app@0.0.1 smoke:installer: `node --experimental-strip-types scripts/smoke-installer.mjs`
+Exit status 1

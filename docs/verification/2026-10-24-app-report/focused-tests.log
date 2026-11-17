@@ -1,0 +1,32 @@
+(node:10632) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///E:/Projects/Factoryze/Factoryze/Factoryze/packages/app/extensions/core/test/report-learning.test.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to \\?\E:\Projects\Factoryze\Factoryze\Factoryze\packages\app\extensions\core\package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ report analysis separates measured tokens without generating suggestions or prompt scores (1.6832ms)
+✔ legacy prompt costs stay unknown while snapshotted zero and positive costs remain explicit (0.6419ms)
+✔ partial accounting and unavailable history remain visible without suggestions (0.2202ms)
+✔ manual attempts show no model usage and never claim commands prove tests ran (0.1807ms)
+✔ summary facts retain saved usage, multiple models and missing legacy data without invented zeroes (0.9626ms)
+✔ report activity deduplicates updates and groups measured requests by preceding tools without inventing context costs (4.9251ms)
+✔ legacy, incomplete and unknown activity keeps all observed usage and discloses missing history (0.481ms)
+✔ request attribution resets between prompts and sessions, including reused tool IDs (0.2862ms)
+✔ missing prompt history stays unavailable and duplicate request starts preserve the next activity group (0.2987ms)
+✔ activity attribution uses recorded cache weights and reconciled ledger usage instead of stale event counts (28.519ms)
+✔ saved report insights and prompt costs survive later prompts, resubmission and restart without prompt text (200.1003ms)
+✔ report insights are optional for old submissions and enforce bounded count structure (7.3382ms)
+✔ Python check diagnostics are optional and bounded, preserving existing clients (1.9939ms)
+✔ report execution pins are optional for old reports and validate metadata without credentials (2.5609ms)
+✔ connection temperature is optional, finite and bounded without changing old defaults (5.1899ms)
+✔ task packs require schema 1 and a valid Python minimum (0.9874ms)
+✔ task retirement is optional and preserves existing schema 1 manifests (0.3375ms)
+✔ lab config pins an agent profile and keeps keys out of the contract (1.3157ms)
+✔ events are versioned and readers can retain unknown event types (0.8004ms)
+✔ attempt and report summaries carry only counts, never prompts or keys (2.045ms)
+ℹ tests 20
+ℹ suites 0
+ℹ pass 20
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 678.543

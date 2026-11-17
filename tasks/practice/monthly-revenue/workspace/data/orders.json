@@ -1,0 +1,253 @@
+{
+  "products": [
+    {
+      "sku": "KB-100",
+      "name": "Mechanical keyboard",
+      "unit_price_cents": 8999,
+      "category": "electronics"
+    },
+    {
+      "sku": "MS-200",
+      "name": "Wireless mouse",
+      "unit_price_cents": 2450,
+      "category": "electronics"
+    },
+    {
+      "sku": "CB-USB",
+      "name": "USB-C cable",
+      "unit_price_cents": 899,
+      "category": "electronics"
+    },
+    {
+      "sku": "NB-A5",
+      "name": "A5 notebook",
+      "unit_price_cents": 375,
+      "category": "stationery"
+    },
+    {
+      "sku": "PEN-BL",
+      "name": "Gel pen, blue",
+      "unit_price_cents": 145,
+      "category": "stationery"
+    },
+    {
+      "sku": "TEA-GR",
+      "name": "Green tea, 50 bags",
+      "unit_price_cents": 1299,
+      "category": "groceries"
+    },
+    {
+      "sku": "COF-BN",
+      "name": "Coffee beans, 1 kg",
+      "unit_price_cents": 3150,
+      "category": "groceries"
+    },
+    {
+      "sku": "DSK-LMP",
+      "name": "Desk lamp",
+      "unit_price_cents": 4575,
+      "category": "home"
+    }
+  ],
+  "customers": [
+    {
+      "id": "C1",
+      "name": "Avery Chen",
+      "region": "north",
+      "tier": "gold"
+    },
+    {
+      "id": "C2",
+      "name": "Bilal Haddad",
+      "region": "south",
+      "tier": "silver"
+    },
+    {
+      "id": "C3",
+      "name": "Carmen Ruiz",
+      "region": "south",
+      "tier": "standard"
+    },
+    {
+      "id": "C4",
+      "name": "Dana Okafor",
+      "region": "export",
+      "tier": "standard"
+    }
+  ],
+  "orders": [
+    {
+      "id": "O-1001",
+      "customer_id": "C3",
+      "placed_on": "2026-03-02",
+      "lines": [
+        {
+          "sku": "NB-A5",
+          "quantity": 4
+        },
+        {
+          "sku": "PEN-BL",
+          "quantity": 12
+        },
+        {
+          "sku": "TEA-GR",
+          "quantity": 1
+        }
+      ]
+    },
+    {
+      "id": "O-1002",
+      "customer_id": "C1",
+      "placed_on": "2026-03-05",
+      "lines": [
+        {
+          "sku": "KB-100",
+          "quantity": 1
+        },
+        {
+          "sku": "MS-200",
+          "quantity": 1
+        }
+      ]
+    },
+    {
+      "id": "O-1003",
+      "customer_id": "C2",
+      "placed_on": "2026-03-11",
+      "lines": [
+        {
+          "sku": "COF-BN",
+          "quantity": 2
+        },
+        {
+          "sku": "DSK-LMP",
+          "quantity": 1
+        }
+      ],
+      "promo_code": "SPRING10"
+    },
+    {
+      "id": "O-1004",
+      "customer_id": "C4",
+      "placed_on": "2026-03-18",
+      "lines": [
+        {
+          "sku": "CB-USB",
+          "quantity": 10
+        }
+      ]
+    },
+    {
+      "id": "O-1005",
+      "customer_id": "C3",
+      "placed_on": "2026-03-24",
+      "lines": [
+        {
+          "sku": "KB-100",
+          "quantity": 1
+        }
+      ],
+      "refunded": true
+    },
+    {
+      "id": "O-1006",
+      "customer_id": "C1",
+      "placed_on": "2026-03-29",
+      "lines": [
+        {
+          "sku": "NB-A5",
+          "quantity": 2
+        }
+      ],
+      "promo_code": "WELCOME5"
+    },
+    {
+      "id": "O-1007",
+      "customer_id": "C2",
+      "placed_on": "2026-04-02",
+      "lines": [
+        {
+          "sku": "TEA-GR",
+          "quantity": 3
+        },
+        {
+          "sku": "COF-BN",
+          "quantity": 1
+        }
+      ]
+    },
+    {
+      "id": "O-1008",
+      "customer_id": "C3",
+      "placed_on": "2026-04-07",
+      "lines": [
+        {
+          "sku": "MS-200",
+          "quantity": 2
+        },
+        {
+          "sku": "CB-USB",
+          "quantity": 2
+        }
+      ],
+      "promo_code": "spring10"
+    },
+    {
+      "id": "O-1009",
+      "customer_id": "C1",
+      "placed_on": "2026-04-15",
+      "lines": [
+        {
+          "sku": "KB-100",
+          "quantity": 2
+        },
+        {
+          "sku": "DSK-LMP",
+          "quantity": 1
+        }
+      ],
+      "promo_code": "SPRING10"
+    },
+    {
+      "id": "O-1010",
+      "customer_id": "C4",
+      "placed_on": "2026-04-21",
+      "lines": [
+        {
+          "sku": "PEN-BL",
+          "quantity": 20
+        },
+        {
+          "sku": "NB-A5",
+          "quantity": 10
+        }
+      ]
+    },
+    {
+      "id": "O-1011",
+      "customer_id": "C2",
+      "placed_on": "2026-04-26",
+      "lines": [
+        {
+          "sku": "MS-200",
+          "quantity": 1
+        }
+      ]
+    },
+    {
+      "id": "O-1012",
+      "customer_id": "C3",
+      "placed_on": "2026-04-30",
+      "lines": [
+        {
+          "sku": "COF-BN",
+          "quantity": 1
+        },
+        {
+          "sku": "TEA-GR",
+          "quantity": 2
+        }
+      ]
+    }
+  ]
+}

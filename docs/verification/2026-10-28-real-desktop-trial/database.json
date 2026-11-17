@@ -1,0 +1,26 @@
+{
+  "accountAvailableMicro": 99507,
+  "accountGrantedMicro": 100001,
+  "accountSpentMicro": 494,
+  "activeAdminCredentials": 0,
+  "activeNativeOrGatewayCredentials": 0,
+  "activeRequests": 0,
+  "allDesktopRequestsCompletedMeasured": true,
+  "budgetMicro": 100000,
+  "desktopRequests": 6,
+  "desktopSpentMicro": 480,
+  "desktopUsage": {
+    "cached": 0,
+    "input": 3392,
+    "output": 234
+  },
+  "displayedCreditMatches": true,
+  "priorSpentMicro": 14,
+  "programPaused": true,
+  "readOnlyInspection": true,
+  "remainingProgramMicro": 99506,
+  "reservedMicro": 0,
+  "totalGatewayRequests": 7,
+  "totalSpentMicro": 494,
+  "verifiedAtUtc": "2026-10-27T23:31:37.7796058Z"
+}

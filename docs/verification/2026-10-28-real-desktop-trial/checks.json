@@ -1,0 +1,39 @@
+{
+  "date": "2026-10-28",
+  "timezone": "Asia/Dhaka",
+  "checkedAtUtc": "2026-10-27T21:48:36.386Z",
+  "status": "blocked-unreadable-local-configuration",
+  "desktopFlowCompleted": false,
+  "approvedTotalCapUsd": 0.1,
+  "approvedTotalCapMicro": 100000,
+  "priorRecordedGatewaySpendMicro": 14,
+  "lastAuditedRemainingMicro": 99986,
+  "currentDatabaseSpendRechecked": false,
+  "paidModelCallsThisRun": 0,
+  "externalOtpEmailsThisRun": 0,
+  "servicesStartedThisRun": false,
+  "configurationReadable": false,
+  "configurationReadErrorCode": "UNKNOWN",
+  "windowsDiagnostic": "The file or directory is corrupted and unreadable (Windows error 1392).",
+  "requiredInput": "Restore the ignored backend .env from a trusted local backup or supply a readable local configuration path. Do not send credentials in chat.",
+  "budgetRule": "Keep the total program cap at 100000 micro-USD and carry forward all prior spend. Never reset it to prior spend plus another 100000.",
+  "remainingVerification": [
+    "Real SMTP OTP inside the packaged desktop app",
+    "Approved existing trial credit and model selection",
+    "Real OpenRouter coding task with reviewed edit and command approvals",
+    "Saved report and server balance settlement",
+    "Pause admissions and revoke pilot credentials after verification"
+  ],
+  "secretsLogged": false,
+  "priorSpendEvidence": {
+    "desktop": "docs/verification/2026-10-27-local-pilot/database.json",
+    "backend": "verification/2026-10-27-local-pilot-database.json"
+  },
+  "boundaries": {
+    "configuration": "blocked-unreadable-file",
+    "desktopUi": "not-started",
+    "nativeAuth": "not-run",
+    "openRouter": "not-called",
+    "reportAndBalance": "not-verified"
+  }
+}

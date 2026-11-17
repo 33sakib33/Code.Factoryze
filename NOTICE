@@ -1,0 +1,15 @@
+Factoryze
+Copyright 2026 Factoryze
+
+This product is licensed under the Apache License, Version 2.0 (see LICENSE).
+
+Eclipse Theia 1.76.0 is distributed under the Eclipse Public License 2.0
+(or the project's stated secondary license). Its license and project notice
+are included in licenses/theia/ in the desktop installer.
+
+The Atkinson Hyperlegible Next and Mono fonts are distributed under the
+SIL Open Font License 1.1. Their licenses accompany the font packages.
+
+Electron and Chromium license information accompanies the desktop installer
+in licenses/electron/. Other bundled dependency notices remain with their
+packages. See THIRD_PARTY_NOTICES.md for the primary third-party components.

@@ -1,0 +1,11 @@
+schema: 1
+id: library-fines
+title: Library fines
+brief: >
+  Riverside members say they're charged a day's fine when they return items on
+  the due date in the evening. Morning returns are fine, and Central members
+  haven't complained. Fines must follow each branch's local calendar day. Fix it
+  without changing fine rates or loan periods.
+minimumPython: "3.11"
+timeHintMinutes: 40
+entryFile: library/fines.py

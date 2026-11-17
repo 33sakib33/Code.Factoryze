@@ -1,0 +1,663 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Factoryze IDE mockup</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Mono:wght@400;500;600&family=Atkinson+Hyperlegible+Next:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --chrome: #E3E7E8;
+    --chrome-hover: #D6DCDE;
+    --side: #EEF1F1;
+    --editor: #FBFCFB;
+    --panel: #F4F6F6;
+    --line: #D2D8DA;
+    --line-strong: #B7C1C4;
+    --text: #1E2A30;
+    --muted: #586770;
+    --faint: #85949B;
+    --accent: #0F6B74;
+    --accent-hover: #0B5960;
+    --accent-soft: #D9ECEC;
+    --on-accent: #FFFFFF;
+    --seg: #66767E;
+    --track: #D2D8DA;
+    --warn: #9A5F0C;
+    --ok: #1D6232;
+    --fail: #9A2B20;
+    --add-bg: #E2F1E5; --add-fg: #1D6232;
+    --del-bg: #F7E2DF; --del-fg: #9A2B20;
+    --sx-k: #7C3A8C; --sx-f: #1F48B8; --sx-s: #8A5A10; --sx-c: #74838A;
+    --sx-n: #A33A2A; --sx-t: #0F6B74; --sx-d: #7A5C00;
+    --tip-bg: #1E2A30; --tip-fg: #F4F6F6;
+
+    --ui: "Atkinson Hyperlegible Next", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+    --mono: "Atkinson Hyperlegible Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+
+    --side-w: 252px;
+    --agent-w: 396px;
+    --panel-h: 216px;
+    color-scheme: light;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --chrome: #151D21; --chrome-hover: #212C31; --side: #192226; --editor: #1D262A;
+      --panel: #182125; --line: #2A363B; --line-strong: #3B494F; --text: #D8E1E4;
+      --muted: #96A6AD; --faint: #6E7E85; --accent: #4FB0B8; --accent-hover: #6CC2C9;
+      --accent-soft: #1E3C40; --on-accent: #0D2326; --seg: #8C9CA3; --track: #2A363B;
+      --warn: #E0A24A; --ok: #8FD6A4; --fail: #F0A69C;
+      --add-bg: #1C3527; --add-fg: #8FD6A4; --del-bg: #3B2321; --del-fg: #F0A69C;
+      --sx-k: #D39BE0; --sx-f: #93B4FF; --sx-s: #E0B872; --sx-c: #71838B;
+      --sx-n: #F29B85; --sx-t: #6CC6CD; --sx-d: #D8C27A;
+      --tip-bg: #D8E1E4; --tip-fg: #151D21;
+      color-scheme: dark;
+    }
+  }
+  :root[data-theme="dark"] {
+    --chrome: #151D21; --chrome-hover: #212C31; --side: #192226; --editor: #1D262A;
+    --panel: #182125; --line: #2A363B; --line-strong: #3B494F; --text: #D8E1E4;
+    --muted: #96A6AD; --faint: #6E7E85; --accent: #4FB0B8; --accent-hover: #6CC2C9;
+    --accent-soft: #1E3C40; --on-accent: #0D2326; --seg: #8C9CA3; --track: #2A363B;
+    --warn: #E0A24A; --ok: #8FD6A4; --fail: #F0A69C;
+    --add-bg: #1C3527; --add-fg: #8FD6A4; --del-bg: #3B2321; --del-fg: #F0A69C;
+    --sx-k: #D39BE0; --sx-f: #93B4FF; --sx-s: #E0B872; --sx-c: #71838B;
+    --sx-n: #F29B85; --sx-t: #6CC6CD; --sx-d: #D8C27A;
+    --tip-bg: #D8E1E4; --tip-fg: #151D21;
+    color-scheme: dark;
+  }
+
+  * { box-sizing: border-box; }
+  html, body { height: 100%; margin: 0; }
+  body {
+    background: var(--editor);
+    color: var(--text);
+    font-family: var(--ui);
+    font-size: 13px;
+    line-height: 1.45;
+    -webkit-font-smoothing: antialiased;
+    overflow: hidden;
+  }
+  button, textarea { font: inherit; color: inherit; }
+  code, pre, kbd { font-family: var(--mono); }
+  :focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; border-radius: 3px; }
+  .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+  svg.i { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; flex: none; }
+
+  /* ---------- Shell ---------- */
+  .app { height: 100vh; display: grid; grid-template-rows: 44px minmax(0, 1fr) 24px; }
+  .workbench {
+    display: grid;
+    grid-template-columns: 48px var(--side-w) minmax(0, 1fr) var(--agent-w);
+    min-height: 0;
+  }
+  .app.no-side  { --side-w: 0px; }
+  .app.no-agent { --agent-w: 0px; }
+  .app.no-panel { --panel-h: 0px; }
+  .app.no-side .sidebar, .app.no-agent .agent, .app.no-panel .panel { display: none; }
+  .activity { grid-column: 1; } .sidebar { grid-column: 2; } .center { grid-column: 3; } .agent { grid-column: 4; }
+  .tabs { grid-row: 1; } .crumbs { grid-row: 2; } .editor { grid-row: 3; } .panel { grid-row: 4; }
+
+  /* ---------- Title bar ---------- */
+  .titlebar {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    padding: 0 10px 0 14px;
+    background: var(--chrome);
+    border-bottom: 1px solid var(--line);
+  }
+  .where { display: flex; align-items: baseline; gap: 12px; min-width: 0; flex: 1 1 0; white-space: nowrap; }
+  .budget { flex: 0 1 480px; min-width: 180px; }
+  .actions { flex: none; }
+  .wordmark { font-weight: 700; letter-spacing: -0.01em; font-size: 14px; }
+  .lab { color: var(--muted); overflow: hidden; text-overflow: ellipsis; }
+  .lab strong { color: var(--text); font-weight: 600; }
+
+  .budget { display: grid; gap: 5px; }
+  .budget-text { display: flex; justify-content: space-between; font-size: 12px; color: var(--muted); font-variant-numeric: tabular-nums; }
+  .budget-text b { color: var(--text); font-weight: 600; }
+  .meter { display: flex; gap: 2px; height: 8px; }
+  .seg { height: 100%; background: var(--seg); border-radius: 1px; position: relative; cursor: default; }
+  .seg:hover, .seg:focus-visible { background: var(--text); }
+  .seg.now {
+    background: repeating-linear-gradient(135deg, var(--accent) 0 4px, var(--accent-soft) 4px 7px);
+    box-shadow: inset 0 0 0 1px var(--accent);
+  }
+  .seg.rest { flex: 1; background: var(--track); }
+  .seg[data-tip]:hover::after, .seg[data-tip]:focus-visible::after {
+    content: attr(data-tip);
+    position: absolute; top: calc(100% + 8px); left: 50%; transform: translateX(-50%);
+    white-space: pre; background: var(--tip-bg); color: var(--tip-fg);
+    padding: 6px 9px; border-radius: 4px; font-size: 12px; line-height: 1.4; z-index: 20;
+    pointer-events: none;
+  }
+
+  .actions { display: flex; align-items: center; justify-content: flex-end; gap: 6px; }
+  .timer { display: flex; align-items: center; gap: 6px; padding: 0 8px; font-variant-numeric: tabular-nums; color: var(--muted); white-space: nowrap; }
+  .timer b { color: var(--text); font-weight: 600; }
+  .layout-toggles { display: flex; gap: 2px; padding: 0 6px; border-left: 1px solid var(--line-strong); border-right: 1px solid var(--line-strong); }
+
+  .icon-btn {
+    display: inline-grid; place-items: center; width: 28px; height: 28px;
+    border: 0; background: transparent; border-radius: 4px; color: var(--muted); cursor: pointer;
+  }
+  .icon-btn:hover { background: var(--chrome-hover); color: var(--text); }
+  .icon-btn[aria-pressed="true"] { color: var(--text); }
+  .icon-btn[aria-pressed="false"] { color: var(--faint); }
+
+  .btn {
+    display: inline-flex; align-items: center; gap: 6px; height: 28px; padding: 0 12px;
+    border-radius: 4px; border: 1px solid var(--line-strong); background: transparent;
+    cursor: pointer; font-weight: 500; white-space: nowrap;
+  }
+  .btn:hover { background: var(--chrome-hover); }
+  .btn.primary { background: var(--accent); border-color: var(--accent); color: var(--on-accent); }
+  .btn.primary:hover { background: var(--accent-hover); border-color: var(--accent-hover); }
+  .btn.quiet { border-color: transparent; color: var(--muted); }
+  .btn.quiet:hover { color: var(--text); }
+  .btn.submit { border-color: var(--accent); color: var(--accent); font-weight: 600; }
+  .btn.submit:hover { background: var(--accent-soft); }
+
+  /* ---------- Activity bar ---------- */
+  .activity {
+    background: var(--chrome); border-right: 1px solid var(--line);
+    display: flex; flex-direction: column; align-items: center; padding: 6px 0; gap: 2px;
+  }
+  .activity .icon-btn { width: 48px; height: 44px; border-radius: 0; position: relative; color: var(--faint); }
+  .activity .icon-btn:hover { background: transparent; color: var(--text); }
+  .activity .icon-btn.active { color: var(--text); }
+  .activity .icon-btn.active::before { content: ""; position: absolute; left: 0; top: 10px; bottom: 10px; width: 2px; background: var(--accent); }
+  .activity .icon-btn svg { width: 20px; height: 20px; }
+  .activity .spacer { flex: 1; }
+
+  /* ---------- Sidebar ---------- */
+  .sidebar { background: var(--side); border-right: 1px solid var(--line); overflow: auto; min-width: 0; }
+  .side-title { height: 35px; display: flex; align-items: center; padding: 0 14px; font-weight: 600; color: var(--muted); }
+  .section-head {
+    display: flex; align-items: center; gap: 4px; width: 100%; height: 26px; padding: 0 8px;
+    border: 0; background: transparent; font-weight: 600; cursor: pointer; text-align: left;
+    border-top: 1px solid var(--line);
+  }
+  .section-head svg { width: 14px; height: 14px; color: var(--muted); transition: transform .12s; }
+  .section-head[aria-expanded="false"] svg { transform: rotate(-90deg); }
+  .brief { padding: 6px 14px 14px 26px; }
+  .brief h2 { font-size: 13px; margin: 0 0 4px; font-weight: 600; }
+  .brief p { margin: 0 0 8px; color: var(--muted); max-width: 32ch; }
+  .link-btn { border: 0; background: none; padding: 0; color: var(--accent); cursor: pointer; font-weight: 500; }
+  .link-btn:hover { text-decoration: underline; }
+
+  .tree { list-style: none; margin: 0; padding: 2px 0 10px; }
+  .tree li > .row {
+    display: flex; align-items: center; gap: 6px; height: 24px; padding-right: 10px;
+    padding-left: calc(10px + var(--depth, 0) * 14px); white-space: nowrap; cursor: default;
+  }
+  .tree .row:hover { background: var(--chrome-hover); }
+  .tree .row.active { background: var(--accent-soft); box-shadow: inset 2px 0 0 var(--accent); }
+  .tree svg { width: 14px; height: 14px; color: var(--muted); }
+  .tree .dir svg.chev { width: 12px; height: 12px; }
+  .tree .file { padding-left: calc(28px + var(--depth, 0) * 14px); }
+  .tree .badge { margin-left: auto; color: var(--warn); font-weight: 600; font-size: 12px; }
+
+  /* ---------- Center ---------- */
+  .center { display: grid; grid-template-rows: 35px 26px minmax(0, 1fr) var(--panel-h); grid-template-columns: minmax(0, 1fr); min-width: 0; min-height: 0; }
+  .tabs { display: flex; background: var(--side); border-bottom: 1px solid var(--line); overflow: hidden; }
+  .tab {
+    display: flex; align-items: center; gap: 8px; padding: 0 12px 0 14px; border: 0;
+    border-right: 1px solid var(--line); background: transparent; color: var(--muted); cursor: pointer; white-space: nowrap;
+  }
+  .tab.active { background: var(--editor); color: var(--text); box-shadow: inset 0 2px 0 var(--accent); margin-bottom: -1px; }
+  .tab .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--text); visibility: hidden; }
+  .tab.modified .dot { visibility: visible; }
+  .crumbs { display: flex; align-items: center; gap: 6px; padding: 0 16px; color: var(--muted); font-size: 12px; background: var(--editor); white-space: nowrap; }
+  .crumbs svg { width: 12px; height: 12px; }
+  .crumbs span:last-child { color: var(--text); }
+
+  .editor { overflow: auto; background: var(--editor); padding: 4px 0 24px; font-family: var(--mono); font-size: 13.5px; line-height: 21px; }
+  .ln { display: grid; grid-template-columns: 56px 6px 1fr; min-width: max-content; }
+  .ln .no { text-align: right; padding-right: 12px; color: var(--faint); user-select: none; font-variant-numeric: tabular-nums; }
+  .ln .mark { width: 3px; }
+  .ln .code { white-space: pre; padding: 0 24px 0 10px; }
+  .ln.current { background: color-mix(in srgb, var(--accent-soft) 45%, transparent); }
+  .ln.current .no { color: var(--text); }
+  .ln.pending .mark { background: var(--accent); }
+  .ln.pending .code { background: color-mix(in srgb, var(--accent-soft) 70%, transparent); }
+  .ln.applied .mark { background: var(--ok); }
+  .k { color: var(--sx-k); } .f { color: var(--sx-f); } .s { color: var(--sx-s); }
+  .c { color: var(--sx-c); font-style: italic; } .n { color: var(--sx-n); } .t { color: var(--sx-t); } .d { color: var(--sx-d); }
+
+  /* ---------- Bottom panel ---------- */
+  .panel { display: grid; grid-template-rows: 32px minmax(0, 1fr); border-top: 1px solid var(--line); background: var(--panel); min-height: 0; }
+  .panel-head { display: flex; align-items: center; padding: 0 8px 0 6px; gap: 2px; }
+  .ptab { height: 32px; padding: 0 10px; border: 0; background: transparent; color: var(--muted); cursor: pointer; display: flex; align-items: center; gap: 6px; }
+  .ptab.active { color: var(--text); box-shadow: inset 0 -2px 0 var(--accent); }
+  .count { background: var(--line); color: var(--text); border-radius: 8px; padding: 0 6px; font-size: 11px; font-weight: 600; }
+  .panel-head .spacer { flex: 1; }
+  .term { margin: 0; padding: 4px 16px 12px; overflow: auto; font-size: 13px; line-height: 19px; white-space: pre; }
+  .term .p { color: var(--accent); }
+  .term .bad { color: var(--fail); }
+  .term .good { color: var(--ok); }
+  .term .dim { color: var(--faint); }
+
+  /* ---------- Agent pane ---------- */
+  .agent { display: grid; grid-template-rows: auto minmax(0, 1fr) auto; grid-template-columns: minmax(0, 1fr); background: var(--side); border-left: 1px solid var(--line); min-width: 0; min-height: 0; overflow: hidden; }
+  .agent-head { display: flex; align-items: center; gap: 8px; padding: 8px 8px 8px 16px; border-bottom: 1px solid var(--line); }
+  .agent-head .who { min-width: 0; flex: 1; }
+  .agent-head h2 { margin: 0; font-size: 13px; font-weight: 600; }
+  .agent-head .profile { color: var(--muted); font-size: 12px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+  .log { overflow: auto; padding: 12px 14px 20px; display: grid; grid-template-columns: minmax(0, 1fr); gap: 18px; align-content: start; }
+  .turn, .approval { min-width: 0; }
+  .earlier { justify-self: start; border: 0; background: none; color: var(--muted); padding: 2px 0; cursor: pointer; display: flex; gap: 6px; align-items: center; }
+  .earlier:hover { color: var(--text); }
+  .turn { display: grid; gap: 10px; }
+  .prompt {
+    background: var(--editor); border: 1px solid var(--line); border-left: 3px solid var(--line-strong);
+    border-radius: 2px 4px 4px 2px; padding: 8px 10px 9px;
+  }
+  .prompt .by { font-size: 12px; color: var(--muted); margin-bottom: 2px; }
+  .prompt p, .reply p { margin: 0; max-width: 62ch; }
+  .turn.live .prompt { border-left-color: var(--accent); }
+  .reply { padding: 0 2px; }
+  code.inline { font-size: 12.5px; background: color-mix(in srgb, var(--line) 55%, transparent); padding: 1px 4px; border-radius: 3px; }
+
+  .step { display: flex; align-items: center; gap: 8px; color: var(--muted); font-size: 12.5px; padding: 0 2px; min-width: 0; }
+  .step .what { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .step .what code { color: var(--text); font-size: 12px; }
+  .step .res { margin-left: auto; white-space: nowrap; font-variant-numeric: tabular-nums; }
+  .res.fail { color: var(--fail); }
+  .res.ok { color: var(--ok); }
+
+  .cost { justify-self: end; color: var(--faint); font-size: 12px; font-variant-numeric: tabular-nums; }
+  .turn.live .cost { color: var(--accent); }
+
+  .approval { background: var(--editor); border: 1px solid var(--line-strong); border-radius: 6px; overflow: hidden; }
+  .approval-head { display: flex; align-items: center; gap: 8px; padding: 8px 10px; border-bottom: 1px solid var(--line); }
+  .approval-head .title { font-weight: 600; min-width: 0; flex: 1; }
+  .approval-head .title code { font-weight: 500; font-size: 12.5px; }
+  .approval-head .meta { color: var(--muted); font-size: 12px; white-space: nowrap; }
+  .diff { margin: 0; padding: 6px 0; font-size: 12.5px; line-height: 19px; overflow: auto; }
+  .diff div { display: grid; grid-template-columns: 34px 16px 1fr; white-space: pre; min-width: max-content; padding-right: 12px; }
+  .diff .n { color: var(--faint); text-align: right; padding-right: 8px; }
+  .diff .sign { color: var(--faint); }
+  .diff .add { background: var(--add-bg); color: var(--add-fg); }
+  .diff .add .sign, .diff .add .n { color: var(--add-fg); }
+  .diff .del { background: var(--del-bg); color: var(--del-fg); }
+  .diff .del .sign, .diff .del .n { color: var(--del-fg); }
+  .approval-actions { display: flex; gap: 6px; padding: 8px 10px; border-top: 1px solid var(--line); background: var(--side); }
+  .approval-actions .btn.quiet { margin-left: auto; }
+  .approval-result { margin: 0; padding: 8px 10px; border-top: 1px solid var(--line); background: var(--side); color: var(--muted); display: flex; gap: 6px; align-items: center; }
+  .approval[data-state="approved"] .approval-actions,
+  .approval[data-state="rejected"] .approval-actions { display: none; }
+  .approval[data-state="approved"] { border-color: var(--line); }
+  .approval[data-state="rejected"] .diff { opacity: .55; }
+
+  .composer { border-top: 1px solid var(--line); padding: 10px 12px 12px; background: var(--side); }
+  .composer textarea {
+    width: 100%; resize: none; border: 1px solid var(--line-strong); border-radius: 6px;
+    background: var(--editor); padding: 9px 10px; line-height: 1.45; min-height: 74px;
+  }
+  .composer textarea::placeholder { color: var(--faint); }
+  .composer textarea:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 1px var(--accent); }
+  .composer-bar { display: flex; align-items: center; gap: 10px; margin-top: 8px; }
+  .composer-bar .note { color: var(--faint); font-size: 12px; flex: 1; }
+  kbd { font-size: 11px; color: var(--muted); border: 1px solid var(--line-strong); border-bottom-width: 2px; border-radius: 3px; padding: 0 4px; }
+  .btn.primary kbd { color: var(--on-accent); border-color: color-mix(in srgb, var(--on-accent) 45%, transparent); }
+
+  /* ---------- Status bar ---------- */
+  .statusbar {
+    display: flex; align-items: center; gap: 2px; padding: 0 6px; font-size: 12px;
+    background: var(--chrome); border-top: 1px solid var(--line); color: var(--muted); white-space: nowrap; overflow: hidden;
+  }
+  .statusbar .item { display: flex; align-items: center; gap: 6px; padding: 0 8px; height: 24px; border: 0; background: none; color: inherit; cursor: default; }
+  .statusbar button.item { cursor: pointer; }
+  .statusbar button.item:hover { background: var(--chrome-hover); color: var(--text); }
+  .statusbar .spacer { flex: 1; }
+  .live-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--ok); }
+  #toast { color: var(--text); }
+
+  @media (max-width: 1180px) { :root { --side-w: 220px; --agent-w: 360px; } .timer span.long { display: none; } }
+  @media (max-width: 900px) {
+    .titlebar { gap: 12px; }
+    .where { flex: none; }
+    .budget { flex: 1 1 auto; min-width: 120px; }
+    .lab { display: none; }
+    .budget-text span:last-child { display: none; }
+    .statusbar .wide { display: none; }
+  }
+  @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="i-files" viewBox="0 0 24 24"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/></symbol>
+    <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"/><path d="m20 20-4.2-4.2"/></symbol>
+    <symbol id="i-brief" viewBox="0 0 24 24"><rect x="5" y="4" width="14" height="17" rx="2"/><path d="M9 4V3h6v1M9 10h6M9 14h6M9 18h3"/></symbol>
+    <symbol id="i-sliders" viewBox="0 0 24 24"><path d="M4 7h10M18 7h2M4 17h4M12 17h8"/><circle cx="16" cy="7" r="2"/><circle cx="10" cy="17" r="2"/></symbol>
+    <symbol id="i-left" viewBox="0 0 24 24"><rect x="3.5" y="4.5" width="17" height="15" rx="2"/><path d="M9 4.5v15"/></symbol>
+    <symbol id="i-bottom" viewBox="0 0 24 24"><rect x="3.5" y="4.5" width="17" height="15" rx="2"/><path d="M3.5 14h17"/></symbol>
+    <symbol id="i-right" viewBox="0 0 24 24"><rect x="3.5" y="4.5" width="17" height="15" rx="2"/><path d="M15 4.5v15"/></symbol>
+    <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></symbol>
+    <symbol id="i-chev" viewBox="0 0 24 24"><path d="m7 9 5 5 5-5"/></symbol>
+    <symbol id="i-chev-r" viewBox="0 0 24 24"><path d="m9 6 6 6-6 6"/></symbol>
+    <symbol id="i-folder" viewBox="0 0 24 24"><path d="M3.5 7.5a2 2 0 0 1 2-2h4l2 2h7a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2h-13a2 2 0 0 1-2-2z"/></symbol>
+    <symbol id="i-file" viewBox="0 0 24 24"><path d="M14 3.5H7.5a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2h9a2 2 0 0 0 2-2V8z"/><path d="M14 3.5V8h4.5"/></symbol>
+    <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+    <symbol id="i-more" viewBox="0 0 24 24"><circle cx="6" cy="12" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="18" cy="12" r="1"/></symbol>
+    <symbol id="i-term" viewBox="0 0 24 24"><path d="m6 8 4 4-4 4M12 16h6"/></symbol>
+    <symbol id="i-read" viewBox="0 0 24 24"><path d="M2.5 12s3.5-6.5 9.5-6.5 9.5 6.5 9.5 6.5-3.5 6.5-9.5 6.5S2.5 12 2.5 12z"/><circle cx="12" cy="12" r="2.5"/></symbol>
+    <symbol id="i-edit" viewBox="0 0 24 24"><path d="M15.5 4.5 19.5 8.5 9 19H5v-4z"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12.5 4.5 4.5L19 7.5"/></symbol>
+    <symbol id="i-x" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></symbol>
+    <symbol id="i-theme" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M12 4v16a8 8 0 0 0 0-16z" fill="currentColor" stroke="none"/></symbol>
+    <symbol id="i-max" viewBox="0 0 24 24"><path d="m7 14 5-5 5 5"/></symbol>
+  </defs>
+</svg>
+
+<div class="app" id="app">
+
+  <!-- Title bar -->
+  <header class="titlebar">
+    <div class="where">
+      <span class="wordmark">Factoryze</span>
+      <span class="lab"><strong>Pagination API</strong> in CS201 Lab 4</span>
+    </div>
+
+    <div class="budget" aria-label="Token budget">
+      <div class="budget-text">
+        <span><b>21,640</b> of 60,000 tokens used</span>
+        <span>38,360 left</span>
+      </div>
+      <div class="meter" role="img" aria-label="5 prompts so far. The second prompt used the most tokens.">
+        <span class="seg" style="width:4.9%"  tabindex="0" data-tip="Prompt 1 used 2,950 tokens&#10;“Open the tests and summarise what they check”"></span>
+        <span class="seg" style="width:11.5%" tabindex="0" data-tip="Prompt 2 used 6,880 tokens&#10;“why is pagination broken”"></span>
+        <span class="seg" style="width:5.7%"  tabindex="0" data-tip="Prompt 3 used 3,410 tokens&#10;“Show me how orders.py calls paginate()”"></span>
+        <span class="seg" style="width:7.0%"  tabindex="0" data-tip="Prompt 4 used 4,190 tokens&#10;“Run the pagination tests and tell me what fails”"></span>
+        <span class="seg now" style="width:7.0%" tabindex="0" data-tip="Prompt 5, still running: 4,210 tokens so far"></span>
+        <span class="seg rest"></span>
+      </div>
+    </div>
+
+    <div class="actions">
+      <div class="timer" title="Lab ends at 11:30">
+        <svg class="i"><use href="#i-clock"/></svg>
+        <span><b>38:12</b> <span class="long">left</span></span>
+      </div>
+      <div class="layout-toggles">
+        <button class="icon-btn" data-toggle="side" aria-pressed="true" aria-label="Toggle explorer" title="Explorer"><svg class="i"><use href="#i-left"/></svg></button>
+        <button class="icon-btn" data-toggle="panel" aria-pressed="true" aria-label="Toggle terminal" title="Terminal"><svg class="i"><use href="#i-bottom"/></svg></button>
+        <button class="icon-btn" data-toggle="agent" aria-pressed="true" aria-label="Toggle agent" title="Agent"><svg class="i"><use href="#i-right"/></svg></button>
+      </div>
+      <button class="btn submit" type="button">Submit</button>
+    </div>
+  </header>
+
+  <div class="workbench">
+
+    <!-- Activity bar -->
+    <nav class="activity" aria-label="Views">
+      <button class="icon-btn active" aria-label="Explorer" title="Explorer"><svg class="i"><use href="#i-files"/></svg></button>
+      <button class="icon-btn" aria-label="Search" title="Search"><svg class="i"><use href="#i-search"/></svg></button>
+      <button class="icon-btn" aria-label="Task brief" title="Task brief"><svg class="i"><use href="#i-brief"/></svg></button>
+      <div class="spacer"></div>
+      <button class="icon-btn" aria-label="Settings" title="Settings"><svg class="i"><use href="#i-sliders"/></svg></button>
+    </nav>
+
+    <!-- Sidebar -->
+    <aside class="sidebar" aria-label="Explorer">
+      <div class="side-title">Explorer</div>
+
+      <button class="section-head" aria-expanded="true" data-collapse="brief"><svg class="i"><use href="#i-chev"/></svg>Task</button>
+      <div class="brief" id="brief">
+        <h2>Pagination API</h2>
+        <p>Customers say the last page of their order history goes missing. Find out why and fix it without changing how pages are numbered.</p>
+        <button class="link-btn">Open the full brief</button>
+      </div>
+
+      <button class="section-head" aria-expanded="true" data-collapse="tree"><svg class="i"><use href="#i-chev"/></svg>pagination-api</button>
+      <ul class="tree" id="tree">
+        <li><div class="row dir" style="--depth:0"><svg class="i chev"><use href="#i-chev"/></svg><svg class="i"><use href="#i-folder"/></svg>app</div></li>
+        <li><div class="row file" style="--depth:1"><svg class="i"><use href="#i-file"/></svg>__init__.py</div></li>
+        <li><div class="row file" style="--depth:1"><svg class="i"><use href="#i-file"/></svg>orders.py</div></li>
+        <li><div class="row file active" style="--depth:1" id="tree-pagination"><svg class="i"><use href="#i-file"/></svg>pagination.py<span class="badge" id="tree-badge" hidden>M</span></div></li>
+        <li><div class="row dir" style="--depth:0"><svg class="i chev"><use href="#i-chev"/></svg><svg class="i"><use href="#i-folder"/></svg>tests</div></li>
+        <li><div class="row file" style="--depth:1"><svg class="i"><use href="#i-file"/></svg>test_pagination.py</div></li>
+        <li><div class="row dir" style="--depth:0"><svg class="i chev" style="transform:rotate(-90deg)"><use href="#i-chev"/></svg><svg class="i"><use href="#i-folder"/></svg>vendor</div></li>
+        <li><div class="row file" style="--depth:0"><svg class="i"><use href="#i-file"/></svg>README.md</div></li>
+        <li><div class="row file" style="--depth:0"><svg class="i"><use href="#i-file"/></svg>requirements.txt</div></li>
+      </ul>
+    </aside>
+
+    <!-- Editor + panel -->
+    <main class="center">
+      <div class="tabs" role="tablist">
+        <button class="tab active" role="tab" aria-selected="true" id="tab-pagination">pagination.py <span class="dot" aria-hidden="true"></span></button>
+        <button class="tab" role="tab" aria-selected="false">test_pagination.py <span class="dot" aria-hidden="true"></span></button>
+      </div>
+      <div class="crumbs">
+        <span>app</span><svg class="i"><use href="#i-chev-r"/></svg>
+        <span>pagination.py</span><svg class="i"><use href="#i-chev-r"/></svg>
+        <span>paginate</span>
+      </div>
+
+      <div class="editor" tabindex="0" aria-label="app/pagination.py">
+        <div class="ln"><span class="no">1</span><span class="mark"></span><span class="code"><span class="k">from</span> dataclasses <span class="k">import</span> dataclass</span></div>
+        <div class="ln"><span class="no">2</span><span class="mark"></span><span class="code"><span class="k">from</span> typing <span class="k">import</span> <span class="t">Sequence</span>, <span class="t">TypeVar</span></span></div>
+        <div class="ln"><span class="no">3</span><span class="mark"></span><span class="code"></span></div>
+        <div class="ln"><span class="no">4</span><span class="mark"></span><span class="code">T = <span class="t">TypeVar</span>(<span class="s">"T"</span>)</span></div>
+        <div class="ln"><span class="no">5</span><span class="mark"></span><span class="code"></span></div>
+        <div class="ln"><span class="no">6</span><span class="mark"></span><span class="code"></span></div>
+        <div class="ln"><span class="no">7</span><span class="mark"></span><span class="code"><span class="d">@dataclass</span>(frozen=<span class="k">True</span>)</span></div>
+        <div class="ln"><span class="no">8</span><span class="mark"></span><span class="code"><span class="k">class</span> <span class="f">Page</span>:</span></div>
+        <div class="ln"><span class="no">9</span><span class="mark"></span><span class="code">    items: <span class="t">list</span></span></div>
+        <div class="ln"><span class="no">10</span><span class="mark"></span><span class="code">    number: <span class="t">int</span></span></div>
+        <div class="ln"><span class="no">11</span><span class="mark"></span><span class="code">    total_pages: <span class="t">int</span></span></div>
+        <div class="ln"><span class="no">12</span><span class="mark"></span><span class="code"></span></div>
+        <div class="ln"><span class="no">13</span><span class="mark"></span><span class="code"></span></div>
+        <div class="ln"><span class="no">14</span><span class="mark"></span><span class="code"><span class="k">def</span> <span class="f">paginate</span>(items: <span class="t">Sequence</span>[T], page: <span class="t">int</span>, per_page: <span class="t">int</span> = <span class="n">20</span>) -&gt; Page:</span></div>
+        <div class="ln"><span class="no">15</span><span class="mark"></span><span class="code">    <span class="c">"""Return one page of items. Pages are numbered from 1."""</span></span></div>
+        <div class="ln"><span class="no">16</span><span class="mark"></span><span class="code">    <span class="k">if</span> per_page &lt;= <span class="n">0</span>:</span></div>
+        <div class="ln"><span class="no">17</span><span class="mark"></span><span class="code">        <span class="k">raise</span> <span class="t">ValueError</span>(<span class="s">"per_page must be positive"</span>)</span></div>
+        <div class="ln"><span class="no">18</span><span class="mark"></span><span class="code"></span></div>
+        <div class="ln current pending" id="line-19" title="The agent wants to change this line"><span class="no">19</span><span class="mark"></span><span class="code" id="line-19-code">    total_pages = <span class="t">len</span>(items) // per_page</span></div>
+        <div class="ln"><span class="no">20</span><span class="mark"></span><span class="code">    <span class="k">if</span> page &lt; <span class="n">1</span> <span class="k">or</span> page &gt; <span class="t">max</span>(total_pages, <span class="n">1</span>):</span></div>
+        <div class="ln"><span class="no">21</span><span class="mark"></span><span class="code">        <span class="k">raise</span> <span class="t">ValueError</span>(<span class="s">f"page {page} out of range"</span>)</span></div>
+        <div class="ln"><span class="no">22</span><span class="mark"></span><span class="code"></span></div>
+        <div class="ln"><span class="no">23</span><span class="mark"></span><span class="code">    start = (page - <span class="n">1</span>) * per_page</span></div>
+        <div class="ln"><span class="no">24</span><span class="mark"></span><span class="code">    end = start + per_page</span></div>
+        <div class="ln"><span class="no">25</span><span class="mark"></span><span class="code">    <span class="k">return</span> Page(items=<span class="t">list</span>(items[start:end]), number=page, total_pages=total_pages)</span></div>
+      </div>
+
+      <section class="panel" aria-label="Terminal">
+        <div class="panel-head">
+          <button class="ptab active"><svg class="i"><use href="#i-term"/></svg>Terminal</button>
+          <button class="ptab">Problems <span class="count">1</span></button>
+          <span class="spacer"></span>
+          <button class="icon-btn" aria-label="Maximise panel" title="Maximise"><svg class="i"><use href="#i-max"/></svg></button>
+          <button class="icon-btn" data-toggle="panel" aria-label="Close panel" title="Close"><svg class="i"><use href="#i-x"/></svg></button>
+        </div>
+<pre class="term"><span class="p">(.venv) pagination-api $</span> pytest -q tests/test_pagination.py
+<span class="good">..</span><span class="bad">F</span><span class="good">.</span>                                                            <span class="dim">[100%]</span>
+<span class="bad">________________________ test_last_page_has_remainder ________________________</span>
+
+    def test_last_page_has_remainder():
+        items = list(range(45))
+<span class="bad">&gt;       page = paginate(items, page=3, per_page=20)</span>
+<span class="bad">E       ValueError: page 3 out of range</span>
+
+<span class="dim">tests/test_pagination.py:18: ValueError</span>
+<span class="bad">1 failed</span>, <span class="good">3 passed</span> in 0.04s
+<span class="p">(.venv) pagination-api $</span> </pre>
+      </section>
+    </main>
+
+    <!-- Agent pane -->
+    <aside class="agent" aria-label="Agent">
+      <div class="agent-head">
+        <div class="who">
+          <h2>Agent</h2>
+          <div class="profile">OpenCode 1.2 running claude-sonnet-5-5</div>
+        </div>
+        <button class="btn quiet" type="button" title="Start a new session with an empty context"><svg class="i"><use href="#i-plus"/></svg>New session</button>
+        <button class="icon-btn" aria-label="More agent actions"><svg class="i"><use href="#i-more"/></svg></button>
+      </div>
+
+      <div class="log" id="log" aria-live="polite">
+        <button class="earlier"><svg class="i"><use href="#i-chev-r"/></svg>Show 3 earlier prompts</button>
+
+        <article class="turn">
+          <div class="prompt"><div class="by">You</div><p>Run the pagination tests and tell me what fails. Don't change anything yet.</p></div>
+          <div class="step"><svg class="i"><use href="#i-term"/></svg><span class="what">Ran <code>pytest -q tests/test_pagination.py</code></span><span class="res fail">1 failed, 3 passed</span></div>
+          <div class="reply"><p><code class="inline">test_last_page_has_remainder</code> fails. With 45 items and 20 per page, page 3 should hold the last 5 items, but <code class="inline">paginate()</code> rejects page 3 as out of range.</p></div>
+          <div class="cost">4,190 tokens</div>
+        </article>
+
+        <article class="turn live" id="live-turn">
+          <div class="prompt"><div class="by">You</div><p>In <code class="inline">paginate()</code> in app/pagination.py, <code class="inline">total_pages</code> uses floor division and drops the last partial page. Round up instead. Keep the signature and the out-of-range error.</p></div>
+          <div class="step"><svg class="i"><use href="#i-read"/></svg><span class="what">Read <code>app/pagination.py</code>, lines 1–25</span></div>
+          <div class="reply"><p>Line 19 floors 45 / 20 to 2, so page 3 fails the range check. Rounding up gives 3 pages and leaves the check as it is.</p></div>
+
+          <div class="approval" id="approval" data-state="pending" role="group" aria-labelledby="approval-title">
+            <div class="approval-head">
+              <svg class="i"><use href="#i-edit"/></svg>
+              <span class="title" id="approval-title">Edit <code>app/pagination.py</code></span>
+              <span class="meta">1 line changed</span>
+            </div>
+<pre class="diff"><div><span class="n">18</span><span class="sign"> </span><span></span></div><div class="del"><span class="n">19</span><span class="sign">-</span><span>    total_pages = len(items) // per_page</span></div><div class="add"><span class="n">19</span><span class="sign">+</span><span>    total_pages = (len(items) + per_page - 1) // per_page</span></div><div><span class="n">20</span><span class="sign"> </span><span>    if page &lt; 1 or page &gt; max(total_pages, 1):</span></div></pre>
+            <div class="approval-actions">
+              <button class="btn primary" id="approve" type="button">Approve</button>
+              <button class="btn" id="reject" type="button">Reject</button>
+              <button class="btn quiet" id="show" type="button">Show in editor</button>
+            </div>
+            <p class="approval-result" id="approval-result" hidden></p>
+          </div>
+
+          <div class="cost" id="live-cost">4,210 tokens so far</div>
+        </article>
+      </div>
+
+      <form class="composer" id="composer">
+        <label for="prompt" class="sr-only">Prompt for the agent</label>
+        <textarea id="prompt" rows="3" placeholder="Describe the change. Name the file, the function and what done looks like."></textarea>
+        <div class="composer-bar">
+          <span class="note">Your prompts, approvals and token use are recorded for this lab.</span>
+          <button class="btn primary" type="submit">Send <kbd>Enter</kbd></button>
+        </div>
+      </form>
+    </aside>
+  </div>
+
+  <!-- Status bar -->
+  <footer class="statusbar">
+    <span class="item"><span class="live-dot" aria-hidden="true"></span>Connected to lab server</span>
+    <span class="item wide">Python 3.12.4 (.venv)</span>
+    <span class="item" id="toast" aria-live="polite"></span>
+    <span class="spacer"></span>
+    <span class="item wide">Ln 19, Col 5</span>
+    <span class="item wide">Spaces: 4</span>
+    <span class="item wide">UTF-8</span>
+    <button class="item" id="theme" type="button"><svg class="i"><use href="#i-theme"/></svg><span id="theme-label">Dark theme</span></button>
+  </footer>
+</div>
+
+<script>
+  const app = document.getElementById('app');
+  const root = document.documentElement;
+  const toast = document.getElementById('toast');
+
+  // Pane toggles (title bar and panel close button share the same state)
+  function syncToggles() {
+    document.querySelectorAll('.layout-toggles [data-toggle]').forEach(b => {
+      b.setAttribute('aria-pressed', String(!app.classList.contains('no-' + b.dataset.toggle)));
+    });
+  }
+  document.querySelectorAll('[data-toggle]').forEach(btn => {
+    btn.addEventListener('click', () => { app.classList.toggle('no-' + btn.dataset.toggle); syncToggles(); });
+  });
+  if (window.innerWidth < 1000) app.classList.add('no-side');
+  if (window.innerWidth < 720) app.classList.add('no-agent');
+  syncToggles();
+
+  // Collapsible sidebar sections
+  document.querySelectorAll('[data-collapse]').forEach(head => {
+    head.addEventListener('click', () => {
+      const target = document.getElementById(head.dataset.collapse);
+      const open = head.getAttribute('aria-expanded') === 'true';
+      head.setAttribute('aria-expanded', String(!open));
+      target.hidden = open;
+    });
+  });
+
+  // Theme toggle
+  const isDark = () => root.dataset.theme ? root.dataset.theme === 'dark' : matchMedia('(prefers-color-scheme: dark)').matches;
+  const themeLabel = document.getElementById('theme-label');
+  const syncTheme = () => { themeLabel.textContent = isDark() ? 'Light theme' : 'Dark theme'; };
+  document.getElementById('theme').addEventListener('click', () => { root.dataset.theme = isDark() ? 'light' : 'dark'; syncTheme(); });
+  syncTheme();
+
+  // Approval card
+  const card = document.getElementById('approval');
+  const result = document.getElementById('approval-result');
+  const line = document.getElementById('line-19');
+  const lineCode = document.getElementById('line-19-code');
+  const liveCost = document.getElementById('live-cost');
+
+  document.getElementById('approve').addEventListener('click', () => {
+    card.dataset.state = 'approved';
+    result.hidden = false;
+    result.innerHTML = '<svg class="i" style="color:var(--ok)"><use href="#i-check"/></svg>Approved and applied to app/pagination.py';
+    lineCode.innerHTML = '    total_pages = (<span class="t">len</span>(items) + per_page - <span class="n">1</span>) // per_page';
+    line.classList.remove('pending'); line.classList.add('applied'); line.title = 'Changed by the agent';
+    document.getElementById('tab-pagination').classList.add('modified');
+    document.getElementById('tree-badge').hidden = false;
+    liveCost.textContent = '4,630 tokens';
+    toast.textContent = 'Edit applied';
+  });
+
+  document.getElementById('reject').addEventListener('click', () => {
+    card.dataset.state = 'rejected';
+    result.hidden = false;
+    result.innerHTML = '<svg class="i" style="color:var(--fail)"><use href="#i-x"/></svg>Rejected. The agent will wait for your next prompt.';
+    line.classList.remove('pending'); line.title = '';
+    liveCost.textContent = '4,210 tokens';
+    toast.textContent = 'Edit rejected';
+  });
+
+  document.getElementById('show').addEventListener('click', () => {
+    line.scrollIntoView({ block: 'center' });
+    toast.textContent = 'Showing the proposed change at line 19';
+  });
+
+  // Composer: Enter sends, Shift+Enter adds a new line
+  const composer = document.getElementById('composer');
+  const promptBox = document.getElementById('prompt');
+  promptBox.addEventListener('keydown', e => {
+    if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); composer.requestSubmit(); }
+  });
+  composer.addEventListener('submit', e => {
+    e.preventDefault();
+    const text = promptBox.value.trim();
+    if (!text) { promptBox.focus(); return; }
+    const turn = document.createElement('article');
+    turn.className = 'turn live';
+    const p = document.createElement('div');
+    p.className = 'prompt';
+    p.innerHTML = '<div class="by">You</div><p></p>';
+    p.querySelector('p').textContent = text;
+    const waiting = document.createElement('div');
+    waiting.className = 'step';
+    waiting.textContent = 'Waiting for the agent';
+    turn.append(p, waiting);
+    document.getElementById('live-turn').classList.remove('live');
+    document.getElementById('log').append(turn);
+    turn.scrollIntoView({ block: 'end' });
+    promptBox.value = '';
+  });
+</script>
+</body>
+</html>

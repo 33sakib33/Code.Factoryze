@@ -1,0 +1,38 @@
+
+> @factoryze/app@0.0.1 smoke:installer E:\Projects\Factoryze\Factoryze\Factoryze\packages\app
+> node --experimental-strip-types scripts/smoke-installer.mjs
+
+Started an attempt from Home; starter file opened; public tests ran.
+node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+
+locator.selectOption: Target page, context or browser has been closed
+Call log:
+  - waiting for locator('.fz-report-head select')
+
+    at E:\Projects\Factoryze\Factoryze\Factoryze\packages\app\scripts\smoke-solo.mjs:362:48 {
+  log: [ "  - waiting for locator('.fz-report-head select')" ]
+}
+
+Node.js v24.19.0
+node:fs:1283
+  return binding.rmSync(getValidatedPath(path), opts.maxRetries, opts.recursive, opts.retryDelay);
+                 ^
+
+Error: EPERM, Permission denied: \\?\C:\Users\Sakib\AppData\Local\Temp\factoryze-installer-smoke-BOf5Qj '\\?\C:\Users\Sakib\AppData\Local\Temp\factoryze-installer-smoke-BOf5Qj'
+    at rmSync (node:fs:1283:18)
+    at file:///E:/Projects/Factoryze/Factoryze/Factoryze/packages/app/scripts/smoke-installer.mjs:46:3
+    at ModuleJob.run (node:internal/modules/esm/module_job:439:25)
+    at async node:internal/modules/esm/loader:643:26
+    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5) {
+  errno: 1,
+  code: 'EPERM',
+  path: '\\\\?\\C:\\Users\\Sakib\\AppData\\Local\\Temp\\factoryze-installer-smoke-BOf5Qj',
+  syscall: 'rm'
+}
+
+Node.js v24.19.0
+E:\Projects\Factoryze\Factoryze\Factoryze\packages\app:
+ ERR_PNPM_RECURSIVE_RUN_FIRST_FAIL  @factoryze/app@0.0.1 smoke:installer: `node --experimental-strip-types scripts/smoke-installer.mjs`
+Exit status 1

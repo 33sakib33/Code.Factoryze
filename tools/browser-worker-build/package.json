@@ -1,0 +1,11 @@
+{
+  "name": "factoryze-browser-worker-build",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Isolated build dependencies for the host-side private worker bundle",
+  "dependencies": {
+    "esbuild": "0.28.2",
+    "yaml": "2.9.1",
+    "zod": "4.4.3"
+  }
+}

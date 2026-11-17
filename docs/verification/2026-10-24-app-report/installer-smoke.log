@@ -1,0 +1,32 @@
+
+> @factoryze/app@0.0.1 smoke:installer E:\Projects\Factoryze\Factoryze\Factoryze\packages\app
+> node --experimental-strip-types scripts/smoke-installer.mjs
+
+Started an attempt from Home; starter file opened; public tests ran.
+Approved report design: full-width result, nine segments, check modal, no suggestions/grades, pane restoration and saved submission costs verified.
+Budget refusal survived New session; raised budget recorded on the second submission.
+Retired tasks stay hidden from Practice; earlier attempts, usage, reports and resubmission survive.
+Folder and ZIP tasks imported and graded in the same window.
+Connected a model from Settings; the retained draft was sent and metered.
+Exhausted budget persisted across restart; reopening the attempt made no request.
+{"passed":true,"platform":"win32","modelCalls":11,"judgeCalls":3,"approvedEdit":true,"correctness":{"passed":9,"total":9},"reportExecutionPins":true,"reportLearning":true,"savedPromptCosts":true,"approvedReportDesign":true,"reportCheckModal":true,"reportSuggestionsAbsent":true,"reportPromptScoresAbsent":true,"temperatureConfiguration":true,"temperatureOnEveryModelStep":true,"agentRunsPublicTestsInNativeShell":true,"titleBarSurvivesWorkspaceReloads":true,"titleBarControlsAccessible":true,"compactWindow":{"width":683,"height":512},"promotedPracticeTasks":true,"retiredAttemptsContinue":true,"retiredReportsPreserved":true,"retiredResubmission":true,"retiredUsagePreserved":true,"olderRetiredDraftReachable":true,"legacyModelCalls":2,"launchOpensHome":true,"relaunchOpensHome":true,"startSheetPythonCheck":true,"startSheetBudgetChange":true,"continueFromHome":true,"reportsFromHome":true,"multipleSubmissions":true,"budgetRaiseRecorded":true,"hiddenCheckNames":true,"promptTextInReport":true,"relativeToolPaths":true,"unifiedDiffApproval":true,"perPromptBudgetSegments":true,"separateInputOutputMeters":true,"freshAttemptMetersReset":true,"freshAttemptPersistsAfterRestart":true,"previousAttemptUsagePreserved":true,"factoryzeHarness":{"requests":5,"readEditShell":true,"diffAndShellApproved":true,"budgetPersistsAfterRestart":true},"budgetEnforcedAfterNewSession":true,"terminalUsesEngineIndex":true,"paneTogglesCarryStateOnLoad":true,"stopCancelsJudge":true,"singleWindowAttempts":true,"folderImport":true,"zipImport":true,"draftRetainedDuringSetup":true,"keychainSetupEnablesSend":true,"forgetConnection":true,"publicTestsRun":true,"starterFileOpened":true,"noOpenCodeInUi":true,"darkAppearance":true,"appearancePersists":true,"matchSystemAppearance":true,"toolbarOverlapsAfterLoad":[]}
+node:fs:1283
+  return binding.rmSync(getValidatedPath(path), opts.maxRetries, opts.recursive, opts.retryDelay);
+                 ^
+
+Error: EPERM, Permission denied: \\?\C:\Users\Sakib\AppData\Local\Temp\factoryze-installer-smoke-DpDWvo '\\?\C:\Users\Sakib\AppData\Local\Temp\factoryze-installer-smoke-DpDWvo'
+    at rmSync (node:fs:1283:18)
+    at file:///E:/Projects/Factoryze/Factoryze/Factoryze/packages/app/scripts/smoke-installer.mjs:46:3
+    at ModuleJob.run (node:internal/modules/esm/module_job:439:25)
+    at async node:internal/modules/esm/loader:643:26
+    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5) {
+  errno: 1,
+  code: 'EPERM',
+  path: '\\\\?\\C:\\Users\\Sakib\\AppData\\Local\\Temp\\factoryze-installer-smoke-DpDWvo',
+  syscall: 'rm'
+}
+
+Node.js v24.19.0
+E:\Projects\Factoryze\Factoryze\Factoryze\packages\app:
+ ERR_PNPM_RECURSIVE_RUN_FIRST_FAIL  @factoryze/app@0.0.1 smoke:installer: `node --experimental-strip-types scripts/smoke-installer.mjs`
+Exit status 1

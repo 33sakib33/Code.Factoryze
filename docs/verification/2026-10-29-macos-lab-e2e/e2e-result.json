@@ -1,0 +1,285 @@
+{
+  "passed": true,
+  "platform": "darwin",
+  "realCliServer": true,
+  "dockerGrading": true,
+  "inference": false,
+  "paidModelCalls": 0,
+  "realEmailsSent": 0,
+  "labSettingsText": "Lab connection e2e-lab · Open Student s001 Pinned model synthetic Token budget 0 / 25,000 Deadline 29/10/2026, 23:23:37 The instructor controls the model and budget. Edits and commands still need your approval. Reconnect Close",
+  "gradesBeforeClose": {
+    "protocol": 1,
+    "lab": "e2e-lab",
+    "submissions": [
+      {
+        "id": "b6332568-ffe9-41b2-af7f-52e8e759d64a",
+        "number": 1,
+        "revision": 0,
+        "snapshotHash": "a61e1611796a89c4e9b279430e3462b294575478b5ae395ae63a18eceaa6d3f0",
+        "submittedAt": "2026-10-29T16:23:49.294Z",
+        "state": "graded",
+        "released": false,
+        "studentId": "s001",
+        "provenance": {
+          "executor": "docker",
+          "image": "sha256:e79d20d59afa6a184267756ad3c87000efcb9ec031ad2471b853c5f6d9100e4d",
+          "runner": "factoryze-hidden-v1",
+          "python": "3.13.18",
+          "checkTimeoutMs": 10000,
+          "runTimeoutMs": 120000
+        }
+      },
+      {
+        "id": "897f0dcb-333a-4b8a-8dbf-e981ef002e5e",
+        "number": 2,
+        "revision": 1,
+        "snapshotHash": "976a79c5216f70f29311e0262391a6fd06a923f92c29290a06538abc4faac899",
+        "submittedAt": "2026-10-29T16:23:53.528Z",
+        "state": "graded",
+        "released": false,
+        "studentId": "s001",
+        "provenance": {
+          "executor": "docker",
+          "image": "sha256:e79d20d59afa6a184267756ad3c87000efcb9ec031ad2471b853c5f6d9100e4d",
+          "runner": "factoryze-hidden-v1",
+          "python": "3.13.18",
+          "checkTimeoutMs": 10000,
+          "runTimeoutMs": 120000
+        }
+      }
+    ]
+  },
+  "close": {
+    "protocol": 1,
+    "config": {
+      "schema": 1,
+      "lab": "e2e-lab",
+      "task": "library-fines",
+      "timeLimitMinutes": 60,
+      "agent": {
+        "profile": "factoryze@0.1.0",
+        "model": "synthetic",
+        "permissions": {
+          "edit": "ask",
+          "shell": "ask"
+        }
+      },
+      "budget": {
+        "limit": 25000,
+        "weights": {
+          "input": 1,
+          "output": 1,
+          "cacheRead": 0.1,
+          "cacheWrite": 1
+        }
+      }
+    },
+    "providerHost": "provider.invalid",
+    "temperature": 0,
+    "createdAt": "2026-10-29T16:23:37.516Z",
+    "closesAt": "2026-10-29T17:23:37.516Z",
+    "closedAt": "2026-10-29T16:24:02.871Z",
+    "students": [
+      {
+        "studentId": "s001",
+        "joined": true,
+        "usage": {
+          "scope": {
+            "userId": "87103cc5-14ca-47ca-9fd3-00774bc770f8",
+            "taskId": "library-fines",
+            "profile": "factoryze@0.1.0",
+            "model": "synthetic"
+          },
+          "raw": {
+            "input": 0,
+            "output": 0,
+            "cacheRead": 0,
+            "cacheWrite": 0
+          },
+          "weighted": 0,
+          "budgetLimit": 25000,
+          "remaining": 25000,
+          "requests": 0,
+          "incompleteRequests": 0,
+          "status": "ready"
+        }
+      }
+    ]
+  },
+  "gradesAfterClose": {
+    "protocol": 1,
+    "lab": "e2e-lab",
+    "submissions": [
+      {
+        "id": "b6332568-ffe9-41b2-af7f-52e8e759d64a",
+        "number": 1,
+        "revision": 0,
+        "snapshotHash": "a61e1611796a89c4e9b279430e3462b294575478b5ae395ae63a18eceaa6d3f0",
+        "submittedAt": "2026-10-29T16:23:49.294Z",
+        "state": "graded",
+        "released": false,
+        "studentId": "s001",
+        "provenance": {
+          "executor": "docker",
+          "image": "sha256:e79d20d59afa6a184267756ad3c87000efcb9ec031ad2471b853c5f6d9100e4d",
+          "runner": "factoryze-hidden-v1",
+          "python": "3.13.18",
+          "checkTimeoutMs": 10000,
+          "runTimeoutMs": 120000
+        }
+      },
+      {
+        "id": "897f0dcb-333a-4b8a-8dbf-e981ef002e5e",
+        "number": 2,
+        "revision": 1,
+        "snapshotHash": "976a79c5216f70f29311e0262391a6fd06a923f92c29290a06538abc4faac899",
+        "submittedAt": "2026-10-29T16:23:53.528Z",
+        "state": "graded",
+        "released": false,
+        "studentId": "s001",
+        "provenance": {
+          "executor": "docker",
+          "image": "sha256:e79d20d59afa6a184267756ad3c87000efcb9ec031ad2471b853c5f6d9100e4d",
+          "runner": "factoryze-hidden-v1",
+          "python": "3.13.18",
+          "checkTimeoutMs": 10000,
+          "runTimeoutMs": 120000
+        }
+      }
+    ]
+  },
+  "release": {
+    "protocol": 1,
+    "config": {
+      "schema": 1,
+      "lab": "e2e-lab",
+      "task": "library-fines",
+      "timeLimitMinutes": 60,
+      "agent": {
+        "profile": "factoryze@0.1.0",
+        "model": "synthetic",
+        "permissions": {
+          "edit": "ask",
+          "shell": "ask"
+        }
+      },
+      "budget": {
+        "limit": 25000,
+        "weights": {
+          "input": 1,
+          "output": 1,
+          "cacheRead": 0.1,
+          "cacheWrite": 1
+        }
+      }
+    },
+    "providerHost": "provider.invalid",
+    "temperature": 0,
+    "createdAt": "2026-10-29T16:23:37.516Z",
+    "closesAt": "2026-10-29T17:23:37.516Z",
+    "closedAt": "2026-10-29T16:24:02.871Z",
+    "students": [
+      {
+        "studentId": "s001",
+        "joined": true,
+        "usage": {
+          "scope": {
+            "userId": "87103cc5-14ca-47ca-9fd3-00774bc770f8",
+            "taskId": "library-fines",
+            "profile": "factoryze@0.1.0",
+            "model": "synthetic"
+          },
+          "raw": {
+            "input": 0,
+            "output": 0,
+            "cacheRead": 0,
+            "cacheWrite": 0
+          },
+          "weighted": 0,
+          "budgetLimit": 25000,
+          "remaining": 25000,
+          "requests": 0,
+          "incompleteRequests": 0,
+          "status": "ready"
+        }
+      }
+    ]
+  },
+  "csv": "\"lab\",\"student_id\",\"joined\",\"profile\",\"model\",\"weighted_tokens\",\"remaining_tokens\",\"accounting_status\",\"lab_state\",\"correctness_passed\",\"correctness_total\",\"submission_hash\",\"grading_executor\",\"grading_image\",\"grading_python\"\r\n\"e2e-lab\",\"s001\",\"true\",\"factoryze@0.1.0\",\"synthetic\",\"0\",\"25000\",\"ready\",\"closed\",\"9\",\"9\",\"976a79c5216f70f29311e0262391a6fd06a923f92c29290a06538abc4faac899\",\"docker\",\"sha256:e79d20d59afa6a184267756ad3c87000efcb9ec031ad2471b853c5f6d9100e4d\",\"3.13.18\"\r\n",
+  "practiceTaskStates": [
+    "Not attempted yet",
+    "Not attempted yet"
+  ],
+  "resultRows": [
+    "Library fines · e2e-lab Attempt 1, submission 2 Today, 22:23 9 of 9 0 Not scored",
+    "Library fines · e2e-lab Attempt 1, submission 1 Today, 22:23 5 of 9 0 Not scored"
+  ],
+  "reportText": "Factoryze No model connected 0 0 Home Library fines · e2e-lab, attempt 1 Submitted today at 22:23. Lab e2e-lab; released by your instructor. Showing Submission 1 of 2 Submission 2 of 2, latest 100% passed Correctness 9 / 9 hidden checks passed All checks passed. View all 9 checks Token budget used 0 / 25,000 Weighted tokens used against the attempt limit. Prompts sent 0 Messages you sent to the agent. Time spent 1 minute From the start of the attempt to submission. Agent model No agent used The model used during this attempt. Activity and token usage Saved with this submission Activity and usage were saved at submission. Later work does not change this report. Recorded activity Exploration calls 0 Edit calls 0 Command calls 0 Actions approved 0 0 failed calls · 0 unfinished calls · 0 declined approvals · 0 cancelled approvals Calls are counted when attempted. A command call alone does not show whether tests ran or passed. Measured token counts Fresh input 0 Cache reads 0 Cache writes 0 Output 0 Raw provider counts. Input includes instructions, history and tool results. The budget total applies the recorded token weights. Usage after activity 0 model requests Measured model-request tokens, grouped by the tools before each request. Mixed steps stay together. Tools and context are not metered separately. No model requests were recorded for this attempt. Recorded agent settings Your prompts and token usage You did not use the agent in this attempt. Back to Home",
+  "checkDetails": "Hidden-check details 9 of 9 passed · all checks passed Close details Closed days and holidays are not counted Passed Concession dvd evening return at riverside Passed Early morning late return at harbour Passed Evening checkout uses the branch day Passed Evening return on due date is on time at riverside Passed Fine rules are unchanged Passed Morning return after due date is late at riverside Passed Notices use the branch day Passed Renewal on the due date evening is allowed Passed",
+  "pageErrors": [],
+  "steps": [
+    {
+      "t": "2026-10-29T16:23:41.696Z",
+      "step": "Home ready"
+    },
+    {
+      "t": "2026-10-29T16:23:45.333Z",
+      "step": "Lab joined and Python prepared"
+    },
+    {
+      "t": "2026-10-29T16:23:49.219Z",
+      "step": "Public tests pass on starter"
+    },
+    {
+      "t": "2026-10-29T16:23:49.427Z",
+      "step": "Submission 1 (unchanged starter) saved"
+    },
+    {
+      "t": "2026-10-29T16:23:49.428Z",
+      "step": "Student fix written to workspace",
+      "detail": {
+        "file": "/labs/e2e-lab-7Pk2q2/library/returns.py"
+      }
+    },
+    {
+      "t": "2026-10-29T16:23:53.680Z",
+      "step": "Submission 2 (fixed) saved"
+    },
+    {
+      "t": "2026-10-29T16:24:02.529Z",
+      "step": "Graded before close",
+      "detail": {
+        "states": [
+          "graded",
+          "graded"
+        ]
+      }
+    },
+    {
+      "t": "2026-10-29T16:24:02.886Z",
+      "step": "Lab closed"
+    },
+    {
+      "t": "2026-10-29T16:24:06.277Z",
+      "step": "Grades after close",
+      "detail": {
+        "states": [
+          "graded",
+          "graded"
+        ]
+      }
+    },
+    {
+      "t": "2026-10-29T16:24:06.697Z",
+      "step": "Released"
+    },
+    {
+      "t": "2026-10-29T16:24:07.122Z",
+      "step": "CSV exported"
+    },
+    {
+      "t": "2026-10-29T16:24:08.897Z",
+      "step": "Done"
+    }
+  ]
+}

@@ -1,0 +1,783 @@
+{
+  "date": "2026-10-29",
+  "timezone": "Asia/Dhaka",
+  "recordedAtUtc": "2026-10-28T20:37:35.737Z",
+  "request": "Finish Phase 2 and update progress while doing it.",
+  "ownerSteering": {
+    "docker": "Keep deferred; complete other Phase 2 work",
+    "labAndPilotDate": "not arranged",
+    "serverAndStudentOs": "not selected"
+  },
+  "state": "non-docker-software-complete-windows-verified",
+  "nonDockerSoftwareComplete": true,
+  "phase2ReleaseComplete": false,
+  "identity": {
+    "branch": "feature/lab-pilot",
+    "baseCommit": "71a399aebb0e5ffb8bb6ba4d88242fa32c1fc8a9",
+    "remote": "git@github.com:33sakib33/Factoryze.git",
+    "checkpoint": "Identified by the enclosing Git commit; no self-referential hash"
+  },
+  "environment": {
+    "platform": "win32",
+    "node": "v24.22.1",
+    "pnpm": "10.28.2",
+    "openssl": "3.0.15 via FACTORYZE_OPENSSL",
+    "python": "3.11+ local environment",
+    "node22FreshCheck": false
+  },
+  "commands": [
+    {
+      "command": "pnpm test",
+      "exitCode": 0,
+      "tests": 226,
+      "passed": 226,
+      "skipped": 0,
+      "log": "tests-release-candidate.log"
+    },
+    {
+      "command": "pnpm typecheck",
+      "exitCode": 0,
+      "log": "typecheck-release-candidate.log"
+    },
+    {
+      "command": "pnpm build:app",
+      "exitCode": 0,
+      "log": "build-complete.log"
+    },
+    {
+      "command": "pnpm --filter @factoryze/app package:installer",
+      "exitCode": 0,
+      "log": "package-complete.log"
+    },
+    {
+      "command": "pnpm --filter @factoryze/app verify:package",
+      "exitCode": 0,
+      "log": "resources-complete.log"
+    },
+    {
+      "command": "pnpm --filter @factoryze/app smoke:installer",
+      "exitCode": 0,
+      "log": "installed-smoke.log",
+      "receipts": [
+        "installer-final.json",
+        "solo-installed-final.json",
+        "lab-installed-final.json"
+      ]
+    },
+    {
+      "command": "node --experimental-strip-types packages/server/scripts/load-lab.mjs docs/verification/2026-10-29-lab-completion/load-60-final.json",
+      "exitCode": 0,
+      "log": "load-60-final.log",
+      "receipt": "load-60-final.json"
+    }
+  ],
+  "finalLoad": {
+    "date": "2026-10-29",
+    "passed": true,
+    "clients": 60,
+    "joined": 60,
+    "completedPrompts": 60,
+    "syntheticModelRequests": 120,
+    "readToolRoundTrips": 60,
+    "immutableSubmissions": 60,
+    "distinctSnapshotHashes": 60,
+    "totalWeightedTokens": 14400,
+    "crossStudentBudgetLeak": false,
+    "closedLabRejectsReleaseUntilGraded": true,
+    "gradingExecuted": false,
+    "paidModelCalls": 0,
+    "realMachines": 0,
+    "elapsedMs": 12003,
+    "clientWorkElapsedMs": 11521,
+    "scope": "Single-host functional load with real TLS, desktop backend stores, unchanged server harness, real local read tools and SQLite. No provider-throughput or classroom hardware capacity claim."
+  },
+  "finalInstalled": {
+    "passed": true,
+    "platform": "win32",
+    "soloSmokePassed": true,
+    "labSmokePassed": true,
+    "appSmokePassed": true,
+    "cleanupPassed": true,
+    "temporaryRoot": "C:\\Users\\Sakib\\AppData\\Local\\Temp\\factoryze-installer-smoke-OEi4lK",
+    "temporaryRootRemoved": true,
+    "uninstallAttempted": true,
+    "rootRemoved": true
+  },
+  "labFlow": {
+    "passed": true,
+    "platform": "win32",
+    "installed": true,
+    "viewport": {
+      "width": 900,
+      "height": 700
+    },
+    "pinnedTLS": true,
+    "joinLab": true,
+    "pythonPrepared": true,
+    "serverBrainLocalHands": true,
+    "modelRequests": 4,
+    "approvals": 2,
+    "weightedTokens": 48,
+    "publicChecks": 5,
+    "submissionSaved": true,
+    "restartToHome": true,
+    "sessionResumed": true,
+    "readonlyLabSettings": true,
+    "byokPreserved": true,
+    "instructorReleaseRendered": true,
+    "gradingVerdictSynthetic": true,
+    "checkDetailsModal": true,
+    "serverStudentCodeExecutions": 0,
+    "suggestionsAndPromptScoresAbsent": true,
+    "paidModelCalls": 0,
+    "realEmailsSent": 0,
+    "pageErrors": []
+  },
+  "installerArtifact": {
+    "signed": false,
+    "path": "dist/Factoryze Setup 0.0.1.exe",
+    "sha256": "d33cb37bdd4aec53c821a2b6221ab24761032440137adfd39b0c337b5fbfac70",
+    "platform": "win32",
+    "arch": "x64",
+    "bytes": 174406059
+  },
+  "scope": {
+    "labModelSynthetic": true,
+    "labGradingVerdictSynthetic": true,
+    "productionServerGradingEnabled": false,
+    "serverStudentCodeExecutions": 0,
+    "realEmailsSent": 0,
+    "paidModelCalls": 0,
+    "realClassroomMachines": 0,
+    "webRepositoriesModified": false,
+    "byokAvailable": true,
+    "trialCreditsAvailable": true,
+    "webAdminAccessUnchanged": true,
+    "reportSuggestionsAndPromptScoresRemoved": true,
+    "harnessBehaviorOrVersionChanged": false
+  },
+  "keyFixes": [
+    "Electron/BoringSSL-compatible pinned trust anchor with hostname/validity verification intact",
+    "Durable join binding, submission IDs and replay without duplicate identities or snapshots",
+    "Serial sync/Submit and preserved concurrent metadata/events",
+    "Acknowledged submission remains successful when status refresh is offline",
+    "Recover an existing receipt after close; refuse new late submissions",
+    "Student denial of instructor operations; pending approval cancels on server closure"
+  ],
+  "initialFailures": [
+    "initial-workflow-tests.log",
+    "initial-runtime-tests.log",
+    "join-binding-red.log",
+    "packages-red.log",
+    "reconnect-red.log",
+    "typecheck-integration.log",
+    "typecheck-desktop.log",
+    "electron-smoke-initial.log",
+    "electron-smoke-tls-fixed.log",
+    "electron-smoke-selector.log",
+    "installed-smoke-initial.log",
+    "closed-receipt-red.log",
+    "sync-submit-red.log",
+    "saved-refresh-red.log"
+  ],
+  "cleanup": {
+    "installedApplicationUninstalled": true,
+    "installedTemporaryRootRemoved": true,
+    "optionalFailedFixtureDeletion": "Automatic approval review rejected the scoped recursive removal with blocked by policy; retained without a workaround",
+    "retainedFailedFixtures": [
+      "dist/desktop-lab-verification/session-AQdYHK",
+      "dist/desktop-lab-verification/session-sATY4S",
+      "dist/desktop-lab-verification/session-ZmHX6k"
+    ],
+    "residualSyntheticCredentialRemoved": 1,
+    "priorBlockedInstallerRootTouched": false
+  },
+  "remainingGates": [
+    "Docker/shared isolated grader explicitly deferred; real submissions remain queued",
+    "Server/student OS and pilot lab/date",
+    "Fresh macOS/Linux/current installer and actual LAN checks",
+    "Ten real-machine dry run",
+    "Instructor-validated pilot task and separately approved pinned model measurements/current baselines",
+    "Completed pilot, accepted CSV and real pilot re-score corpus",
+    "Recorded human review before merge; earlier 0.1 manual/platform gates remain separate"
+  ],
+  "publication": {
+    "merged": false,
+    "pushed": false,
+    "released": false
+  },
+  "sourceHashes": [
+    {
+      "path": ".gitattributes",
+      "normalization": "UTF-8 with CRLF converted to LF",
+      "sha256": "aefae4ea97c64b65461d4791b14bd65c50be216a7fc6b7afd4be2a54eac28df3"
+    },
+    {
+      "path": ".github/workflows/installers.yml",
+      "normalization": "UTF-8 with CRLF converted to LF",
+      "sha256": "859511526c166a193b0f50488fd2b60146adf271c7238938712b7e1bf20e033a"
+    },
+    {
+      "path": "AGENTS.md",
+      "normalization": "UTF-8 with CRLF converted to LF",
+      "sha256": "1c75cbdebfdcf89be8512ba0dd48338e304bbdcda1138f52cec670955ceeb7d4"
+    },
+    {
+      "path": "PLAN.md",
+      "normalization": "UTF-8 with CRLF converted to LF",
+      "sha256": "d8bc2b0e0f63b8b742820b36f9bb11d4d61b53e3440245e4dc0adfeb72c0e298"
+    },
+    {
+      "path": "PROGRESS.md",
+      "normalization": "UTF-8 with CRLF converted to LF",
+      "sha256": "20f789cd4d0b0ecccdb5dcf35261b6b89aa931c65fcaa025c50e5c52eac0758d"
+    },
+    {
+      "path": "README.md",
+      "normalization": "UTF-8 with CRLF converted to LF",
+      "sha256": "f71ee931659f9f99f474aabeee8b4f5902e8ffa80711d73de88478e050b26c1e"
+    },
+    {
+      "path": "SPEC.md",
+      "normalization": "UTF-8 with CRLF converted to LF",
+      "sha256": "d32b76598335b318e5c0cea37f65056992a8776e7e87979929a6d2ddd26889f7"
+    },
+    {
+      "path": "docs/lab-pilot.md",
+      "normalization": "UTF-8 with CRLF converted to LF",
+      "sha256": "6bb0ece476f3cae262c6fdb5f3835951d5361a32b4367dd8c4e4a32ef6701d0d"
+    },
+    {
+      "path": "docs/verification/2026-10-29-lab-completion/README.md",
+      "normalization": "UTF-8 with CRLF converted to LF",
+      "sha256": "721fae70a19e99b24700b2574638e8df57de02fbcf5a80e9e2e35e0c1aa145ec"
+    },
+    {
+      "path": "package.json",
+      "normalization": "UTF-8 with CRLF converted to LF",
+      "sha256": "bb4925e31815f9490f146acfc42bc892a5077d5583037fbee1ec532a8db2d21d"
+    },
+    {
+      "path": "packages/app/extensions/core/package.json",
+      "normalization": "UTF-8 with CRLF converted to LF",
+      "sha256": "9cdae915f7827c60d9f8e3b98ed254cc05cacb14a860110c599d0c468ef52cf7"
+    },
+    {
+      "path": "packages/app/extensions/core/src/browser/dialogs.ts",
+      "normalization": "UTF-8 with CRLF converted to LF",
+      "sha256": "259df54b4b5bb40401ebb52222533ce0252325221ce99c02ab669f35e7a5e1c9"
+    },
+    {
+      "path": "packages/app/extensions/core/src/browser/factoryze-agent-widget.ts",
+      "normalization": "UTF-8 with CRLF converted to LF",
+      "sha256": "212bef37c4be8c41c9e4c8f8539f1d99f10c811b40c5d13600ee1b00576c286a"
+    },
+    {
+      "path": "packages/app/extensions/core/src/browser/factoryze-frontend-module.ts",
+      "normalization": "UTF-8 with CRLF converted to LF",
+      "sha256": "e92e7938d9f11d6da0d8fba0278473145b4f5990119766494cdb13555794a3af"
+    },
+    {
+      "path": "packages/app/extensions/core/src/browser/factoryze-home-widget.ts",
+      "normalization": "UTF-8 with CRLF converted to LF",
+      "sha256": "fd4d844f7d2aa31b0ecef9dc4499d725b3837974a9f2c3188d04a78adf301f1b"
+    },
+    {
+      "path": "packages/app/extensions/core/src/browser/factoryze-metrics-widget.ts",
+      "normalization": "UTF-8 with CRLF converted to LF",
+      "sha256": "d20242b5ab54d41d81f35c2d97e56e400b92c55496ce4e76720359495228be62"
+    },
+    {
+      "path": "packages/app/extensions/core/src/browser/factoryze-report-widget.ts",
+      "normalization": "UTF-8 with CRLF converted to LF",
+      "sha256": "2834e8345c792f6cd6b05a0da6714724beb1b83bc8150e4c3f582ed17b97b84a"
+    },
+    {
+      "path": "packages/app/extensions/core/src/browser/factoryze-solo-contribution.ts",
+      "normalization": "UTF-8 with CRLF converted to LF",
+      "sha256": "72197ef395be4bb953508c8685d8f06a5b966462857b0a6b4886fd6fd6bef75f"
+    },
+    {
+      "path": "packages/app/extensions/core/src/browser/factoryze-tests-widget.ts",
+      "normalization": "UTF-8 with CRLF converted to LF",
+      "sha256": "6a4c5dac710e24d8b5f11c3dc07abb117ee6b6f81c41d1e08bbebf45a533ddf5"
+    },
+    {
+      "path": "packages/app/extensions/core/src/browser/lab-dialog.ts",
+      "normalization": "UTF-8 with CRLF converted to LF",
+      "sha256": "0549521a6360ad0713d9e7f3af8fb5d0fa4a3156aa27c2c9769bbf6e5642beb0"
+    },
+    {
+      "path": "packages/app/extensions/core/src/common/task-service.ts",
+      "normalization": "UTF-8 with CRLF converted to LF",
+      "sha256": "c84a69094a7a6367eda21af9e983a124191d8c389316d8e874099073e2e74354"
+    },
+    {
+      "path": "packages/app/extensions/core/src/node/agent-backend-service.ts",
+      "normalization": "UTF-8 with CRLF converted to LF",
+      "sha256": "3b98acaf643b3f26f1f3793aee80d910fac0f22750dc14ccabe6f58dd699d6f8"
+    },
+    {
+      "path": "packages/app/extensions/core/src/node/factoryze-backend-module.ts",
+      "normalization": "UTF-8 with CRLF converted to LF",
+      "sha256": "4a7678cfaacfd8c2593dca9f084e4f561ed00a64993b915d57b25c7233111cc9"
+    },
+    {
+      "path": "packages/app/extensions/core/src/node/lab-connection.ts",
+      "normalization": "UTF-8 with CRLF converted to LF",
+      "sha256": "6d7b087c2ff8c72221faa4c9a163f0ed9a99f0c415bcd48d3674b7252f2424c9"
+    },
+    {
+      "path": "packages/app/extensions/core/src/node/lab-session.ts",
+      "normalization": "UTF-8 with CRLF converted to LF",
+      "sha256": "246eab6bd355b5ccfe8c876faebfda5a8dbb39249ac65226a041974abaf733d6"
+    },
+    {
+      "path": "packages/app/extensions/core/src/node/model-settings.ts",
+      "normalization": "UTF-8 with CRLF converted to LF",
+      "sha256": "89f05d997de91d248ee455a83c30c50401596952aa321f04ef66c801f0f01c10"
+    },
+    {
+      "path": "packages/app/extensions/core/src/node/task-backend-service.ts",
+      "normalization": "UTF-8 with CRLF converted to LF",
+      "sha256": "721962cdce3095ccd692c1b095581a18a5e8c7649b79851caa03583bf0c9fbb9"
+    },
+    {
+      "path": "packages/app/extensions/core/test/lab-agent.test.ts",
+      "normalization": "UTF-8 with CRLF converted to LF",
+      "sha256": "47e9eb961a26c4e0c58c5d863d7410cc961d9db1f23cdcbbb84db55cc04110ae"
+    },
+    {
+      "path": "packages/app/extensions/core/test/lab-connection.test.ts",
+      "normalization": "UTF-8 with CRLF converted to LF",
+      "sha256": "a25d510ef6c15dcd678ae42e5f5ec79d7aae574609a9193651fba940f66273a0"
+    },
+    {
+      "path": "packages/app/package.json",
+      "normalization": "UTF-8 with CRLF converted to LF",
+      "sha256": "94faed0895dc4011c9fc0370b56c6566862fbe1ed2b8369a8bacee77c25e3273"
+    },
+    {
+      "path": "packages/app/scripts/smoke-installer.mjs",
+      "normalization": "UTF-8 with CRLF converted to LF",
+      "sha256": "194c85b7e8653fba39b4ec871cce9350485f7d8950cc9c6eb50bb9850f1757dd"
+    },
+    {
+      "path": "packages/app/scripts/smoke-lab.mjs",
+      "normalization": "UTF-8 with CRLF converted to LF",
+      "sha256": "1300b8aa7e68207e03501fde2677f3214a37c549dfde6961c8ad405f00b825aa"
+    },
+    {
+      "path": "packages/app/scripts/smoke-solo.mjs",
+      "normalization": "UTF-8 with CRLF converted to LF",
+      "sha256": "475686fd288558859366929a37499de7eeab116791d8e1dc023b31b1fce376e2"
+    },
+    {
+      "path": "packages/engine/package.json",
+      "normalization": "UTF-8 with CRLF converted to LF",
+      "sha256": "283eb92ded0e09e23df2f396db0d8790e1395a33c5b4dcfc7de38cadc9872b85"
+    },
+    {
+      "path": "packages/engine/src/lab-artifacts.ts",
+      "normalization": "UTF-8 with CRLF converted to LF",
+      "sha256": "aea2b101aa8f70d1f488ff242f7191ef6d118431bdaa1d439c2fecfb15398585"
+    },
+    {
+      "path": "packages/engine/src/lab-client.ts",
+      "normalization": "UTF-8 with CRLF converted to LF",
+      "sha256": "ac6975b917dabe4a1f49aa15997189642db2d6bc538b75a189b7ee0d40aae25e"
+    },
+    {
+      "path": "packages/engine/src/lab-files.ts",
+      "normalization": "UTF-8 with CRLF converted to LF",
+      "sha256": "fe880c10f618097c4af2360c9583a900d027069da59632d81b30071fe9118f81"
+    },
+    {
+      "path": "packages/engine/src/lab-runtime.ts",
+      "normalization": "UTF-8 with CRLF converted to LF",
+      "sha256": "a59ca991748f6b0a04dc2330af9e6e3b82ad63780ef6ef4c40352f7c637f98e3"
+    },
+    {
+      "path": "packages/engine/src/lab.ts",
+      "normalization": "UTF-8 with CRLF converted to LF",
+      "sha256": "41b72a63a9d6b9c08db40c90ed281c7a3cc9ba1013ed6f7f543d93b5551e1c40"
+    },
+    {
+      "path": "packages/engine/test/lab-runtime.test.ts",
+      "normalization": "UTF-8 with CRLF converted to LF",
+      "sha256": "87f3f7c2129fd781410ca641109f50212d89b7700be5f1fecd59b8b995c7d2bc"
+    },
+    {
+      "path": "packages/engine/test/lab-workflow.test.ts",
+      "normalization": "UTF-8 with CRLF converted to LF",
+      "sha256": "dea9c00d53f105a92bb8ff2eb723078bd2efe895d47540b5e67a5f9a57d7c46f"
+    },
+    {
+      "path": "packages/protocol/src/index.ts",
+      "normalization": "UTF-8 with CRLF converted to LF",
+      "sha256": "4b17339898c12021ea9f11a5b8b2221bb9a146eb1f605204ee4c3b61942eaf84"
+    },
+    {
+      "path": "packages/server/scripts/load-lab.mjs",
+      "normalization": "UTF-8 with CRLF converted to LF",
+      "sha256": "92d567ad9b3f6b7dfa56ed1cd25991a6e39e19daf7759b759571f3cd57c36dc8"
+    },
+    {
+      "path": "packages/server/src/cli.ts",
+      "normalization": "UTF-8 with CRLF converted to LF",
+      "sha256": "b0902973f91bf002721fbd2848aa9020c9db3f40f28c6eccbb17ea5ca94ffe86"
+    },
+    {
+      "path": "packages/server/src/client.ts",
+      "normalization": "UTF-8 with CRLF converted to LF",
+      "sha256": "24a56f7a92343386cf4d4a6ebfd7c44fd21284d49d3eb3967bed2ba4ade934a4"
+    },
+    {
+      "path": "packages/server/src/identity.ts",
+      "normalization": "UTF-8 with CRLF converted to LF",
+      "sha256": "a7a51dadc4a65999f307e2f357b98bfbe512b681d2304b4b4a46be7b0a4929e2"
+    },
+    {
+      "path": "packages/server/src/server-lock.ts",
+      "normalization": "UTF-8 with CRLF converted to LF",
+      "sha256": "8d0370da43ffbdaca5b88e3396063eadb4cd1541901e81f723017db5c5a67c58"
+    },
+    {
+      "path": "packages/server/src/server.ts",
+      "normalization": "UTF-8 with CRLF converted to LF",
+      "sha256": "ad6ef3af371910333d3598217c7b1e3cb8bb92559d0b21900debf0a8fc976c26"
+    },
+    {
+      "path": "packages/server/test/lab-packages.test.ts",
+      "normalization": "UTF-8 with CRLF converted to LF",
+      "sha256": "ffa8eeff02b1867c04efc4f2f837665ab6efc44f8401b085fb81e3dfd23d8b87"
+    },
+    {
+      "path": "packages/server/test/lab-server.test.ts",
+      "normalization": "UTF-8 with CRLF converted to LF",
+      "sha256": "fa3ffdf9349e7efbc7670a9bef500f7a2f4d00817db785832d007a95eb40f010"
+    },
+    {
+      "path": "packages/server/test/server-lock.test.ts",
+      "normalization": "UTF-8 with CRLF converted to LF",
+      "sha256": "997f41c381c77eec36ff35bc1bfe6b407bac289f3c8f16d47ef64ff1c4f14fe8"
+    }
+  ],
+  "evidenceHashes": [
+    {
+      "path": "docs/verification/2026-10-29-lab-completion/approval-cancellation-tests.log",
+      "bytes": 774,
+      "sha256": "c6172f41a1688cc3aecf048d58a77a386190b723157df7cf454a9ece2e7b5f2b"
+    },
+    {
+      "path": "docs/verification/2026-10-29-lab-completion/build-complete.log",
+      "bytes": 1175,
+      "sha256": "fdc12659eee19dd40bd861bd729ada85392836444a0d7fdbfb82257c1f7f7c7e"
+    },
+    {
+      "path": "docs/verification/2026-10-29-lab-completion/build-concurrency-fix.log",
+      "bytes": 1175,
+      "sha256": "1f3b2b8c99f9c3bbfd1034f954ecb31d8fa479cf4d023d50698acbaacd533876"
+    },
+    {
+      "path": "docs/verification/2026-10-29-lab-completion/build-final.log",
+      "bytes": 1175,
+      "sha256": "386ebe0e7f94e7cc2b234d80ddf55b2e709407b6e9325999c9c8f687a89b6505"
+    },
+    {
+      "path": "docs/verification/2026-10-29-lab-completion/build-lab-copy.log",
+      "bytes": 1175,
+      "sha256": "fb301c22d718194ce3770d6648fb32eaa49ac39324e34ec11544c5a20dc2f124"
+    },
+    {
+      "path": "docs/verification/2026-10-29-lab-completion/build-verified.log",
+      "bytes": 1175,
+      "sha256": "2a9dcde95c92ba47477fc9e23b28838424278f8725ff8549b922a86ec5bb7ba8"
+    },
+    {
+      "path": "docs/verification/2026-10-29-lab-completion/build.log",
+      "bytes": 1178,
+      "sha256": "f4c3ff4afb64bc88a7111b94481505b8a9d113ea6aa5dfa777ea27c88a336c22"
+    },
+    {
+      "path": "docs/verification/2026-10-29-lab-completion/closed-receipt-red.log",
+      "bytes": 1607,
+      "sha256": "56bab5e10d64151f940573d94a202d0e36cb9259b15d73e0be033123b92eafaf"
+    },
+    {
+      "path": "docs/verification/2026-10-29-lab-completion/closed-receipt-tests.log",
+      "bytes": 599,
+      "sha256": "82c7d09975e079e499e4e2ae879192b39fb2ff60004e27958b475fb306a63ce2"
+    },
+    {
+      "path": "docs/verification/2026-10-29-lab-completion/desktop-agent-tests.log",
+      "bytes": 773,
+      "sha256": "b489056d6534d94864a40c1bc9113ccf9b5ffb32436ad4c09738cf20d129a26f"
+    },
+    {
+      "path": "docs/verification/2026-10-29-lab-completion/desktop-connection-tests.log",
+      "bytes": 791,
+      "sha256": "5b578e7fc89e45419ca29ab491a02f2bfca974083238750e1c4e3dad0587e57f"
+    },
+    {
+      "path": "docs/verification/2026-10-29-lab-completion/electron-development.json",
+      "bytes": 659,
+      "sha256": "69255bb07b3daf75198f2ad2789ffa87d907056ec0807b98fa253a5b057eb487"
+    },
+    {
+      "path": "docs/verification/2026-10-29-lab-completion/electron-smoke-final.log",
+      "bytes": 664,
+      "sha256": "1b59ccf54a5362cd72efe1ceeb63f580bdd9ab4188269b1c532d7a0a557ceede"
+    },
+    {
+      "path": "docs/verification/2026-10-29-lab-completion/electron-smoke-initial.log",
+      "bytes": 468,
+      "sha256": "34d3911b8f171eafd9c6d3a13a088f131f65842f049ceeb6ffc9f3cb46510277"
+    },
+    {
+      "path": "docs/verification/2026-10-29-lab-completion/electron-smoke-selector.log",
+      "bytes": 975,
+      "sha256": "c8fe9eaf5905ab0b475f1464a473c0668d6897c7d72efacd81b84a17630ea84a"
+    },
+    {
+      "path": "docs/verification/2026-10-29-lab-completion/electron-smoke-tls-fixed.log",
+      "bytes": 497,
+      "sha256": "82fb1cae78c072d8f5ee1af6c4603a9a231fa8bdd22f4f837cc7e4c22d102044"
+    },
+    {
+      "path": "docs/verification/2026-10-29-lab-completion/initial-runtime-tests.log",
+      "bytes": 1523,
+      "sha256": "305cec736f466870f26236402684963801c3f0467469d5fa065b398d1fbf8603"
+    },
+    {
+      "path": "docs/verification/2026-10-29-lab-completion/initial-workflow-tests.log",
+      "bytes": 2663,
+      "sha256": "b9e0ecd175967a37a3165c93c03f13ae72ed6f17257d23370e1d839041f8487a"
+    },
+    {
+      "path": "docs/verification/2026-10-29-lab-completion/installed-smoke-initial.log",
+      "bytes": 4131,
+      "sha256": "b706fd4255d14e5cf46fdf9a2403b6369f6328bdbe74fe5c00960e375bef2128"
+    },
+    {
+      "path": "docs/verification/2026-10-29-lab-completion/installed-smoke-pre-final.log",
+      "bytes": 3559,
+      "sha256": "1faf9dfda88cf508010fdf1b53e48231c7ed3bd6657948f377f01af657f81e68"
+    },
+    {
+      "path": "docs/verification/2026-10-29-lab-completion/installed-smoke.log",
+      "bytes": 3559,
+      "sha256": "47193ad0e6ccecfc0fb904c9f7c1f72b2f425724d189388511f453b9b4daa636"
+    },
+    {
+      "path": "docs/verification/2026-10-29-lab-completion/installer-artifact.json",
+      "bytes": 208,
+      "sha256": "35e5664904af3b4c64cc01c06068f61a255ca70fced3c43e9c0e0d63b9089d45"
+    },
+    {
+      "path": "docs/verification/2026-10-29-lab-completion/installer-final.json",
+      "bytes": 328,
+      "sha256": "c88e096298d5210f6b4323c45484be5091d6e24b724fb0e6e0c2835dc9a1ba32"
+    },
+    {
+      "path": "docs/verification/2026-10-29-lab-completion/installer-initial.json",
+      "bytes": 579,
+      "sha256": "4803239c3ad0035a6cf9e439859d6872740b9d0b5f10f8bf09fae5316ac425a5"
+    },
+    {
+      "path": "docs/verification/2026-10-29-lab-completion/installer-pre-final.json",
+      "bytes": 328,
+      "sha256": "6eab0a08a472dc305f91536a7b4113812f6dd624a28bb81237a928fd5210c73a"
+    },
+    {
+      "path": "docs/verification/2026-10-29-lab-completion/join-binding-red.log",
+      "bytes": 1386,
+      "sha256": "08574c76513ae9bee09773642283fa454cc27e41e11bf95b08e20c168ec34f4e"
+    },
+    {
+      "path": "docs/verification/2026-10-29-lab-completion/lab-attempt.png",
+      "bytes": 107263,
+      "sha256": "15ffbf2a1835789877a135402c632d68d90e9a4534ef11b9e5bf44adb36e1379"
+    },
+    {
+      "path": "docs/verification/2026-10-29-lab-completion/lab-installed-final.json",
+      "bytes": 687,
+      "sha256": "3294cda34790d1250bec5d143b51b1019d5701f2585f8e142ebc3ee317e2e316"
+    },
+    {
+      "path": "docs/verification/2026-10-29-lab-completion/lab-installed-pre-final.json",
+      "bytes": 687,
+      "sha256": "3294cda34790d1250bec5d143b51b1019d5701f2585f8e142ebc3ee317e2e316"
+    },
+    {
+      "path": "docs/verification/2026-10-29-lab-completion/lab-report-synthetic.png",
+      "bytes": 72179,
+      "sha256": "f711ff8b9cef528a03620330bb2406fa9ce983fbe6d69b51110379caae24400c"
+    },
+    {
+      "path": "docs/verification/2026-10-29-lab-completion/load-60-final.json",
+      "bytes": 668,
+      "sha256": "d04e3239471be279a9d38154983dc5fc6f4b340eedad15c91a87a3b84ee13add"
+    },
+    {
+      "path": "docs/verification/2026-10-29-lab-completion/load-60-final.log",
+      "bytes": 1132,
+      "sha256": "583011310bbca7b3052bcf1452f92e526b5becf1a581d11bcd80344cd9ece108"
+    },
+    {
+      "path": "docs/verification/2026-10-29-lab-completion/load-60.json",
+      "bytes": 666,
+      "sha256": "8642293fbdfd03a2f06e6bcd9c9170b0d4738cbf4bc1f14feb303219d2bb5ff2"
+    },
+    {
+      "path": "docs/verification/2026-10-29-lab-completion/load-60.log",
+      "bytes": 1130,
+      "sha256": "fe966a5eb8c1d7063db6af7a1aa581f44919ac2213202c61c97311f2e4b76581"
+    },
+    {
+      "path": "docs/verification/2026-10-29-lab-completion/package-complete.log",
+      "bytes": 5809,
+      "sha256": "b1288ba91ae36accb17b86cec2b4473980b1f6a4ed0f15296fadfc26a50323b3"
+    },
+    {
+      "path": "docs/verification/2026-10-29-lab-completion/package.log",
+      "bytes": 5809,
+      "sha256": "d5e278060244844530cc5eada63828d0a437c1476f96c1b3c8baf1478e60296e"
+    },
+    {
+      "path": "docs/verification/2026-10-29-lab-completion/packages-red.log",
+      "bytes": 836,
+      "sha256": "695ec308f49642b026f7e64c43c38071175e62e612f850fb0106fa617b180f47"
+    },
+    {
+      "path": "docs/verification/2026-10-29-lab-completion/reconnect-red.log",
+      "bytes": 1788,
+      "sha256": "58063f4cfb866b45d36911d587cf4fb7f00e445762a590586443a059f8165651"
+    },
+    {
+      "path": "docs/verification/2026-10-29-lab-completion/reconnect-tests.log",
+      "bytes": 903,
+      "sha256": "f29a1fd63287634d48cf7f20096dad6f2ea113925453cfd52cafb1936dacff5c"
+    },
+    {
+      "path": "docs/verification/2026-10-29-lab-completion/recovery-access-tests.log",
+      "bytes": 1108,
+      "sha256": "5591c2610a81661e46b940fb5d4e73e8df6dea0b424a8c74b9d5fedd35cffe58"
+    },
+    {
+      "path": "docs/verification/2026-10-29-lab-completion/resources-complete.log",
+      "bytes": 261,
+      "sha256": "197dbc0b00f7ff83c40c0669449a61dc13631d6b860a36d9aa5d8367db44c4ec"
+    },
+    {
+      "path": "docs/verification/2026-10-29-lab-completion/resources.log",
+      "bytes": 261,
+      "sha256": "197dbc0b00f7ff83c40c0669449a61dc13631d6b860a36d9aa5d8367db44c4ec"
+    },
+    {
+      "path": "docs/verification/2026-10-29-lab-completion/runtime-tests.log",
+      "bytes": 240,
+      "sha256": "a18fb28f6e1f72990a27b1f3021dfdd8f80c24025d8a560072044d44d676b2c7"
+    },
+    {
+      "path": "docs/verification/2026-10-29-lab-completion/saved-refresh-red.log",
+      "bytes": 2149,
+      "sha256": "bf2602f0538cbf33ea1fb51a46f4851d5d2fce1e856353d83c03a6590539165c"
+    },
+    {
+      "path": "docs/verification/2026-10-29-lab-completion/secret-scan.json",
+      "bytes": 178,
+      "sha256": "b2024670a57e1dea98466671644e9fccb0531ac5313c66fe56c7f66c778ac925"
+    },
+    {
+      "path": "docs/verification/2026-10-29-lab-completion/server-tests.log",
+      "bytes": 541,
+      "sha256": "25df9dde1e97e6226c6868d4e7115ac67c921bca4ddda590027f130f0fb2b327"
+    },
+    {
+      "path": "docs/verification/2026-10-29-lab-completion/solo-installed-final.json",
+      "bytes": 2095,
+      "sha256": "220657cecc17298afa5a983b0f157e56fa36d975cc5b292d7131ae0c666f9a7a"
+    },
+    {
+      "path": "docs/verification/2026-10-29-lab-completion/solo-pre-final.json",
+      "bytes": 2095,
+      "sha256": "220657cecc17298afa5a983b0f157e56fa36d975cc5b292d7131ae0c666f9a7a"
+    },
+    {
+      "path": "docs/verification/2026-10-29-lab-completion/submission-concurrency-tests.log",
+      "bytes": 1446,
+      "sha256": "ebde6163dee0104b4e6211c0892b99dcaada0aaaefb09fe998deac27b8477e37"
+    },
+    {
+      "path": "docs/verification/2026-10-29-lab-completion/submission-final-tests.log",
+      "bytes": 1920,
+      "sha256": "48f7ce079b7e391df930640f48b9832af487e8ffe86c5dbcb3b15152898cb177"
+    },
+    {
+      "path": "docs/verification/2026-10-29-lab-completion/sync-submit-red.log",
+      "bytes": 1508,
+      "sha256": "4a93bb3aa9dc5ecfd80d052d4c37a47b29bcfd4e8bcba7b34cce42c324c39693"
+    },
+    {
+      "path": "docs/verification/2026-10-29-lab-completion/tests-complete.log",
+      "bytes": 34085,
+      "sha256": "f10a17358acbe3c46397500193f93ac5af0b1692aa080edcc087d638cb2f3128"
+    },
+    {
+      "path": "docs/verification/2026-10-29-lab-completion/tests-final.log",
+      "bytes": 34082,
+      "sha256": "1d0eea856cd1068a73ce689ad5b5b5ced0c3fc91174321194519a01103d40d71"
+    },
+    {
+      "path": "docs/verification/2026-10-29-lab-completion/tests-release-candidate.log",
+      "bytes": 34080,
+      "sha256": "ad642168f1b612311d74cd3ce4376297b7b686971dd35d6b15d240cfd848a4ce"
+    },
+    {
+      "path": "docs/verification/2026-10-29-lab-completion/tests.log",
+      "bytes": 34065,
+      "sha256": "428788c130c0d38593434a5f3804d140ef796b53f4e775336c4d8247905b7f49"
+    },
+    {
+      "path": "docs/verification/2026-10-29-lab-completion/typecheck-desktop.log",
+      "bytes": 375,
+      "sha256": "f86771acf83576cd67618598d10a5466950f1a0c0b6f5435850347e07afc28da"
+    },
+    {
+      "path": "docs/verification/2026-10-29-lab-completion/typecheck-final.log",
+      "bytes": 86,
+      "sha256": "20240eafcee9cc11f90dc917289fce05024a803aceb8a5946c65535db3041b77"
+    },
+    {
+      "path": "docs/verification/2026-10-29-lab-completion/typecheck-integration.log",
+      "bytes": 360,
+      "sha256": "887aedc2617143bb1c9487950fafcad9b97f9e35de60a676c647996a1e0c4b5f"
+    },
+    {
+      "path": "docs/verification/2026-10-29-lab-completion/typecheck-prebuild.log",
+      "bytes": 86,
+      "sha256": "20240eafcee9cc11f90dc917289fce05024a803aceb8a5946c65535db3041b77"
+    },
+    {
+      "path": "docs/verification/2026-10-29-lab-completion/typecheck-release-candidate.log",
+      "bytes": 86,
+      "sha256": "20240eafcee9cc11f90dc917289fce05024a803aceb8a5946c65535db3041b77"
+    },
+    {
+      "path": "docs/verification/2026-10-29-lab-completion/typecheck-ui.log",
+      "bytes": 86,
+      "sha256": "20240eafcee9cc11f90dc917289fce05024a803aceb8a5946c65535db3041b77"
+    },
+    {
+      "path": "docs/verification/2026-10-29-lab-completion/workflow-runtime-tests.log",
+      "bytes": 713,
+      "sha256": "82eb911fcafb07102e9e7c36accc772451e26bf5a6f9813f57f25fba4151d852"
+    },
+    {
+      "path": "docs/verification/2026-10-29-lab-completion/workflow-tests.log",
+      "bytes": 1000,
+      "sha256": "f240e020c6b03f3f299d7d246c12e99e1d2cc6a9d2027d7d377a2400e99786ef"
+    }
+  ]
+}

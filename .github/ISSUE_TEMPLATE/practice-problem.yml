@@ -1,0 +1,62 @@
+name: Practice problem proposal
+description: Propose one public practice problem before building a new pack.
+title: "Problem: "
+labels: []
+body:
+  - type: markdown
+    attributes:
+      value: "Check the [problem map](https://github.com/33sakib33/Factoryze/blob/main/docs/problem-library.md) and [contribution guide](https://github.com/33sakib33/Factoryze/blob/main/docs/contributing-problems.md) before proposing a new pack. Do not include private assessment content or secrets."
+  - type: input
+    id: learning_goal
+    attributes:
+      label: One learning goal
+      description: What decision should the learner practice?
+      placeholder: "Decide when a failed request should be retried"
+    validations:
+      required: true
+  - type: textarea
+    id: symptom
+    attributes:
+      label: Visible scenario and symptom
+      description: Describe what the learner sees without giving away the fix.
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior and corrected-workspace checks
+      description: State the observable outcome and the cases a correct solution must pass.
+    validations:
+      required: true
+  - type: dropdown
+    id: practice_type
+    attributes:
+      label: Practice type
+      options:
+        - Debugging
+        - Refactoring
+        - Working with context
+    validations:
+      required: true
+  - type: dropdown
+    id: difficulty
+    attributes:
+      label: Intended difficulty
+      options:
+        - Beginner
+        - Intermediate
+        - Advanced
+    validations:
+      required: true
+  - type: input
+    id: minutes
+    attributes:
+      label: Estimated minutes
+      placeholder: "30"
+    validations:
+      required: true
+  - type: textarea
+    id: background
+    attributes:
+      label: Helpful background and dependencies
+      description: List optional knowledge topics and any non-standard packages or assets you expect to need.

@@ -1,0 +1,5 @@
+
+> @factoryze/app@0.0.1 verify:package E:\Projects\Factoryze\Factoryze\Factoryze\packages\app
+> node --experimental-strip-types scripts/verify-package.mjs
+
+Factoryze-only package, two active tasks, retained retired graders and platform resources verified.

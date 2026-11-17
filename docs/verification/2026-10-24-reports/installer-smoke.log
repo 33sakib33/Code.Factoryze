@@ -1,0 +1,18 @@
+
+> @factoryze/app@0.0.1 smoke:installer E:\Projects\Factoryze\Factoryze\Factoryze\packages\app
+> node --experimental-strip-types scripts/smoke-installer.mjs
+
+file:///E:/Projects/Factoryze/Factoryze/Factoryze/packages/app/scripts/smoke-installer.mjs:16
+  if (installer.length !== 1) throw new Error(`Expected one ${extension} installer; found ${installer.length}`);
+                                    ^
+
+Error: Expected one .exe installer; found 0
+    at file:///E:/Projects/Factoryze/Factoryze/Factoryze/packages/app/scripts/smoke-installer.mjs:16:37
+    at ModuleJob.run (node:internal/modules/esm/module_job:439:25)
+    at async node:internal/modules/esm/loader:643:26
+    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5)
+
+Node.js v24.19.0
+E:\Projects\Factoryze\Factoryze\Factoryze\packages\app:
+ ERR_PNPM_RECURSIVE_RUN_FIRST_FAIL  @factoryze/app@0.0.1 smoke:installer: `node --experimental-strip-types scripts/smoke-installer.mjs`
+Exit status 1

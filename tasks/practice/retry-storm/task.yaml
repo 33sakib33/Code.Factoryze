@@ -1,0 +1,15 @@
+schema: 1
+id: retry-storm
+title: Stop a retry storm
+brief: >
+  A deployment changed the upstream response for invalid requests. The worker now
+  sends repeated requests for failures that cannot recover, multiplying load
+  during an incident. Inspect the synthetic incident notes and repair the retry
+  policy while keeping bounded retries for temporary failures.
+minimumPython: "3.11"
+topics: [sre, reliability]
+recommendedKnowledge:
+  - HTTP response status codes
+  - Bounded retries and backoff
+timeHintMinutes: 30
+entryFile: service/retry.py

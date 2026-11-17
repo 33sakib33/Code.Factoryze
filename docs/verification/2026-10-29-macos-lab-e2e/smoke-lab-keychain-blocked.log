@@ -1,0 +1,24 @@
+
+> @factoryze/app@0.0.1 smoke:lab /Users/sakib/Projects/Factoryze/Factoryze/Factoryze/packages/app
+> node --experimental-strip-types scripts/smoke-lab.mjs
+
+Home ready
+node:internal/modules/run_main:123
+    triggerUncaughtException(
+    ^
+
+locator.waitFor: Timeout 180000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'Prompt for the agent' }) to be visible
+
+    at /Users/sakib/Projects/Factoryze/Factoryze/Factoryze/packages/app/scripts/smoke-lab.mjs:58:98 {
+  log: [
+    "  - waiting for getByRole('textbox', { name: 'Prompt for the agent' }) to be visible"
+  ],
+  name: 'TimeoutError'
+}
+
+Node.js v22.23.2
+/Users/sakib/Projects/Factoryze/Factoryze/Factoryze/packages/app:
+ ERR_PNPM_RECURSIVE_RUN_FIRST_FAIL  @factoryze/app@0.0.1 smoke:lab: `node --experimental-strip-types scripts/smoke-lab.mjs`
+Exit status 1

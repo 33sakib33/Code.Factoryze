@@ -1,0 +1,25 @@
+(node:17512) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///E:/Projects/Factoryze/Factoryze/Factoryze/packages/app/extensions/core/test/harness-tools.test.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to \\?\E:\Projects\Factoryze\Factoryze\Factoryze\packages\app\extensions\core\package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ Windows shells retain OS module/cache locations without inheriting provider keys or another PowerShell module path (1.0754ms)
+✔ harness tools scope reads/searches to the workspace and require a reviewed diff for edits (40.966ms)
+✔ shell denial never launches a command, approvals cannot overwrite edits made while reviewing (6.7038ms)
+✔ approved shell runs with the task package index and without provider environment credentials (227.0459ms)
+✔ Stop while waiting for approval cancels without a write even if approval arrives later (3.8156ms)
+✔ Windows smoke waits for in-place NSIS uninstall before removing its owned directory (6.5285ms)
+✔ failed uninstall is reported and preserves the install for diagnosis (3.9241ms)
+✔ cleanup refuses an unrelated temporary directory before invoking any operation (1.6754ms)
+✔ an installed executable without an uninstaller is an explicit cleanup failure (3.3083ms)
+✔ cleanup removes an owned directory when setup never installed an app (1.666ms)
+✔ folder and ZIP imports retain a validated private task snapshot and declared budget (47.8901ms)
+✔ imports reject traversal, symlinks and missing starter files without writing outside the pack (9.4916ms)
+✔ ZIP imports reject Unix file and directory symlinks on every platform (28.9625ms)
+ℹ tests 13
+ℹ suites 0
+ℹ pass 13
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 516.4327

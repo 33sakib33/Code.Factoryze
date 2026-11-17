@@ -1,0 +1,113 @@
+name: Unsigned installers
+
+# Build verified installer candidates after a main-branch push. Maintainers can
+# also request selected platforms manually; publishing a release remains separate.
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+    inputs:
+      platforms:
+        description: 'Installers to build and test: all, or a comma-separated list of macos, windows, linux (macOS minutes cost the most)'
+        required: false
+        default: all
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.head.ref || github.ref_name }}
+  cancel-in-progress: true
+
+jobs:
+  plan:
+    runs-on: ubuntu-24.04
+    outputs:
+      include: ${{ steps.pick.outputs.include }}
+    steps:
+      - id: pick
+        shell: bash
+        env:
+          PLATFORMS: ${{ inputs.platforms }}
+        run: |
+          all='[{"os":"macos-latest","artifact":"macos"},{"os":"windows-2022","artifact":"windows"},{"os":"ubuntu-24.04","artifact":"linux"}]'
+          wanted="${PLATFORMS:-all}"
+          if [ "$wanted" = all ]; then include="$all"
+          else include=$(jq -c --arg wanted "$wanted" '($wanted | split(",") | map(gsub("^\\s+|\\s+$"; ""))) as $w | [.[] | select(.artifact as $a | $w | index($a))]' <<<"$all"); fi
+          [ "$include" != "[]" ] || { echo "No known platform in: $wanted" >&2; exit 1; }
+          echo "include=$include" >> "$GITHUB_OUTPUT"
+
+  package:
+    needs: plan
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include: ${{ fromJSON(needs.plan.outputs.include) }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10.28.2
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: pnpm
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Select OpenSSL 3 for lab certificate tests (macOS)
+        if: runner.os == 'macOS'
+        shell: bash
+        run: |
+          lab_openssl="$(brew --prefix openssl@3)/bin/openssl"
+          test -x "$lab_openssl"
+          echo "FACTORYZE_OPENSSL=$lab_openssl" >> "$GITHUB_ENV"
+      - name: Select Git OpenSSL for lab certificate tests (Windows)
+        if: runner.os == 'Windows'
+        shell: pwsh
+        run: |
+          $labOpenSsl = Join-Path $env:ProgramFiles 'Git\usr\bin\openssl.exe'
+          if (!(Test-Path -LiteralPath $labOpenSsl)) { throw 'OpenSSL 3 is required for lab certificate tests' }
+          "FACTORYZE_OPENSSL=$labOpenSsl" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
+      - run: sudo apt-get update && sudo apt-get install -y build-essential pkg-config libx11-dev libxkbfile-dev xvfb libsecret-1-dev dbus-x11 gnome-keyring openssl
+        if: runner.os == 'Linux'
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm build:app
+      - run: pnpm --filter @factoryze/app package:installer
+        env:
+          # PR builds still need the configured ad-hoc macOS signature; no certificate discovery or signing secrets.
+          CSC_FOR_PULL_REQUEST: 'true'
+          CSC_IDENTITY_AUTO_DISCOVERY: 'false'
+      - run: pnpm --filter @factoryze/app verify:package
+      - run: pnpm test
+      - run: pnpm typecheck
+      - run: pnpm --filter @factoryze/app smoke:installer
+        if: runner.os != 'Linux'
+      - name: Installed flow with an isolated test keyring
+        if: runner.os == 'Linux'
+        shell: bash
+        run: |
+          dbus-run-session -- bash -euo pipefail <<'SH'
+          factoryze_keyring_dir="$(mktemp -d)"
+          export XDG_DATA_HOME="$factoryze_keyring_dir"
+          trap 'rm -rf "$factoryze_keyring_dir"' EXIT
+          printf '%s' 'synthetic-smoke-keyring' | gnome-keyring-daemon --unlock --components=secrets > /dev/null
+          xvfb-run -a pnpm --filter @factoryze/app smoke:installer
+          SH
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: smoke-${{ matrix.artifact }}
+          path: |
+            dist/smoke-*/
+            dist/desktop-lab-verification/*.json
+            dist/desktop-lab-verification/*.png
+            dist/desktop-lab-verification/*.log
+            dist/desktop-lab-verification/*.txt
+      - uses: actions/upload-artifact@v4
+        with:
+          name: factoryze-${{ matrix.artifact }}
+          path: |
+            dist/*.dmg
+            dist/*.exe
+            dist/*.AppImage
+          if-no-files-found: error

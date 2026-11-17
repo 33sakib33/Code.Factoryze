@@ -1,0 +1,8 @@
+Synthetic host monitor incident — no live process data
+
+08:40  dashboard lists pid 4102 "worker" with 15 CPU ticks.
+08:41  dashboard omits pid 4103 "sync worker" after a deployment.
+08:41  the source record still has a valid pid, state and clock tick fields.
+
+The process name is stored in parentheses in field 2 of /proc/<pid>/stat.
+The monitor currently separates the whole record on whitespace.

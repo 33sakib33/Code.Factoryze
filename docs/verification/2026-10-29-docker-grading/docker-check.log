@@ -1,0 +1,1 @@
+{"date":"2026-10-29","passed":false,"realDockerChecks":false,"paidModelCalls":0,"realEmailsSent":0,"hostStudentCodeExecutions":0,"stage":"docker-preflight","error":"Docker could not start. Install Docker and start a local Linux engine.","containersStarted":0}

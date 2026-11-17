@@ -1,0 +1,20 @@
+{
+  "date": "2026-10-29",
+  "passed": true,
+  "clients": 60,
+  "joined": 60,
+  "completedPrompts": 60,
+  "syntheticModelRequests": 120,
+  "readToolRoundTrips": 60,
+  "immutableSubmissions": 60,
+  "distinctSnapshotHashes": 60,
+  "totalWeightedTokens": 14400,
+  "crossStudentBudgetLeak": false,
+  "closedLabRejectsReleaseUntilGraded": true,
+  "gradingExecuted": false,
+  "paidModelCalls": 0,
+  "realMachines": 0,
+  "elapsedMs": 12003,
+  "clientWorkElapsedMs": 11521,
+  "scope": "Single-host functional load with real TLS, desktop backend stores, unchanged server harness, real local read tools and SQLite. No provider-throughput or classroom hardware capacity claim."
+}

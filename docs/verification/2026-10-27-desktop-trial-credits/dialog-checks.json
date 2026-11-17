@@ -1,0 +1,22 @@
+{
+  "passed": true,
+  "widths": [
+    1280,
+    683,
+    390
+  ],
+  "themes": [
+    "light",
+    "dark"
+  ],
+  "signup": true,
+  "invalidCode": true,
+  "resendCooldown": true,
+  "invitation": true,
+  "modelSelection": true,
+  "byokChoice": true,
+  "offlineRecovery": true,
+  "escapeAndFocusReturn": true,
+  "dialogFits": true,
+  "pageErrors": []
+}

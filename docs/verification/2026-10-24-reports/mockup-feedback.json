@@ -1,0 +1,29 @@
+{
+  "passed": true,
+  "platform": "win32",
+  "browser": "155.0.8059.85",
+  "states": [
+    "complete",
+    "partial",
+    "older",
+    "manual"
+  ],
+  "widths": [
+    1280,
+    683,
+    390
+  ],
+  "lightAndDark": true,
+  "schemaValidation": true,
+  "legacyCostsUnknown": true,
+  "promptHtmlEscaped": true,
+  "keyboardControls": true,
+  "suggestionsRemoved": true,
+  "promptScoringRemoved": true,
+  "summaryLabelsExplained": true,
+  "analysisInFirstDesktopView": true,
+  "externalRequests": 0,
+  "consoleErrors": 0,
+  "scope": "Mockup-only browser feedback revision; production behavior unchanged",
+  "htmlSha256": "df146259bc03c2c09bbf20c5a55e089fe3c6b27653003ebb3c59f3b221ed2b19"
+}

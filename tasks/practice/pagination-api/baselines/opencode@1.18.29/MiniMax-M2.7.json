@@ -1,0 +1,40 @@
+{
+  "schema": 1,
+  "taskId": "pagination-api",
+  "profile": "opencode@1.18.29",
+  "model": "MiniMax-M2.7",
+  "promptsHash": "8d31e5a1262995bc43b944ba172abe7bb6bf39798db22918bbfea154b69a995d",
+  "recordedAt": "2026-10-21T06:52:42.695Z",
+  "expert": {
+    "correctness": {
+      "passed": 1,
+      "total": 1
+    },
+    "raw": {
+      "input": 171295,
+      "output": 2116,
+      "cacheRead": 150493,
+      "cacheWrite": 19297
+    },
+    "weightedTokens": 37967.3,
+    "requests": 9,
+    "turns": 1,
+    "elapsedMs": 225697
+  },
+  "naive": {
+    "correctness": {
+      "passed": 1,
+      "total": 1
+    },
+    "raw": {
+      "input": 174783,
+      "output": 1146,
+      "cacheRead": 135101,
+      "cacheWrite": 28097
+    },
+    "weightedTokens": 54338.1,
+    "requests": 7,
+    "turns": 1,
+    "elapsedMs": 147292
+  }
+}

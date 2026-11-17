@@ -1,0 +1,180 @@
+{
+  "name": "@factoryze/app",
+  "version": "0.0.1",
+  "private": true,
+  "license": "Apache-2.0",
+  "productName": "Factoryze",
+  "main": "lib/backend/electron-main.js",
+  "theia": {
+    "target": "electron",
+    "frontend": {
+      "config": {
+        "applicationName": "Factoryze",
+        "electron": {
+          "appUserModelId": "Factoryze.Desktop",
+          "windowOptions": {
+            "titleBarStyle": "hiddenInset",
+            "trafficLightPosition": {
+              "x": 16,
+              "y": 15
+            }
+          },
+          "splashScreenOptions": {
+            "content": "resources/factoryze.svg",
+            "height": 176,
+            "width": 420,
+            "minDuration": 500
+          }
+        },
+        "preferences": {
+          "security.workspace.trust.enabled": false,
+          "files.exclude": {
+            "**/.git": true,
+            "**/.svn": true,
+            "**/.hg": true,
+            "**/CVS": true,
+            "**/.DS_Store": true,
+            "**/.venv": true,
+            "**/__pycache__": true,
+            "**/.pytest_cache": true
+          }
+        }
+      }
+    }
+  },
+  "scripts": {
+    "build": "install-electron && theia rebuild:electron --cacheRoot ../.. && theia build --mode development",
+    "start": "theia start",
+    "verify:package": "node --experimental-strip-types scripts/verify-package.mjs",
+    "package:dir": "electron-builder --dir --publish never",
+    "package:installer": "electron-builder --publish never",
+    "smoke:solo": "node --experimental-strip-types scripts/smoke-solo.mjs",
+    "smoke:lab": "node --experimental-strip-types scripts/smoke-lab.mjs",
+    "smoke:installer": "node --experimental-strip-types scripts/smoke-installer.mjs",
+    "install:local:macos": "node scripts/install-local-macos.mjs"
+  },
+  "build": {
+    "appId": "com.factoryze.desktop",
+    "productName": "Factoryze",
+    "directories": {
+      "output": "../../dist"
+    },
+    "electronDist": "node_modules/electron/dist",
+    "files": [
+      "lib/**/*",
+      "resources/factoryze.svg",
+      "package.json"
+    ],
+    "asarUnpack": [
+      "lib/prebuilds/**/spawn-helper"
+    ],
+    "extraResources": [
+      {
+        "from": "../../tasks/practice",
+        "to": "practice-tasks"
+      },
+      {
+        "from": "../../LICENSE",
+        "to": "LICENSE"
+      },
+      {
+        "from": "../../NOTICE",
+        "to": "NOTICE"
+      },
+      {
+        "from": "../../THIRD_PARTY_NOTICES.md",
+        "to": "THIRD_PARTY_NOTICES.md"
+      },
+      {
+        "from": "licenses/THEIA-LICENSE-EPL",
+        "to": "licenses/theia/LICENSE-EPL"
+      },
+      {
+        "from": "licenses/THEIA-NOTICE.md",
+        "to": "licenses/theia/NOTICE.md"
+      },
+      {
+        "from": "node_modules/electron/dist/LICENSE",
+        "to": "licenses/electron/LICENSE"
+      },
+      {
+        "from": "node_modules/electron/dist/LICENSES.chromium.html",
+        "to": "licenses/electron/LICENSES.chromium.html"
+      }
+    ],
+    "npmRebuild": false,
+    "mac": {
+      "target": [
+        "dmg"
+      ],
+      "identity": "-",
+      "icon": "resources/icons/factoryze.icns"
+    },
+    "win": {
+      "target": [
+        "nsis"
+      ],
+      "icon": "resources/icons/factoryze.ico"
+    },
+    "linux": {
+      "target": [
+        "AppImage"
+      ],
+      "category": "Development",
+      "icon": "resources/icons/factoryze.png",
+      "executableName": "factoryze"
+    },
+    "afterPack": "scripts/after-pack.cjs"
+  },
+  "dependencies": {
+    "@factoryze/app-core": "workspace:*",
+    "@theia/core": "1.76.0",
+    "@theia/editor": "1.76.0",
+    "@theia/electron": "1.76.0",
+    "@theia/file-search": "1.76.0",
+    "@theia/filesystem": "1.76.0",
+    "@theia/markers": "1.76.0",
+    "@theia/messages": "1.76.0",
+    "@theia/monaco": "1.76.0",
+    "@theia/monaco-editor-core": "1.108.201",
+    "@theia/navigator": "1.76.0",
+    "@theia/outline-view": "1.76.0",
+    "@theia/preferences": "1.76.0",
+    "@theia/process": "1.76.0",
+    "@theia/terminal": "1.76.0",
+    "@theia/userstorage": "1.76.0",
+    "@theia/variable-resolver": "1.76.0",
+    "@theia/workspace": "1.76.0",
+    "native-keymap": "2.5.0",
+    "node-pty": "1.2.0-beta.12",
+    "reflect-metadata": "0.2.2",
+    "trash": "7.2.0"
+  },
+  "devDependencies": {
+    "@theia/bundle-plugin": "1.76.0",
+    "@theia/cli": "1.76.0",
+    "electron": "42.8.1",
+    "electron-builder": "26.17.0",
+    "@electron/rebuild": "4.2.1",
+    "esbuild": "0.28.2",
+    "esbuild-plugin-copy": "2.1.1",
+    "esbuild-plugins-node-modules-polyfill": "1.8.3",
+    "find-git-repositories": "0.2.2",
+    "playwright": "^1.64.1",
+    "resolve-package-path": "4.0.3",
+    "yargs": "17.7.3"
+  },
+  "optionalDependencies": {
+    "@msgpackr-extract/msgpackr-extract-darwin-x64": "3.0.4",
+    "@msgpackr-extract/msgpackr-extract-linux-x64": "3.0.4",
+    "@msgpackr-extract/msgpackr-extract-win32-x64": "3.0.4",
+    "@parcel/watcher-darwin-arm64": "2.6.0",
+    "@parcel/watcher-darwin-x64": "2.6.0",
+    "@parcel/watcher-linux-x64-glibc": "2.6.0",
+    "@parcel/watcher-win32-x64": "2.6.0",
+    "@vscode/ripgrep-darwin-arm64": "1.18.0",
+    "@vscode/ripgrep-darwin-x64": "1.18.0",
+    "@vscode/ripgrep-linux-x64": "1.18.0",
+    "@vscode/ripgrep-win32-x64": "1.18.0"
+  }
+}

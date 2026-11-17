@@ -1,0 +1,895 @@
+{
+  "taskId": "monthly-revenue",
+  "profile": "factoryze@0.1.0",
+  "model": "deepseek/deepseek-v4.1-flash-1017",
+  "temperature": 0,
+  "promptsHash": "79feba4e6e7b4b18460be5316026df2b476fb208c0c91722f0611b4369a35b0b",
+  "recordedAt": "2026-10-22T11:22:42.599Z",
+  "expert": [
+    {
+      "correctness": {
+        "passed": 9,
+        "total": 9
+      },
+      "raw": {
+        "input": 31861,
+        "output": 1613,
+        "cacheRead": 26496,
+        "cacheWrite": 0
+      },
+      "weightedTokens": 9627.6,
+      "requests": 13,
+      "turns": 1,
+      "elapsedMs": 18276
+    },
+    {
+      "correctness": {
+        "passed": 9,
+        "total": 9
+      },
+      "raw": {
+        "input": 18291,
+        "output": 935,
+        "cacheRead": 16128,
+        "cacheWrite": 0
+      },
+      "weightedTokens": 4710.8,
+      "requests": 9,
+      "turns": 1,
+      "elapsedMs": 20568
+    },
+    {
+      "correctness": {
+        "passed": 9,
+        "total": 9
+      },
+      "raw": {
+        "input": 9601,
+        "output": 619,
+        "cacheRead": 9088,
+        "cacheWrite": 0
+      },
+      "weightedTokens": 2040.8,
+      "requests": 6,
+      "turns": 1,
+      "elapsedMs": 6774
+    },
+    {
+      "correctness": {
+        "passed": 9,
+        "total": 9
+      },
+      "raw": {
+        "input": 7662,
+        "output": 448,
+        "cacheRead": 2176,
+        "cacheWrite": 0
+      },
+      "weightedTokens": 6151.6,
+      "requests": 5,
+      "turns": 1,
+      "elapsedMs": 6017
+    },
+    {
+      "correctness": {
+        "passed": 9,
+        "total": 9
+      },
+      "raw": {
+        "input": 9601,
+        "output": 592,
+        "cacheRead": 9216,
+        "cacheWrite": 0
+      },
+      "weightedTokens": 1898.6,
+      "requests": 6,
+      "turns": 1,
+      "elapsedMs": 6707
+    },
+    {
+      "correctness": {
+        "passed": 9,
+        "total": 9
+      },
+      "raw": {
+        "input": 15354,
+        "output": 814,
+        "cacheRead": 6272,
+        "cacheWrite": 0
+      },
+      "weightedTokens": 10523.2,
+      "requests": 8,
+      "turns": 1,
+      "elapsedMs": 11750
+    },
+    {
+      "correctness": {
+        "passed": 9,
+        "total": 9
+      },
+      "raw": {
+        "input": 8028,
+        "output": 425,
+        "cacheRead": 0,
+        "cacheWrite": 0
+      },
+      "weightedTokens": 8453,
+      "requests": 5,
+      "turns": 1,
+      "elapsedMs": 6354
+    },
+    {
+      "correctness": {
+        "passed": 9,
+        "total": 9
+      },
+      "raw": {
+        "input": 16708,
+        "output": 880,
+        "cacheRead": 15360,
+        "cacheWrite": 0
+      },
+      "weightedTokens": 3764,
+      "requests": 9,
+      "turns": 1,
+      "elapsedMs": 10816
+    },
+    {
+      "correctness": {
+        "passed": 9,
+        "total": 9
+      },
+      "raw": {
+        "input": 9601,
+        "output": 534,
+        "cacheRead": 9216,
+        "cacheWrite": 0
+      },
+      "weightedTokens": 1840.6,
+      "requests": 6,
+      "turns": 1,
+      "elapsedMs": 6006
+    },
+    {
+      "correctness": {
+        "passed": 9,
+        "total": 9
+      },
+      "raw": {
+        "input": 9553,
+        "output": 503,
+        "cacheRead": 9088,
+        "cacheWrite": 0
+      },
+      "weightedTokens": 1876.8,
+      "requests": 6,
+      "turns": 1,
+      "elapsedMs": 7856
+    }
+  ],
+  "naive": [
+    {
+      "error": "Model response exceeded the size limit"
+    },
+    {
+      "correctness": {
+        "passed": 9,
+        "total": 9
+      },
+      "raw": {
+        "input": 40223,
+        "output": 7409,
+        "cacheRead": 19072,
+        "cacheWrite": 0
+      },
+      "weightedTokens": 30467.2,
+      "requests": 9,
+      "turns": 1,
+      "elapsedMs": 96346
+    },
+    {
+      "correctness": {
+        "passed": 9,
+        "total": 9
+      },
+      "raw": {
+        "input": 85435,
+        "output": 15785,
+        "cacheRead": 67200,
+        "cacheWrite": 0
+      },
+      "weightedTokens": 40740,
+      "requests": 15,
+      "turns": 1,
+      "elapsedMs": 83168
+    },
+    {
+      "correctness": {
+        "passed": 9,
+        "total": 9
+      },
+      "raw": {
+        "input": 81908,
+        "output": 10614,
+        "cacheRead": 64617,
+        "cacheWrite": 0
+      },
+      "weightedTokens": 34366.7,
+      "requests": 14,
+      "turns": 1,
+      "elapsedMs": 75176
+    },
+    {
+      "correctness": {
+        "passed": 9,
+        "total": 9
+      },
+      "raw": {
+        "input": 58896,
+        "output": 11495,
+        "cacheRead": 40035,
+        "cacheWrite": 0
+      },
+      "weightedTokens": 34359.5,
+      "requests": 12,
+      "turns": 0,
+      "elapsedMs": 78403,
+      "error": "The model returned invalid tool arguments"
+    },
+    {
+      "correctness": {
+        "passed": 9,
+        "total": 9
+      },
+      "raw": {
+        "input": 50183,
+        "output": 5202,
+        "cacheRead": 29824,
+        "cacheWrite": 0
+      },
+      "weightedTokens": 28543.4,
+      "requests": 11,
+      "turns": 1,
+      "elapsedMs": 50020
+    },
+    {
+      "error": "The model provider is unavailable. Wait and retry."
+    },
+    {
+      "error": "The model provider is unavailable. Wait and retry."
+    },
+    {
+      "correctness": {
+        "passed": 9,
+        "total": 9
+      },
+      "raw": {
+        "input": 40044,
+        "output": 5800,
+        "cacheRead": 27136,
+        "cacheWrite": 0
+      },
+      "weightedTokens": 21421.6,
+      "requests": 9,
+      "turns": 1,
+      "elapsedMs": 39478
+    },
+    {
+      "error": "Model response exceeded the size limit"
+    }
+  ],
+  "middle": [
+    {
+      "correctness": {
+        "passed": 9,
+        "total": 9
+      },
+      "raw": {
+        "input": 71235,
+        "output": 3112,
+        "cacheRead": 61568,
+        "cacheWrite": 0
+      },
+      "weightedTokens": 18935.8,
+      "requests": 14,
+      "turns": 1,
+      "elapsedMs": 29038
+    },
+    {
+      "correctness": {
+        "passed": 9,
+        "total": 9
+      },
+      "raw": {
+        "input": 54211,
+        "output": 4765,
+        "cacheRead": 45056,
+        "cacheWrite": 0
+      },
+      "weightedTokens": 18425.6,
+      "requests": 12,
+      "turns": 1,
+      "elapsedMs": 39404
+    },
+    {
+      "correctness": {
+        "passed": 9,
+        "total": 9
+      },
+      "raw": {
+        "input": 61585,
+        "output": 2865,
+        "cacheRead": 54272,
+        "cacheWrite": 0
+      },
+      "weightedTokens": 15605.2,
+      "requests": 14,
+      "turns": 1,
+      "elapsedMs": 29550
+    },
+    {
+      "correctness": {
+        "passed": 9,
+        "total": 9
+      },
+      "raw": {
+        "input": 85147,
+        "output": 7811,
+        "cacheRead": 78592,
+        "cacheWrite": 0
+      },
+      "weightedTokens": 22225.2,
+      "requests": 16,
+      "turns": 0,
+      "elapsedMs": 54458,
+      "error": "Stopped after 16 model steps. Start a new session and ask for a smaller change."
+    },
+    {
+      "correctness": {
+        "passed": 9,
+        "total": 9
+      },
+      "raw": {
+        "input": 63238,
+        "output": 2967,
+        "cacheRead": 57984,
+        "cacheWrite": 0
+      },
+      "weightedTokens": 14019.4,
+      "requests": 14,
+      "turns": 1,
+      "elapsedMs": 27485
+    },
+    {
+      "correctness": {
+        "passed": 9,
+        "total": 9
+      },
+      "raw": {
+        "input": 32580,
+        "output": 1591,
+        "cacheRead": 22784,
+        "cacheWrite": 0
+      },
+      "weightedTokens": 13665.4,
+      "requests": 9,
+      "turns": 1,
+      "elapsedMs": 21707
+    },
+    {
+      "correctness": {
+        "passed": 9,
+        "total": 9
+      },
+      "raw": {
+        "input": 33530,
+        "output": 1861,
+        "cacheRead": 27264,
+        "cacheWrite": 0
+      },
+      "weightedTokens": 10853.4,
+      "requests": 10,
+      "turns": 1,
+      "elapsedMs": 20328
+    },
+    {
+      "correctness": {
+        "passed": 9,
+        "total": 9
+      },
+      "raw": {
+        "input": 58814,
+        "output": 2757,
+        "cacheRead": 51456,
+        "cacheWrite": 0
+      },
+      "weightedTokens": 15260.6,
+      "requests": 14,
+      "turns": 1,
+      "elapsedMs": 30672
+    },
+    {
+      "correctness": {
+        "passed": 9,
+        "total": 9
+      },
+      "raw": {
+        "input": 70588,
+        "output": 5389,
+        "cacheRead": 63616,
+        "cacheWrite": 0
+      },
+      "weightedTokens": 18722.6,
+      "requests": 14,
+      "turns": 1,
+      "elapsedMs": 34989
+    },
+    {
+      "correctness": {
+        "passed": 9,
+        "total": 9
+      },
+      "raw": {
+        "input": 81471,
+        "output": 4757,
+        "cacheRead": 72448,
+        "cacheWrite": 0
+      },
+      "weightedTokens": 21024.8,
+      "requests": 16,
+      "turns": 0,
+      "elapsedMs": 24219,
+      "error": "Stopped after 16 model steps. Start a new session and ask for a smaller change."
+    }
+  ],
+  "summary": {
+    "expert": {
+      "completed": 10,
+      "failed": 0,
+      "solved": 10,
+      "min": 1840.6,
+      "median": 4237.4,
+      "max": 10523.2,
+      "mean": 5088.7,
+      "stdev": 3237.5
+    },
+    "naive": {
+      "completed": 5,
+      "failed": 5,
+      "solved": 6,
+      "min": 21421.6,
+      "median": 32413.4,
+      "max": 40740,
+      "mean": 31649.7,
+      "stdev": 5958.5
+    },
+    "middle": {
+      "completed": 8,
+      "failed": 2,
+      "solved": 10,
+      "min": 10853.4,
+      "median": 17015.4,
+      "max": 22225.2,
+      "mean": 16873.8,
+      "stdev": 3388.9
+    },
+    "separated": true
+  },
+  "shell": [
+    {
+      "scenario": "expert",
+      "command": "python -m unittest 2>&1 | tail -20",
+      "approved": true
+    },
+    {
+      "scenario": "expert",
+      "command": "python -m unittest discover -v 2>&1 | tail -30; ls",
+      "approved": false
+    },
+    {
+      "scenario": "expert",
+      "command": "python -c \"\nfrom billing.promotions import applicable_promotions\nfrom billing.models import Customer, Order\nimport inspect\nprint(inspect.signature(applicable_promotions))\n\"",
+      "approved": false
+    },
+    {
+      "scenario": "middle",
+      "command": "cd /workspace 2>/dev/null || cd .; python -m billing.cli report",
+      "approved": false
+    },
+    {
+      "scenario": "middle",
+      "command": "python -m unittest -v",
+      "approved": true
+    },
+    {
+      "scenario": "middle",
+      "command": "python -m billing.cli report && echo \"---\" && python -c \"\nfrom billing.storage import load\nfrom billing.invoice import build_invoice\nfrom billing.report import monthly_report\nc, cust, orders = load()\nr = monthly_report(orders, c, cust)\nfor m, s in r.items():\n    print(m, s.invoices, s.revenue_cents, s.discount_cents, s.tax_cents, s.refunded_orders)\nprint('--- per-invoice sum check ---')\ntot = sum(build_invoice(o, c, cust[o.customer_id]).subtotal_cents - build_invoice(o, c, cust[o.customer_id]).discount_cents for o in orders if not o.refunded)\nprint('sum of individual invoices:', tot, 'report total:', sum(s.revenue_cents for s in r.values()))\n\"",
+      "approved": false
+    },
+    {
+      "scenario": "naive",
+      "command": "cd . && python -m unittest -v 2>&1 | tail -20; echo \"---\"; python -m billing.cli report",
+      "approved": false
+    },
+    {
+      "scenario": "expert",
+      "command": "python -m unittest",
+      "approved": true
+    },
+    {
+      "scenario": "expert",
+      "command": "python -c \"\nfrom datetime import date\nfrom billing.models import Customer, Order, OrderLine\nfrom billing.promotions import applicable_promotions\nc = Customer('c1','A','gold')\no = Order('o1','c1',date(2026,3,2),[],'SPRING10',False)\nprint(applicable_promotions(o,c))\nprint(applicable_promotions(o,c))\n\"",
+      "approved": false
+    },
+    {
+      "scenario": "middle",
+      "command": "cd /workspace 2>/dev/null || cd .; python -m billing.cli report",
+      "approved": false
+    },
+    {
+      "scenario": "middle",
+      "command": "python -m unittest -v",
+      "approved": true
+    },
+    {
+      "scenario": "middle",
+      "command": "python -m billing.cli report && echo \"---\" && python -m billing.cli invoice O-1002",
+      "approved": false
+    },
+    {
+      "scenario": "naive",
+      "command": "cd . && python -m unittest -v 2>&1 | tail -30",
+      "approved": true
+    },
+    {
+      "scenario": "naive",
+      "command": "cd . && python -m billing.cli report",
+      "approved": false
+    },
+    {
+      "scenario": "naive",
+      "command": "cd . && for o in O-1001 O-1002 O-1003 O-1004 O-1006 O-1007 O-1008 O-1009 O-1010 O-1011 O-1012; do echo \"== $o\"; python -m billing.cli invoice $o | tail -4; done",
+      "approved": false
+    },
+    {
+      "scenario": "expert",
+      "command": "python -m unittest",
+      "approved": true
+    },
+    {
+      "scenario": "expert",
+      "command": "python -m unittest discover -v 2>&1 | tail -20",
+      "approved": true
+    },
+    {
+      "scenario": "middle",
+      "command": "cd . && python -c \"\nfrom billing.storage import load\nfrom billing.invoice import build_invoice\nfrom billing.report import monthly_report\nc, cust, orders = load()\n# fresh process per invoice\nimport subprocess\nfor o in orders[:6]:\n    print(o.id, o.placed_on, o.customer_id, o.promo_code, [ (l.sku,l.quantity) for l in o.lines])\nprint('---')\nr = monthly_report(orders, c, cust)\nfor m,s in r.items(): print(m, s)\n\"",
+      "approved": false
+    },
+    {
+      "scenario": "middle",
+      "command": "cd . && python -m unittest -v 2>&1 | tail -20",
+      "approved": true
+    },
+    {
+      "scenario": "middle",
+      "command": "cd . && python -c \"\nfrom billing.storage import load\nfrom billing.invoice import build_invoice\nfrom billing.report import monthly_report\nc, cust, orders = load()\n# report built in normal order\nr1 = monthly_report(orders, c, cust)\n# report built from reversed order\nr2 = monthly_report(list(reversed(orders)), c, cust)\nprint('order-independent:', r1 == r2)\n# report revenue must equal sum of individually built invoices\nfrom collections import defaultdict\nagg = defaultdict(int)\nfor o in orders:\n    if o.refunded: continue\n    inv = build_invoice(o, c, cust[o.customer_id])\n    agg[o.placed_on.strftime('%Y-%m')] += inv.subtotal_cents - inv.discount_cents\nprint('matches per-invoice:', all(agg[m] == s.revenue_cents for m, s in r1.items()))\nfor m, s in r1.items(): print(m, s.invoices, s.revenue_cents, s.discount_cents, s.tax_cents, s.refunded_orders)\n\"",
+      "approved": false
+    },
+    {
+      "scenario": "middle",
+      "command": "cd . && python -m billing.cli report",
+      "approved": false
+    },
+    {
+      "scenario": "naive",
+      "command": "cd . && python -m unittest -v 2>&1 | tail -30",
+      "approved": true
+    },
+    {
+      "scenario": "naive",
+      "command": "cd . && python -m billing.cli report",
+      "approved": false
+    },
+    {
+      "scenario": "naive",
+      "command": "cd . && python -m billing.cli report; echo \"---\"; git log --oneline -5 2>&1 | head",
+      "approved": false
+    },
+    {
+      "scenario": "naive",
+      "command": "cd . && python -c \"\nfrom billing.storage import load\nfrom billing.invoice import build_invoice\ncatalog, customers, orders = load()\nfor o in orders:\n    if o.refunded: continue\n    inv = build_invoice(o, catalog, customers[o.customer_id])\n    print(o.id, o.customer_id, inv.subtotal_cents, inv.discount_cents, inv.tax_cents)\n\"",
+      "approved": false
+    },
+    {
+      "scenario": "naive",
+      "command": "cd . && python -m unittest -v",
+      "approved": true
+    },
+    {
+      "scenario": "naive",
+      "command": "cd . && python -m billing.cli report",
+      "approved": false
+    },
+    {
+      "scenario": "naive",
+      "command": "cd . && python -m unittest -v",
+      "approved": true
+    },
+    {
+      "scenario": "expert",
+      "command": "python -m unittest",
+      "approved": true
+    },
+    {
+      "scenario": "middle",
+      "command": "cd . && python -m billing.cli report && echo \"--- single invoice ---\" && python -m billing.cli invoice O-1002",
+      "approved": false
+    },
+    {
+      "scenario": "middle",
+      "command": "python -m unittest -v",
+      "approved": true
+    },
+    {
+      "scenario": "middle",
+      "command": "python -m billing.cli report && echo \"--- single invoice ---\" && python -m billing.cli invoice O-1002",
+      "approved": false
+    },
+    {
+      "scenario": "naive",
+      "command": "cd . && python -m unittest -v 2>&1 | tail -40",
+      "approved": true
+    },
+    {
+      "scenario": "naive",
+      "command": "cd . && python -m billing.cli report",
+      "approved": false
+    },
+    {
+      "scenario": "naive",
+      "command": "cd . && python -c \"\nfrom billing.storage import load\nfrom billing.invoice import build_invoice\nc,cu,orders=load()\nfor o in orders:\n    i=build_invoice(o,c,cu[o.customer_id])\n    print(o.id,o.placed_on,i.subtotal_cents,i.discount_cents,i.tax_cents,i.total_cents,[l.discount_cents for l in i.lines])\n\"",
+      "approved": false
+    },
+    {
+      "scenario": "naive",
+      "command": "cd . && python -m unittest -v 2>&1 | tail -20",
+      "approved": true
+    },
+    {
+      "scenario": "naive",
+      "command": "cd . && python -m billing.cli report",
+      "approved": false
+    },
+    {
+      "scenario": "expert",
+      "command": "python -m unittest",
+      "approved": true
+    },
+    {
+      "scenario": "expert",
+      "command": "python -m unittest discover -v 2>&1 | tail -20",
+      "approved": true
+    },
+    {
+      "scenario": "middle",
+      "command": "cd . && python -c \"\nfrom billing.storage import load\nfrom billing.invoice import build_invoice\nfrom billing.promotions import applicable_promotions\nfrom billing.report import monthly_report\nc, cust, orders = load()\no = next(x for x in orders if x.id=='O-1002')\nprint('first call:', applicable_promotions(o, cust['C1']))\nprint('second call:', applicable_promotions(o, cust['C1']))\nprint('third call:', applicable_promotions(o, cust['C1']))\n\"",
+      "approved": false
+    },
+    {
+      "scenario": "middle",
+      "command": "python -m unittest -v",
+      "approved": true
+    },
+    {
+      "scenario": "middle",
+      "command": "python -c \"\nfrom billing.storage import load\nfrom billing.promotions import applicable_promotions\nfrom billing.report import monthly_report, render_report\nc, cust, orders = load()\no = next(x for x in orders if x.id=='O-1002')\nprint('call 1:', applicable_promotions(o, cust['C1']))\nprint('call 2:', applicable_promotions(o, cust['C1']))\nprint()\nprint(render_report(monthly_report(orders, c, cust)))\nprint()\nprint('--- second report run (must be identical) ---')\nprint(render_report(monthly_report(orders, c, cust)))\n\"",
+      "approved": false
+    },
+    {
+      "scenario": "naive",
+      "command": "cd . && python -m unittest -v 2>&1 | tail -20",
+      "approved": true
+    },
+    {
+      "scenario": "naive",
+      "command": "cd . && python -m billing.cli report",
+      "approved": false
+    },
+    {
+      "scenario": "naive",
+      "command": "cd . && git log --oneline -5 2>&1 | head",
+      "approved": false
+    },
+    {
+      "scenario": "naive",
+      "command": "cd . && python -m billing.cli report",
+      "approved": false
+    },
+    {
+      "scenario": "naive",
+      "command": "cd . && python -c \"\nfrom billing.storage import load\nfrom billing.report import monthly_report, render_report\nc, cu, o = load()\nprint(render_report(monthly_report(o, c, cu)))\n\"",
+      "approved": false
+    },
+    {
+      "scenario": "naive",
+      "command": "cd . && python -m unittest -v 2>&1 | tail -20",
+      "approved": true
+    },
+    {
+      "scenario": "expert",
+      "command": "python -m unittest",
+      "approved": true
+    },
+    {
+      "scenario": "expert",
+      "command": "python -c \"\nfrom billing.storage import load\nfrom billing.report import monthly_report, render_report\nc,cu,o=load()\nprint(render_report(monthly_report(o,c,cu)))\n\"",
+      "approved": false
+    },
+    {
+      "scenario": "middle",
+      "command": "cd /workspace 2>/dev/null || cd .; python -m billing.cli report; echo \"---\"; python -m unittest -v 2>&1 | tail -20",
+      "approved": false
+    },
+    {
+      "scenario": "naive",
+      "command": "cd /workspace 2>/dev/null || cd .; python -m unittest -v 2>&1 | tail -30",
+      "approved": false
+    },
+    {
+      "scenario": "naive",
+      "command": "python -m unittest -v",
+      "approved": true
+    },
+    {
+      "scenario": "naive",
+      "command": "python -m billing.cli report",
+      "approved": false
+    },
+    {
+      "scenario": "expert",
+      "command": "python -m unittest",
+      "approved": true
+    },
+    {
+      "scenario": "middle",
+      "command": "cd . && python -m unittest discover -s tests -v 2>&1 | tail -20",
+      "approved": true
+    },
+    {
+      "scenario": "middle",
+      "command": "cd . && python -m billing.cli report && echo \"---\" && python -c \"\nfrom billing.storage import load\nfrom billing.invoice import build_invoice\nc,cu,o=load()\na=[build_invoice(x,c,cu[x.customer_id]) for x in o]\nb=[build_invoice(x,c,cu[x.customer_id]) for x in o]\nprint('stable across passes:', [i.total_cents for i in a]==[i.total_cents for i in b])\n\"",
+      "approved": false
+    },
+    {
+      "scenario": "naive",
+      "command": "cd /workspace 2>/dev/null || cd .; python -m unittest -v 2>&1 | tail -20; echo ---; python -m billing.cli report",
+      "approved": false
+    },
+    {
+      "scenario": "naive",
+      "command": "git log --oneline -10 2>&1 | head",
+      "approved": false
+    },
+    {
+      "scenario": "expert",
+      "command": "python -m unittest",
+      "approved": true
+    },
+    {
+      "scenario": "expert",
+      "command": "python -m unittest discover -v 2>&1 | tail -20; ls",
+      "approved": false
+    },
+    {
+      "scenario": "middle",
+      "command": "cd /workspace 2>/dev/null || cd .; python -m unittest -v 2>&1 | tail -20",
+      "approved": false
+    },
+    {
+      "scenario": "middle",
+      "command": "python -m unittest -v 2>&1 | tail -20",
+      "approved": true
+    },
+    {
+      "scenario": "middle",
+      "command": "python -c \"\nfrom billing.storage import load\nfrom billing.invoice import build_invoice\nfrom billing.report import monthly_report\n\ncatalog, customers, orders = load()\n\n# 1. Same invoice built twice in a row must be identical\no = next(x for x in orders if x.id == 'O-1002')\na = build_invoice(o, catalog, customers['C1'])\nb = build_invoice(o, catalog, customers['C1'])\nprint('repeat build identical:', a == b, a.discount_cents, b.discount_cents)\n\n# 2. Build every invoice in reverse order, then compare to forward order\nfwd = {x.id: build_invoice(x, catalog, customers[x.customer_id]) for x in orders if not x.refunded}\nrev = {x.id: build_invoice(x, catalog, customers[x.customer_id]) for x in reversed(orders) if not x.refunded}\nprint('order-independent:', fwd == rev)\n\n# 3. Report revenue == sum of individually built invoices\nrep = monthly_report(orders, catalog, customers)\ntotal = sum(s.revenue_cents for s in rep.values())\nmanual = sum(i.subtotal_cents - i.discount_cents for i in fwd.values())\nprint('report total matches:', total == manual, total, manual)\n\"",
+      "approved": false
+    },
+    {
+      "scenario": "naive",
+      "command": "cd . && python -m unittest -v 2>&1 | tail -30",
+      "approved": true
+    },
+    {
+      "scenario": "naive",
+      "command": "cd . && python -m billing.cli report",
+      "approved": false
+    },
+    {
+      "scenario": "naive",
+      "command": "cd . && python -c \"\nfrom billing.storage import load\nfrom billing.promotions import applicable_promotions\nc, cust, orders = load()\nfor o in orders[:4]:\n    print(o.id, applicable_promotions(o, cust[o.customer_id]))\n\"",
+      "approved": false
+    },
+    {
+      "scenario": "naive",
+      "command": "cd . && git log --oneline -5",
+      "approved": false
+    },
+    {
+      "scenario": "naive",
+      "command": "cd . && python -m unittest -v 2>&1 | tail -20",
+      "approved": true
+    },
+    {
+      "scenario": "expert",
+      "command": "python -m unittest",
+      "approved": true
+    },
+    {
+      "scenario": "expert",
+      "command": "python -m unittest discover -v 2>&1 | tail -20",
+      "approved": true
+    },
+    {
+      "scenario": "middle",
+      "command": "cd . && python -m billing.cli report && echo \"---\" && python - <<'EOF'\nfrom billing.storage import load\nfrom billing.invoice import build_invoice\nfrom billing.report import monthly_report\nfrom billing.promotions import applicable_promotions\n\ncatalog, customers, orders = load()\n# per-invoice, fresh process semantics: call build_invoice in isolation\nfor o in orders:\n    if o.refunded: continue\n    inv = build_invoice(o, catalog, customers[o.customer_id])\n    print(o.id, o.placed_on, o.customer_id, customers[o.customer_id].tier, o.promo_code, inv.subtotal_cents, inv.discount_cents, inv.tax_cents)\nEOF",
+      "approved": false
+    },
+    {
+      "scenario": "middle",
+      "command": "cd . && python -m unittest -v",
+      "approved": true
+    },
+    {
+      "scenario": "middle",
+      "command": "cd . && python -m billing.cli report && echo \"--- cross-check: report vs isolated per-invoice sums ---\" && python - <<'EOF'\nfrom billing.storage import load\nfrom billing.invoice import build_invoice\nfrom billing.report import monthly_report\n\ncatalog, customers, orders = load()\nrep = monthly_report(orders, catalog, customers)\n\n# Recompute each month from scratch, one invoice at a time, in a fresh list each time.\nexpected = {}\nfor o in sorted(orders, key=lambda i: (i.placed_on, i.id)):\n    m = o.placed_on.strftime(\"%Y-%m\")\n    e = expected.setdefault(m, {\"invoices\": 0, \"revenue\": 0, \"discount\": 0, \"tax\": 0, \"refunded\": 0})\n    if o.refunded:\n        e[\"refunded\"] += 1\n        continue\n    inv = build_invoice(o, catalog, customers[o.customer_id])\n    e[\"invoices\"] += 1\n    e[\"revenue\"] += inv.subtotal_cents - inv.discount_cents\n    e[\"discount\"] += inv.discount_cents + sum(l.discount_cents for l in inv.lines)\n    e[\"tax\"] += inv.tax_cents\n\nok = True\nfor m, e in expected.items():\n    s = rep[m]\n    got = {\"invoices\": s.invoices, \"revenue\": s.revenue_cents, \"discount\": s.discount_cents,\n           \"tax\": s.tax_cents, \"refunded\": s.refunded_orders}\n    match = got == e\n    ok &= match\n    print(f\"{m} {'OK ' if match else 'MISMATCH'} {got}\")\nprint(\"ALL MATCH\" if ok else \"MISMATCH FOUND\")\n\n# Also confirm no cross-invoice leakage: same order priced alone vs in a batch\no = next(x for x in orders if x.id == \"O-1012\")\nalone = build_invoice(o, catalog, customers[o.customer_id])\nprint(\"O-1012 alone:\", alone.subtotal_cents, alone.discount_cents, alone.tax_cents)\nEOF",
+      "approved": false
+    },
+    {
+      "scenario": "naive",
+      "command": "cd . && python -m unittest -v 2>&1 | tail -30; echo \"---REPORT---\"; python -m billing.cli report",
+      "approved": false
+    },
+    {
+      "scenario": "naive",
+      "command": "python -m unittest -v 2>&1 | tail -20; echo \"--- REPORT ---\"; python -m billing.cli report",
+      "approved": false
+    },
+    {
+      "scenario": "expert",
+      "command": "python -m unittest",
+      "approved": true
+    },
+    {
+      "scenario": "expert",
+      "command": "python -m unittest discover -v 2>&1 | tail -20",
+      "approved": true
+    },
+    {
+      "scenario": "middle",
+      "command": "cd . && python -m billing.cli report",
+      "approved": false
+    },
+    {
+      "scenario": "middle",
+      "command": "cd . && python -m unittest discover -s tests -v 2>&1 | tail -30",
+      "approved": true
+    },
+    {
+      "scenario": "middle",
+      "command": "cd . && python -m billing.cli report",
+      "approved": false
+    },
+    {
+      "scenario": "middle",
+      "command": "cd . && python -c \"\nfrom billing.storage import load\nfrom billing.report import monthly_report, render_report\nc, cu, o = load()\nprint(render_report(monthly_report(o, c, cu)))\n\"",
+      "approved": false
+    },
+    {
+      "scenario": "naive",
+      "command": "cd /workspace 2>/dev/null || cd .; python -m unittest -v 2>&1 | tail -30",
+      "approved": false
+    }
+  ]
+}

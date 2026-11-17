@@ -1,0 +1,17 @@
+node_modules/
+.browser_modules/
+.pnpm-store/
+dist/
+!/sites/learnide-spec-guide/dist/
+!/sites/learnide-spec-guide/dist/**
+lib/
+packages/app/src-gen/
+packages/app/esbuild.mjs
+packages/app/gen-esbuild.*.mjs
+packages/app/resources/opencode/
+*.tsbuildinfo
+.DS_Store
+.env
+.factoryze-lab/
+.env.*
+!.env.example

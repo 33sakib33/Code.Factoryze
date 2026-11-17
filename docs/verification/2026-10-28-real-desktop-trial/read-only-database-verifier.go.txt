@@ -1,0 +1,34 @@
+package main
+
+import (
+ "context"
+ "crypto/sha256"
+ "encoding/hex"
+ "encoding/json"
+ "fmt"
+ "os"
+ "strings"
+ "time"
+ "go.mongodb.org/mongo-driver/v2/bson"
+ "go.mongodb.org/mongo-driver/v2/mongo"
+ "go.mongodb.org/mongo-driver/v2/mongo/options"
+)
+
+func main(){
+ raw,err:=os.ReadFile(".env.local");must(err);env:=map[string]string{};for _,line:=range strings.Split(string(raw),"\n"){p:=strings.SplitN(strings.TrimSpace(line),"=",2);if len(p)==2{env[p[0]]=p[1]}}
+ var run struct{Passed bool `json:"passed"`;Total int64 `json:"totalProgramSpendMicro"`;Desktop int64 `json:"desktopSpendMicro"`;Displayed int64 `json:"displayedCreditAfterMicro"`;Requests []struct{ID string `json:"id"`;Cost int64 `json:"costMicro"`} `json:"gatewayRequests"`}
+ raw,err=os.ReadFile(".verification/real-desktop-live/complete-result.json");must(err);must(json.Unmarshal(raw,&run));if !run.Passed||len(run.Requests)!=6{panic("Expected completed six-request desktop receipt")}
+ ctx,cancel:=context.WithTimeout(context.Background(),15*time.Second);defer cancel();client,err:=mongo.Connect(options.Client().ApplyURI(env["MONGODB_URI"]));must(err);defer client.Disconnect(ctx);db:=client.Database(env["MONGODB_DATABASE"])
+ var p struct{Enabled bool `bson:"enabled"`;Budget int64 `bson:"budgetMicro"`;Spent int64 `bson:"spentMicro"`;Reserved int64 `bson:"reservedMicro"`;Active int64 `bson:"active"`};must(db.Collection("gateway_program").FindOne(ctx,bson.M{"_id":"program"}).Decode(&p))
+ sum:=int64(0);input:=int64(0);output:=int64(0);cached:=int64(0)
+ for _,r:=range run.Requests{var record struct{State string `bson:"state"`;Outcome string `bson:"outcome"`;Kind string `bson:"costKind"`;Cost int64 `bson:"costMicro"`;Usage struct{Input int64 `bson:"input"`;Output int64 `bson:"output"`;Cached int64 `bson:"cached"`} `bson:"usage"`};must(db.Collection("gateway_requests").FindOne(ctx,bson.M{"_id":r.ID}).Decode(&record));if record.State!="finished"||record.Outcome!="completed"||record.Kind!="measured"||record.Cost!=r.Cost{panic("Gateway request differs from UI receipt")};sum+=record.Cost;input+=record.Usage.Input;output+=record.Usage.Output;cached+=record.Usage.Cached}
+ hash:=sha256.Sum256([]byte(strings.ToLower(strings.TrimSpace(env["ADMIN_EMAILS"]))));id:="email:"+hex.EncodeToString(hash[:])
+ var a struct{Granted int64 `bson:"grantedMicro"`;Spent int64 `bson:"spentMicro"`;Reserved int64 `bson:"reservedMicro"`};must(db.Collection("gateway_accounts").FindOne(ctx,bson.M{"_id":id}).Decode(&a))
+ sessions,err:=db.Collection("gateway_credentials").CountDocuments(ctx,bson.M{"accountId":id,"expiresAt":bson.M{"$gt":time.Now().UTC()}});must(err)
+ admins,err:=db.Collection("gateway_admin_credentials").CountDocuments(ctx,bson.M{"email":env["ADMIN_EMAILS"],"expiresAt":bson.M{"$gt":time.Now().UTC()}});must(err)
+ count,err:=db.Collection("gateway_requests").CountDocuments(ctx,bson.M{});must(err)
+ if p.Enabled||p.Budget!=100000||p.Spent!=run.Total||p.Spent!=14+sum||sum!=run.Desktop||p.Reserved!=0||p.Active!=0||a.Reserved!=0||a.Granted-a.Spent!=run.Displayed||sessions!=0||admins!=0||count!=7{panic("Pilot is not paused, settled, within the original cap and signed out")}
+ result:=map[string]any{"verifiedAtUtc":time.Now().UTC(),"readOnlyInspection":true,"programPaused":true,"budgetMicro":p.Budget,"totalSpentMicro":p.Spent,"desktopSpentMicro":sum,"priorSpentMicro":14,"remainingProgramMicro":p.Budget-p.Spent,"reservedMicro":p.Reserved,"activeRequests":p.Active,"desktopRequests":len(run.Requests),"totalGatewayRequests":count,"allDesktopRequestsCompletedMeasured":true,"desktopUsage":map[string]int64{"input":input,"output":output,"cached":cached},"accountGrantedMicro":a.Granted,"accountSpentMicro":a.Spent,"accountAvailableMicro":a.Granted-a.Spent,"displayedCreditMatches":true,"activeNativeOrGatewayCredentials":sessions,"activeAdminCredentials":admins}
+ out,err:=json.MarshalIndent(result,"","  ");must(err);must(os.WriteFile(".verification/real-desktop-live/database-final.json",append(out,'\n'),0600));fmt.Println(string(out))
+}
+func must(err error){if err!=nil{panic("Private read-only verification failed; no credentials printed")}}

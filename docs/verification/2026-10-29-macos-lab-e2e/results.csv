@@ -1,0 +1,2 @@
+"lab","student_id","joined","profile","model","weighted_tokens","remaining_tokens","accounting_status","lab_state","correctness_passed","correctness_total","submission_hash","grading_executor","grading_image","grading_python"
+"e2e-lab","s001","true","factoryze@0.1.0","synthetic","0","25000","ready","closed","9","9","976a79c5216f70f29311e0262391a6fd06a923f92c29290a06538abc4faac899","docker","sha256:e79d20d59afa6a184267756ad3c87000efcb9ec031ad2471b853c5f6d9100e4d","3.13.18"

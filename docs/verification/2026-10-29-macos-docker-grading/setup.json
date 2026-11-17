@@ -1,0 +1,31 @@
+{
+  "platform": "macOS 27.0.1 (26A434)",
+  "arch": "arm64",
+  "cpu": "Apple M1 Pro",
+  "memoryBytes": 17179869184,
+  "dockerDesktop": "4.41.2",
+  "dockerClient": "28.3.3",
+  "dockerServer": "28.1.1",
+  "engineOs": "linux/arm64",
+  "engineKernel": "6.10.14-linuxkit",
+  "cgroupVersion": "2",
+  "cgroupDriver": "cgroupfs",
+  "engineCpus": 8,
+  "engineMemoryBytes": 16749285376,
+  "seccompBeforeChange": "unconfined",
+  "seccompAfterChange": "builtin",
+  "daemonConfigChange": {
+    "file": "~/.docker/daemon.json",
+    "added": {
+      "seccomp-profile": "builtin"
+    },
+    "approvedByOwner": true,
+    "dockerDesktopRestarted": true,
+    "otherRunningContainersRestartedHealthy": true
+  },
+  "node": "v22.23.2",
+  "pnpm": "10.28.2",
+  "opensslOnPath": "OpenSSL 1.1.1u (Anaconda)",
+  "opensslUsedForTests": "/opt/homebrew/opt/openssl@3/bin/openssl (OpenSSL 3.6.5)",
+  "date": "2026-10-29"
+}

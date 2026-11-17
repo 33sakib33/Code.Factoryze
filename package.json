@@ -1,0 +1,34 @@
+{
+  "name": "factoryze",
+  "private": true,
+  "license": "Apache-2.0",
+  "packageManager": "pnpm@10.28.2",
+  "engines": {
+    "node": ">=22.12 <23",
+    "pnpm": "10.28.2"
+  },
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "test": "node --experimental-strip-types --test",
+    "typecheck": "tsc --noEmit",
+    "factoryze": "node --experimental-strip-types packages/server/src/cli.ts",
+    "lab:load": "node --experimental-strip-types packages/server/scripts/load-lab.mjs",
+    "docker:build": "node packages/engine/scripts/build-grader.mjs",
+    "docker:check": "node --experimental-strip-types packages/engine/scripts/check-docker.mjs",
+    "browser:check-worker": "node --experimental-strip-types packages/server/scripts/browser-check-worker.mjs",
+    "browser:queue-worker": "node --experimental-strip-types packages/server/scripts/browser-queue-worker.mjs",
+    "browser:check": "node --experimental-strip-types packages/engine/scripts/check-browser-worker.mjs",
+    "problem:check": "node --experimental-strip-types packages/engine/scripts/check-problem.mjs",
+    "build:app": "pnpm --filter @factoryze/app-core build && pnpm --filter @factoryze/app build",
+    "bench:record": "node --experimental-strip-types packages/app/scripts/bench-record.mjs",
+    "bench:variance": "node --experimental-strip-types packages/app/scripts/bench-variance.mjs",
+    "spike:harness:live": "node --experimental-strip-types spikes/factoryze-harness.mjs"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "@types/yauzl": "2.10.3",
+    "typescript": "^5.2.2"
+  }
+}

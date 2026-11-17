@@ -1,0 +1,679 @@
+{
+  "taskId": "monthly-revenue",
+  "profile": "factoryze@0.1.0",
+  "model": "google/gemini-4-argon",
+  "temperature": 0,
+  "promptsHash": "79feba4e6e7b4b18460be5316026df2b476fb208c0c91722f0611b4369a35b0b",
+  "recordedAt": "2026-10-22T07:50:51.008Z",
+  "expert": [
+    {
+      "correctness": {
+        "passed": 9,
+        "total": 9
+      },
+      "raw": {
+        "input": 5963,
+        "output": 226,
+        "cacheRead": 0,
+        "cacheWrite": 0
+      },
+      "weightedTokens": 6189,
+      "requests": 5,
+      "turns": 1,
+      "elapsedMs": 23306
+    },
+    {
+      "correctness": {
+        "passed": 9,
+        "total": 9
+      },
+      "raw": {
+        "input": 5963,
+        "output": 240,
+        "cacheRead": 0,
+        "cacheWrite": 0
+      },
+      "weightedTokens": 6203,
+      "requests": 5,
+      "turns": 1,
+      "elapsedMs": 20488
+    },
+    {
+      "correctness": {
+        "passed": 9,
+        "total": 9
+      },
+      "raw": {
+        "input": 4434,
+        "output": 219,
+        "cacheRead": 0,
+        "cacheWrite": 0
+      },
+      "weightedTokens": 4653,
+      "requests": 4,
+      "turns": 1,
+      "elapsedMs": 17233
+    },
+    {
+      "correctness": {
+        "passed": 9,
+        "total": 9
+      },
+      "raw": {
+        "input": 4434,
+        "output": 218,
+        "cacheRead": 0,
+        "cacheWrite": 0
+      },
+      "weightedTokens": 4652,
+      "requests": 4,
+      "turns": 1,
+      "elapsedMs": 23038
+    },
+    {
+      "correctness": {
+        "passed": 9,
+        "total": 9
+      },
+      "raw": {
+        "input": 4434,
+        "output": 218,
+        "cacheRead": 0,
+        "cacheWrite": 0
+      },
+      "weightedTokens": 4652,
+      "requests": 4,
+      "turns": 1,
+      "elapsedMs": 26266
+    },
+    {
+      "correctness": {
+        "passed": 9,
+        "total": 9
+      },
+      "raw": {
+        "input": 6015,
+        "output": 262,
+        "cacheRead": 0,
+        "cacheWrite": 0
+      },
+      "weightedTokens": 6277,
+      "requests": 5,
+      "turns": 1,
+      "elapsedMs": 22209
+    },
+    {
+      "correctness": {
+        "passed": 9,
+        "total": 9
+      },
+      "raw": {
+        "input": 5963,
+        "output": 248,
+        "cacheRead": 0,
+        "cacheWrite": 0
+      },
+      "weightedTokens": 6211,
+      "requests": 5,
+      "turns": 1,
+      "elapsedMs": 29979
+    },
+    {
+      "correctness": {
+        "passed": 9,
+        "total": 9
+      },
+      "raw": {
+        "input": 5963,
+        "output": 240,
+        "cacheRead": 0,
+        "cacheWrite": 0
+      },
+      "weightedTokens": 6203,
+      "requests": 5,
+      "turns": 1,
+      "elapsedMs": 21233
+    },
+    {
+      "correctness": {
+        "passed": 9,
+        "total": 9
+      },
+      "raw": {
+        "input": 5963,
+        "output": 243,
+        "cacheRead": 0,
+        "cacheWrite": 0
+      },
+      "weightedTokens": 6206,
+      "requests": 5,
+      "turns": 1,
+      "elapsedMs": 30405
+    },
+    {
+      "correctness": {
+        "passed": 9,
+        "total": 9
+      },
+      "raw": {
+        "input": 6015,
+        "output": 253,
+        "cacheRead": 0,
+        "cacheWrite": 0
+      },
+      "weightedTokens": 6268,
+      "requests": 5,
+      "turns": 1,
+      "elapsedMs": 20618
+    }
+  ],
+  "naive": [
+    {
+      "correctness": {
+        "passed": 9,
+        "total": 9
+      },
+      "raw": {
+        "input": 26792,
+        "output": 531,
+        "cacheRead": 12069,
+        "cacheWrite": 0
+      },
+      "weightedTokens": 16460.9,
+      "requests": 7,
+      "turns": 1,
+      "elapsedMs": 31825
+    },
+    {
+      "correctness": {
+        "passed": 9,
+        "total": 9
+      },
+      "raw": {
+        "input": 27097,
+        "output": 528,
+        "cacheRead": 12433,
+        "cacheWrite": 0
+      },
+      "weightedTokens": 16435.3,
+      "requests": 7,
+      "turns": 1,
+      "elapsedMs": 41464
+    },
+    {
+      "correctness": {
+        "passed": 9,
+        "total": 9
+      },
+      "raw": {
+        "input": 26681,
+        "output": 490,
+        "cacheRead": 12043,
+        "cacheWrite": 0
+      },
+      "weightedTokens": 16332.3,
+      "requests": 7,
+      "turns": 1,
+      "elapsedMs": 46045
+    },
+    {
+      "correctness": {
+        "passed": 9,
+        "total": 9
+      },
+      "raw": {
+        "input": 27097,
+        "output": 497,
+        "cacheRead": 12433,
+        "cacheWrite": 0
+      },
+      "weightedTokens": 16404.3,
+      "requests": 7,
+      "turns": 1,
+      "elapsedMs": 28228
+    },
+    {
+      "correctness": {
+        "passed": 9,
+        "total": 9
+      },
+      "raw": {
+        "input": 25277,
+        "output": 504,
+        "cacheRead": 11822,
+        "cacheWrite": 0
+      },
+      "weightedTokens": 15141.2,
+      "requests": 7,
+      "turns": 1,
+      "elapsedMs": 29871
+    },
+    {
+      "correctness": {
+        "passed": 9,
+        "total": 9
+      },
+      "raw": {
+        "input": 25619,
+        "output": 512,
+        "cacheRead": 12175,
+        "cacheWrite": 0
+      },
+      "weightedTokens": 15173.5,
+      "requests": 7,
+      "turns": 1,
+      "elapsedMs": 30377
+    },
+    {
+      "correctness": {
+        "passed": 9,
+        "total": 9
+      },
+      "raw": {
+        "input": 21813,
+        "output": 495,
+        "cacheRead": 8425,
+        "cacheWrite": 0
+      },
+      "weightedTokens": 14725.5,
+      "requests": 7,
+      "turns": 1,
+      "elapsedMs": 28443
+    },
+    {
+      "correctness": {
+        "passed": 9,
+        "total": 9
+      },
+      "raw": {
+        "input": 27097,
+        "output": 501,
+        "cacheRead": 12433,
+        "cacheWrite": 0
+      },
+      "weightedTokens": 16408.3,
+      "requests": 7,
+      "turns": 1,
+      "elapsedMs": 43311
+    },
+    {
+      "correctness": {
+        "passed": 9,
+        "total": 9
+      },
+      "raw": {
+        "input": 26507,
+        "output": 526,
+        "cacheRead": 11843,
+        "cacheWrite": 0
+      },
+      "weightedTokens": 16374.3,
+      "requests": 7,
+      "turns": 1,
+      "elapsedMs": 43110
+    },
+    {
+      "correctness": {
+        "passed": 9,
+        "total": 9
+      },
+      "raw": {
+        "input": 31264,
+        "output": 534,
+        "cacheRead": 15720,
+        "cacheWrite": 0
+      },
+      "weightedTokens": 17650,
+      "requests": 8,
+      "turns": 1,
+      "elapsedMs": 83609
+    }
+  ],
+  "middle": [
+    {
+      "correctness": {
+        "passed": 9,
+        "total": 9
+      },
+      "raw": {
+        "input": 22660,
+        "output": 562,
+        "cacheRead": 7355,
+        "cacheWrite": 0
+      },
+      "weightedTokens": 16602.5,
+      "requests": 7,
+      "turns": 1,
+      "elapsedMs": 70589
+    },
+    {
+      "correctness": {
+        "passed": 9,
+        "total": 9
+      },
+      "raw": {
+        "input": 18637,
+        "output": 489,
+        "cacheRead": 5676,
+        "cacheWrite": 0
+      },
+      "weightedTokens": 14017.6,
+      "requests": 6,
+      "turns": 1,
+      "elapsedMs": 27339
+    },
+    {
+      "correctness": {
+        "passed": 9,
+        "total": 9
+      },
+      "raw": {
+        "input": 16192,
+        "output": 456,
+        "cacheRead": 4041,
+        "cacheWrite": 0
+      },
+      "weightedTokens": 13011.1,
+      "requests": 6,
+      "turns": 1,
+      "elapsedMs": 28376
+    },
+    {
+      "correctness": {
+        "passed": 9,
+        "total": 9
+      },
+      "raw": {
+        "input": 18739,
+        "output": 507,
+        "cacheRead": 5689,
+        "cacheWrite": 0
+      },
+      "weightedTokens": 14125.9,
+      "requests": 6,
+      "turns": 1,
+      "elapsedMs": 62664
+    },
+    {
+      "correctness": {
+        "passed": 9,
+        "total": 9
+      },
+      "raw": {
+        "input": 22640,
+        "output": 539,
+        "cacheRead": 10231,
+        "cacheWrite": 0
+      },
+      "weightedTokens": 13971.1,
+      "requests": 7,
+      "turns": 1,
+      "elapsedMs": 37118
+    },
+    {
+      "correctness": {
+        "passed": 9,
+        "total": 9
+      },
+      "raw": {
+        "input": 22666,
+        "output": 486,
+        "cacheRead": 5697,
+        "cacheWrite": 0
+      },
+      "weightedTokens": 18024.7,
+      "requests": 7,
+      "turns": 1,
+      "elapsedMs": 31179
+    },
+    {
+      "correctness": {
+        "passed": 9,
+        "total": 9
+      },
+      "raw": {
+        "input": 22532,
+        "output": 500,
+        "cacheRead": 5503,
+        "cacheWrite": 0
+      },
+      "weightedTokens": 18079.3,
+      "requests": 7,
+      "turns": 1,
+      "elapsedMs": 45426
+    },
+    {
+      "correctness": {
+        "passed": 9,
+        "total": 9
+      },
+      "raw": {
+        "input": 19079,
+        "output": 507,
+        "cacheRead": 8080,
+        "cacheWrite": 0
+      },
+      "weightedTokens": 12314,
+      "requests": 6,
+      "turns": 1,
+      "elapsedMs": 26020
+    },
+    {
+      "correctness": {
+        "passed": 9,
+        "total": 9
+      },
+      "raw": {
+        "input": 22612,
+        "output": 529,
+        "cacheRead": 8477,
+        "cacheWrite": 0
+      },
+      "weightedTokens": 15511.7,
+      "requests": 7,
+      "turns": 1,
+      "elapsedMs": 79091
+    },
+    {
+      "correctness": {
+        "passed": 9,
+        "total": 9
+      },
+      "raw": {
+        "input": 22480,
+        "output": 456,
+        "cacheRead": 8404,
+        "cacheWrite": 0
+      },
+      "weightedTokens": 15372.4,
+      "requests": 7,
+      "turns": 1,
+      "elapsedMs": 44957
+    }
+  ],
+  "summary": {
+    "expert": {
+      "completed": 10,
+      "failed": 0,
+      "solved": 10,
+      "min": 4652,
+      "median": 6203,
+      "max": 6277,
+      "mean": 5751.4,
+      "stdev": 720
+    },
+    "naive": {
+      "completed": 10,
+      "failed": 0,
+      "solved": 10,
+      "min": 14725.5,
+      "median": 16389.3,
+      "max": 17650,
+      "mean": 16110.6,
+      "stdev": 814.1
+    },
+    "middle": {
+      "completed": 10,
+      "failed": 0,
+      "solved": 10,
+      "min": 12314,
+      "median": 14749.2,
+      "max": 18079.3,
+      "mean": 15103,
+      "stdev": 1882.9
+    },
+    "separated": true
+  },
+  "shell": [
+    {
+      "scenario": "expert",
+      "command": "python -m unittest",
+      "approved": true
+    },
+    {
+      "scenario": "middle",
+      "command": "python -m unittest",
+      "approved": true
+    },
+    {
+      "scenario": "naive",
+      "command": "python -m unittest -v",
+      "approved": true
+    },
+    {
+      "scenario": "expert",
+      "command": "python -m unittest",
+      "approved": true
+    },
+    {
+      "scenario": "middle",
+      "command": "python -m unittest",
+      "approved": true
+    },
+    {
+      "scenario": "naive",
+      "command": "python -m unittest",
+      "approved": true
+    },
+    {
+      "scenario": "expert",
+      "command": "python -m unittest",
+      "approved": true
+    },
+    {
+      "scenario": "middle",
+      "command": "python3 -m unittest",
+      "approved": true
+    },
+    {
+      "scenario": "naive",
+      "command": "python -m unittest",
+      "approved": true
+    },
+    {
+      "scenario": "expert",
+      "command": "python -m unittest",
+      "approved": true
+    },
+    {
+      "scenario": "middle",
+      "command": "python -m unittest",
+      "approved": true
+    },
+    {
+      "scenario": "naive",
+      "command": "python -m unittest",
+      "approved": true
+    },
+    {
+      "scenario": "expert",
+      "command": "python -m unittest",
+      "approved": true
+    },
+    {
+      "scenario": "middle",
+      "command": "python -m unittest",
+      "approved": true
+    },
+    {
+      "scenario": "naive",
+      "command": "python -m unittest",
+      "approved": true
+    },
+    {
+      "scenario": "expert",
+      "command": "python -m unittest",
+      "approved": true
+    },
+    {
+      "scenario": "middle",
+      "command": "python -m unittest",
+      "approved": true
+    },
+    {
+      "scenario": "naive",
+      "command": "python -m unittest",
+      "approved": true
+    },
+    {
+      "scenario": "expert",
+      "command": "python -m unittest",
+      "approved": true
+    },
+    {
+      "scenario": "middle",
+      "command": "python -m unittest",
+      "approved": true
+    },
+    {
+      "scenario": "naive",
+      "command": "python -m unittest",
+      "approved": true
+    },
+    {
+      "scenario": "expert",
+      "command": "python -m unittest",
+      "approved": true
+    },
+    {
+      "scenario": "middle",
+      "command": "python -m unittest",
+      "approved": true
+    },
+    {
+      "scenario": "naive",
+      "command": "python -m unittest",
+      "approved": true
+    },
+    {
+      "scenario": "expert",
+      "command": "python -m unittest",
+      "approved": true
+    },
+    {
+      "scenario": "middle",
+      "command": "python -m unittest",
+      "approved": true
+    },
+    {
+      "scenario": "naive",
+      "command": "python -m unittest",
+      "approved": true
+    },
+    {
+      "scenario": "expert",
+      "command": "python -m unittest",
+      "approved": true
+    },
+    {
+      "scenario": "middle",
+      "command": "python -m unittest",
+      "approved": true
+    },
+    {
+      "scenario": "naive",
+      "command": "python -m unittest",
+      "approved": true
+    }
+  ]
+}

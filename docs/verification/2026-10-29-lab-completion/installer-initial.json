@@ -1,0 +1,13 @@
+{
+  "passed": false,
+  "platform": "win32",
+  "soloSmokePassed": false,
+  "labSmokePassed": false,
+  "appSmokePassed": false,
+  "cleanupPassed": true,
+  "temporaryRoot": "C:\\Users\\Sakib\\AppData\\Local\\Temp\\factoryze-installer-smoke-Lg6n7A",
+  "temporaryRootRemoved": true,
+  "uninstallAttempted": true,
+  "rootRemoved": true,
+  "smokeError": "Command failed: C:\\Users\\Sakib\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\node\\bin\\node.exe --experimental-strip-types E:\\Projects\\Factoryze\\Factoryze\\Factoryze\\packages\\app\\scripts\\smoke-solo.mjs"
+}

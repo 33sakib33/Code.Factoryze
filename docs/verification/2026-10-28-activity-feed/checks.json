@@ -1,0 +1,295 @@
+{
+  "date": "2026-10-28",
+  "timezone": "Asia/Dhaka",
+  "capturedAtUtc": "2026-10-27T21:48:09.184Z",
+  "taskId": "activity-feed",
+  "status": "deterministic-content-verified-not-promoted",
+  "node": "v24.22.1",
+  "python": "Python 3.12.7",
+  "platform": "win32",
+  "paidModelCalls": 0,
+  "externalEmails": 0,
+  "dockerUsed": false,
+  "starter": {
+    "public": {
+      "passed": 6,
+      "total": 6,
+      "failures": []
+    },
+    "hidden": {
+      "passed": 8,
+      "total": 12,
+      "checks": [
+        {
+          "name": "test_deleted_members_keep_entries_on_next_request",
+          "passed": true
+        },
+        {
+          "name": "test_distinct_authors_use_bounded_reads",
+          "passed": false,
+          "message": "AssertionError: A 100-entry page made 101 reads; expected at most 2"
+        },
+        {
+          "name": "test_empty_feed_skips_member_reads",
+          "passed": true
+        },
+        {
+          "name": "test_member_ids_are_scoped_to_workspace",
+          "passed": true
+        },
+        {
+          "name": "test_missing_authors_use_bounded_reads",
+          "passed": false,
+          "message": "AssertionError: Missing authors produced 101 reads"
+        },
+        {
+          "name": "test_multiple_batches_use_bounded_reads",
+          "passed": false,
+          "message": "AssertionError: 901 distinct authors produced 902 reads; expected at most 4"
+        },
+        {
+          "name": "test_names_and_workspace_values_are_data",
+          "passed": true
+        },
+        {
+          "name": "test_negative_limit_is_rejected",
+          "passed": true
+        },
+        {
+          "name": "test_new_display_names_are_visible_on_next_request",
+          "passed": true
+        },
+        {
+          "name": "test_order_and_limit_apply_to_activity_not_author",
+          "passed": true
+        },
+        {
+          "name": "test_repeated_author_is_not_reloaded_per_entry",
+          "passed": false,
+          "message": "AssertionError: Repeated author produced 101 reads"
+        },
+        {
+          "name": "test_zero_limit_skips_member_reads",
+          "passed": true
+        }
+      ]
+    },
+    "measurements": {
+      "distinct100": {
+        "entries": 100,
+        "sqlReads": 101
+      },
+      "repeated100": {
+        "entries": 100,
+        "sqlReads": 101
+      },
+      "missing100": {
+        "entries": 100,
+        "sqlReads": 101
+      },
+      "distinct901": {
+        "entries": 901,
+        "sqlReads": 902
+      }
+    }
+  },
+  "reference": {
+    "public": {
+      "passed": 6,
+      "total": 6,
+      "failures": []
+    },
+    "hidden": {
+      "passed": 12,
+      "total": 12,
+      "checks": [
+        {
+          "name": "test_deleted_members_keep_entries_on_next_request",
+          "passed": true
+        },
+        {
+          "name": "test_distinct_authors_use_bounded_reads",
+          "passed": true
+        },
+        {
+          "name": "test_empty_feed_skips_member_reads",
+          "passed": true
+        },
+        {
+          "name": "test_member_ids_are_scoped_to_workspace",
+          "passed": true
+        },
+        {
+          "name": "test_missing_authors_use_bounded_reads",
+          "passed": true
+        },
+        {
+          "name": "test_multiple_batches_use_bounded_reads",
+          "passed": true
+        },
+        {
+          "name": "test_names_and_workspace_values_are_data",
+          "passed": true
+        },
+        {
+          "name": "test_negative_limit_is_rejected",
+          "passed": true
+        },
+        {
+          "name": "test_new_display_names_are_visible_on_next_request",
+          "passed": true
+        },
+        {
+          "name": "test_order_and_limit_apply_to_activity_not_author",
+          "passed": true
+        },
+        {
+          "name": "test_repeated_author_is_not_reloaded_per_entry",
+          "passed": true
+        },
+        {
+          "name": "test_zero_limit_skips_member_reads",
+          "passed": true
+        }
+      ]
+    },
+    "measurements": {
+      "distinct100": {
+        "entries": 100,
+        "sqlReads": 2
+      },
+      "repeated100": {
+        "entries": 100,
+        "sqlReads": 2
+      },
+      "missing100": {
+        "entries": 100,
+        "sqlReads": 2
+      },
+      "distinct901": {
+        "entries": 901,
+        "sqlReads": 4
+      }
+    }
+  },
+  "integration": {
+    "finalFocusedTests": 2,
+    "passed": 2,
+    "log": "content-tests-final.log",
+    "covers": [
+      "immutable task-folder import",
+      "private material excluded from student workspace",
+      "starter public/hidden and reference public/hidden",
+      "mutation rejection: stale cache, workspace leak, dropped rows, reordered rows"
+    ]
+  },
+  "fullSuite": {
+    "tests": 199,
+    "pass": 197,
+    "fail": 2,
+    "skipped": 0,
+    "command": "pnpm@10.28.2 run test --test-concurrency=4",
+    "log": "full-tests.log",
+    "limitations": [
+      "Two unchanged Windows symlink EPERM failures: harness-tools.test.ts and task-import.test.ts"
+    ]
+  },
+  "typecheck": {
+    "passed": true,
+    "log": "typecheck.log"
+  },
+  "publicUnittest": {
+    "passed": 6,
+    "log": "public-unittest.log"
+  },
+  "developmentCorrections": [
+    "System Node was too old for strip-types/test; used bundled Node 24.22.1.",
+    "Initial test failed because the task did not exist, then an accidental shadowed-variable assertion was corrected.",
+    "Initial pnpm test invocation rejected an option before tests ran; reran through pinned pnpm run test. Raw command error retained.",
+    "Automatic approval review blocked deletion of generated Python caches as blocked by policy; caches remain locally and are Git-ignored."
+  ],
+  "scope": {
+    "bundledCatalogChanged": false,
+    "appCodeChanged": false,
+    "sourceHashEncoding": "UTF-8 with LF endings",
+    "preExistingEditsExcluded": [
+      "INSTALL.md",
+      "packages/app/package.json"
+    ]
+  },
+  "remaining": [
+    "Model measurements and promotion review with separately approved spending",
+    "No efficiency baseline or validated skill-separation claim",
+    "Sandbox measurements deferred with Docker"
+  ],
+  "sources": [
+    {
+      "path": "docs/verification/2026-10-28-activity-feed/capture.mjs",
+      "sha256": "bab974f4079c4b6c218645799ad0a274c21bc0f1f6eccab424f848490119cc23"
+    },
+    {
+      "path": "packages/engine/test/activity-feed.test.ts",
+      "sha256": "f077f69e5c4336b44baf733c1b5918db94106ef5cc8e13bc12dada0619024988"
+    },
+    {
+      "path": "tasks/benchmark/activity-feed/.gitignore",
+      "sha256": "862263fa1f46c20f0d1e4dac5ffcc75abd55c08211b2c3864c5f8764b9d87793"
+    },
+    {
+      "path": "tasks/benchmark/activity-feed/README.md",
+      "sha256": "011773b8c0bbc791c1999def1089e795a3b454c98f4ba0132d37e95d0125c563"
+    },
+    {
+      "path": "tasks/benchmark/activity-feed/prompts/benchmark.yaml",
+      "sha256": "e414cd2c9ade4ac9f0ce1d68ee3fc2cdc36129ab31066ae17e8509e7b1555cda"
+    },
+    {
+      "path": "tasks/benchmark/activity-feed/reference/feed.py",
+      "sha256": "1bd97865f54bbae1b7195438b964154518872de4158315b68675fad784ed47ea"
+    },
+    {
+      "path": "tasks/benchmark/activity-feed/task.yaml",
+      "sha256": "44d9eea68915560a5ea7841b1143d8f8c859ec96028141ac3f858437ec6cb4fe"
+    },
+    {
+      "path": "tasks/benchmark/activity-feed/tests/hidden/test_feed.py",
+      "sha256": "82c2efa4ebfca9a90cb92c5f636c66af4651ee6d5574074856806d0db7106d6b"
+    },
+    {
+      "path": "tasks/benchmark/activity-feed/workspace/README.md",
+      "sha256": "9c71def2b53def061b8c30766d627e975454804b63ca0d09efcdc2d93a8d07f6"
+    },
+    {
+      "path": "tasks/benchmark/activity-feed/workspace/feed/__init__.py",
+      "sha256": "f36b0720fff74f166a21ace1331d120e91587bb16397fdd7e23652f9c19239e2"
+    },
+    {
+      "path": "tasks/benchmark/activity-feed/workspace/feed/feed.py",
+      "sha256": "d3fec656d0a4391c751a101f8273c8ed4255debf6b91dcf25512e8f754f4837a"
+    },
+    {
+      "path": "tasks/benchmark/activity-feed/workspace/feed/models.py",
+      "sha256": "e3afc47f302e3c1a45546a6b4f8d28a53bcf979c59f136981e585881474f194f"
+    },
+    {
+      "path": "tasks/benchmark/activity-feed/workspace/feed/render.py",
+      "sha256": "d4a3c3126de349e62d94dec1a323b108e0de8eb920b77727d8b9d5e9ea478fe2"
+    },
+    {
+      "path": "tasks/benchmark/activity-feed/workspace/feed/repository.py",
+      "sha256": "c21a0a06689ad7b5e4c57ca7f01326bfea223fbd681bc0a4581ad176fc7b9fc4"
+    },
+    {
+      "path": "tasks/benchmark/activity-feed/workspace/feed/sample.py",
+      "sha256": "197d0d0b035e1bb2989a1f31ae87cc27532a6eca9e47a0ae052238e240bb04a7"
+    },
+    {
+      "path": "tasks/benchmark/activity-feed/workspace/tests/__init__.py",
+      "sha256": "c09bf8aa03321747f9ccd0a8f4ae6a8a4240d6ebc100d81318ae8934ab7ad423"
+    },
+    {
+      "path": "tasks/benchmark/activity-feed/workspace/tests/test_public.py",
+      "sha256": "6eb2b8abab353dea8bed5f0ae99b6420911fafec74df5056b9ef9fef913c8921"
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+schema: 1
+id: pagination-api
+retired: true
+title: Pagination API
+brief: >
+  Customers say the last order on each page is missing from their history.
+  Find the boundary error without changing the page numbering.
+minimumPython: "3.11"
+timeHintMinutes: 35
+entryFile: app/pagination.py

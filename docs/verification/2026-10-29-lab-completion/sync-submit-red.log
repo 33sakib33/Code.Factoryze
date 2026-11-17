@@ -1,0 +1,25 @@
+(node:7140) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///E:/Projects/Factoryze/Factoryze/Factoryze/packages/app/extensions/core/test/lab-connection.test.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to \\?\E:\Projects\Factoryze\Factoryze\Factoryze\packages\app\extensions\core\package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✖ desktop lab connection stores tokens only in credentials, resumes safely and retains concurrent offline work/events (648.8684ms)
+ℹ tests 1
+ℹ suites 0
+ℹ pass 0
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1162.11
+
+✖ failing tests:
+
+test at packages\app\extensions\core\test\lab-connection.test.ts:12:1
+✖ desktop lab connection stores tokens only in credentials, resumes safely and retains concurrent offline work/events (648.8684ms)
+  Error: Lab request failed (409): The lab request conflicts with the current state or contains invalid data. Reconnect and retry.
+      at IncomingMessage.<anonymous> (file:///E:/Projects/Factoryze/Factoryze/Factoryze/packages/engine/src/lab-client.ts:37:59)
+      at IncomingMessage.emit (node:events:526:24)
+      at endReadableNT (node:internal/streams/readable:1783:12)
+      at process.processTicksAndRejections (node:internal/process/task_queues:90:21) {
+    status: 409
+  }

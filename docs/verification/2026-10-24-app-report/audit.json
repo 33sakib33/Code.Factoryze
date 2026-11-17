@@ -1,0 +1,31 @@
+{
+  "passed": true,
+  "markdownFiles": 7,
+  "localLinks": 80,
+  "anchors": 26,
+  "receiptConsistency": true,
+  "errors": [],
+  "sha256": {
+    "packages/app/extensions/core/src/browser/report-result.ts": "dce035e8e3e28fe143dc2dc8e1e3604d60693177c0436546eff363a39cce3d39",
+    "packages/app/extensions/core/src/browser/factoryze-metrics-contribution.ts": "797aff18008542bb1c72b12d4b8e77ebe0b7dc0bf1d76cd1fccc3b2735557fc8",
+    "packages/app/extensions/core/src/browser/factoryze-settings-widget.ts": "9d8881887cb3546c8356239640066ffc66fd0477dd7c9292cf793492bf097a38",
+    "packages/protocol/src/index.ts": "634f211b768d25a04120adab378556a77a7a6db7795b1edf5d31267dc61087fa",
+    "packages/engine/package.json": "55455848eb6f7247d98ffb0eb9f006c5ae799159d6c8cc621edd4cc16b8ef11e",
+    "packages/engine/src/report-insights.ts": "3ed89e0f4a1152d0593a8895652b3debe1ccc02165cd3b01a4f84973697bb616",
+    "packages/engine/src/usage-store.ts": "25df085d378eec20f9fe860e23af6f8da338b48757ad8788885bb14868771140",
+    "packages/engine/src/solo.ts": "7e8a2a7d9b6113898b54066ade5022fc3c826a4845a5e78a7d6cac9a6ad5b090",
+    "packages/engine/test/report-insights.test.ts": "3cecc3bd896d9a4562059622ff540f63e866af6cbfae8bca4c62090d62d87aa1",
+    "packages/protocol/test/contracts.test.ts": "32f269a0237dbfab5901a5f1252e44a3c5fd9c70e7cf2f49caeb05d9edef2f94",
+    "packages/app/scripts/smoke-solo.mjs": "f849aa5d0d1b06e382d4840cea447715b5cb4e2bd2af5ecfacd0365407424e9e",
+    "packages/app/extensions/core/src/browser/factoryze-report-widget.ts": "c391e822aed822bcf44a393b2a0c37f58b658eb9fdf00e8baed7308f4fcaef7b",
+    "packages/app/extensions/core/src/browser/factoryze-solo-contribution.ts": "6d3337968fbb5b210733d829e6a9f601468fd4ddc3ab6b33610acd71f5fb3926",
+    "packages/app/extensions/core/src/browser/report-learning.ts": "1903a40fa5d1a106d65ff7c60749c50132b314bc70a30b36911db7d35f5a7b99",
+    "packages/app/extensions/core/src/browser/report-learning-section.ts": "0f935b427f94d4800fcb4bc6d9899321cef223729e4c38d51f61fd8af4ad52fb",
+    "packages/app/extensions/core/src/browser/style/factoryze.css": "1b13b78e8560b0f6daaa90492545f611632be36acd625a714f8967b4e6065321",
+    "packages/app/extensions/core/test/report-learning.test.ts": "d7e03f1c86c0466cdbc2a73a9f0d073a1d4dc78316bdf241e49622a98cf70b21",
+    "mockups/report-preview.ts": "fd00851b57671a5224ddc92807189bbf09861942a7e6e2afe478972fa8d4e4fd",
+    "mockups/build-report.mjs": "77b4bc188af67b2f27bb490ab3c37b3cd7eb2d4cadde0cf947e4d1e9d45775ea",
+    "mockups/check-report.mjs": "38461c4ae5d916c529638cd80b5c79ea8fc3467c5279037eaae4293babd8b6ac",
+    "mockups/report.html": "c22baa3f87c0ea0393848ab11b72e11901bc7fe62a381b10e290639bfd815e6d"
+  }
+}

@@ -1,0 +1,12 @@
+✔ a private join binding recovers a lost response without allowing another client to claim the identity (179.4188ms)
+✔ lab task delivery excludes hidden material; mirror sync is bounded, scoped, versioned and idempotent (160.4637ms)
+✔ submissions are immutable; closing auto-submits; grades remain private until instructor release (225.8467ms)
+✔ instructor session recovery preserves identity, budgets and snapshots; student events are untrusted flags (137.8867ms)
+ℹ tests 4
+ℹ suites 0
+ℹ pass 4
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1076.1344

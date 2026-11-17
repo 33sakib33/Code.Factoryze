@@ -1,0 +1,48 @@
+
+> factoryze@ build:app E:\Projects\Factoryze\Factoryze\Factoryze
+> pnpm --filter @factoryze/app-core build && pnpm --filter @factoryze/app build
+
+
+> @factoryze/app-core@0.0.1 build E:\Projects\Factoryze\Factoryze\Factoryze\packages\app\extensions\core
+> tsc -p tsconfig.json
+
+
+> @factoryze/app@0.0.1 build E:\Projects\Factoryze\Factoryze\Factoryze\packages\app
+> theia rebuild:electron --cacheRoot ../.. && theia build --mode development
+
+Processed "keytar"
+Processed "native-keymap"
+Processed "drivelist"
+Processed "find-git-repositories"
+Processed "node-pty"
+Searching dependency tree
+Building modules: keytar, find-git-repositories, native-keymap, node-pty, drivelist
+(node:25404) [DEP0190] DeprecationWarning: Passing args to a child process with shell option true can lead to security vulnerabilities, as the arguments are not escaped, only concatenated.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+
+Building the projects in this solution one at a time. To enable parallel build, please add the "-m" switch.
+C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets(487,5): error MSB8040: Spectre-mitigated libraries are required for this project. Install them from the Visual Studio installer (Individual components tab) for any toolsets and architectures being used. Learn more: https://aka.ms/Ofhn4c [E:\Projects\Factoryze\Factoryze\Factoryze\node_modules\.pnpm\node-pty@1.2.0-beta.12\node_modules\node-pty\build\conpty.vcxproj]
+C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets(487,5): error MSB8040: Spectre-mitigated libraries are required for this project. Install them from the Visual Studio installer (Individual components tab) for any toolsets and architectures being used. Learn more: https://aka.ms/Ofhn4c [E:\Projects\Factoryze\Factoryze\Factoryze\node_modules\.pnpm\node-pty@1.2.0-beta.12\node_modules\node-pty\build\conpty_console_list.vcxproj]
+Error: `C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\MSBuild\Current\Bin\MSBuild.exe` failed with exit code: 1
+    at ChildProcess.<anonymous> (E:\Projects\Factoryze\Factoryze\Factoryze\node_modules\.pnpm\node-gyp@12.4.0\node_modules\node-gyp\lib\build.js:219:23)
+    at ChildProcess.emit (node:events:509:28)
+    at ChildProcess._handle.onexit (node:internal/child_process:295:12)
+
+✖ Rebuild Failed
+
+An unhandled error occurred inside electron-rebuild
+node-gyp failed to rebuild 'E:\Projects\Factoryze\Factoryze\Factoryze\node_modules\.pnpm\node-pty@1.2.0-beta.12\node_modules\node-pty'
+
+Error: node-gyp failed to rebuild 'E:\Projects\Factoryze\Factoryze\Factoryze\node_modules\.pnpm\node-pty@1.2.0-beta.12\node_modules\node-pty'
+    at ChildProcess.<anonymous> (file:///E:/Projects/Factoryze/Factoryze/Factoryze/node_modules/.pnpm/@electron+rebuild@4.2.1/node_modules/@electron/rebuild/lib/module-type/node-gyp/node-gyp.js:120:24)
+    at ChildProcess.emit (node:events:509:28)
+    at ChildProcess._handle.onexit (node:internal/child_process:295:12)
+Reverted "keytar"
+Reverted "node-pty"
+Reverted "drivelist"
+Reverted "native-keymap"
+Reverted "find-git-repositories"
+E:\Projects\Factoryze\Factoryze\Factoryze\packages\app:
+ ERR_PNPM_RECURSIVE_RUN_FIRST_FAIL  @factoryze/app@0.0.1 build: `theia rebuild:electron --cacheRoot ../.. && theia build --mode development`
+Exit status 4294967295
+ ELIFECYCLE  Command failed with exit code 1.

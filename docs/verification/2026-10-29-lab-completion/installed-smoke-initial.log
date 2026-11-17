@@ -1,0 +1,112 @@
+
+> @factoryze/app@0.0.1 smoke:installer E:\Projects\Factoryze\Factoryze\Factoryze\packages\app
+> node --experimental-strip-types scripts/smoke-installer.mjs
+
+Started an attempt from Home; starter file opened; public tests ran.
+Approved report design: full-width result, nine segments, check modal, no suggestions/grades, pane restoration and saved submission costs verified.
+Budget refusal survived New session; raised budget recorded on the second submission.
+Retired tasks stay hidden from Practice; earlier attempts, usage, reports and resubmission survive.
+Folder and ZIP tasks imported and graded in the same window.
+File
+Edit
+Selection
+View
+Go
+Terminal
+Help
+Factoryze
+No model connected
+0
+0
+Classroom
+Join a lab
+Refresh lab results
+
+Use the configuration and join code provided by your instructor.
+
+Connect a model for solo practice
+
+Use trial credits, your own provider key or a model running on this computer. You can open tasks, edit code, run tests and submit without one.
+
+Connect a model
+Continue
+Show all attempts
+zip-assessment
+
+Attempt 1, started just now. Last submitted just now: 1 of 1 checks passed.
+
+Continue
+folder-assessment
+
+Attempt 1, started just now. Last submitted just now: 1 of 1 checks passed.
+
+Continue
+Monthly revenue report
+
+Attempt 1, started just now. Last worked on just now.
+
+Continue
+Practice tasks
+Open task folder…
+Open task ZIP…
+Library fines
+
+Riverside members say they're charged a day's fine when they return items on the due date in the evening. Morning returns are fine, and Central members haven't complained. Fines must follow each branch's local calendar day. Fix it without changing fine rates or loan periods.
+
+Start
+Monthly revenue report
+
+Finance says the monthly revenue report comes out too low, and the gap is bigger in busier months. Reprinting any single invoice with `python -m billing.cli invoice ORDER_ID` shows the right amount. Fix the report without changing how invoices are priced.
+
+Start
+Results
+Task	Hidden checks	Tokens
+zip-assessment Attempt 1	1 of 1	0
+folder-assessment Attempt 1	1 of 1	0
+Pagination API Attempt 1, submission 2	1 of 1	14
+Stable customer IDs Attempt 3, submission 2	2 of 2	14
+Pagination API Attempt 1, submission 1	1 of 1	14
+Stable customer IDs Attempt 3, submission 1	2 of 2	14
+Library fines Attempt 1, submission 2	9 of 9	3,046
+Library fines Attempt 1, submission 1	9 of 9	42
+node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+
+locator.waitFor: Timeout 45000ms exceeded.
+Call log:
+  - waiting for locator('.fz-home').getByText('Connect a model to use the agent', { exact: true }) to be visible
+
+    at E:\Projects\Factoryze\Factoryze\Factoryze\packages\app\scripts\smoke-solo.mjs:497:83 {
+  log: [
+    "  - waiting for locator('.fz-home').getByText('Connect a model to use the agent', { exact: true }) to be visible"
+  ],
+  name: 'TimeoutError'
+}
+
+Node.js v24.22.1
+node:internal/errors:986
+  const err = new Error(message);
+              ^
+
+Error: Command failed: C:\Users\Sakib\.cache\codex-runtimes\codex-primary-runtime\dependencies\node\bin\node.exe --experimental-strip-types E:\Projects\Factoryze\Factoryze\Factoryze\packages\app\scripts\smoke-solo.mjs
+    at genericNodeError (node:internal/errors:986:15)
+    at wrappedFn (node:internal/errors:540:14)
+    at checkExecSyncError (node:child_process:943:11)
+    at execFileSync (node:child_process:979:15)
+    at file:///E:/Projects/Factoryze/Factoryze/Factoryze/packages/app/scripts/smoke-installer.mjs:39:3
+    at ModuleJob.run (node:internal/modules/esm/module_job:561:25)
+    at async node:internal/modules/esm/loader:647:26
+    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5) {
+  status: 1,
+  signal: null,
+  output: [ null, null, null ],
+  pid: 3860,
+  stdout: null,
+  stderr: null
+}
+
+Node.js v24.22.1
+E:\Projects\Factoryze\Factoryze\Factoryze\packages\app:
+ ERR_PNPM_RECURSIVE_RUN_FIRST_FAIL  @factoryze/app@0.0.1 smoke:installer: `node --experimental-strip-types scripts/smoke-installer.mjs`
+Exit status 1

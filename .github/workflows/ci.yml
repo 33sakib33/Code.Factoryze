@@ -1,0 +1,49 @@
+name: CI
+
+# Manual only (decided 2026-10-22): start it from Actions → CI → Run workflow. Nothing runs on push or pull requests.
+on:
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.head.ref || github.ref_name }}
+  cancel-in-progress: true
+
+jobs:
+  contracts-and-replay:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-24.04, macos-latest, windows-2022]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10.28.2
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: pnpm
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Select OpenSSL 3 for lab certificate tests (macOS)
+        if: runner.os == 'macOS'
+        shell: bash
+        run: |
+          lab_openssl="$(brew --prefix openssl@3)/bin/openssl"
+          test -x "$lab_openssl"
+          echo "FACTORYZE_OPENSSL=$lab_openssl" >> "$GITHUB_ENV"
+      - name: Select Git OpenSSL for lab certificate tests (Windows)
+        if: runner.os == 'Windows'
+        shell: pwsh
+        run: |
+          $labOpenSsl = Join-Path $env:ProgramFiles 'Git\usr\bin\openssl.exe'
+          if (!(Test-Path -LiteralPath $labOpenSsl)) { throw 'OpenSSL 3 is required for lab certificate tests' }
+          "FACTORYZE_OPENSSL=$labOpenSsl" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
+      - name: Linux native build prerequisites
+        if: runner.os == 'Linux'
+        run: sudo apt-get update && sudo apt-get install -y build-essential pkg-config libx11-dev libxkbfile-dev libsecret-1-dev openssl
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm test
+      - run: pnpm typecheck

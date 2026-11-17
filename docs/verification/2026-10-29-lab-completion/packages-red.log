@@ -1,0 +1,19 @@
+✖ lab package downloads require a student session and serve only the curated wheelhouse (643.2752ms)
+ℹ tests 1
+ℹ suites 0
+ℹ pass 0
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 940.8546
+
+✖ failing tests:
+
+test at packages\server\test\lab-packages.test.ts:12:1
+✖ lab package downloads require a student session and serve only the curated wheelhouse (643.2752ms)
+  TypeError [Error]: student.resource is not a function
+      at TestContext.<anonymous> (file:///E:/Projects/Factoryze/Factoryze/Factoryze/packages/server/test/lab-packages.test.ts:20:28)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3)

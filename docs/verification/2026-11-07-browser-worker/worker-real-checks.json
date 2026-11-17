@@ -1,0 +1,232 @@
+{
+  "verifiedAt": "2026-11-07T05:08:59.056Z",
+  "passed": true,
+  "realDockerChecks": true,
+  "hostStudentCodeExecutions": 0,
+  "paidModelCalls": 0,
+  "xpGranted": 0,
+  "publicAPIConnected": false,
+  "image": "sha256:7f36a9ff7bd392d95d44124709f6cff3244550eaa15c38ba87f3a7df9ccdf8ad",
+  "python": "3.13.18",
+  "starter": {
+    "schema": 1,
+    "kind": "public_checks",
+    "jobId": "aaaaaaaaaaaaaaaaaaaaaaaa",
+    "attemptId": "bbbbbbbbbbbbbbbbbbbbbbbb",
+    "revision": 1,
+    "inputHash": "e959a24031d5152893b967ce6ec0883b1cd2da9d5a487282b8b604d1b07992b9",
+    "status": "completed",
+    "trust": "practice",
+    "rewardEligible": false,
+    "passed": 0,
+    "total": 1,
+    "checks": [
+      {
+        "name": "tests/test_main.py::test_answer",
+        "passed": false,
+        "outcome": "did_not_pass"
+      }
+    ],
+    "provenance": {
+      "executor": "docker",
+      "image": "sha256:7f36a9ff7bd392d95d44124709f6cff3244550eaa15c38ba87f3a7df9ccdf8ad",
+      "runner": "factoryze-browser-public-v1",
+      "python": "3.13.18",
+      "checkTimeoutMs": 5000,
+      "runTimeoutMs": 60000
+    }
+  },
+  "fixed": {
+    "schema": 1,
+    "kind": "public_checks",
+    "jobId": "aaaaaaaaaaaaaaaaaaaaaaaa",
+    "attemptId": "bbbbbbbbbbbbbbbbbbbbbbbb",
+    "revision": 1,
+    "inputHash": "ab978513038731bfbf0fecbd50856d4d15ea866b11840850026f4ad40476397e",
+    "status": "completed",
+    "trust": "practice",
+    "rewardEligible": false,
+    "passed": 1,
+    "total": 1,
+    "checks": [
+      {
+        "name": "tests/test_main.py::test_answer",
+        "passed": true,
+        "outcome": "passed"
+      }
+    ],
+    "provenance": {
+      "executor": "docker",
+      "image": "sha256:7f36a9ff7bd392d95d44124709f6cff3244550eaa15c38ba87f3a7df9ccdf8ad",
+      "runner": "factoryze-browser-public-v1",
+      "python": "3.13.18",
+      "checkTimeoutMs": 5000,
+      "runTimeoutMs": 60000
+    }
+  },
+  "probes": {
+    "network_and_socket": {
+      "passed": true,
+      "result": {
+        "schema": 1,
+        "kind": "public_checks",
+        "jobId": "aaaaaaaaaaaaaaaaaaaaaaaa",
+        "attemptId": "bbbbbbbbbbbbbbbbbbbbbbbb",
+        "revision": 1,
+        "inputHash": "394d916821ee054b4a51eeca6fc00c8afa98edef33e66110f19d6840a2df3dd0",
+        "status": "completed",
+        "trust": "practice",
+        "rewardEligible": false,
+        "passed": 1,
+        "total": 1,
+        "checks": [
+          {
+            "name": "tests/test_main.py::test_answer",
+            "passed": true,
+            "outcome": "passed"
+          }
+        ],
+        "provenance": {
+          "executor": "docker",
+          "image": "sha256:7f36a9ff7bd392d95d44124709f6cff3244550eaa15c38ba87f3a7df9ccdf8ad",
+          "runner": "factoryze-browser-public-v1",
+          "python": "3.13.18",
+          "checkTimeoutMs": 5000,
+          "runTimeoutMs": 60000
+        }
+      }
+    },
+    "timeout": {
+      "passed": true,
+      "result": {
+        "schema": 1,
+        "kind": "public_checks",
+        "jobId": "aaaaaaaaaaaaaaaaaaaaaaaa",
+        "attemptId": "bbbbbbbbbbbbbbbbbbbbbbbb",
+        "revision": 1,
+        "inputHash": "99cec978b6bc48d5f22e62e6021d970cf5270ce419a7485dc3862c9ea5429e8b",
+        "status": "completed",
+        "trust": "practice",
+        "rewardEligible": false,
+        "passed": 0,
+        "total": 1,
+        "checks": [
+          {
+            "name": "tests/test_main.py::test_answer",
+            "passed": false,
+            "outcome": "did_not_pass"
+          }
+        ],
+        "provenance": {
+          "executor": "docker",
+          "image": "sha256:7f36a9ff7bd392d95d44124709f6cff3244550eaa15c38ba87f3a7df9ccdf8ad",
+          "runner": "factoryze-browser-public-v1",
+          "python": "3.13.18",
+          "checkTimeoutMs": 5000,
+          "runTimeoutMs": 60000
+        }
+      }
+    },
+    "output_limit": {
+      "passed": true,
+      "result": {
+        "schema": 1,
+        "kind": "public_checks",
+        "jobId": "aaaaaaaaaaaaaaaaaaaaaaaa",
+        "attemptId": "bbbbbbbbbbbbbbbbbbbbbbbb",
+        "revision": 1,
+        "inputHash": "b017ab40d5ad9a743d9ce325e2214841bb191c2a8f0bcbb37261b48ba2c90a1a",
+        "status": "completed",
+        "trust": "practice",
+        "rewardEligible": false,
+        "passed": 0,
+        "total": 1,
+        "checks": [
+          {
+            "name": "tests/test_main.py::test_answer",
+            "passed": false,
+            "outcome": "did_not_pass"
+          }
+        ],
+        "provenance": {
+          "executor": "docker",
+          "image": "sha256:7f36a9ff7bd392d95d44124709f6cff3244550eaa15c38ba87f3a7df9ccdf8ad",
+          "runner": "factoryze-browser-public-v1",
+          "python": "3.13.18",
+          "checkTimeoutMs": 5000,
+          "runTimeoutMs": 60000
+        }
+      }
+    },
+    "memory_limit": {
+      "passed": true,
+      "result": {
+        "schema": 1,
+        "kind": "public_checks",
+        "jobId": "aaaaaaaaaaaaaaaaaaaaaaaa",
+        "attemptId": "bbbbbbbbbbbbbbbbbbbbbbbb",
+        "revision": 1,
+        "inputHash": "11359e23875c469fc33e0878fd9bdc8ee141b46e08222dbff33e7e477abf0831",
+        "status": "completed",
+        "trust": "practice",
+        "rewardEligible": false,
+        "passed": 0,
+        "total": 1,
+        "checks": [
+          {
+            "name": "tests/test_main.py::test_answer",
+            "passed": false,
+            "outcome": "memory_limit"
+          }
+        ],
+        "provenance": {
+          "executor": "docker",
+          "image": "sha256:7f36a9ff7bd392d95d44124709f6cff3244550eaa15c38ba87f3a7df9ccdf8ad",
+          "runner": "factoryze-browser-public-v1",
+          "python": "3.13.18",
+          "checkTimeoutMs": 5000,
+          "runTimeoutMs": 60000
+        }
+      }
+    },
+    "fresh_container_per_check": {
+      "passed": true,
+      "result": {
+        "schema": 1,
+        "kind": "public_checks",
+        "jobId": "aaaaaaaaaaaaaaaaaaaaaaaa",
+        "attemptId": "bbbbbbbbbbbbbbbbbbbbbbbb",
+        "revision": 1,
+        "inputHash": "b16b6675b48ed9121921a3f50c38ec0a0b7ac15ff9be2acebe4ac1aecdc5e921",
+        "status": "completed",
+        "trust": "practice",
+        "rewardEligible": false,
+        "passed": 2,
+        "total": 2,
+        "checks": [
+          {
+            "name": "tests/test_main.py::test_a",
+            "passed": true,
+            "outcome": "passed"
+          },
+          {
+            "name": "tests/test_main.py::test_b",
+            "passed": true,
+            "outcome": "passed"
+          }
+        ],
+        "provenance": {
+          "executor": "docker",
+          "image": "sha256:7f36a9ff7bd392d95d44124709f6cff3244550eaa15c38ba87f3a7df9ccdf8ad",
+          "runner": "factoryze-browser-public-v1",
+          "python": "3.13.18",
+          "checkTimeoutMs": 5000,
+          "runTimeoutMs": 60000
+        }
+      }
+    }
+  },
+  "cancellation": true,
+  "ownedContainersRemaining": 0,
+  "directExecutorContainersStarted": 14
+}

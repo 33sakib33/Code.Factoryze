@@ -1,0 +1,17 @@
+✔ Docker executor requires immutable Linux images and a local daemon, enforces isolation and cleans only its container (17.2537ms)
+✔ Docker executor fails closed when default seccomp or a local Linux engine is unavailable (1.0509ms)
+✔ isolated grader takes names only from trusted discovery, runs each check freshly and continues after a timeout (2.2317ms)
+✔ isolated grader refuses forged discovery, unsupported Python, malformed verdicts and infrastructure/cleanup failures (1.0909ms)
+✔ grading failures require instructor retry; v2 migration preserves snapshots and released CSV pins the grader image (99.7695ms)
+✔ a private join binding recovers a lost response without allowing another client to claim the identity (65.4045ms)
+✔ lab task delivery excludes hidden material; mirror sync is bounded, scoped, versioned and idempotent (63.1635ms)
+✔ submissions are immutable; closing auto-submits; grades remain private until instructor release (80.9163ms)
+✔ instructor session recovery preserves identity, budgets and snapshots; student events are untrusted flags (56.1329ms)
+ℹ tests 9
+ℹ suites 0
+ℹ pass 9
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 721.0181

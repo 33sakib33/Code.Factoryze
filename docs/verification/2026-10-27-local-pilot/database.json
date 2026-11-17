@@ -1,0 +1,16 @@
+{
+  "activePilotAdminCredentials": 0,
+  "activePilotSessionCredentials": 0,
+  "activeRequests": 0,
+  "budgetMicro": 100000,
+  "pilotRequestCount": 1,
+  "programPaused": true,
+  "readOnlyInspection": true,
+  "requestCostKind": "measured",
+  "requestCostMicro": 14,
+  "requestOutcome": "completed",
+  "requestState": "finished",
+  "reservedMicro": 0,
+  "spentMicro": 14,
+  "verifiedAtUtc": "2026-10-26T23:26:47.27118Z"
+}

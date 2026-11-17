@@ -1,0 +1,129 @@
+{
+  "date": "2026-10-27",
+  "timezone": "Asia/Dhaka",
+  "recordedAtUtc": "2026-10-26T23:30:30.242Z",
+  "state": "completed_paused_after_one_request",
+  "supersedes": "2026-10-27-local-pilot-preflight.json",
+  "scope": "Private local OpenRouter gateway smoke test using real SMTP OTP and native trial authentication. No public deployment or production UI/source change.",
+  "authorization": {
+    "ownerApprovedTotalUsd": 0.1,
+    "lightweightTest": true,
+    "administratorChosenByOwner": true,
+    "administratorAllowlistCount": 1
+  },
+  "source": {
+    "desktopImplementation": "980f21a9eb2984a13c88dff4aaa653ba2f14eb90",
+    "backendImplementation": "0cf0ede479b103b1d3ad19f90925825b4847f459",
+    "runtimeExecutable": "bin/factoryze-desktop-verification.exe",
+    "runtimeSha256": "2b9f6706749100e52f91777c8935afd2186c0870e9cecd8c042c41d53f3b9f71"
+  },
+  "configuration": {
+    "providerURL": "https://openrouter.ai/api/v1",
+    "bind": "127.0.0.1:8091",
+    "publicURL": "http://127.0.0.1:4321",
+    "credentialsFile": ".env",
+    "credentialsGitIgnored": true,
+    "providerKeyPrinted": false,
+    "sessionCredentialsPersisted": false,
+    "runtimeEnabled": true,
+    "programPausedAfterTest": true,
+    "programBudgetMicro": 100000,
+    "maxConcurrent": 1,
+    "requestsPerMinute": 5,
+    "model": {
+      "id": "openai/gpt-4.1-nano",
+      "upstream": "openai/gpt-4.1-nano",
+      "enabled": true,
+      "maxInputTokens": 32768,
+      "maxOutputTokens": 128,
+      "inputMicroPerMillion": 110000,
+      "cachedMicroPerMillion": 33000,
+      "outputMicroPerMillion": 440000,
+      "outputParameter": "max_tokens"
+    }
+  },
+  "verification": {
+    "providerKeyMetadataValid": true,
+    "providerCreditAvailable": true,
+    "administratorOtpVerified": true,
+    "nativeTrialOtpVerified": true,
+    "nativeCredentialsDeniedAtAdminEndpoint": true,
+    "targetedInvitationClaimed": true,
+    "streamCompleted": true,
+    "functionCalling": true,
+    "observedFunction": "pilot_result",
+    "observedArguments": {
+      "status": "ok",
+      "answer": 4
+    },
+    "usage": {
+      "input": 84,
+      "output": 10,
+      "cached": 0
+    },
+    "elapsedMs": 3806,
+    "gatewayHttpStatus": 200,
+    "gatewayRequestId": "6adfe0e6e8c499564118aa6a",
+    "requestOutcome": "completed",
+    "requestCostKind": "measured",
+    "reservationsReleased": true,
+    "activeRequests": 0,
+    "activePilotAdminCredentials": 0,
+    "activePilotSessionCredentials": 0,
+    "temporaryControlAndInspectorListenersClosed": true,
+    "desktopAppTested": false,
+    "client": "native HTTP pilot harness"
+  },
+  "spending": {
+    "modelRequests": 1,
+    "retries": 0,
+    "automaticFallback": false,
+    "approvedMaximumUsd": 0.1,
+    "reservationMicro": 3661,
+    "accountedMicro": 14,
+    "accountedUsd": 0.000014,
+    "remainingProgramAllowanceMicro": 99986,
+    "pricingPolicy": "Conservative maximum across published provider endpoints; actual provider cost recorded separately.",
+    "providerInvoiceCostIndependentlyVerified": false,
+    "note": "Measured token usage priced at the configured conservative allowance rates. The USD 0.000014 is the gateway ledger amount; a separate OpenRouter billed generation cost was not captured."
+  },
+  "smtp": {
+    "externalOtpRequests": 3,
+    "successfulVerifiedPurposes": [
+      "administrator",
+      "native_trial"
+    ],
+    "discardedInitialHelperChallengeRequests": 1,
+    "transport": "Existing certificate-verified STARTTLS SMTP; no mail library added.",
+    "codesPersistedInAudit": false
+  },
+  "databaseEvidence": {
+    "file": "2026-10-27-local-pilot-database.json",
+    "sha256": "e3ae5022f2e0b5981cadf34cc212a0c4a233e93b57dc460fb0c19af53843392f",
+    "readOnlyInspection": true
+  },
+  "publicModelMetadata": {
+    "source": "https://openrouter.ai/api/v1/models/openai/gpt-4.1-nano/endpoints",
+    "checkedAt": "2026-10-26T23:12:36.237Z",
+    "model": "openai/gpt-4.1-nano"
+  },
+  "helperCorrections": [
+    "Initial private runner exited when its input stream closed; replaced stdin waiting with a temporary authenticated loopback control endpoint and requested a fresh challenge after cooldown.",
+    "Corrected the private helper to read account.login and admin from the existing admin-me response. A local Node inspector patch retained the challenge; inspector was closed before OTP redemption. Production code and authentication were unchanged.",
+    "Backend restart first encountered the prior process log-file lock; used a separate live-server log and verified runtime readiness before the model call."
+  ],
+  "notPerformed": [
+    "Additional model calls or benchmarks",
+    "Public deployment",
+    "Frontend or desktop product-code/UI changes",
+    "Authentication bypass",
+    "Administrator or trial credentials in committed files",
+    "Merge or push",
+    "Fresh cross-OS/installed-desktop real-provider verification"
+  ],
+  "nextSteps": [
+    "Review results at the local admin console. Program remains paused after the single authorized smoke call.",
+    "For a desktop session, start .verification/start-desktop-pilot.ps1, sign in through Trial credits, and enable the capped program in admin when ready.",
+    "Broader coding checks, release review and public hosting remain separate work."
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "protocol": 1,
+  "lab": "lan-agent",
+  "submissions": [
+    {
+      "id": "a39e3329-3f79-482f-b8a7-252db0bbad13",
+      "number": 1,
+      "revision": 2,
+      "snapshotHash": "976a79c5216f70f29311e0262391a6fd06a923f92c29290a06538abc4faac899",
+      "submittedAt": "2026-11-01T03:17:01.821Z",
+      "state": "graded",
+      "released": true,
+      "studentId": "s001",
+      "provenance": {
+        "executor": "docker",
+        "image": "sha256:e79d20d59afa6a184267756ad3c87000efcb9ec031ad2471b853c5f6d9100e4d",
+        "runner": "factoryze-hidden-v1",
+        "python": "3.13.18",
+        "checkTimeoutMs": 10000,
+        "runTimeoutMs": 120000
+      }
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+diff --git a/lib/rebuild.js b/lib/rebuild.js
+index a954fccbb0494a6c4f9611128d80eceb9981604c..57f04b4199f885292a4292970eafba06462a363a 100644
+--- a/lib/rebuild.js
++++ b/lib/rebuild.js
+@@ -176,7 +176,7 @@ async function revertBrowserModules(browserModuleCache, modules) {
+ async function runElectronRebuild(modules, forceAbi, token) {
+     const todo = modules.join(',');
+     return new Promise(async (resolve, reject) => {
+-        let command = `npx --no-install electron-rebuild -f -w=${todo} -o=${todo}`;
++        let command = `pnpm exec electron-rebuild --force --which-module=${todo} --only=${todo}`;
+         if (forceAbi) {
+             command += ` --force-abi ${forceAbi}`;
+         }

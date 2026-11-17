@@ -1,0 +1,6 @@
+schema: 1
+taskId: dedupe-ids
+expert:
+  - "Inspect the ID deduplication function and its public test. Preserve the first occurrence and exact spelling of each ID. Make the smallest fix and run the tests."
+naive:
+  - "Fix the duplicate ID bug."

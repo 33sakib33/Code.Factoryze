@@ -1,0 +1,10 @@
+schema: 1
+id: dedupe-ids
+retired: true
+title: Stable customer IDs
+brief: >
+  A customer export sometimes changes the order of IDs when duplicates appear.
+  Keep the first occurrence of each ID in its original position.
+minimumPython: "3.11"
+timeHintMinutes: 30
+entryFile: app/dedupe.py

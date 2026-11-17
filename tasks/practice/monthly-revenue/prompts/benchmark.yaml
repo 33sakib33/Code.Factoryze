@@ -1,0 +1,8 @@
+schema: 1
+taskId: monthly-revenue
+expert:
+  - "In billing/promotions.py, applicable_promotions has a mutable default argument (found=[]), so promotions from earlier orders leak into later invoices in the monthly report. Give each call a fresh list without changing anything else, then run python -m unittest."
+naive:
+  - "The monthly revenue report is wrong. Fix it and run the tests."
+middle:
+  - "The monthly revenue report is too low and busier months are further off, but any single invoice prints correctly. Look for state that carries over from one invoice to the next, fix it, and run the tests."

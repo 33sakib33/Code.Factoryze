@@ -1,0 +1,16 @@
+node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+
+locator.waitFor: Timeout 180000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'Prompt for the agent' }) to be visible
+
+    at E:\Projects\Factoryze\Factoryze\Factoryze\packages\app\scripts\smoke-lab.mjs:58:84 {
+  log: [
+    "  - waiting for getByRole('textbox', { name: 'Prompt for the agent' }) to be visible"
+  ],
+  name: 'TimeoutError'
+}
+
+Node.js v24.22.1

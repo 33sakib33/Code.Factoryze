@@ -1,0 +1,17 @@
+✔ local grader runs hidden tests on a disposable copy without placing them in the student workspace (1068.9284ms)
+✔ local grader rejects missing hidden tests rather than reporting a perfect score (17.2979ms)
+✔ public checks report actionable failures and pass after the workspace is fixed without exposing hidden checks (730.7471ms)
+✔ hidden check timeouts fail by name and allow later checks to run (1615.6815ms)
+✔ public check timeouts return named failures and allow later checks to run (1678.0976ms)
+✔ the grading run limit reports every remaining check without executing it (2216.8738ms)
+✔ an import timeout or exited check cannot prevent other test files from running (1709.4142ms)
+✔ a check timeout stops its child processes before grading returns (2263.9578ms)
+✔ submission saves a report with a timed-out hidden check and retains it after restart (1623.1584ms)
+ℹ tests 9
+ℹ suites 0
+ℹ pass 9
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 13495.4832

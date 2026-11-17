@@ -1,0 +1,10 @@
+✔ Docker executor requires immutable Linux images and a local daemon, enforces isolation and cleans only its container (20.0273ms)
+✔ Docker executor fails closed when default seccomp or a local Linux engine is unavailable (1.0316ms)
+ℹ tests 2
+ℹ suites 0
+ℹ pass 2
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 287.6953

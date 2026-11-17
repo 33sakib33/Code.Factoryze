@@ -1,0 +1,40 @@
+
+> factoryze@ docker:build /Users/sakib/Projects/Factoryze/Factoryze/Factoryze
+> node packages/engine/scripts/build-grader.mjs
+
+#0 building with "desktop-linux" instance using docker driver
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 415B done
+#1 DONE 0.0s
+
+#2 [internal] load metadata for docker.io/library/python:3.13-slim-bookworm@sha256:281d39ff02e3b389401586134ff9e6572954687822a58055ec07a60ded4e0b7f
+#2 DONE 1.7s
+
+#3 [internal] load .dockerignore
+#3 transferring context: 102B 0.0s done
+#3 DONE 0.0s
+
+#4 [1/3] FROM docker.io/library/python:3.13-slim-bookworm@sha256:281d39ff02e3b389401586134ff9e6572954687822a58055ec07a60ded4e0b7f
+#4 DONE 0.0s
+
+#5 [internal] load build context
+#5 transferring context: 68B done
+#5 DONE 0.0s
+
+#6 [2/3] COPY --chmod=0555 runner.py /opt/factoryze/runner.py
+#6 CACHED
+
+#7 [3/3] WORKDIR /work
+#7 CACHED
+
+#8 exporting to image
+#8 exporting layers done
+#8 writing image sha256:e79d20d59afa6a184267756ad3c87000efcb9ec031ad2471b853c5f6d9100e4d done
+#8 naming to docker.io/library/factoryze-grader:1 done
+#8 DONE 0.0s
+
+View build details: docker-desktop://dashboard/build/desktop-linux/desktop-linux/atmx66d176rpu593vzheww7y8
+Built immutable grader image: sha256:e79d20d59afa6a184267756ad3c87000efcb9ec031ad2471b853c5f6d9100e4d
+Set FACTORYZE_LAB_GRADER_IMAGE to this ID before enabling grading.
+exit=0

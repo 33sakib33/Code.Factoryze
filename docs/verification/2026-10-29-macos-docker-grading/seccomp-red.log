@@ -1,0 +1,31 @@
+# Initial macOS run, before the Docker engine change (2026-10-29)
+$ docker info | grep -A3 'Security Options'
+ Security Options:
+  seccomp
+   Profile: unconfined
+  cgroupns
+
+$ pnpm docker:check
+{"date":"2026-10-29","passed":false,"realDockerChecks":false,"paidModelCalls":0,"realEmailsSent":0,"hostStudentCodeExecutions":0,"stage":"isolation-self-check","error":"Grading requires Linux containers with Docker default seccomp enabled.","containersStarted":0}
+exit=1
+
+# Confirmation that the daemon default applied no filter, while the builtin profile works
+$ docker run --rm --entrypoint sh <pinned python base> -c 'grep -E "Seccomp|NoNewPrivs" /proc/self/status'
+NoNewPrivs:	0
+Seccomp:	0
+Seccomp_filters:	0
+$ docker run --rm --security-opt seccomp=builtin --entrypoint sh factoryze-grader:1 -c 'grep Seccomp /proc/self/status'
+Seccomp:	2
+Seccomp_filters:	1
+
+# ~/.docker/daemon.json had no seccomp key; the unconfined default came from Docker Desktop 4.41.2.
+# With the owner's approval, "seccomp-profile": "builtin" was added to ~/.docker/daemon.json and Docker Desktop restarted.
+
+$ docker info | grep -A3 'Security Options'
+ Security Options:
+  seccomp
+   Profile: builtin
+  cgroupns
+$ docker run --rm --entrypoint sh factoryze-grader:1 -c 'grep Seccomp /proc/self/status'
+Seccomp:	2
+Seccomp_filters:	1

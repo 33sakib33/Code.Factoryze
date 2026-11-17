@@ -1,0 +1,43 @@
+{
+  "date": "2026-11-16",
+  "scope": "Web participant and administrator sign-in; desktop participant sign-in; administrator access remains web-only",
+  "localVerification": [
+    {
+      "check": "Go backend tests against an isolated local MongoDB replica set, including the same-email web/admin/desktop session matrix",
+      "result": "passed",
+      "command": "MONGO_TEST_URI=<isolated replica set> go test -count=1 ./..."
+    },
+    {
+      "check": "Go vet",
+      "result": "passed",
+      "command": "go vet ./..."
+    },
+    {
+      "check": "Web participant/admin browser flows with local TLS SMTP and synthetic model fixtures",
+      "result": "13 passed",
+      "command": "playwright test tests/trial-email.spec.ts tests/admin.spec.ts"
+    },
+    {
+      "check": "Frontend static build",
+      "result": "passed",
+      "command": "astro build"
+    },
+    {
+      "check": "Desktop unit suite and typecheck with OpenSSL 3 and modern Python on PATH",
+      "result": "275 passed; typecheck passed",
+      "command": "pnpm test && pnpm typecheck"
+    },
+    {
+      "check": "Rebuilt macOS arm64 package directory and DMG, package verification, and packaged Electron trial smoke",
+      "result": "passed",
+      "localDmgSha256": "24ae8bdbfd81acd6cca7bb447bb802bbbbe0d50ab802a1261bee836207c951ce",
+      "details": "Synthetic SMTP/model only; wrong code rejected; OTP sign-in, invitation, model request, local approvals, restart, BYOK preservation, sign-out, and admin denial verified. No real email or paid model call."
+    }
+  ],
+  "releaseGatesStillOpen": [
+    "Independent human review of authentication and key handling before merge, as required by base/AGENTS.md",
+    "Fresh installed authentication smoke on Windows and Linux and downloaded-installer checks on all supported platforms",
+    "Release CI must build and test this change with the repository-pinned Node 22; the local macOS DMG used installed Node 24",
+    "Production HTTPS origin, SMTP delivery, MongoDB, allowlist, and secret configuration and real-host verification before deployment"
+  ]
+}

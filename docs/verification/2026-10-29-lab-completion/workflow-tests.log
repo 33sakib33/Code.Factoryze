@@ -1,0 +1,16 @@
+✔ lab task delivery excludes hidden material; mirror sync is bounded, scoped, versioned and idempotent (141.98ms)
+✔ submissions are immutable; closing auto-submits; grades remain private until instructor release (103.5363ms)
+✔ instructor session recovery preserves identity, budgets and snapshots; student events are untrusted flags (56.4888ms)
+✔ lab joins are roster-bound, versioned, scoped and do not disclose operator secrets (63.8344ms)
+✔ trusted server metering survives reconnect/restart and cannot reset or cross student/lab budgets (70.3309ms)
+✔ closing or expiring a lab stops joins and requests while preserving readable usage (54.9845ms)
+✔ incomplete requests fail closed, immutable pins and duplicate labs are rejected (48.6021ms)
+✔ queued requests recheck budget and closure before dispatch; invalid usage cannot become complete (51.4736ms)
+ℹ tests 8
+ℹ suites 0
+ℹ pass 8
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 785.7797

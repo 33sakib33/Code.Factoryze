@@ -1,0 +1,28 @@
+(node:19668) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///E:/Projects/Factoryze/Factoryze/Factoryze/packages/app/extensions/core/test/lab-connection.test.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to \\?\E:\Projects\Factoryze\Factoryze\Factoryze\packages\app\extensions\core\package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✖ desktop lab connection stores tokens only in credentials, resumes safely and retains concurrent offline work/events (694.9702ms)
+ℹ tests 1
+ℹ suites 0
+ℹ pass 0
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1127.2555
+
+✖ failing tests:
+
+test at packages\app\extensions\core\test\lab-connection.test.ts:12:1
+✖ desktop lab connection stores tokens only in credentials, resumes safely and retains concurrent offline work/events (694.9702ms)
+  Error: Offline after save
+      at resumedClient.request (file:///E:/Projects/Factoryze/Factoryze/Factoryze/packages/app/extensions/core/test/lab-connection.test.ts:47:46)
+      at LabClient.student (file:///E:/Projects/Factoryze/Factoryze/Factoryze/packages/engine/src/lab-client.ts:46:93)
+      at LabConnectionStore.refresh (file:///E:/Projects/Factoryze/Factoryze/Factoryze/packages/app/extensions/core/src/node/lab-connection.ts:89:77)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async file:///E:/Projects/Factoryze/Factoryze/Factoryze/packages/app/extensions/core/src/node/lab-connection.ts:117:87
+      at async LabConnectionStore.exclusive (file:///E:/Projects/Factoryze/Factoryze/Factoryze/packages/app/extensions/core/src/node/lab-connection.ts:102:16)
+      at async TestContext.<anonymous> (file:///E:/Projects/Factoryze/Factoryze/Factoryze/packages/app/extensions/core/test/lab-connection.test.ts:48:17)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3)

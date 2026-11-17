@@ -1,0 +1,22 @@
+(node:13256) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///E:/Projects/Factoryze/Factoryze/Factoryze/packages/app/extensions/core/test/lab-agent.test.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to \\?\E:\Projects\Factoryze\Factoryze\Factoryze\packages\app\extensions\core\package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ real desktop backend uses the server brain and existing approved hands without loading BYOK settings (2678.8491ms)
+(node:7456) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///E:/Projects/Factoryze/Factoryze/Factoryze/packages/app/extensions/core/test/lab-connection.test.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to \\?\E:\Projects\Factoryze\Factoryze\Factoryze\packages\app\extensions\core\package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ desktop lab connection stores tokens only in credentials, resumes safely and retains concurrent offline work/events (1588.5437ms)
+✔ a private join binding recovers a lost response without allowing another client to claim the identity (102.5668ms)
+✔ lab task delivery excludes hidden material; mirror sync is bounded, scoped, versioned and idempotent (78.8667ms)
+✔ submissions are immutable; closing auto-submits; grades remain private until instructor release (104.9427ms)
+✔ instructor session recovery preserves identity, budgets and snapshots; student events are untrusted flags (56.9915ms)
+ℹ tests 6
+ℹ suites 0
+ℹ pass 6
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 4597.2489

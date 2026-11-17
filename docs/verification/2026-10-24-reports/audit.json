@@ -1,0 +1,28 @@
+{
+  "passed": true,
+  "markdownFiles": 7,
+  "localLinks": 68,
+  "anchors": 25,
+  "receiptConsistency": true,
+  "errors": [],
+  "sha256": {
+    "packages/protocol/src/index.ts": "634f211b768d25a04120adab378556a77a7a6db7795b1edf5d31267dc61087fa",
+    "packages/engine/package.json": "55455848eb6f7247d98ffb0eb9f006c5ae799159d6c8cc621edd4cc16b8ef11e",
+    "packages/engine/src/report-insights.ts": "3ed89e0f4a1152d0593a8895652b3debe1ccc02165cd3b01a4f84973697bb616",
+    "packages/engine/src/usage-store.ts": "25df085d378eec20f9fe860e23af6f8da338b48757ad8788885bb14868771140",
+    "packages/engine/src/solo.ts": "7e8a2a7d9b6113898b54066ade5022fc3c826a4845a5e78a7d6cac9a6ad5b090",
+    "packages/engine/test/report-insights.test.ts": "3cecc3bd896d9a4562059622ff540f63e866af6cbfae8bca4c62090d62d87aa1",
+    "packages/protocol/test/contracts.test.ts": "32f269a0237dbfab5901a5f1252e44a3c5fd9c70e7cf2f49caeb05d9edef2f94",
+    "packages/app/scripts/smoke-solo.mjs": "65a3f9c9f99a05602642a6da9ee41e921a55d125f12a2cde9a66ae4d7ff72fe8",
+    "packages/app/extensions/core/src/browser/factoryze-report-widget.ts": "089f40b84eae3e9a5158fa182604001dd86aeae8238c02ca2a011bbb0e79f779",
+    "packages/app/extensions/core/src/browser/factoryze-solo-contribution.ts": "1c20d357f074c695c79936bf855e0b52ddd71d5f6d46272626925b7941754f35",
+    "packages/app/extensions/core/src/browser/report-learning.ts": "1f32dd28a39e827bb01508bd595a0b9f94335fb58da6a676328961aa2478135e",
+    "packages/app/extensions/core/src/browser/report-learning-section.ts": "26ba073ba23f38ebdbbbb5b5529d22823527b4bb80b1c88324f7e682ecf61bc5",
+    "packages/app/extensions/core/src/browser/style/factoryze.css": "ba86626cc37ab07897177c8a22f183c2fec1405102d6bd9c23c07d29936ef20b",
+    "packages/app/extensions/core/test/report-learning.test.ts": "5aaa810cb2f31fae473058d2166cc1aa14e285719056874df2f55deb6f8cf853",
+    "mockups/report-preview.ts": "4f56de0868887bcfc87ab6d1ce8ae879c6897c5fa240dcb4d9673580b343458a",
+    "mockups/build-report.mjs": "d2ba5a0c1824dfb02a9fed06eae51aff7ae3d4627b17cc66445a6b37f08b9015",
+    "mockups/check-report.mjs": "6a34bcce216488042de1cb02b6897cb158bd1d84230fa353b7cd520b195d26d9",
+    "mockups/report.html": "59105e5a7a923f43937c8c34e19ff25876511733a8ac70709907e59809046dcd"
+  }
+}

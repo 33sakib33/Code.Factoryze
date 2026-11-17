@@ -1,0 +1,6 @@
+
+> factoryze@ typecheck E:\Projects\Factoryze\Factoryze\Factoryze
+> tsc --noEmit
+
+packages/engine/src/lab-runtime.ts(30,9): error TS7023: 'start' implicitly has return type 'any' because it does not have a return type annotation and is referenced directly or indirectly in one of its return expressions.
+ ELIFECYCLE  Command failed with exit code 2.

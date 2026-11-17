@@ -1,0 +1,23 @@
+{
+  "platform": "win32",
+  "arch": "x64",
+  "version": "0.0.1",
+  "electron": "42.8.1",
+  "signed": false,
+  "installer": {
+    "path": "dist/Factoryze Setup 0.0.1.exe",
+    "bytes": 174308968,
+    "builtAtUtc": "2026-10-24T00:56:36.712556+00:00",
+    "sha256": "b9fc97c6c1ec29ada0d16713085d4f7289a3ed00942018369c1c5679722af974"
+  },
+  "appAsar": {
+    "path": "dist/win-unpacked/resources/app.asar",
+    "bytes": 407395868,
+    "sha256": "17a65d15def3e400e339e5d1865f653ff4636330a9917238d6129cffab1b4015"
+  },
+  "buildLog": "app-build.log",
+  "packageLog": "package.log",
+  "resourceVerificationLog": "verify-package.log",
+  "sourceHashes": "audit.json",
+  "note": "Built from the uncommitted local working tree. Release approval remains open; see checks.json. Generated installer and unpacked app remain in ignored dist/."
+}

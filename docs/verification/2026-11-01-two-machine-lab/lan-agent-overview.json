@@ -1,0 +1,66 @@
+{
+  "protocol": 1,
+  "config": {
+    "schema": 1,
+    "lab": "lan-agent",
+    "task": "library-fines",
+    "timeLimitMinutes": 480,
+    "agent": {
+      "profile": "factoryze@0.1.0",
+      "model": "deepseek/deepseek-v4.1-flash-1017",
+      "permissions": {
+        "edit": "ask",
+        "shell": "ask"
+      }
+    },
+    "budget": {
+      "limit": 100000,
+      "weights": {
+        "input": 1,
+        "output": 1,
+        "cacheRead": 0.1,
+        "cacheWrite": 1
+      }
+    }
+  },
+  "providerHost": "openrouter.ai",
+  "temperature": 0,
+  "createdAt": "2026-11-01T03:00:55.670Z",
+  "closesAt": "2026-11-01T11:00:55.670Z",
+  "closedAt": "2026-11-01T03:19:48.552Z",
+  "students": [
+    {
+      "studentId": "s001",
+      "joined": true,
+      "usage": {
+        "scope": {
+          "taskId": "library-fines",
+          "profile": "factoryze@0.1.0",
+          "model": "deepseek/deepseek-v4.1-flash-1017"
+        },
+        "raw": {
+          "input": 107190,
+          "output": 22271,
+          "cacheRead": 79702,
+          "cacheWrite": 0
+        },
+        "weighted": 57729.2,
+        "budgetLimit": 100000,
+        "remaining": 42270.8,
+        "requests": 32,
+        "incompleteRequests": 0,
+        "status": "ready"
+      }
+    },
+    {
+      "studentId": "s002",
+      "joined": false,
+      "usage": null
+    },
+    {
+      "studentId": "s003",
+      "joined": false,
+      "usage": null
+    }
+  ]
+}

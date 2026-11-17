@@ -1,0 +1,30 @@
+
+> factoryze@ build:app E:\Projects\Factoryze\Factoryze\Factoryze
+> pnpm --filter @factoryze/app-core build && pnpm --filter @factoryze/app build
+
+
+> @factoryze/app-core@0.0.1 build E:\Projects\Factoryze\Factoryze\Factoryze\packages\app\extensions\core
+> tsc -p tsconfig.json
+
+
+> @factoryze/app@0.0.1 build E:\Projects\Factoryze\Factoryze\Factoryze\packages\app
+> install-electron && theia rebuild:electron --cacheRoot ../.. && theia build --mode development
+
+native node modules are already rebuilt for electron
+Found cached ffmpeg library.
+Hashes are equal, not replacing the ffmpeg library.
+"E:\Projects\Factoryze\Factoryze\Factoryze\node_modules\.pnpm\electron@42.8.1\node_modules\electron\dist\ffmpeg.dll" does not contain proprietary codecs (13 found).
+Could not resolve optional peer dependency '@types/react'. Skipping...
+Could not resolve optional peer dependency '@types/react-dom'. Skipping...
+[build/browser] Build started
+
+[build/browser] Finished with 0 errors in 19630ms.
+
+[build/node] Build started
+
+[build/node] Finished with 0 errors in 17754ms.
+
+[build/electron] Build started
+
+[build/electron] Finished with 0 errors in 235ms.
+

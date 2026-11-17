@@ -1,0 +1,62 @@
+{
+  "verifiedAt": "2026-11-07T05:09:43.988202+00:00",
+  "scope": "D4 private one-shot browser public-check worker; Go/browser integration pending",
+  "platform": "macOS arm64 with local Docker Linux arm64 engine",
+  "toolchain": {
+    "node": "22.22.0",
+    "pnpm": "10.28.2",
+    "pythonHost": "3.12",
+    "openssl": "3.6.3",
+    "pythonContainer": "3.13.18"
+  },
+  "deterministic": {
+    "tests": 257,
+    "pass": 257,
+    "fail": 0,
+    "cancelled": 0,
+    "skipped": 0,
+    "newWorkerCases": 10,
+    "command": "pnpm test",
+    "durationMs": 11726.2845
+  },
+  "typecheck": {
+    "command": "pnpm typecheck",
+    "passed": true
+  },
+  "realDocker": {
+    "executorReceipt": "executor-real-checks.json",
+    "workerReceipt": "worker-real-checks.json",
+    "passed": true,
+    "ownedContainersRemaining": 0
+  },
+  "initialAttempt": {
+    "passed": false,
+    "stopped": true,
+    "issues": [
+      "Host OpenSSL 3 path was not configured; rerun with FACTORYZE_OPENSSL.",
+      "Existing packaging test expected an obsolete error message; updated its assertion to the actual missing active-task error."
+    ]
+  },
+  "hostStudentCodeExecutions": 0,
+  "paidModelCalls": 0,
+  "externalEmailsSent": 0,
+  "xpGranted": 0,
+  "publicAPIConnected": false,
+  "deployed": false,
+  "merged": false,
+  "limitations": [
+    "No Go job admission, durable queue, authenticated worker leases, ownership/rate/global concurrency gates or browser Run checks integration.",
+    "Practice feedback only; shared student/test interpreter is not tamper-resistant grading.",
+    "No public hostile-multitenant security or cross-platform release claim.",
+    "New Windows and Linux worker verification and human security/contract review remain open."
+  ],
+  "sourceSHA256": {
+    "packages/protocol/src/browser-checks.ts": "2a048f14dc022f6badac0d346b3489c4d70f0cfdd91353ca9d2fbc7941dfa7c7",
+    "packages/engine/src/browser-checks.ts": "8796afea436e7134850b743d25b9f816a60a336ef085e801e2fde00e46a6bb9a",
+    "packages/engine/src/browser-check-input.ts": "2a13a5b927cd8036e39816983a608b3d777a87564ae5823fb44d79d1a2fbd264",
+    "packages/engine/test/browser-checks.test.ts": "05856cc17508e133481c61c710512d6a52e70ed3714ecbb3d1204eeb5dd114d1",
+    "packages/server/scripts/browser-check-worker.mjs": "cf521fbb14f443773999597f00053dae3476dd87c4d50375e47a449c6e0e1c25",
+    "packages/engine/scripts/check-browser-worker.mjs": "80541d3e33a769a8c025b378a355ce6e9ff3f1dbc36663e076725270757e7b03",
+    "packages/app/extensions/core/test/package-tasks.test.mjs": "34b721519fe60cd49acada3b1685fe8d8463923d6b7b6fecf124cd2ab5b707c3"
+  }
+}

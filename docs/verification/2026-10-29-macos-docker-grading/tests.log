@@ -1,0 +1,1536 @@
+
+> factoryze@ test /Users/sakib/Projects/Factoryze/Factoryze/Factoryze
+> node --experimental-strip-types --test
+
+TAP version 13
+# (node:45592) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///Users/sakib/Projects/Factoryze/Factoryze/Factoryze/packages/app/extensions/core/test/agent-backend-service.test.ts is not specified and it doesn't parse as CommonJS.
+# Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+# To eliminate this warning, add "type": "module" to /Users/sakib/Projects/Factoryze/Factoryze/Factoryze/packages/app/extensions/core/package.json.
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# (node:45592) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+# Subtest: a temperature refusal is actionable, never retried, and a cleared setting recovers with metering
+ok 1 - a temperature refusal is actionable, never retried, and a cleared setting recovers with metering
+  ---
+  duration_ms: 192.729875
+  type: 'test'
+  ...
+# Subtest: app backend uses the task gateway, publishes usage and preserves exhaustion when New session is clicked
+ok 2 - app backend uses the task gateway, publishes usage and preserves exhaustion when New session is clicked
+  ---
+  duration_ms: 74.093208
+  type: 'test'
+  ...
+# Subtest: Stop interrupts an active prompt without recording a completed turn
+ok 3 - Stop interrupts an active prompt without recording a completed turn
+  ---
+  duration_ms: 32.269791
+  type: 'test'
+  ...
+# Subtest: Stop during settings loading cannot launch a late OpenCode process
+ok 4 - Stop during settings loading cannot launch a late OpenCode process
+  ---
+  duration_ms: 2.191667
+  type: 'test'
+  ...
+# Subtest: Factoryze backend needs no OpenCode process and releases its gateway after provider rejection
+ok 5 - Factoryze backend needs no OpenCode process and releases its gateway after provider rejection
+  ---
+  duration_ms: 29.532125
+  type: 'test'
+  ...
+# (node:45593) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///Users/sakib/Projects/Factoryze/Factoryze/Factoryze/packages/app/extensions/core/test/agent-configuration.test.ts is not specified and it doesn't parse as CommonJS.
+# Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+# To eliminate this warning, add "type": "module" to /Users/sakib/Projects/Factoryze/Factoryze/Factoryze/packages/app/extensions/core/package.json.
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: a task without a model offers setup and becomes ready after settings are saved
+ok 6 - a task without a model offers setup and becomes ready after settings are saved
+  ---
+  duration_ms: 0.493167
+  type: 'test'
+  ...
+# Subtest: a settings lookup failure is distinguishable from missing settings and can be retried
+ok 7 - a settings lookup failure is distinguishable from missing settings and can be retried
+  ---
+  duration_ms: 0.105917
+  type: 'test'
+  ...
+# Subtest: a stale startup lookup cannot disable chat after a successful settings refresh
+ok 8 - a stale startup lookup cannot disable chat after a successful settings refresh
+  ---
+  duration_ms: 0.101083
+  type: 'test'
+  ...
+# Subtest: clearing settings wins over an older ready result
+ok 9 - clearing settings wins over an older ready result
+  ---
+  duration_ms: 0.139
+  type: 'test'
+  ...
+# (node:45594) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///Users/sakib/Projects/Factoryze/Factoryze/Factoryze/packages/app/extensions/core/test/agent-error.test.ts is not specified and it doesn't parse as CommonJS.
+# Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+# To eliminate this warning, add "type": "module" to /Users/sakib/Projects/Factoryze/Factoryze/Factoryze/packages/app/extensions/core/package.json.
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: agent errors distinguish task budgets, provider credits and unavailable models without displaying diagnostic JSON
+ok 10 - agent errors distinguish task budgets, provider credits and unavailable models without displaying diagnostic JSON
+  ---
+  duration_ms: 42.550916
+  type: 'test'
+  ...
+# (node:45595) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///Users/sakib/Projects/Factoryze/Factoryze/Factoryze/packages/app/extensions/core/test/agent-tab-icon.test.ts is not specified and it doesn't parse as CommonJS.
+# Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+# To eliminate this warning, add "type": "module" to /Users/sakib/Projects/Factoryze/Factoryze/Factoryze/packages/app/extensions/core/package.json.
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: the Agent view has a chat icon in the right sidebar navigation
+ok 11 - the Agent view has a chat icon in the right sidebar navigation
+  ---
+  duration_ms: 2.034375
+  type: 'test'
+  ...
+# (node:45596) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///Users/sakib/Projects/Factoryze/Factoryze/Factoryze/packages/app/extensions/core/test/appearance.test.ts is not specified and it doesn't parse as CommonJS.
+# Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+# To eliminate this warning, add "type": "module" to /Users/sakib/Projects/Factoryze/Factoryze/Factoryze/packages/app/extensions/core/package.json.
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: appearance defaults to matching the system and maps each mode to a Theia theme
+ok 12 - appearance defaults to matching the system and maps each mode to a Theia theme
+  ---
+  duration_ms: 0.47775
+  type: 'test'
+  ...
+# (node:45597) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///Users/sakib/Projects/Factoryze/Factoryze/Factoryze/packages/app/extensions/core/test/benchmark-cli.test.ts is not specified and it doesn't parse as CommonJS.
+# Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+# To eliminate this warning, add "type": "module" to /Users/sakib/Projects/Factoryze/Factoryze/Factoryze/packages/app/extensions/core/package.json.
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: benchmark command explains its required profile and task without starting a run
+ok 13 - benchmark command explains its required profile and task without starting a run
+  ---
+  duration_ms: 649.878666
+  type: 'test'
+  ...
+# (node:45598) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///Users/sakib/Projects/Factoryze/Factoryze/Factoryze/packages/app/extensions/core/test/flow-model.test.ts is not specified and it doesn't parse as CommonJS.
+# Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+# To eliminate this warning, add "type": "module" to /Users/sakib/Projects/Factoryze/Factoryze/Factoryze/packages/app/extensions/core/package.json.
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: hidden check names read as sentences
+ok 14 - hidden check names read as sentences
+  ---
+  duration_ms: 0.790958
+  type: 'test'
+  ...
+# Subtest: times read relative to now, then as dates
+ok 15 - times read relative to now, then as dates
+  ---
+  duration_ms: 14.731375
+  type: 'test'
+  ...
+# Subtest: Continue shows the three most recently used attempts
+ok 16 - Continue shows the three most recently used attempts
+  ---
+  duration_ms: 1.054291
+  type: 'test'
+  ...
+# Subtest: Continue can reveal every older attempt, including unsubmitted retired work
+ok 17 - Continue can reveal every older attempt, including unsubmitted retired work
+  ---
+  duration_ms: 0.108625
+  type: 'test'
+  ...
+# Subtest: each task shows its open attempt, then its best result, then that it has not been tried
+ok 18 - each task shows its open attempt, then its best result, then that it has not been tried
+  ---
+  duration_ms: 0.212042
+  type: 'test'
+  ...
+# Subtest: attempt label names the task and attempt without punctuation tricks
+ok 19 - attempt label names the task and attempt without punctuation tricks
+  ---
+  duration_ms: 0.058625
+  type: 'test'
+  ...
+# Subtest: tool paths are shown relative to the attempt folder
+ok 20 - tool paths are shown relative to the attempt folder
+  ---
+  duration_ms: 0.1945
+  type: 'test'
+  ...
+# Subtest: unified diff keeps two lines of context around each change
+ok 21 - unified diff keeps two lines of context around each change
+  ---
+  duration_ms: 0.256084
+  type: 'test'
+  ...
+# Subtest: tool rows read as plain actions, in progress or done
+ok 22 - tool rows read as plain actions, in progress or done
+  ---
+  duration_ms: 0.547875
+  type: 'test'
+  ...
+# Subtest: submission times read naturally in a sentence
+ok 23 - submission times read naturally in a sentence
+  ---
+  duration_ms: 1.464083
+  type: 'test'
+  ...
+# (node:45600) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///Users/sakib/Projects/Factoryze/Factoryze/Factoryze/packages/app/extensions/core/test/harness-tools.test.ts is not specified and it doesn't parse as CommonJS.
+# Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+# To eliminate this warning, add "type": "module" to /Users/sakib/Projects/Factoryze/Factoryze/Factoryze/packages/app/extensions/core/package.json.
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: Windows shells retain OS module/cache locations without inheriting provider keys or another PowerShell module path
+ok 24 - Windows shells retain OS module/cache locations without inheriting provider keys or another PowerShell module path
+  ---
+  duration_ms: 1.848083
+  type: 'test'
+  ...
+# Subtest: harness tools scope reads/searches to the workspace and require a reviewed diff for edits
+ok 25 - harness tools scope reads/searches to the workspace and require a reviewed diff for edits
+  ---
+  duration_ms: 107.773375
+  type: 'test'
+  ...
+# Subtest: shell denial never launches a command, approvals cannot overwrite edits made while reviewing
+ok 26 - shell denial never launches a command, approvals cannot overwrite edits made while reviewing
+  ---
+  duration_ms: 9.598458
+  type: 'test'
+  ...
+# Subtest: approved shell runs with the task package index and without provider environment credentials
+ok 27 - approved shell runs with the task package index and without provider environment credentials
+  ---
+  duration_ms: 20.571583
+  type: 'test'
+  ...
+# Subtest: Stop while waiting for approval cancels without a write even if approval arrives later
+ok 28 - Stop while waiting for approval cancels without a write even if approval arrives later
+  ---
+  duration_ms: 4.868708
+  type: 'test'
+  ...
+# (node:45601) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///Users/sakib/Projects/Factoryze/Factoryze/Factoryze/packages/app/extensions/core/test/lab-agent.test.ts is not specified and it doesn't parse as CommonJS.
+# Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+# To eliminate this warning, add "type": "module" to /Users/sakib/Projects/Factoryze/Factoryze/Factoryze/packages/app/extensions/core/package.json.
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# (node:45601) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+# Subtest: real desktop backend uses the server brain and existing approved hands without loading BYOK settings
+ok 29 - real desktop backend uses the server brain and existing approved hands without loading BYOK settings
+  ---
+  duration_ms: 1202.946291
+  type: 'test'
+  ...
+# (node:45602) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///Users/sakib/Projects/Factoryze/Factoryze/Factoryze/packages/app/extensions/core/test/lab-connection.test.ts is not specified and it doesn't parse as CommonJS.
+# Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+# To eliminate this warning, add "type": "module" to /Users/sakib/Projects/Factoryze/Factoryze/Factoryze/packages/app/extensions/core/package.json.
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# (node:45602) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+# Subtest: desktop lab connection stores tokens only in credentials, resumes safely and retains concurrent offline work/events
+ok 30 - desktop lab connection stores tokens only in credentials, resumes safely and retains concurrent offline work/events
+  ---
+  duration_ms: 908.256042
+  type: 'test'
+  ...
+# (node:45603) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///Users/sakib/Projects/Factoryze/Factoryze/Factoryze/packages/app/extensions/core/test/model-settings.test.ts is not specified and it doesn't parse as CommonJS.
+# Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+# To eliminate this warning, add "type": "module" to /Users/sakib/Projects/Factoryze/Factoryze/Factoryze/packages/app/extensions/core/package.json.
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# (node:45603) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+# Subtest: unavailable Linux Secret Service gives safe recovery guidance for reads, writes and deletes
+ok 31 - unavailable Linux Secret Service gives safe recovery guidance for reads, writes and deletes
+  ---
+  duration_ms: 4.746375
+  type: 'test'
+  ...
+# Subtest: temperature persists, reaches the engine and can be cleared without replacing credentials
+ok 32 - temperature persists, reaches the engine and can be cleared without replacing credentials
+  ---
+  duration_ms: 1.339625
+  type: 'test'
+  ...
+# Subtest: environment temperature is validated and visible without keychain access
+ok 33 - environment temperature is validated and visible without keychain access
+  ---
+  duration_ms: 0.260875
+  type: 'test'
+  ...
+# Subtest: model settings keep the key in the credential store and return only redacted settings
+ok 34 - model settings keep the key in the credential store and return only redacted settings
+  ---
+  duration_ms: 1.067833
+  type: 'test'
+  ...
+# Subtest: model settings reject unsafe provider URLs and invalid capacities before saving
+ok 35 - model settings reject unsafe provider URLs and invalid capacities before saving
+  ---
+  duration_ms: 0.376959
+  type: 'test'
+  ...
+# Subtest: judge and scoring remain opt-in and selected judge settings reach only the engine
+ok 36 - judge and scoring remain opt-in and selected judge settings reach only the engine
+  ---
+  duration_ms: 0.4475
+  type: 'test'
+  ...
+# Subtest: explicit backend provider configuration works without accessing the desktop keychain
+ok 37 - explicit backend provider configuration works without accessing the desktop keychain
+  ---
+  duration_ms: 0.144958
+  type: 'test'
+  ...
+# Subtest: isolated credential accounts do not read, overwrite or delete the normal desktop setup
+ok 38 - isolated credential accounts do not read, overwrite or delete the normal desktop setup
+  ---
+  duration_ms: 0.687584
+  type: 'test'
+  ...
+# Subtest: OpenRouter saves and legacy reads select Chat Completions without replacing the saved key
+ok 39 - OpenRouter saves and legacy reads select Chat Completions without replacing the saved key
+  ---
+  duration_ms: 0.705292
+  type: 'test'
+  ...
+# Subtest: pasting an OpenRouter completion endpoint repairs the base URL on save and legacy load without losing credentials
+ok 40 - pasting an OpenRouter completion endpoint repairs the base URL on save and legacy load without losing credentials
+  ---
+  duration_ms: 2.844875
+  type: 'test'
+  ...
+# Subtest: Factoryze is explicitly selected, survives keychain reload and retains the existing provider key
+ok 41 - Factoryze is explicitly selected, survives keychain reload and retains the existing provider key
+  ---
+  duration_ms: 0.633084
+  type: 'test'
+  ...
+# Subtest: legacy OpenCode settings migrate to Factoryze without losing the provider key or budget
+ok 42 - legacy OpenCode settings migrate to Factoryze without losing the provider key or budget
+  ---
+  duration_ms: 1.656625
+  type: 'test'
+  ...
+# Subtest: packaged task verification accepts the promoted catalog without requiring OpenCode baselines
+ok 43 - packaged task verification accepts the promoted catalog without requiring OpenCode baselines
+  ---
+  duration_ms: 21.791667
+  type: 'test'
+  ...
+# Subtest: packaged task verification requires the retired graders and both visible tasks
+ok 44 - packaged task verification requires the retired graders and both visible tasks
+  ---
+  duration_ms: 250.5365
+  type: 'test'
+  ...
+# (node:45609) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///Users/sakib/Projects/Factoryze/Factoryze/Factoryze/packages/app/extensions/core/test/practice-report-copy.test.ts is not specified and it doesn't parse as CommonJS.
+# Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+# To eliminate this warning, add "type": "module" to /Users/sakib/Projects/Factoryze/Factoryze/Factoryze/packages/app/extensions/core/package.json.
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: report copy shows measured turns and separate expert token and turn ratios
+ok 45 - report copy shows measured turns and separate expert token and turn ratios
+  ---
+  duration_ms: 0.917
+  type: 'test'
+  ...
+# Subtest: report copy explains missing and invalid comparisons without inventing a score
+ok 46 - report copy explains missing and invalid comparisons without inventing a score
+  ---
+  duration_ms: 0.136292
+  type: 'test'
+  ...
+# (node:45612) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///Users/sakib/Projects/Factoryze/Factoryze/Factoryze/packages/app/extensions/core/test/prompt-history.test.ts is not specified and it doesn't parse as CommonJS.
+# Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+# To eliminate this warning, add "type": "module" to /Users/sakib/Projects/Factoryze/Factoryze/Factoryze/packages/app/extensions/core/package.json.
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: prompt text is kept locally by prompt ID and long prompts are shortened
+ok 47 - prompt text is kept locally by prompt ID and long prompts are shortened
+  ---
+  duration_ms: 0.524625
+  type: 'test'
+  ...
+# (node:45613) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///Users/sakib/Projects/Factoryze/Factoryze/Factoryze/packages/app/extensions/core/test/report-learning.test.ts is not specified and it doesn't parse as CommonJS.
+# Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+# To eliminate this warning, add "type": "module" to /Users/sakib/Projects/Factoryze/Factoryze/Factoryze/packages/app/extensions/core/package.json.
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: report analysis separates measured tokens without generating suggestions or prompt scores
+ok 48 - report analysis separates measured tokens without generating suggestions or prompt scores
+  ---
+  duration_ms: 0.938875
+  type: 'test'
+  ...
+# Subtest: legacy prompt costs stay unknown while snapshotted zero and positive costs remain explicit
+ok 49 - legacy prompt costs stay unknown while snapshotted zero and positive costs remain explicit
+  ---
+  duration_ms: 0.26875
+  type: 'test'
+  ...
+# Subtest: partial accounting and unavailable history remain visible without suggestions
+ok 50 - partial accounting and unavailable history remain visible without suggestions
+  ---
+  duration_ms: 0.118333
+  type: 'test'
+  ...
+# Subtest: manual attempts show no model usage and never claim commands prove tests ran
+ok 51 - manual attempts show no model usage and never claim commands prove tests ran
+  ---
+  duration_ms: 0.090708
+  type: 'test'
+  ...
+# Subtest: summary facts retain saved usage, multiple models and missing legacy data without invented zeroes
+ok 52 - summary facts retain saved usage, multiple models and missing legacy data without invented zeroes
+  ---
+  duration_ms: 0.349375
+  type: 'test'
+  ...
+# (node:45614) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///Users/sakib/Projects/Factoryze/Factoryze/Factoryze/packages/app/extensions/core/test/solo-launch.test.ts is not specified and it doesn't parse as CommonJS.
+# Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+# To eliminate this warning, add "type": "module" to /Users/sakib/Projects/Factoryze/Factoryze/Factoryze/packages/app/extensions/core/package.json.
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: only a recent explicit task open reveals its starter once for its own workspace
+ok 53 - only a recent explicit task open reveals its starter once for its own workspace
+  ---
+  duration_ms: 0.552459
+  type: 'test'
+  ...
+# (node:45615) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///Users/sakib/Projects/Factoryze/Factoryze/Factoryze/packages/app/extensions/core/test/startup-policy.test.ts is not specified and it doesn't parse as CommonJS.
+# Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+# To eliminate this warning, add "type": "module" to /Users/sakib/Projects/Factoryze/Factoryze/Factoryze/packages/app/extensions/core/package.json.
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: launch opens Home instead of restoring the last attempt, unless a folder is passed on the command line
+ok 54 - launch opens Home instead of restoring the last attempt, unless a folder is passed on the command line
+  ---
+  duration_ms: 3.500083
+  type: 'test'
+  ...
+# (node:45616) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///Users/sakib/Projects/Factoryze/Factoryze/Factoryze/packages/app/extensions/core/test/trial-connection.test.ts is not specified and it doesn't parse as CommonJS.
+# Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+# To eliminate this warning, add "type": "module" to /Users/sakib/Projects/Factoryze/Factoryze/Factoryze/packages/app/extensions/core/package.json.
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# (node:45616) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+# Subtest: trial signup exposes only account data, preserves BYOK and survives a desktop restart
+ok 55 - trial signup exposes only account data, preserves BYOK and survives a desktop restart
+  ---
+  duration_ms: 13.359292
+  type: 'test'
+  ...
+# Subtest: gateway renewal is single-flight, short-lived and never rewrites the saved BYOK key
+ok 56 - gateway renewal is single-flight, short-lived and never rewrites the saved BYOK key
+  ---
+  duration_ms: 2.460042
+  type: 'test'
+  ...
+# Subtest: revocation, lack of credit and paused service never fall back to BYOK
+ok 57 - revocation, lack of credit and paused service never fall back to BYOK
+  ---
+  duration_ms: 2.880542
+  type: 'test'
+  ...
+# Subtest: trial logout clears the device credential and keeps the saved BYOK connection
+ok 58 - trial logout clears the device credential and keeps the saved BYOK connection
+  ---
+  duration_ms: 0.956083
+  type: 'test'
+  ...
+# Subtest: an unavailable trial service leaves an explicit BYOK route without selecting it automatically
+ok 59 - an unavailable trial service leaves an explicit BYOK route without selecting it automatically
+  ---
+  duration_ms: 1.284667
+  type: 'test'
+  ...
+# (node:45617) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///Users/sakib/Projects/Factoryze/Factoryze/Factoryze/packages/app/extensions/core/test/workbench-metrics.test.ts is not specified and it doesn't parse as CommonJS.
+# Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+# To eliminate this warning, add "type": "module" to /Users/sakib/Projects/Factoryze/Factoryze/Factoryze/packages/app/extensions/core/package.json.
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: each prompt gets a block proportional to its weighted token use
+ok 60 - each prompt gets a block proportional to its weighted token use
+  ---
+  duration_ms: 2.14825
+  type: 'test'
+  ...
+# Subtest: saved usage is shown as earlier usage and a new scope resets the blocks
+ok 61 - saved usage is shown as earlier usage and a new scope resets the blocks
+  ---
+  duration_ms: 0.166292
+  type: 'test'
+  ...
+# Subtest: timer tracks elapsed practice time without treating the task estimate as a deadline
+ok 62 - timer tracks elapsed practice time without treating the task estimate as a deadline
+  ---
+  duration_ms: 0.150209
+  type: 'test'
+  ...
+# Subtest: Home hides the elapsed display without resetting the task clock or metered totals
+ok 63 - Home hides the elapsed display without resetting the task clock or metered totals
+  ---
+  duration_ms: 0.098209
+  type: 'test'
+  ...
+# Subtest: task source budget is visible before the first model call
+ok 64 - task source budget is visible before the first model call
+  ---
+  duration_ms: 0.182
+  type: 'test'
+  ...
+# Subtest: restoring the timer after loading task metadata retains its source budget and title
+ok 65 - restoring the timer after loading task metadata retains its source budget and title
+  ---
+  duration_ms: 0.069875
+  type: 'test'
+  ...
+# Subtest: input, output and cached tokens remain separate from the weighted budget, including after workspace changes
+ok 66 - input, output and cached tokens remain separate from the weighted budget, including after workspace changes
+  ---
+  duration_ms: 0.209833
+  type: 'test'
+  ...
+# Subtest: late usage from the previous task run cannot repopulate fresh input/output meters
+ok 67 - late usage from the previous task run cannot repopulate fresh input/output meters
+  ---
+  duration_ms: 0.162042
+  type: 'test'
+  ...
+# Subtest: an older workspace metadata response cannot lower the latest metered counts
+ok 68 - an older workspace metadata response cannot lower the latest metered counts
+  ---
+  duration_ms: 1.017125
+  type: 'test'
+  ...
+# Subtest: reopening an attempt rebuilds one segment per saved prompt, then keeps counting live
+ok 69 - reopening an attempt rebuilds one segment per saved prompt, then keeps counting live
+  ---
+  duration_ms: 0.905417
+  type: 'test'
+  ...
+# (node:45618) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///Users/sakib/Projects/Factoryze/Factoryze/Factoryze/packages/app/extensions/core/test/workbench-panes.test.ts is not specified and it doesn't parse as CommonJS.
+# Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+# To eliminate this warning, add "type": "module" to /Users/sakib/Projects/Factoryze/Factoryze/Factoryze/packages/app/extensions/core/package.json.
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: pane controls hide and restore each pane independently without closing its content
+ok 70 - pane controls hide and restore each pane independently without closing its content
+  ---
+  duration_ms: 0.818208
+  type: 'test'
+  ...
+# Subtest: showing an empty pane restores its default view before expanding
+ok 71 - showing an empty pane restores its default view before expanding
+  ---
+  duration_ms: 0.145417
+  type: 'test'
+  ...
+# Subtest: opening the bottom pane reveals the terminal even when the Problems view already exists
+ok 72 - opening the bottom pane reveals the terminal even when the Problems view already exists
+  ---
+  duration_ms: 0.132333
+  type: 'test'
+  ...
+# Subtest: Windows smoke waits for in-place NSIS uninstall before removing its owned directory
+ok 73 - Windows smoke waits for in-place NSIS uninstall before removing its owned directory
+  ---
+  duration_ms: 8.300125
+  type: 'test'
+  ...
+# Subtest: failed uninstall is reported and preserves the install for diagnosis
+ok 74 - failed uninstall is reported and preserves the install for diagnosis
+  ---
+  duration_ms: 1.505917
+  type: 'test'
+  ...
+# Subtest: cleanup refuses an unrelated temporary directory before invoking any operation
+ok 75 - cleanup refuses an unrelated temporary directory before invoking any operation
+  ---
+  duration_ms: 3.295583
+  type: 'test'
+  ...
+# Subtest: an installed executable without an uninstaller is an explicit cleanup failure
+ok 76 - an installed executable without an uninstaller is an explicit cleanup failure
+  ---
+  duration_ms: 1.329333
+  type: 'test'
+  ...
+# Subtest: cleanup removes an owned directory when setup never installed an app
+ok 77 - cleanup removes an owned directory when setup never installed an app
+  ---
+  duration_ms: 0.340375
+  type: 'test'
+  ...
+# Subtest: cleanup permits a canonical temporary-parent alias without following a linked root
+ok 78 - cleanup permits a canonical temporary-parent alias without following a linked root
+  ---
+  duration_ms: 0.990708
+  type: 'test'
+  ...
+# Subtest: a linked smoke root cannot redirect cleanup into a different directory
+ok 79 - a linked smoke root cannot redirect cleanup into a different directory
+  ---
+  duration_ms: 1.607916
+  type: 'test'
+  ...
+# Subtest: custom Electron packages launch Factoryze instead of the default Electron shell on every platform
+ok 80 - custom Electron packages launch Factoryze instead of the default Electron shell on every platform
+  ---
+  duration_ms: 39.876333
+  type: 'test'
+  ...
+# Subtest: synthetic benchmark command policy accepts native Windows and POSIX test commands only
+ok 81 - synthetic benchmark command policy accepts native Windows and POSIX test commands only
+  ---
+  duration_ms: 1.140834
+  type: 'test'
+  ...
+# Subtest: the desktop app packages and launches only the Factoryze harness
+ok 82 - the desktop app packages and launches only the Factoryze harness
+  ---
+  duration_ms: 0.888166
+  type: 'test'
+  ...
+# Subtest: the harness spike exposes help without credentials or a model call
+ok 83 - the harness spike exposes help without credentials or a model call
+  ---
+  duration_ms: 306.343708
+  type: 'test'
+  ...
+# Subtest: task files and dependency patches are checked out with LF on every OS
+ok 84 - task files and dependency patches are checked out with LF on every OS
+  ---
+  duration_ms: 35.908167
+  type: 'test'
+  ...
+# Subtest: Theia invokes the maintained local rebuild tool through pnpm without downloading a legacy package
+ok 85 - Theia invokes the maintained local rebuild tool through pnpm without downloading a legacy package
+  ---
+  duration_ms: 524.048375
+  type: 'test'
+  ...
+# Subtest: installed smoke decodes Theia workspace URLs into native Windows drive and UNC paths
+ok 86 - installed smoke decodes Theia workspace URLs into native Windows drive and UNC paths
+  ---
+  duration_ms: 0.563417
+  type: 'test'
+  ...
+# Subtest: installed smoke preserves POSIX workspace paths and rejects an absent workspace
+ok 87 - installed smoke preserves POSIX workspace paths and rejects an absent workspace
+  ---
+  duration_ms: 0.25325
+  type: 'test'
+  ...
+# Subtest: Electron lets the workbench header occupy the macOS title row
+ok 88 - Electron lets the workbench header occupy the macOS title row
+  ---
+  duration_ms: 0.579875
+  type: 'test'
+  ...
+# (node:45645) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: public OpenCode requests retain native context, meter tokens and distinguish provider failures from a task budget
+ok 89 - public OpenCode requests retain native context, meter tokens and distinguish provider failures from a task budget
+  ---
+  duration_ms: 62.404375
+  type: 'test'
+  ...
+# Subtest: authenticated gateway counts every request, serializes spending, and refuses requests after the budget
+ok 90 - authenticated gateway counts every request, serializes spending, and refuses requests after the budget
+  ---
+  duration_ms: 40.982
+  type: 'test'
+  ...
+# Subtest: client cancellation persists observed usage and blocks subsequent requests
+ok 91 - client cancellation persists observed usage and blocks subsequent requests
+  ---
+  duration_ms: 6.473292
+  type: 'test'
+  ...
+# Subtest: provider rejections do not expose diagnostics and do not consume the token budget
+ok 92 - provider rejections do not expose diagnostics and do not consume the token budget
+  ---
+  duration_ms: 4.115292
+  type: 'test'
+  ...
+# Subtest: missing usage blocks the next call rather than recording free tokens
+ok 93 - missing usage blocks the next call rather than recording free tokens
+  ---
+  duration_ms: 6.673542
+  type: 'test'
+  ...
+# Subtest: activity feed stays experimental and its correct-looking starter fails the performance checks
+ok 94 - activity feed stays experimental and its correct-looking starter fails the performance checks
+  ---
+  duration_ms: 3655.903416
+  type: 'test'
+  ...
+# Subtest: activity feed checks reject stale caches, cross-workspace names, dropped rows and reordered pages
+ok 95 - activity feed checks reject stale caches, cross-workspace names, dropped rows and reordered pages
+  ---
+  duration_ms: 4855.259292
+  type: 'test'
+  ...
+# Subtest: expert comparison requires solved work, matching model, complete usage and known turns
+ok 96 - expert comparison requires solved work, matching model, complete usage and known turns
+  ---
+  duration_ms: 1.010167
+  type: 'test'
+  ...
+# (node:45668) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: benchmark records isolated expert and naive runs only after both are measured
+ok 97 - benchmark records isolated expert and naive runs only after both are measured
+  ---
+  duration_ms: 231.616541
+  type: 'test'
+  ...
+# Subtest: failed benchmark leaves no baseline and closes its run
+ok 98 - failed benchmark leaves no baseline and closes its run
+  ---
+  duration_ms: 42.774125
+  type: 'test'
+  ...
+# Subtest: benchmark refuses a run without metered model usage
+ok 99 - benchmark refuses a run without metered model usage
+  ---
+  duration_ms: 53.781542
+  type: 'test'
+  ...
+# Subtest: benchmark refuses model usage without completed prompt turns
+ok 100 - benchmark refuses model usage without completed prompt turns
+  ---
+  duration_ms: 62.763916
+  type: 'test'
+  ...
+# Subtest: variance runs alternate expert and naive, keep failed runs, and write no baseline
+ok 101 - variance runs alternate expert and naive, keep failed runs, and write no baseline
+  ---
+  duration_ms: 236.483834
+  type: 'test'
+  ...
+# Subtest: run summaries report spread and whether expert and naive overlap
+ok 102 - run summaries report spread and whether expert and naive overlap
+  ---
+  duration_ms: 0.221459
+  type: 'test'
+  ...
+# Subtest: variance runs include the middle scenario when the task defines one
+ok 103 - variance runs include the middle scenario when the task defines one
+  ---
+  duration_ms: 326.649292
+  type: 'test'
+  ...
+# Subtest: a variance run that fails after spending tokens keeps its usage and grade
+ok 104 - a variance run that fails after spending tokens keeps its usage and grade
+  ---
+  duration_ms: 128.2205
+  type: 'test'
+  ...
+# Subtest: Docker executor requires immutable Linux images and a local daemon, enforces isolation and cleans only its container
+ok 105 - Docker executor requires immutable Linux images and a local daemon, enforces isolation and cleans only its container
+  ---
+  duration_ms: 21.83275
+  type: 'test'
+  ...
+# Subtest: executor verifies actual container security configuration before allowing it to start
+ok 106 - executor verifies actual container security configuration before allowing it to start
+  ---
+  duration_ms: 78.655167
+  type: 'test'
+  ...
+# Subtest: Docker executor fails closed when default seccomp or a local Linux engine is unavailable
+ok 107 - Docker executor fails closed when default seccomp or a local Linux engine is unavailable
+  ---
+  duration_ms: 21.12725
+  type: 'test'
+  ...
+# Subtest: isolated grader takes names only from trusted discovery, runs each check freshly and continues after a timeout
+ok 108 - isolated grader takes names only from trusted discovery, runs each check freshly and continues after a timeout
+  ---
+  duration_ms: 1.093875
+  type: 'test'
+  ...
+# Subtest: isolated grader refuses forged discovery, unsupported Python, malformed verdicts and infrastructure/cleanup failures
+ok 109 - isolated grader refuses forged discovery, unsupported Python, malformed verdicts and infrastructure/cleanup failures
+  ---
+  duration_ms: 0.537
+  type: 'test'
+  ...
+# (node:45690) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: the gateway streams a replayed provider response over HTTP
+ok 110 - the gateway streams a replayed provider response over HTTP
+  ---
+  duration_ms: 44.913833
+  type: 'test'
+  ...
+# Subtest: gateway preserves a Unicode prompt split across incoming UTF-8 chunks
+ok 111 - gateway preserves a Unicode prompt split across incoming UTF-8 chunks
+  ---
+  duration_ms: 20.481125
+  type: 'test'
+  ...
+# Subtest: the gateway rewrites an edit before returning the tool call
+ok 112 - the gateway rewrites an edit before returning the tool call
+  ---
+  duration_ms: 3.410625
+  type: 'test'
+  ...
+# (node:45697) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: local grader runs hidden tests on a disposable copy without placing them in the student workspace
+ok 113 - local grader runs hidden tests on a disposable copy without placing them in the student workspace
+  ---
+  duration_ms: 376.148291
+  type: 'test'
+  ...
+# Subtest: local grader rejects missing hidden tests rather than reporting a perfect score
+ok 114 - local grader rejects missing hidden tests rather than reporting a perfect score
+  ---
+  duration_ms: 11.321958
+  type: 'test'
+  ...
+# Subtest: public checks report actionable failures and pass after the workspace is fixed without exposing hidden checks
+ok 115 - public checks report actionable failures and pass after the workspace is fixed without exposing hidden checks
+  ---
+  duration_ms: 218.398459
+  type: 'test'
+  ...
+# Subtest: hidden check timeouts fail by name and allow later checks to run
+ok 116 - hidden check timeouts fail by name and allow later checks to run
+  ---
+  duration_ms: 1286.288625
+  type: 'test'
+  ...
+# Subtest: public check timeouts return named failures and allow later checks to run
+ok 117 - public check timeouts return named failures and allow later checks to run
+  ---
+  duration_ms: 1226.731291
+  type: 'test'
+  ...
+# Subtest: the grading run limit reports every remaining check without executing it
+ok 118 - the grading run limit reports every remaining check without executing it
+  ---
+  duration_ms: 2066.539959
+  type: 'test'
+  ...
+# Subtest: an import timeout or exited check cannot prevent other test files from running
+ok 119 - an import timeout or exited check cannot prevent other test files from running
+  ---
+  duration_ms: 1288.465209
+  type: 'test'
+  ...
+# Subtest: a check timeout stops its child processes before grading returns
+ok 120 - a check timeout stops its child processes before grading returns
+  ---
+  duration_ms: 1801.099417
+  type: 'test'
+  ...
+# Subtest: submission saves a report with a timed-out hidden check and retains it after restart
+ok 121 - submission saves a report with a timed-out hidden check and retains it after restart
+  ---
+  duration_ms: 1097.690167
+  type: 'test'
+  ...
+# Subtest: instructions, tool definitions and execution limits require a new harness version when changed
+ok 122 - instructions, tool definitions and execution limits require a new harness version when changed
+  ---
+  duration_ms: 0.651833
+  type: 'test'
+  ...
+# (node:45719) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: Factoryze openai-chat: streams, runs a tool, keeps history, meters every call and retains exhaustion after restart
+ok 123 - Factoryze openai-chat: streams, runs a tool, keeps history, meters every call and retains exhaustion after restart
+  ---
+  duration_ms: 160.658875
+  type: 'test'
+  ...
+# Subtest: Factoryze anthropic-messages: streams, runs a tool, keeps history, meters every call and retains exhaustion after restart
+ok 124 - Factoryze anthropic-messages: streams, runs a tool, keeps history, meters every call and retains exhaustion after restart
+  ---
+  duration_ms: 84.201291
+  type: 'test'
+  ...
+# Subtest: harness refuses truncated tool calls and exposes only safe gateway errors
+ok 125 - harness refuses truncated tool calls and exposes only safe gateway errors
+  ---
+  duration_ms: 1.919333
+  type: 'test'
+  ...
+# Subtest: Stop cancels an active model request and concurrent prompts cannot interleave history
+ok 126 - Stop cancels an active model request and concurrent prompts cannot interleave history
+  ---
+  duration_ms: 0.343584
+  type: 'test'
+  ...
+# Subtest: context caps drop complete older turns without auxiliary calls and reject oversized current prompts
+ok 127 - context caps drop complete older turns without auxiliary calls and reject oversized current prompts
+  ---
+  duration_ms: 0.957
+  type: 'test'
+  ...
+# Subtest: temperature is sent only when pinned, for both provider APIs
+ok 128 - temperature is sent only when pinned, for both provider APIs
+  ---
+  duration_ms: 0.881833
+  type: 'test'
+  ...
+# Subtest: OpenCode-only public connections fail before the custom harness sends any request
+ok 129 - OpenCode-only public connections fail before the custom harness sends any request
+  ---
+  duration_ms: 0.13325
+  type: 'test'
+  ...
+# Subtest: sponsored context limits drop complete earlier turns and reject oversized requests before dispatch
+ok 130 - sponsored context limits drop complete earlier turns and reject oversized requests before dispatch
+  ---
+  duration_ms: 1.03575
+  type: 'test'
+  ...
+# (node:45759) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: server agent dispatches tools to the student, meters provider usage and deduplicates prompts/results
+ok 131 - server agent dispatches tools to the student, meters provider usage and deduplicates prompts/results
+  ---
+  duration_ms: 115.946625
+  type: 'test'
+  ...
+# (node:45773) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: grading failures require instructor retry; v2 migration preserves snapshots and released CSV pins the grader image
+ok 132 - grading failures require instructor retry; v2 migration preserves snapshots and released CSV pins the grader image
+  ---
+  duration_ms: 54.118
+  type: 'test'
+  ...
+# Subtest: a private join binding recovers a lost response without allowing another client to claim the identity
+ok 133 - a private join binding recovers a lost response without allowing another client to claim the identity
+  ---
+  duration_ms: 36.683667
+  type: 'test'
+  ...
+# Subtest: a lab pins its first grading image and refuses a different image before executing a retry
+ok 134 - a lab pins its first grading image and refuses a different image before executing a retry
+  ---
+  duration_ms: 43.812541
+  type: 'test'
+  ...
+# Subtest: lab task delivery excludes hidden material; mirror sync is bounded, scoped, versioned and idempotent
+ok 135 - lab task delivery excludes hidden material; mirror sync is bounded, scoped, versioned and idempotent
+  ---
+  duration_ms: 26.219667
+  type: 'test'
+  ...
+# Subtest: submissions are immutable; closing auto-submits; grades remain private until instructor release
+ok 136 - submissions are immutable; closing auto-submits; grades remain private until instructor release
+  ---
+  duration_ms: 49.603333
+  type: 'test'
+  ...
+# Subtest: instructor session recovery preserves identity, budgets and snapshots; student events are untrusted flags
+ok 137 - instructor session recovery preserves identity, budgets and snapshots; student events are untrusted flags
+  ---
+  duration_ms: 23.599958
+  type: 'test'
+  ...
+# (node:45878) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: lab joins are roster-bound, versioned, scoped and do not disclose operator secrets
+ok 138 - lab joins are roster-bound, versioned, scoped and do not disclose operator secrets
+  ---
+  duration_ms: 22.9895
+  type: 'test'
+  ...
+# Subtest: trusted server metering survives reconnect/restart and cannot reset or cross student/lab budgets
+ok 139 - trusted server metering survives reconnect/restart and cannot reset or cross student/lab budgets
+  ---
+  duration_ms: 25.783125
+  type: 'test'
+  ...
+# Subtest: closing or expiring a lab stops joins and requests while preserving readable usage
+ok 140 - closing or expiring a lab stops joins and requests while preserving readable usage
+  ---
+  duration_ms: 15.334333
+  type: 'test'
+  ...
+# Subtest: incomplete requests fail closed, immutable pins and duplicate labs are rejected
+ok 141 - incomplete requests fail closed, immutable pins and duplicate labs are rejected
+  ---
+  duration_ms: 18.414792
+  type: 'test'
+  ...
+# Subtest: queued requests recheck budget and closure before dispatch; invalid usage cannot become complete
+ok 142 - queued requests recheck budget and closure before dispatch; invalid usage cannot become complete
+  ---
+  duration_ms: 19.28725
+  type: 'test'
+  ...
+# Subtest: weighted tokens discount cached input without hiding raw counts
+ok 143 - weighted tokens discount cached input without hiding raw counts
+  ---
+  duration_ms: 0.544083
+  type: 'test'
+  ...
+# Subtest: accounts for JSON and Anthropic cache counts without double counting cached input
+ok 144 - accounts for JSON and Anthropic cache counts without double counting cached input
+  ---
+  duration_ms: 1.613459
+  type: 'test'
+  ...
+# Subtest: interruption preserves observed usage; absent, invalid and truncated usage stays incomplete
+ok 145 - interruption preserves observed usage; absent, invalid and truncated usage stays incomplete
+  ---
+  duration_ms: 0.774584
+  type: 'test'
+  ...
+# Subtest: a malformed final usage event cannot turn an earlier checkpoint into a complete charge
+ok 146 - a malformed final usage event cannot turn an earlier checkpoint into a complete charge
+  ---
+  duration_ms: 0.41925
+  type: 'test'
+  ...
+# Subtest: metering reads a usage event split across chunks and preserves the stream
+ok 147 - metering reads a usage event split across chunks and preserves the stream
+  ---
+  duration_ms: 0.211417
+  type: 'test'
+  ...
+# Subtest: engine package index serves only curated wheels and pins pip without a fallback index
+ok 148 - engine package index serves only curated wheels and pins pip without a fallback index
+  ---
+  duration_ms: 49.60975
+  type: 'test'
+  ...
+# (node:45960) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: schema 5 upgrades to append-only scoped events and auditable usage reconciliation
+ok 149 - schema 5 upgrades to append-only scoped events and auditable usage reconciliation
+  ---
+  duration_ms: 27.587125
+  type: 'test'
+  ...
+# Subtest: scoring v1 is deterministic, gates incorrect work, and never invents missing judge/baseline scores
+ok 150 - scoring v1 is deterministic, gates incorrect work, and never invents missing judge/baseline scores
+  ---
+  duration_ms: 0.890792
+  type: 'test'
+  ...
+# (node:45960) Warning: AI SDK Warning System: To turn off warning logging, set the AI_SDK_LOG_WARNINGS global to false.
+# (node:45960) Warning: AI SDK Warning (factoryze-judge.chat / small-judge): The feature "responseFormat" is not supported. JSON response format schema is only supported with structuredOutputs
+# Subtest: judge treats prompts as data, validates structured provider output, and returns separate usage
+ok 151 - judge treats prompts as data, validates structured provider output, and returns separate usage
+  ---
+  duration_ms: 38.531875
+  type: 'test'
+  ...
+# Subtest: session judge usage stays outside the student budget and report assessments survive restart
+ok 152 - session judge usage stays outside the student budget and report assessments survive restart
+  ---
+  duration_ms: 100.42475
+  type: 'test'
+  ...
+# Subtest: judge is disabled by default, failures do not block prompts, and stopping aborts pending judgement
+ok 153 - judge is disabled by default, failures do not block prompts, and stopping aborts pending judgement
+  ---
+  duration_ms: 25.759208
+  type: 'test'
+  ...
+# Subtest: Anthropic-compatible judge validates the structured JSON tool response and usage
+ok 154 - Anthropic-compatible judge validates the structured JSON tool response and usage
+  ---
+  duration_ms: 14.084083
+  type: 'test'
+  ...
+# (node:46013) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: library-fines: public tests pass on the buggy starter and a targeted fix passes every hidden check
+ok 155 - library-fines: public tests pass on the buggy starter and a targeted fix passes every hidden check
+  ---
+  duration_ms: 8041.699958
+  type: 'test'
+  ...
+# Subtest: monthly-revenue: public tests pass on the buggy starter and a targeted fix passes every hidden check
+ok 156 - monthly-revenue: public tests pass on the buggy starter and a targeted fix passes every hidden check
+  ---
+  duration_ms: 3448.237333
+  type: 'test'
+  ...
+# Subtest: retiring bundled tasks preserves old attempts, usage, reports and resubmission after restart
+ok 157 - retiring bundled tasks preserves old attempts, usage, reports and resubmission after restart
+  ---
+  duration_ms: 5140.070542
+  type: 'test'
+  ...
+# Subtest: temperature refusals have a safe specific category without misclassifying unrelated bad requests
+ok 158 - temperature refusals have a safe specific category without misclassifying unrelated bad requests
+  ---
+  duration_ms: 3.705083
+  type: 'test'
+  ...
+# Subtest: Anthropic transport keeps the upstream key in engine headers and preserves split UTF-8 bytes
+ok 159 - Anthropic transport keeps the upstream key in engine headers and preserves split UTF-8 bytes
+  ---
+  duration_ms: 22.701
+  type: 'test'
+  ...
+# Subtest: provider URL validation rejects plaintext remote endpoints and credentials embedded in URLs
+ok 160 - provider URL validation rejects plaintext remote endpoints and credentials embedded in URLs
+  ---
+  duration_ms: 0.360375
+  type: 'test'
+  ...
+# Subtest: a pasted OpenRouter request endpoint is appended exactly once
+ok 161 - a pasted OpenRouter request endpoint is appended exactly once
+  ---
+  duration_ms: 0.4755
+  type: 'test'
+  ...
+# Subtest: OpenRouter routing and account errors expose only a safe category, not upstream diagnostics
+ok 162 - OpenRouter routing and account errors expose only a safe category, not upstream diagnostics
+  ---
+  duration_ms: 1.280958
+  type: 'test'
+  ...
+# Subtest: OpenCode public transport preserves native OpenCode headers and never forwards a private credential or session token
+ok 163 - OpenCode public transport preserves native OpenCode headers and never forwards a private credential or session token
+  ---
+  duration_ms: 0.631125
+  type: 'test'
+  ...
+# Subtest: Python preflight detects missing venv support and gives the matching Debian/Ubuntu package without creating files
+ok 164 - Python preflight detects missing venv support and gives the matching Debian/Ubuntu package without creating files
+  ---
+  duration_ms: 0.9015
+  type: 'test'
+  ...
+# Subtest: preflight and setup skip an incomplete Python and use a compatible interpreter with venv and ensurepip
+ok 165 - preflight and setup skip an incomplete Python and use a compatible interpreter with venv and ensurepip
+  ---
+  duration_ms: 5.874125
+  type: 'test'
+  ...
+# Subtest: Windows discovery supports py selectors and rejects the Microsoft Store alias response
+ok 166 - Windows discovery supports py selectors and rejects the Microsoft Store alias response
+  ---
+  duration_ms: 0.30575
+  type: 'test'
+  ...
+# Subtest: Windows minimum-version errors retain the interpreter version instead of replacing it with alias guidance
+ok 167 - Windows minimum-version errors retain the interpreter version instead of replacing it with alias guidance
+  ---
+  duration_ms: 0.3185
+  type: 'test'
+  ...
+# Subtest: uses a compatible Python and creates a task venv
+ok 168 - uses a compatible Python and creates a task venv
+  ---
+  duration_ms: 3.551125
+  type: 'test'
+  ...
+# Subtest: explains when no installed Python meets the task minimum
+ok 169 - explains when no installed Python meets the task minimum
+  ---
+  duration_ms: 0.752542
+  type: 'test'
+  ...
+# Subtest: reports a failed venv setup without claiming the workspace is ready
+ok 170 - reports a failed venv setup without claiming the workspace is ready
+  ---
+  duration_ms: 1.3505
+  type: 'test'
+  ...
+# Subtest: python check reports the best match without creating a virtual environment
+ok 171 - python check reports the best match without creating a virtual environment
+  ---
+  duration_ms: 0.362459
+  type: 'test'
+  ...
+# Subtest: recording and replay preserve streamed chunk boundaries
+ok 172 - recording and replay preserve streamed chunk boundaries
+  ---
+  duration_ms: 1.010542
+  type: 'test'
+  ...
+# Subtest: a mismatched request does not consume the next fixture
+ok 173 - a mismatched request does not consume the next fixture
+  ---
+  duration_ms: 0.322417
+  type: 'test'
+  ...
+# Subtest: a committed fixture replays without a network provider
+ok 174 - a committed fixture replays without a network provider
+  ---
+  duration_ms: 4.767042
+  type: 'test'
+  ...
+# (node:46131) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: report activity deduplicates updates and groups measured requests by preceding tools without inventing context costs
+ok 175 - report activity deduplicates updates and groups measured requests by preceding tools without inventing context costs
+  ---
+  duration_ms: 8.649083
+  type: 'test'
+  ...
+# Subtest: legacy, incomplete and unknown activity keeps all observed usage and discloses missing history
+ok 176 - legacy, incomplete and unknown activity keeps all observed usage and discloses missing history
+  ---
+  duration_ms: 0.37125
+  type: 'test'
+  ...
+# Subtest: request attribution resets between prompts and sessions, including reused tool IDs
+ok 177 - request attribution resets between prompts and sessions, including reused tool IDs
+  ---
+  duration_ms: 0.196291
+  type: 'test'
+  ...
+# Subtest: missing prompt history stays unavailable and duplicate request starts preserve the next activity group
+ok 178 - missing prompt history stays unavailable and duplicate request starts preserve the next activity group
+  ---
+  duration_ms: 0.144333
+  type: 'test'
+  ...
+# Subtest: activity attribution uses recorded cache weights and reconciled ledger usage instead of stale event counts
+ok 179 - activity attribution uses recorded cache weights and reconciled ledger usage instead of stale event counts
+  ---
+  duration_ms: 20.719667
+  type: 'test'
+  ...
+# Subtest: saved report insights and prompt costs survive later prompts, resubmission and restart without prompt text
+ok 180 - saved report insights and prompt costs survive later prompts, resubmission and restart without prompt text
+  ---
+  duration_ms: 127.215667
+  type: 'test'
+  ...
+# Subtest: rewrites an edit argument split across SSE events before tool dispatch
+ok 181 - rewrites an edit argument split across SSE events before tool dispatch
+  ---
+  duration_ms: 1.271625
+  type: 'test'
+  ...
+# Subtest: passes text-only SSE chunks through unchanged
+ok 182 - passes text-only SSE chunks through unchanged
+  ---
+  duration_ms: 0.144417
+  type: 'test'
+  ...
+# Subtest: does not release a partial edit call when the stream ends early
+ok 183 - does not release a partial edit call when the stream ends early
+  ---
+  duration_ms: 0.334291
+  type: 'test'
+  ...
+# (node:46156) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: reports retain every distinct execution pin across sessions, resubmission and engine restart
+ok 184 - reports retain every distinct execution pin across sessions, resubmission and engine restart
+  ---
+  duration_ms: 98.526791
+  type: 'test'
+  ...
+# Subtest: submission grades only a registered practice workspace and labels the result unverified
+ok 185 - submission grades only a registered practice workspace and labels the result unverified
+  ---
+  duration_ms: 30.328542
+  type: 'test'
+  ...
+# Subtest: practice session routes to the upstream with engine credentials and persists task totals across engine restarts
+ok 186 - practice session routes to the upstream with engine credentials and persists task totals across engine restarts
+  ---
+  duration_ms: 131.156542
+  type: 'test'
+  ...
+# Subtest: starting the same task again resets this run, while resume/New session/restart preserve each run
+ok 187 - starting the same task again resets this run, while resume/New session/restart preserve each run
+  ---
+  duration_ms: 92.108333
+  type: 'test'
+  ...
+# Subtest: solved practice report snapshots matching expert ratios and preserves correctness when a baseline goes stale
+ok 188 - solved practice report snapshots matching expert ratios and preserves correctness when a baseline goes stale
+  ---
+  duration_ms: 355.337625
+  type: 'test'
+  ...
+# Subtest: attempts list every practice workspace with its number, usage and submissions
+ok 189 - attempts list every practice workspace with its number, usage and submissions
+  ---
+  duration_ms: 157.875167
+  type: 'test'
+  ...
+# Subtest: raising the budget in an attempt is recorded on its next report
+ok 190 - raising the budget in an attempt is recorded on its next report
+  ---
+  duration_ms: 546.683375
+  type: 'test'
+  ...
+# (node:46194) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: a budget override resolves native temp-directory aliases to the registered workspace
+ok 191 - a budget override resolves native temp-directory aliases to the registered workspace
+  ---
+  duration_ms: 75.493125
+  type: 'test'
+  ...
+# Subtest: imported task source, budget and explicit override survive restart without resetting usage
+ok 192 - imported task source, budget and explicit override survive restart without resetting usage
+  ---
+  duration_ms: 209.813375
+  type: 'test'
+  ...
+# Subtest: folder and ZIP imports retain a validated private task snapshot and declared budget
+ok 193 - folder and ZIP imports retain a validated private task snapshot and declared budget
+  ---
+  duration_ms: 60.721667
+  type: 'test'
+  ...
+# Subtest: imports reject traversal, symlinks and missing starter files without writing outside the pack
+ok 194 - imports reject traversal, symlinks and missing starter files without writing outside the pack
+  ---
+  duration_ms: 38.917167
+  type: 'test'
+  ...
+# Subtest: ZIP imports reject Unix file and directory symlinks on every platform
+ok 195 - ZIP imports reject Unix file and directory symlinks on every platform
+  ---
+  duration_ms: 14.908708
+  type: 'test'
+  ...
+# Subtest: practice task loader validates metadata and copies only starter files
+ok 196 - practice task loader validates metadata and copies only starter files
+  ---
+  duration_ms: 29.84225
+  type: 'test'
+  ...
+# Subtest: practice task removes a partial workspace when setup fails
+ok 197 - practice task removes a partial workspace when setup fails
+  ---
+  duration_ms: 11.814042
+  type: 'test'
+  ...
+# Subtest: practice task loader rejects invalid metadata
+ok 198 - practice task loader rejects invalid metadata
+  ---
+  duration_ms: 9.445083
+  type: 'test'
+  ...
+# Subtest: bundled practice catalog contains two valid Python tasks
+ok 199 - bundled practice catalog contains two valid Python tasks
+  ---
+  duration_ms: 15.845375
+  type: 'test'
+  ...
+# Subtest: retired tasks stay loadable for existing attempts while hidden from the practice catalog
+ok 200 - retired tasks stay loadable for existing attempts while hidden from the practice catalog
+  ---
+  duration_ms: 17.07275
+  type: 'test'
+  ...
+# Subtest: benchmark prompts validate against the task and stay outside student workspaces
+ok 201 - benchmark prompts validate against the task and stay outside student workspaces
+  ---
+  duration_ms: 554.227334
+  type: 'test'
+  ...
+# Subtest: benchmark prompt loader rejects missing, mismatched and empty scenarios
+ok 202 - benchmark prompt loader rejects missing, mismatched and empty scenarios
+  ---
+  duration_ms: 393.576333
+  type: 'test'
+  ...
+# Subtest: benchmark prompts may add an optional middle scenario without changing existing prompt hashes
+ok 203 - benchmark prompts may add an optional middle scenario without changing existing prompt hashes
+  ---
+  duration_ms: 80.41425
+  type: 'test'
+  ...
+# Subtest: trial transport uses short-lived authorization, unique idempotency and server output limits without retries
+ok 204 - trial transport uses short-lived authorization, unique idempotency and server output limits without retries
+  ---
+  duration_ms: 97.24725
+  type: 'test'
+  ...
+# Subtest: trial failures preserve a safe funding-specific error and never silently retry
+ok 205 - trial failures preserve a safe funding-specific error and never silently retry
+  ---
+  duration_ms: 2.325333
+  type: 'test'
+  ...
+# Subtest: program exhaustion is distinct from personal credit and unsafe trial URLs are rejected
+ok 206 - program exhaustion is distinct from personal credit and unsafe trial URLs are rejected
+  ---
+  duration_ms: 1.368125
+  type: 'test'
+  ...
+# (node:46332) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: usage persists per user/task/profile/model; reopening conversations cannot reset the budget
+ok 207 - usage persists per user/task/profile/model; reopening conversations cannot reset the budget
+  ---
+  duration_ms: 141.403334
+  type: 'test'
+  ...
+# Subtest: schema 1 usage database migrates to append-only practice reports without losing usage
+ok 208 - schema 1 usage database migrates to append-only practice reports without losing usage
+  ---
+  duration_ms: 35.088583
+  type: 'test'
+  ...
+# Subtest: unknown and crashed requests retain partial counts and block further spending after restart
+ok 209 - unknown and crashed requests retain partial counts and block further spending after restart
+  ---
+  duration_ms: 10.777917
+  type: 'test'
+  ...
+# Subtest: workspace usage isolates requests while the task budget remains cumulative
+ok 210 - workspace usage isolates requests while the task budget remains cumulative
+  ---
+  duration_ms: 19.341042
+  type: 'test'
+  ...
+# Subtest: schema 2 migration preserves old reports and leaves old requests unattributed
+ok 211 - schema 2 migration preserves old reports and leaves old requests unattributed
+  ---
+  duration_ms: 149.153625
+  type: 'test'
+  ...
+# Subtest: completed prompt turns persist by workspace and model after a schema 3 migration
+ok 212 - completed prompt turns persist by workspace and model after a schema 3 migration
+  ---
+  duration_ms: 99.124542
+  type: 'test'
+  ...
+# Subtest: schema 4 migration marks existing model history as incomplete for prompt-turn comparisons
+ok 213 - schema 4 migration marks existing model history as incomplete for prompt-turn comparisons
+  ---
+  duration_ms: 19.137709
+  type: 'test'
+  ...
+# Subtest: schema 6 migrates task sources and budget overrides while retaining reports, events and usage
+ok 214 - schema 6 migrates task sources and budget overrides while retaining reports, events and usage
+  ---
+  duration_ms: 26.8445
+  type: 'test'
+  ...
+# Subtest: fresh task workspaces have independent meters and budgets while cumulative history stays intact
+ok 215 - fresh task workspaces have independent meters and budgets while cumulative history stays intact
+  ---
+  duration_ms: 5.16525
+  type: 'test'
+  ...
+# Subtest: incomplete accounting blocks its own run without contaminating another task workspace
+ok 216 - incomplete accounting blocks its own run without contaminating another task workspace
+  ---
+  duration_ms: 2.806166
+  type: 'test'
+  ...
+# Subtest: prompt usage follows the event log order and flags prompts with unconfirmed counts
+ok 217 - prompt usage follows the event log order and flags prompts with unconfirmed counts
+  ---
+  duration_ms: 12.658125
+  type: 'test'
+  ...
+# Subtest: report insights are optional for old submissions and enforce bounded count structure
+ok 218 - report insights are optional for old submissions and enforce bounded count structure
+  ---
+  duration_ms: 15.149417
+  type: 'test'
+  ...
+# Subtest: Python check diagnostics are optional and bounded, preserving existing clients
+ok 219 - Python check diagnostics are optional and bounded, preserving existing clients
+  ---
+  duration_ms: 1.615125
+  type: 'test'
+  ...
+# Subtest: report execution pins are optional for old reports and validate metadata without credentials
+ok 220 - report execution pins are optional for old reports and validate metadata without credentials
+  ---
+  duration_ms: 0.947458
+  type: 'test'
+  ...
+# Subtest: connection temperature is optional, finite and bounded without changing old defaults
+ok 221 - connection temperature is optional, finite and bounded without changing old defaults
+  ---
+  duration_ms: 1.873334
+  type: 'test'
+  ...
+# Subtest: task packs require schema 1 and a valid Python minimum
+ok 222 - task packs require schema 1 and a valid Python minimum
+  ---
+  duration_ms: 1.163625
+  type: 'test'
+  ...
+# Subtest: task retirement is optional and preserves existing schema 1 manifests
+ok 223 - task retirement is optional and preserves existing schema 1 manifests
+  ---
+  duration_ms: 0.230125
+  type: 'test'
+  ...
+# Subtest: lab config pins an agent profile and keeps keys out of the contract
+ok 224 - lab config pins an agent profile and keeps keys out of the contract
+  ---
+  duration_ms: 6.581709
+  type: 'test'
+  ...
+# Subtest: events are versioned and readers can retain unknown event types
+ok 225 - events are versioned and readers can retain unknown event types
+  ---
+  duration_ms: 0.489958
+  type: 'test'
+  ...
+# Subtest: attempt and report summaries carry only counts, never prompts or keys
+ok 226 - attempt and report summaries carry only counts, never prompts or keys
+  ---
+  duration_ms: 15.760667
+  type: 'test'
+  ...
+# Subtest: lab connection contracts require a pinned HTTPS origin and exclude credentials
+ok 227 - lab connection contracts require a pinned HTTPS origin and exclude credentials
+  ---
+  duration_ms: 11.311542
+  type: 'test'
+  ...
+# Subtest: lab join and creation inputs exclude student-assigned roles, budget overrides and keys
+ok 228 - lab join and creation inputs exclude student-assigned roles, budget overrides and keys
+  ---
+  duration_ms: 7.680167
+  type: 'test'
+  ...
+# (node:46428) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: HTTPS grading queue keeps results private, restricts retry/status/release and exports immutable image provenance
+ok 229 - HTTPS grading queue keeps results private, restricts retry/status/release and exports immutable image provenance
+  ---
+  duration_ms: 1020.56925
+  type: 'test'
+  ...
+# (node:46436) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: lab package downloads require a student session and serve only the curated wheelhouse
+ok 230 - lab package downloads require a student session and serve only the curated wheelhouse
+  ---
+  duration_ms: 491.661417
+  type: 'test'
+  ...
+# (node:46456) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: real TLS clients join/reconnect, cannot administer or self-report usage, and observe closure
+ok 231 - real TLS clients join/reconnect, cannot administer or self-report usage, and observe closure
+  ---
+  duration_ms: 751.337958
+  type: 'test'
+  ...
+# Subtest: instructor CLI creates, watches, closes and exports over real HTTPS without leaking its token
+ok 232 - instructor CLI creates, watches, closes and exports over real HTTPS without leaking its token
+  ---
+  duration_ms: 2570.548125
+  type: 'test'
+  ...
+# Subtest: failed initialization does not overwrite an identity or leave partial keys
+ok 233 - failed initialization does not overwrite an identity or leave partial keys
+  ---
+  duration_ms: 2.01375
+  type: 'test'
+  ...
+# Subtest: server state lock refuses a live owner, reclaims stale state and releases only its own marker
+ok 234 - server state lock refuses a live owner, reclaims stale state and releases only its own marker
+  ---
+  duration_ms: 3.641375
+  type: 'test'
+  ...
+1..234
+# tests 234
+# suites 0
+# pass 234
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 19382.190917
+exit=0

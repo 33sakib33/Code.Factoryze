@@ -1,0 +1,35 @@
+{
+  "date": "2026-10-24",
+  "timezone": "Asia/Dhaka",
+  "baseCommit": "1102835",
+  "branch": "codex/phase1_finale",
+  "scope": "Approved report design implemented in app; local working tree, not release approval",
+  "environment": { "platform": "win32", "node": "24.19.0", "unitTestPnpm": "10.28.2", "packagingPnpm": "10.28.2", "previewBrowser": "Chrome 155.0.8059.85", "note": "An earlier full suite also ran with global pnpm 8.7.5; the retained final unit log uses pinned pnpm 10.28.2. The installed app uses Electron 42.8.1 (artifact.json)." },
+  "checks": [
+    { "command": "pnpm test", "status": "failed_environment", "tests": 188, "passed": 186, "failed": 2, "skipped": 0, "log": "unit-tests.log",
+      "note": "Unchanged harness-tools and task-import tests fail creating Windows symlinks with EPERM. Executed outside the sandbox for process-tree cleanup; no tests skipped or weakened." },
+    { "command": "node --experimental-strip-types --test packages/app/extensions/core/test/report-learning.test.ts packages/engine/test/report-insights.test.ts packages/protocol/test/contracts.test.ts", "status": "passed", "tests": 20, "log": "focused-tests.log" },
+    { "command": "pnpm typecheck", "status": "passed", "log": "typecheck.log" },
+    { "command": "pnpm --filter @factoryze/app-core build", "status": "passed", "log": "app-core-build.log" },
+    { "command": "pnpm build:app", "status": "passed", "log": "app-build.log", "note": "Current workspace setup builds browser, backend and Electron with zero errors. Independent INSTALL.md/package.json setup changes were preserved." },
+    { "command": "pnpm --filter @factoryze/app package:installer (pinned pnpm 10.28.2)", "status": "passed", "log": "package.log", "note": "Unsigned Windows NSIS installer built after the pnpm 8 collector failure and sandbox cache denial; retried outside the sandbox with pinned pnpm." },
+    { "command": "pnpm --filter @factoryze/app verify:package", "status": "passed", "log": "verify-package.log" },
+    { "command": "pnpm --filter @factoryze/app smoke:installer", "status": "failed_cleanup", "appFlowPassed": true, "processExitCode": 1, "log": "installer-smoke.log", "receipt": "installed-windows.json", "screenshot": "report-overview.png", "note": "The complete installed UI flow passed at 683x512, all report assertions true and zero toolbar overlaps. The outer installer wrapper then failed removing its temporary install with EPERM. This command is not reported as an overall pass." },
+    { "command": "node mockups/build-report.mjs && node mockups/check-report.mjs", "status": "passed", "receipt": "preview.json",
+      "note": "Production renderers/CSS; saved scores hidden, unknown legacy details, per-test statuses, stable pass/fail dimensions, narrow app panes, modal replacement/hide cleanup, keyboard/theme/responsive/text-escaping checks." },
+    { "command": "node --check packages/app/scripts/smoke-solo.mjs", "status": "passed" }
+  ],
+  "installedSmokeAttempts": [
+    { "attempt": 1, "status": "failed", "log": "installer-smoke-first.log", "receipt": "installed-first.json", "diagnostics": "installed-diagnostics-first.log", "note": "Workbench closed while switching saved submissions; a cause was not established. The run also exposed the narrow attempt report pane. Main-area maximization/pane restoration, disposed-widget handling and current submission-selection state were corrected before rerunning. Temporary installer cleanup also reported EPERM." },
+    { "attempt": 2, "status": "failed", "log": "installer-smoke-second.log", "receipt": "installed-second.json", "diagnostics": "installed-diagnostics-second.log", "note": "Report assertions and submission switching passed; later Home navigation exposed the invisible Theia drag panel covering model/Settings toolbar buttons. Restricted the drag region to the title row before rerunning. Temporary installer cleanup also reported EPERM." },
+    { "attempt": 3, "status": "failed", "log": "installer-smoke-third.log", "receipt": "installed-third.json", "diagnostics": "installed-diagnostics-third.log", "screenshot": "header-overlap-third.png", "note": "Report checks passed again; the earlier drag-panel failure did not recur. A subsequent Home reload left IDE content behind the toolbar: the shell cached the earlier title-row height before native controls were added. Added a shell refit for native header-child insertion and initial toolbar setup. Temporary installer cleanup also reported EPERM." },
+    { "attempt": 4, "status": "failed", "log": "installer-smoke-fourth.log", "receipt": "installed-fourth.json", "diagnostics": "installed-diagnostics-fourth.log", "screenshot": "maximized-window-fourth.png", "note": "Report, history and imports passed. Relaunch restored a maximized 1920px window; the fixture's setContentSize could not apply while maximized and its unchanged exact-viewport assertion timed out. The test now waits for unmaximize before sizing to 683x512. Product code and packaged artifact were unchanged for the next run. Temporary installer cleanup also reported EPERM." },
+    { "attempt": 5, "status": "failed_cleanup", "flowStatus": "passed", "log": "installer-smoke.log", "receipt": "installed-windows.json", "note": "Every installed app-flow assertion passed, including settings, budget restart/persistence, appearance, reports and toolbar accessibility. The outer wrapper's temporary-directory removal failed with EPERM after the successful receipt was written." }
+  ],
+  "releaseGatesCleared": false,
+  "openGates": ["Two Windows symlink-permission test failures", "Windows installer-wrapper temporary cleanup EPERM", "Fresh macOS/Linux tests, builds and installed smoke", "Recorded human review", "Manual real-provider and downloaded-installer checks"],
+  "compatibility": { "newContract": false, "databaseMigration": false, "newEventType": false, "harnessVersion": "factoryze@0.1.0", "scoringFormulaChanged": false, "backendModulesDisabled": false, "historicalDataDeleted": false, "addedModelCalls": false },
+  "concurrentSetupFilesNotEditedByThisPrompt": ["INSTALL.md", "packages/app/package.json"],
+  "publishingFollowUp": { "authorization": "User requested commit and push after verification", "target": "origin/codex/phase1_finale", "excludedConcurrentFiles": ["INSTALL.md", "packages/app/package.json"] },
+  "notPerformed": ["Docker work", "Paid model calls or benchmarks", "Workflow dispatch", "PR, deployment or release"]
+}

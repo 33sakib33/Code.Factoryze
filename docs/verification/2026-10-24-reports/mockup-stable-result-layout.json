@@ -1,0 +1,47 @@
+{
+  "passed": true,
+  "platform": "win32",
+  "browser": "155.0.8059.85",
+  "states": [
+    "complete",
+    "partial",
+    "older",
+    "manual"
+  ],
+  "widths": [
+    1280,
+    683,
+    390
+  ],
+  "lightAndDark": true,
+  "schemaValidation": true,
+  "legacyCostsUnknown": true,
+  "promptHtmlEscaped": true,
+  "keyboardControls": true,
+  "suggestionsRemoved": true,
+  "promptScoringRemoved": true,
+  "summaryLabelsExplained": true,
+  "analysisInFirstDesktopView": true,
+  "segmentedTestPerimeter": true,
+  "oneSegmentPerCheck": true,
+  "individualCheckStatuses": true,
+  "accuratePassRate": true,
+  "stableResultCardSize": true,
+  "stableFollowingContent": true,
+  "layoutComparisonWidths": [
+    1254,
+    1280,
+    683,
+    390
+  ],
+  "checkDetailsModal": true,
+  "failureReasons": true,
+  "failuresShownFirst": true,
+  "passedChecksExpandable": true,
+  "modalEscapeAndFocusReturn": true,
+  "modalBackdropClose": true,
+  "externalRequests": 0,
+  "consoleErrors": 0,
+  "scope": "Mockup-only stable pass/fail card size and summary position",
+  "htmlSha256": "7f35c935fe56f60aa5741846215184c2ff650464d765eccc04b1144f36b25d19"
+}

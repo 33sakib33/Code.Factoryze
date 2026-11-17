@@ -1,0 +1,323 @@
+
+> factoryze@ test E:\Projects\Factoryze\Factoryze\Factoryze
+> node --experimental-strip-types --test
+
+(node:8856) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///E:/Projects/Factoryze/Factoryze/Factoryze/packages/app/extensions/core/test/agent-backend-service.test.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to \\?\E:\Projects\Factoryze\Factoryze\Factoryze\packages\app\extensions\core\package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ a temperature refusal is actionable, never retried, and a cleared setting recovers with metering (364.5933ms)
+✔ app backend uses the task gateway, publishes usage and preserves exhaustion when New session is clicked (202.3085ms)
+✔ Stop interrupts an active prompt without recording a completed turn (65.5398ms)
+✔ Stop during settings loading cannot launch a late OpenCode process (1.8478ms)
+✔ Factoryze backend needs no OpenCode process and releases its gateway after provider rejection (75.8388ms)
+(node:21124) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///E:/Projects/Factoryze/Factoryze/Factoryze/packages/app/extensions/core/test/agent-configuration.test.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to \\?\E:\Projects\Factoryze\Factoryze\Factoryze\packages\app\extensions\core\package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ a task without a model offers setup and becomes ready after settings are saved (1.8476ms)
+✔ a settings lookup failure is distinguishable from missing settings and can be retried (0.3638ms)
+✔ a stale startup lookup cannot disable chat after a successful settings refresh (0.441ms)
+✔ clearing settings wins over an older ready result (0.2362ms)
+(node:16156) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///E:/Projects/Factoryze/Factoryze/Factoryze/packages/app/extensions/core/test/agent-error.test.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to \\?\E:\Projects\Factoryze\Factoryze\Factoryze\packages\app\extensions\core\package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ agent errors distinguish task budgets, provider credits and unavailable models without displaying diagnostic JSON (7.7197ms)
+(node:6732) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///E:/Projects/Factoryze/Factoryze/Factoryze/packages/app/extensions/core/test/agent-tab-icon.test.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to \\?\E:\Projects\Factoryze\Factoryze\Factoryze\packages\app\extensions\core\package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ the Agent view has a chat icon in the right sidebar navigation (1.4425ms)
+(node:23304) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///E:/Projects/Factoryze/Factoryze/Factoryze/packages/app/extensions/core/test/appearance.test.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to \\?\E:\Projects\Factoryze\Factoryze\Factoryze\packages\app\extensions\core\package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ appearance defaults to matching the system and maps each mode to a Theia theme (1.7136ms)
+(node:12464) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///E:/Projects/Factoryze/Factoryze/Factoryze/packages/app/extensions/core/test/benchmark-cli.test.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to \\?\E:\Projects\Factoryze\Factoryze\Factoryze\packages\app\extensions\core\package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ benchmark command explains its required profile and task without starting a run (1417.8022ms)
+(node:1644) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///E:/Projects/Factoryze/Factoryze/Factoryze/packages/app/extensions/core/test/flow-model.test.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to \\?\E:\Projects\Factoryze\Factoryze\Factoryze\packages\app\extensions\core\package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ hidden check names read as sentences (1.5095ms)
+✔ times read relative to now, then as dates (160.8516ms)
+✔ Continue shows the three most recently used attempts (2.2617ms)
+✔ Continue can reveal every older attempt, including unsubmitted retired work (0.2957ms)
+✔ each task shows its open attempt, then its best result, then that it has not been tried (0.3471ms)
+✔ attempt label names the task and attempt without punctuation tricks (0.1758ms)
+✔ tool paths are shown relative to the attempt folder (0.4019ms)
+✔ unified diff keeps two lines of context around each change (0.896ms)
+✔ tool rows read as plain actions, in progress or done (0.5759ms)
+✔ submission times read naturally in a sentence (1.0283ms)
+(node:16120) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///E:/Projects/Factoryze/Factoryze/Factoryze/packages/app/extensions/core/test/harness-tools.test.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to \\?\E:\Projects\Factoryze\Factoryze\Factoryze\packages\app\extensions\core\package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ Windows shells retain OS module/cache locations without inheriting provider keys or another PowerShell module path (2.7401ms)
+✔ harness tools scope reads/searches to the workspace and require a reviewed diff for edits (101.5869ms)
+✔ shell denial never launches a command, approvals cannot overwrite edits made while reviewing (50.725ms)
+✔ approved shell runs with the task package index and without provider environment credentials (556.1688ms)
+✔ Stop while waiting for approval cancels without a write even if approval arrives later (15.331ms)
+(node:8276) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///E:/Projects/Factoryze/Factoryze/Factoryze/packages/app/extensions/core/test/lab-agent.test.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to \\?\E:\Projects\Factoryze\Factoryze\Factoryze\packages\app\extensions\core\package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ real desktop backend uses the server brain and existing approved hands without loading BYOK settings (3663.535ms)
+(node:13708) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///E:/Projects/Factoryze/Factoryze/Factoryze/packages/app/extensions/core/test/lab-connection.test.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to \\?\E:\Projects\Factoryze\Factoryze\Factoryze\packages\app\extensions\core\package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ desktop lab connection stores tokens only in credentials, resumes safely and retains concurrent offline work/events (1438.9908ms)
+(node:10428) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///E:/Projects/Factoryze/Factoryze/Factoryze/packages/app/extensions/core/test/model-settings.test.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to \\?\E:\Projects\Factoryze\Factoryze\Factoryze\packages\app\extensions\core\package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ unavailable Linux Secret Service gives safe recovery guidance for reads, writes and deletes (11.2452ms)
+✔ temperature persists, reaches the engine and can be cleared without replacing credentials (4.6742ms)
+✔ environment temperature is validated and visible without keychain access (0.9702ms)
+✔ model settings keep the key in the credential store and return only redacted settings (4.802ms)
+✔ model settings reject unsafe provider URLs and invalid capacities before saving (1.0765ms)
+✔ judge and scoring remain opt-in and selected judge settings reach only the engine (2.0525ms)
+✔ explicit backend provider configuration works without accessing the desktop keychain (0.8086ms)
+✔ isolated credential accounts do not read, overwrite or delete the normal desktop setup (1.7569ms)
+✔ OpenRouter saves and legacy reads select Chat Completions without replacing the saved key (1.9098ms)
+✔ pasting an OpenRouter completion endpoint repairs the base URL on save and legacy load without losing credentials (1.3121ms)
+✔ Factoryze is explicitly selected, survives keychain reload and retains the existing provider key (1.2107ms)
+✔ legacy OpenCode settings migrate to Factoryze without losing the provider key or budget (0.954ms)
+✔ packaged task verification accepts the promoted catalog without requiring OpenCode baselines (85.5356ms)
+✔ packaged task verification requires the retired graders and both visible tasks (517.3134ms)
+(node:21068) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///E:/Projects/Factoryze/Factoryze/Factoryze/packages/app/extensions/core/test/practice-report-copy.test.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to \\?\E:\Projects\Factoryze\Factoryze\Factoryze\packages\app\extensions\core\package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ report copy shows measured turns and separate expert token and turn ratios (2.406ms)
+✔ report copy explains missing and invalid comparisons without inventing a score (0.3327ms)
+(node:4708) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///E:/Projects/Factoryze/Factoryze/Factoryze/packages/app/extensions/core/test/prompt-history.test.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to \\?\E:\Projects\Factoryze\Factoryze\Factoryze\packages\app\extensions\core\package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ prompt text is kept locally by prompt ID and long prompts are shortened (4.3283ms)
+(node:21732) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///E:/Projects/Factoryze/Factoryze/Factoryze/packages/app/extensions/core/test/report-learning.test.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to \\?\E:\Projects\Factoryze\Factoryze\Factoryze\packages\app\extensions\core\package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ report analysis separates measured tokens without generating suggestions or prompt scores (2.48ms)
+✔ legacy prompt costs stay unknown while snapshotted zero and positive costs remain explicit (0.5907ms)
+✔ partial accounting and unavailable history remain visible without suggestions (0.3054ms)
+✔ manual attempts show no model usage and never claim commands prove tests ran (1.2134ms)
+✔ summary facts retain saved usage, multiple models and missing legacy data without invented zeroes (0.5555ms)
+(node:2936) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///E:/Projects/Factoryze/Factoryze/Factoryze/packages/app/extensions/core/test/solo-launch.test.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to \\?\E:\Projects\Factoryze\Factoryze\Factoryze\packages\app\extensions\core\package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ only a recent explicit task open reveals its starter once for its own workspace (1.2014ms)
+(node:12556) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///E:/Projects/Factoryze/Factoryze/Factoryze/packages/app/extensions/core/test/startup-policy.test.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to \\?\E:\Projects\Factoryze\Factoryze\Factoryze\packages\app\extensions\core\package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ launch opens Home instead of restoring the last attempt, unless a folder is passed on the command line (1.5941ms)
+(node:1252) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///E:/Projects/Factoryze/Factoryze/Factoryze/packages/app/extensions/core/test/trial-connection.test.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to \\?\E:\Projects\Factoryze\Factoryze\Factoryze\packages\app\extensions\core\package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ trial signup exposes only account data, preserves BYOK and survives a desktop restart (26.36ms)
+✔ gateway renewal is single-flight, short-lived and never rewrites the saved BYOK key (6.5874ms)
+✔ revocation, lack of credit and paused service never fall back to BYOK (4.3569ms)
+✔ trial logout clears the device credential and keeps the saved BYOK connection (2.4998ms)
+✔ an unavailable trial service leaves an explicit BYOK route without selecting it automatically (2.7208ms)
+(node:1428) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///E:/Projects/Factoryze/Factoryze/Factoryze/packages/app/extensions/core/test/workbench-metrics.test.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to \\?\E:\Projects\Factoryze\Factoryze\Factoryze\packages\app\extensions\core\package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ each prompt gets a block proportional to its weighted token use (5.372ms)
+✔ saved usage is shown as earlier usage and a new scope resets the blocks (0.45ms)
+✔ timer tracks elapsed practice time without treating the task estimate as a deadline (0.2863ms)
+✔ Home hides the elapsed display without resetting the task clock or metered totals (0.2117ms)
+✔ task source budget is visible before the first model call (0.3079ms)
+✔ restoring the timer after loading task metadata retains its source budget and title (1.4108ms)
+✔ input, output and cached tokens remain separate from the weighted budget, including after workspace changes (0.7154ms)
+✔ late usage from the previous task run cannot repopulate fresh input/output meters (0.6208ms)
+✔ an older workspace metadata response cannot lower the latest metered counts (0.3764ms)
+✔ reopening an attempt rebuilds one segment per saved prompt, then keeps counting live (0.7319ms)
+(node:2988) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///E:/Projects/Factoryze/Factoryze/Factoryze/packages/app/extensions/core/test/workbench-panes.test.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to \\?\E:\Projects\Factoryze\Factoryze\Factoryze\packages\app\extensions\core\package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ pane controls hide and restore each pane independently without closing its content (2.1231ms)
+✔ showing an empty pane restores its default view before expanding (0.4667ms)
+✔ opening the bottom pane reveals the terminal even when the Problems view already exists (0.3821ms)
+✔ Windows smoke waits for in-place NSIS uninstall before removing its owned directory (7.532ms)
+✔ failed uninstall is reported and preserves the install for diagnosis (6.1721ms)
+✔ cleanup refuses an unrelated temporary directory before invoking any operation (1.5744ms)
+✔ an installed executable without an uninstaller is an explicit cleanup failure (23.439ms)
+✔ cleanup removes an owned directory when setup never installed an app (4.0929ms)
+✔ cleanup permits a canonical temporary-parent alias without following a linked root (8.8517ms)
+✔ a linked smoke root cannot redirect cleanup into a different directory (7.3755ms)
+✔ custom Electron packages launch Factoryze instead of the default Electron shell on every platform (67.4549ms)
+✔ synthetic benchmark command policy accepts native Windows and POSIX test commands only (1.9634ms)
+✔ the desktop app packages and launches only the Factoryze harness (2.1855ms)
+(node:22560) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///E:/Projects/Factoryze/Factoryze/Factoryze/packages/app/extensions/core/src/node/model-settings.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to \\?\E:\Projects\Factoryze\Factoryze\Factoryze\packages\app\extensions\core\package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ the harness spike exposes help without credentials or a model call (729.6387ms)
+✔ task files and dependency patches are checked out with LF on every OS (130.8812ms)
+(node:11444) [DEP0190] DeprecationWarning: Passing args to a child process with shell option true can lead to security vulnerabilities, as the arguments are not escaped, only concatenated.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+✔ Theia invokes the maintained local rebuild tool through pnpm without downloading a legacy package (1399.4844ms)
+✔ installed smoke decodes Theia workspace URLs into native Windows drive and UNC paths (1.447ms)
+✔ installed smoke preserves POSIX workspace paths and rejects an absent workspace (0.6764ms)
+✔ Electron lets the workbench header occupy the macOS title row (1.971ms)
+✔ public OpenCode requests retain native context, meter tokens and distinguish provider failures from a task budget (115.2151ms)
+✔ authenticated gateway counts every request, serializes spending, and refuses requests after the budget (76.3557ms)
+✔ client cancellation persists observed usage and blocks subsequent requests (17.6477ms)
+✔ provider rejections do not expose diagnostics and do not consume the token budget (14.4856ms)
+✔ missing usage blocks the next call rather than recording free tokens (11.4903ms)
+✔ activity feed stays experimental and its correct-looking starter fails the performance checks (8317.0421ms)
+✔ activity feed checks reject stale caches, cross-workspace names, dropped rows and reordered pages (6929.0738ms)
+✔ expert comparison requires solved work, matching model, complete usage and known turns (5.3302ms)
+✔ benchmark records isolated expert and naive runs only after both are measured (376.7612ms)
+✔ failed benchmark leaves no baseline and closes its run (81.015ms)
+✔ benchmark refuses a run without metered model usage (83.9865ms)
+✔ benchmark refuses model usage without completed prompt turns (110.6958ms)
+✔ variance runs alternate expert and naive, keep failed runs, and write no baseline (679.8732ms)
+✔ run summaries report spread and whether expert and naive overlap (0.723ms)
+✔ variance runs include the middle scenario when the task defines one (671.8229ms)
+✔ a variance run that fails after spending tokens keeps its usage and grade (195.6918ms)
+✔ the gateway streams a replayed provider response over HTTP (116.6838ms)
+✔ gateway preserves a Unicode prompt split across incoming UTF-8 chunks (30.9817ms)
+✔ the gateway rewrites an edit before returning the tool call (8.3391ms)
+✔ local grader runs hidden tests on a disposable copy without placing them in the student workspace (2186.988ms)
+✔ local grader rejects missing hidden tests rather than reporting a perfect score (21.5246ms)
+✔ public checks report actionable failures and pass after the workspace is fixed without exposing hidden checks (796.7239ms)
+✔ hidden check timeouts fail by name and allow later checks to run (1411.4958ms)
+✔ public check timeouts return named failures and allow later checks to run (1416.0781ms)
+✔ the grading run limit reports every remaining check without executing it (2132.3268ms)
+✔ an import timeout or exited check cannot prevent other test files from running (1467.8751ms)
+✔ a check timeout stops its child processes before grading returns (2047.8247ms)
+✔ submission saves a report with a timed-out hidden check and retains it after restart (1408.3939ms)
+✔ instructions, tool definitions and execution limits require a new harness version when changed (1.6091ms)
+✔ Factoryze openai-chat: streams, runs a tool, keeps history, meters every call and retains exhaustion after restart (362.1238ms)
+✔ Factoryze anthropic-messages: streams, runs a tool, keeps history, meters every call and retains exhaustion after restart (220.7514ms)
+✔ harness refuses truncated tool calls and exposes only safe gateway errors (3.7947ms)
+✔ Stop cancels an active model request and concurrent prompts cannot interleave history (0.6809ms)
+✔ context caps drop complete older turns without auxiliary calls and reject oversized current prompts (1.4174ms)
+✔ temperature is sent only when pinned, for both provider APIs (2.02ms)
+✔ OpenCode-only public connections fail before the custom harness sends any request (0.3666ms)
+✔ sponsored context limits drop complete earlier turns and reject oversized requests before dispatch (1.813ms)
+✔ server agent dispatches tools to the student, meters provider usage and deduplicates prompts/results (309.7437ms)
+✔ a private join binding recovers a lost response without allowing another client to claim the identity (172.6392ms)
+✔ lab task delivery excludes hidden material; mirror sync is bounded, scoped, versioned and idempotent (186.6123ms)
+✔ submissions are immutable; closing auto-submits; grades remain private until instructor release (202.9636ms)
+✔ instructor session recovery preserves identity, budgets and snapshots; student events are untrusted flags (86.535ms)
+✔ lab joins are roster-bound, versioned, scoped and do not disclose operator secrets (110.7278ms)
+✔ trusted server metering survives reconnect/restart and cannot reset or cross student/lab budgets (173.3965ms)
+✔ closing or expiring a lab stops joins and requests while preserving readable usage (96.8978ms)
+✔ incomplete requests fail closed, immutable pins and duplicate labs are rejected (87.1782ms)
+✔ queued requests recheck budget and closure before dispatch; invalid usage cannot become complete (87.6937ms)
+✔ weighted tokens discount cached input without hiding raw counts (5.6215ms)
+✔ accounts for JSON and Anthropic cache counts without double counting cached input (3.9738ms)
+✔ interruption preserves observed usage; absent, invalid and truncated usage stays incomplete (1.9584ms)
+✔ a malformed final usage event cannot turn an earlier checkpoint into a complete charge (0.896ms)
+✔ metering reads a usage event split across chunks and preserves the stream (0.6009ms)
+✔ engine package index serves only curated wheels and pins pip without a fallback index (112.4545ms)
+✔ schema 5 upgrades to append-only scoped events and auditable usage reconciliation (86.3403ms)
+✔ scoring v1 is deterministic, gates incorrect work, and never invents missing judge/baseline scores (2.621ms)
+(node:13824) Warning: AI SDK Warning System: To turn off warning logging, set the AI_SDK_LOG_WARNINGS global to false.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:13824) Warning: AI SDK Warning (factoryze-judge.chat / small-judge): The feature "responseFormat" is not supported. JSON response format schema is only supported with structuredOutputs
+✔ judge treats prompts as data, validates structured provider output, and returns separate usage (94.0554ms)
+✔ session judge usage stays outside the student budget and report assessments survive restart (246.252ms)
+✔ judge is disabled by default, failures do not block prompts, and stopping aborts pending judgement (107.2363ms)
+✔ Anthropic-compatible judge validates the structured JSON tool response and usage (55.9372ms)
+✔ library-fines: public tests pass on the buggy starter and a targeted fix passes every hidden check (14634.1452ms)
+✔ monthly-revenue: public tests pass on the buggy starter and a targeted fix passes every hidden check (10300.8712ms)
+✔ retiring bundled tasks preserves old attempts, usage, reports and resubmission after restart (14141.9553ms)
+✔ temperature refusals have a safe specific category without misclassifying unrelated bad requests (8.6869ms)
+✔ Anthropic transport keeps the upstream key in engine headers and preserves split UTF-8 bytes (67.7452ms)
+✔ provider URL validation rejects plaintext remote endpoints and credentials embedded in URLs (0.9469ms)
+✔ a pasted OpenRouter request endpoint is appended exactly once (0.888ms)
+✔ OpenRouter routing and account errors expose only a safe category, not upstream diagnostics (1.9ms)
+✔ OpenCode public transport preserves native OpenCode headers and never forwards a private credential or session token (2.103ms)
+✔ Python preflight detects missing venv support and gives the matching Debian/Ubuntu package without creating files (1.9195ms)
+✔ preflight and setup skip an incomplete Python and use a compatible interpreter with venv and ensurepip (13.1822ms)
+✔ Windows discovery supports py selectors and rejects the Microsoft Store alias response (0.7282ms)
+✔ Windows minimum-version errors retain the interpreter version instead of replacing it with alias guidance (0.7655ms)
+✔ uses a compatible Python and creates a task venv (15.013ms)
+✔ explains when no installed Python meets the task minimum (1.6513ms)
+✔ reports a failed venv setup without claiming the workspace is ready (2.3939ms)
+✔ python check reports the best match without creating a virtual environment (1.7112ms)
+✔ recording and replay preserve streamed chunk boundaries (4.5176ms)
+✔ a mismatched request does not consume the next fixture (1.9585ms)
+✔ a committed fixture replays without a network provider (17.1657ms)
+✔ report activity deduplicates updates and groups measured requests by preceding tools without inventing context costs (6.9966ms)
+✔ legacy, incomplete and unknown activity keeps all observed usage and discloses missing history (0.8182ms)
+✔ request attribution resets between prompts and sessions, including reused tool IDs (0.4008ms)
+✔ missing prompt history stays unavailable and duplicate request starts preserve the next activity group (0.4468ms)
+✔ activity attribution uses recorded cache weights and reconciled ledger usage instead of stale event counts (26.5286ms)
+✔ saved report insights and prompt costs survive later prompts, resubmission and restart without prompt text (253.0403ms)
+✔ rewrites an edit argument split across SSE events before tool dispatch (3.1031ms)
+✔ passes text-only SSE chunks through unchanged (0.4729ms)
+✔ does not release a partial edit call when the stream ends early (0.8849ms)
+✔ reports retain every distinct execution pin across sessions, resubmission and engine restart (211.5711ms)
+✔ submission grades only a registered practice workspace and labels the result unverified (66.1388ms)
+✔ practice session routes to the upstream with engine credentials and persists task totals across engine restarts (196.5849ms)
+✔ starting the same task again resets this run, while resume/New session/restart preserve each run (146.613ms)
+✔ solved practice report snapshots matching expert ratios and preserves correctness when a baseline goes stale (177.5819ms)
+✔ attempts list every practice workspace with its number, usage and submissions (86.5618ms)
+✔ raising the budget in an attempt is recorded on its next report (61.3837ms)
+✔ a budget override resolves native temp-directory aliases to the registered workspace (115.9859ms)
+✔ imported task source, budget and explicit override survive restart without resetting usage (281.6861ms)
+✔ folder and ZIP imports retain a validated private task snapshot and declared budget (172.734ms)
+✔ imports reject traversal, symlinks and missing starter files without writing outside the pack (54.7886ms)
+✔ ZIP imports reject Unix file and directory symlinks on every platform (57.084ms)
+✔ practice task loader validates metadata and copies only starter files (126.1719ms)
+✔ practice task removes a partial workspace when setup fails (70.8289ms)
+✔ practice task loader rejects invalid metadata (56.3258ms)
+✔ bundled practice catalog contains two valid Python tasks (30.2114ms)
+✔ retired tasks stay loadable for existing attempts while hidden from the practice catalog (25.2891ms)
+✔ benchmark prompts validate against the task and stay outside student workspaces (387.3738ms)
+✔ benchmark prompt loader rejects missing, mismatched and empty scenarios (66.0153ms)
+✔ benchmark prompts may add an optional middle scenario without changing existing prompt hashes (41.1357ms)
+✔ trial transport uses short-lived authorization, unique idempotency and server output limits without retries (34.7974ms)
+✔ trial failures preserve a safe funding-specific error and never silently retry (0.8531ms)
+✔ program exhaustion is distinct from personal credit and unsafe trial URLs are rejected (1.4117ms)
+✔ usage persists per user/task/profile/model; reopening conversations cannot reset the budget (71.4173ms)
+✔ schema 1 usage database migrates to append-only practice reports without losing usage (49.5471ms)
+✔ unknown and crashed requests retain partial counts and block further spending after restart (33.9983ms)
+✔ workspace usage isolates requests while the task budget remains cumulative (26.154ms)
+✔ schema 2 migration preserves old reports and leaves old requests unattributed (62.4427ms)
+✔ completed prompt turns persist by workspace and model after a schema 3 migration (74.3894ms)
+✔ schema 4 migration marks existing model history as incomplete for prompt-turn comparisons (57.6736ms)
+✔ schema 6 migrates task sources and budget overrides while retaining reports, events and usage (49.3402ms)
+✔ fresh task workspaces have independent meters and budgets while cumulative history stays intact (3.6044ms)
+✔ incomplete accounting blocks its own run without contaminating another task workspace (3.4686ms)
+✔ prompt usage follows the event log order and flags prompts with unconfirmed counts (37.4952ms)
+✔ report insights are optional for old submissions and enforce bounded count structure (13.6679ms)
+✔ Python check diagnostics are optional and bounded, preserving existing clients (1.8059ms)
+✔ report execution pins are optional for old reports and validate metadata without credentials (1.8428ms)
+✔ connection temperature is optional, finite and bounded without changing old defaults (2.0112ms)
+✔ task packs require schema 1 and a valid Python minimum (1.2241ms)
+✔ task retirement is optional and preserves existing schema 1 manifests (0.4164ms)
+✔ lab config pins an agent profile and keeps keys out of the contract (2.4124ms)
+✔ events are versioned and readers can retain unknown event types (1.4181ms)
+✔ attempt and report summaries carry only counts, never prompts or keys (2.997ms)
+✔ lab connection contracts require a pinned HTTPS origin and exclude credentials (11.4196ms)
+✔ lab join and creation inputs exclude student-assigned roles, budget overrides and keys (5.0226ms)
+✔ lab package downloads require a student session and serve only the curated wheelhouse (1213.1386ms)
+✔ real TLS clients join/reconnect, cannot administer or self-report usage, and observe closure (1339.7984ms)
+✔ instructor CLI creates, watches, closes and exports over real HTTPS without leaking its token (3392.805ms)
+✔ failed initialization does not overwrite an identity or leave partial keys (3.2999ms)
+✔ server state lock refuses a live owner, reclaims stale state and releases only its own marker (29.4953ms)
+ℹ tests 226
+ℹ suites 0
+ℹ pass 226
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 42983.7939

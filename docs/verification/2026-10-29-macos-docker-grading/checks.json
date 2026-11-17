@@ -1,0 +1,220 @@
+{
+  "date": "2026-10-29",
+  "timezone": "Asia/Dhaka",
+  "recordedAtUtc": "2026-10-29T15:35:00Z",
+  "request": "Run the real Docker grading checks on the owner's Mac, enable Docker's default seccomp profile, and record the result.",
+  "state": "real-docker-checks-passed-macos-arm64",
+  "realDockerChecksPassed": true,
+  "imageBuilt": true,
+  "deterministicChecksPassed": true,
+  "defaultGradingEnabled": false,
+  "phase2ReleaseComplete": false,
+  "identity": {
+    "branch": "feature/lab-pilot",
+    "sourceCommit": "d1a5d7bc484e09757c05430432954801bf146565",
+    "sourceChanged": false,
+    "checkpoint": "The enclosing Git commit adds only this evidence and documentation"
+  },
+  "checks": [
+    {
+      "command": "pnpm docker:check",
+      "exitCode": 1,
+      "log": "seccomp-red.log",
+      "scope": "Initial run: Docker Desktop default seccomp was unconfined; refused at isolation self-check with zero containers"
+    },
+    {
+      "command": "Add \"seccomp-profile\": \"builtin\" to ~/.docker/daemon.json and restart Docker Desktop",
+      "approvedByOwner": true,
+      "log": "seccomp-red.log"
+    },
+    {
+      "command": "pnpm docker:build",
+      "exitCode": 0,
+      "log": "docker-build.log",
+      "image": "sha256:e79d20d59afa6a184267756ad3c87000efcb9ec031ad2471b853c5f6d9100e4d",
+      "reproducible": "Two builds produced the same image ID"
+    },
+    {
+      "command": "pnpm docker:check",
+      "exitCode": 0,
+      "log": "docker-check.log",
+      "receipt": "docker-check-receipt.json",
+      "containersStarted": 26,
+      "ownedContainersRemaining": 0,
+      "scope": "Real Linux containers: kernel policy, network/filesystem restrictions, abuse containment, Library fines starter/fixed grading, queue/release/CSV and cleanup"
+    },
+    {
+      "command": "pnpm test",
+      "env": {
+        "FACTORYZE_OPENSSL": "/opt/homebrew/opt/openssl@3/bin/openssl"
+      },
+      "exitCode": 0,
+      "tests": 234,
+      "passed": 234,
+      "skipped": 0,
+      "log": "tests.log",
+      "scope": "Deterministic suite on macOS; a first run without FACTORYZE_OPENSSL failed 3 lab TLS tests because PATH openssl is Anaconda's 1.1.1u, and was stopped; its log was overwritten by this rerun"
+    },
+    {
+      "command": "pnpm typecheck",
+      "exitCode": 0,
+      "log": "typecheck.log"
+    }
+  ],
+  "realDocker": {
+    "date": "2026-10-29",
+    "passed": true,
+    "realDockerChecks": true,
+    "paidModelCalls": 0,
+    "realEmailsSent": 0,
+    "hostStudentCodeExecutions": 0,
+    "image": "sha256:e79d20d59afa6a184267756ad3c87000efcb9ec031ad2471b853c5f6d9100e4d",
+    "python": "3.13.18",
+    "policy": {
+      "uid": 10000,
+      "keyAbsent": true,
+      "socketAbsent": true,
+      "hostFileAbsent": true,
+      "networkBlocked": true,
+      "rootReadonly": true,
+      "inputReadonly": true
+    },
+    "resourceAbuseContained": true,
+    "correctness": {
+      "starter": {
+        "passed": 5,
+        "total": 9
+      },
+      "fixed": {
+        "passed": 9,
+        "total": 9
+      }
+    },
+    "queueReleaseCsvVerified": true,
+    "ownedContainersRemaining": 0,
+    "containersStarted": 26
+  },
+  "setup": {
+    "platform": "macOS 27.0.1 (26A434)",
+    "arch": "arm64",
+    "cpu": "Apple M1 Pro",
+    "memoryBytes": 17179869184,
+    "dockerDesktop": "4.41.2",
+    "dockerClient": "28.3.3",
+    "dockerServer": "28.1.1",
+    "engineOs": "linux/arm64",
+    "engineKernel": "6.10.14-linuxkit",
+    "cgroupVersion": "2",
+    "cgroupDriver": "cgroupfs",
+    "engineCpus": 8,
+    "engineMemoryBytes": 16749285376,
+    "seccompBeforeChange": "unconfined",
+    "seccompAfterChange": "builtin",
+    "daemonConfigChange": {
+      "file": "~/.docker/daemon.json",
+      "added": {
+        "seccomp-profile": "builtin"
+      },
+      "approvedByOwner": true,
+      "dockerDesktopRestarted": true,
+      "otherRunningContainersRestartedHealthy": true
+    },
+    "node": "v22.23.2",
+    "pnpm": "10.28.2",
+    "opensslOnPath": "OpenSSL 1.1.1u (Anaconda)",
+    "opensslUsedForTests": "/opt/homebrew/opt/openssl@3/bin/openssl (OpenSSL 3.6.5)",
+    "date": "2026-10-29"
+  },
+  "safetyLimits": {
+    "defaultGradingEnabled": false,
+    "nativeFallback": false,
+    "realKernelBoundaryVerified": true,
+    "verifiedArchitecture": "linux/arm64 (Docker Desktop on Apple silicon)",
+    "antiCheatingGuarantee": false,
+    "pythonSharesProcessWithEachTest": true,
+    "paidModelCalls": 0,
+    "realEmailsSent": 0,
+    "hostStudentCodeExecutions": 0
+  },
+  "remaining": [
+    "Docker Desktop on macOS needs \"seccomp-profile\": \"builtin\"; document it as a setup step for macOS operators",
+    "Real Docker checks on linux/amd64: the manual Ubuntu workflow and the owner's Windows PC (virtualization/WSL2/Docker Desktop)",
+    "Enable the verified grader on a lab server and grade a real desktop submission/report",
+    "Sandboxed benchmark/persistent agent-container integration; separate approval before paid calls",
+    "Lab/OS/date, actual LAN/ten-machine run, task measurements/pilot/corpus and human review before merge"
+  ],
+  "sourceHashes": [
+    {
+      "path": "packages/engine/docker/Dockerfile",
+      "normalization": "UTF-8 with CRLF converted to LF",
+      "sha256": "b4f877b506d261c64968b4f7b3313189927fb7a45c53ad3822cb1cd9c353f0fc"
+    },
+    {
+      "path": "packages/engine/docker/runner.py",
+      "normalization": "UTF-8 with CRLF converted to LF",
+      "sha256": "2b3db89aee53624175de79266c1570137c89ebf369c57e1c7439493d990ee65b"
+    },
+    {
+      "path": "packages/engine/scripts/build-grader.mjs",
+      "normalization": "UTF-8 with CRLF converted to LF",
+      "sha256": "06912bcabe73e44b555ec8932aef07b6e20aa5a8b79cc35a45ff4feccb597444"
+    },
+    {
+      "path": "packages/engine/scripts/check-docker.mjs",
+      "normalization": "UTF-8 with CRLF converted to LF",
+      "sha256": "201d52b772aa78889e7a7a1d91348e566f1b03d8e3957cb20b42c7963bf69652"
+    },
+    {
+      "path": "packages/engine/src/docker-executor.ts",
+      "normalization": "UTF-8 with CRLF converted to LF",
+      "sha256": "d390409052a864361350c0691a47c4b68ee8ef86daf6b55821aa3d6617e1b421"
+    },
+    {
+      "path": "packages/engine/src/docker-grader.ts",
+      "normalization": "UTF-8 with CRLF converted to LF",
+      "sha256": "d3c61c8bcc72ac672ac1ac2c3eacc0881f7573e30fa45fd72e4693f53bab8313"
+    }
+  ],
+  "evidenceHashes": [
+    {
+      "path": "docs/verification/2026-10-29-macos-docker-grading/docker-build.log",
+      "bytes": 1369,
+      "sha256": "8104ed87b0a8455ead09910106034719a11674a459c691cb82fd770a99ac6c77"
+    },
+    {
+      "path": "docs/verification/2026-10-29-macos-docker-grading/docker-check-receipt.json",
+      "bytes": 726,
+      "sha256": "ef70bdcc4ead00e229ea306038fb3e25497409b39778a5103641bdc02a2eb275"
+    },
+    {
+      "path": "docs/verification/2026-10-29-macos-docker-grading/docker-check.log",
+      "bytes": 898,
+      "sha256": "3110ed8181e707647719b5528b8ec9cb93e04ae97e4c4c2cd0becf5cebd6f2aa"
+    },
+    {
+      "path": "docs/verification/2026-10-29-macos-docker-grading/seccomp-red.log",
+      "bytes": 1305,
+      "sha256": "98f89b7422f94aad379a9c7438b651ea39c9cd0a37129e20695bc2f1a75b1af5"
+    },
+    {
+      "path": "docs/verification/2026-10-29-macos-docker-grading/setup.json",
+      "bytes": 891,
+      "sha256": "1481048d19b77b0d35ac932dfb8c3127de20a6ae73413a80733a10a722d1038c"
+    },
+    {
+      "path": "docs/verification/2026-10-29-macos-docker-grading/tests.log",
+      "bytes": 70211,
+      "sha256": "5d8efa66027e16a478d5911c0bab474fdf4d8af2cbbf8e0c5a6ea6ed65fc7496"
+    },
+    {
+      "path": "docs/verification/2026-10-29-macos-docker-grading/typecheck.log",
+      "bytes": 99,
+      "sha256": "c99ea6ee135bb0fe8c46cc00595e5f218e6ee0e4332e5d460cdc2ba1bd7191cc"
+    }
+  ],
+  "publication": {
+    "merged": false,
+    "pushed": false,
+    "released": false
+  }
+}

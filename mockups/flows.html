@@ -1,0 +1,1391 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Factoryze solo flows</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Mono:wght@400;500;600&family=Atkinson+Hyperlegible+Next:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --chrome: #E3E7E8; --chrome-hover: #D6DCDE; --side: #EEF1F1; --editor: #FBFCFB; --panel: #F4F6F6;
+    --page: #F7F8F8; --line: #D2D8DA; --line-strong: #B7C1C4; --text: #1E2A30; --muted: #586770; --faint: #85949B;
+    --accent: #0F6B74; --accent-hover: #0B5960; --accent-soft: #D9ECEC; --on-accent: #FFFFFF;
+    --seg: #66767E; --track: #D2D8DA; --ok: #1D6232; --fail: #9A2B20; --warn: #8A560B;
+    --ok-bg: #E2F1E5; --fail-bg: #F7E2DF; --warn-bg: #FBF1DE; --warn-line: #E2C07C;
+    --add-bg: #E2F1E5; --add-fg: #1D6232; --del-bg: #F7E2DF; --del-fg: #9A2B20;
+    --sx-k: #7C3A8C; --sx-f: #1F48B8; --sx-s: #8A5A10; --sx-c: #74838A; --sx-n: #A33A2A; --sx-t: #0F6B74;
+    --tip-bg: #1E2A30; --tip-fg: #F4F6F6; --backdrop: rgba(30, 42, 48, .38);
+    --ui: "Atkinson Hyperlegible Next", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+    --mono: "Atkinson Hyperlegible Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+    --side-w: 248px; --agent-w: 392px; --panel-h: 200px;
+    color-scheme: light;
+  }
+  :root[data-theme="dark"] {
+    --chrome: #151D21; --chrome-hover: #212C31; --side: #192226; --editor: #1D262A; --panel: #182125;
+    --page: #1A2327; --line: #2A363B; --line-strong: #3B494F; --text: #D8E1E4; --muted: #96A6AD; --faint: #6E7E85;
+    --accent: #4FB0B8; --accent-hover: #6CC2C9; --accent-soft: #1E3C40; --on-accent: #0D2326;
+    --seg: #8C9CA3; --track: #2A363B; --ok: #8FD6A4; --fail: #F0A69C; --warn: #E7B45E;
+    --ok-bg: #1C3527; --fail-bg: #3B2321; --warn-bg: #33291A; --warn-line: #6B5222;
+    --add-bg: #1C3527; --add-fg: #8FD6A4; --del-bg: #3B2321; --del-fg: #F0A69C;
+    --sx-k: #D39BE0; --sx-f: #93B4FF; --sx-s: #E0B872; --sx-c: #71838B; --sx-n: #F29B85; --sx-t: #6CC6CD;
+    --tip-bg: #D8E1E4; --tip-fg: #151D21; --backdrop: rgba(0, 0, 0, .55);
+    color-scheme: dark;
+  }
+
+  * { box-sizing: border-box; }
+  html, body { height: 100%; margin: 0; }
+  body { background: var(--page); color: var(--text); font: 13px/1.45 var(--ui); -webkit-font-smoothing: antialiased; overflow: hidden; }
+  button, input, select, textarea { font: inherit; color: inherit; }
+  code, pre, kbd { font-family: var(--mono); }
+  h1, h2, h3, p { margin: 0; }
+  [hidden] { display: none !important; }
+  :focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; border-radius: 3px; }
+  svg.i { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; flex: none; }
+
+  /* ---------- Buttons and inputs ---------- */
+  .btn { display: inline-flex; align-items: center; justify-content: center; gap: 6px; height: 30px; padding: 0 12px; border-radius: 4px;
+    border: 1px solid var(--line-strong); background: var(--editor); cursor: pointer; font-weight: 500; white-space: nowrap; }
+  .btn:hover { background: var(--chrome-hover); }
+  .btn:disabled { opacity: .5; cursor: not-allowed; }
+  .btn.primary { background: var(--accent); border-color: var(--accent); color: var(--on-accent); }
+  .btn.primary:hover:not(:disabled) { background: var(--accent-hover); border-color: var(--accent-hover); }
+  .btn.quiet { background: transparent; border-color: transparent; color: var(--muted); }
+  .btn.quiet:hover { color: var(--text); background: var(--chrome-hover); }
+  .btn.sm { height: 26px; padding: 0 10px; }
+  .link { border: 0; background: none; padding: 0; color: var(--accent); cursor: pointer; font-weight: 500; }
+  .link:hover { text-decoration: underline; }
+  .icon-btn { display: inline-grid; place-items: center; width: 28px; height: 28px; border: 0; background: transparent; border-radius: 4px; color: var(--muted); cursor: pointer; }
+  .icon-btn:hover { background: var(--chrome-hover); color: var(--text); }
+  .icon-btn[aria-pressed="false"] { color: var(--faint); }
+  .field { display: grid; gap: 4px; }
+  .field > span { font-weight: 600; }
+  .field small { color: var(--muted); }
+  .input { height: 32px; padding: 0 10px; border: 1px solid var(--line-strong); border-radius: 4px; background: var(--editor); width: 100%; }
+  .input:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 1px var(--accent); }
+
+  /* ---------- Window ---------- */
+  .window { height: 100vh; display: grid; grid-template-rows: 44px minmax(0, 1fr); }
+  .screen { min-height: 0; }
+  .titlebar { display: flex; align-items: center; gap: 20px; padding: 0 10px 0 14px; background: var(--chrome); border-bottom: 1px solid var(--line); min-width: 0; }
+  .wordmark { font-weight: 700; font-size: 14px; letter-spacing: -0.01em; }
+  .tb-group { display: flex; align-items: center; gap: 8px; min-width: 0; }
+  .tb-spacer { flex: 1; }
+  .model-chip { display: inline-flex; align-items: center; gap: 8px; height: 28px; padding: 0 10px; border: 1px solid var(--line-strong); border-radius: 14px;
+    background: transparent; cursor: pointer; color: var(--text); }
+  .model-chip:hover { background: var(--chrome-hover); }
+  .model-chip #chip-label { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 40vw; }
+  .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--ok); flex: none; }
+  .dot.off { background: transparent; box-shadow: inset 0 0 0 1.5px var(--warn); }
+  .attempt-title { display: flex; align-items: baseline; gap: 8px; min-width: 0; white-space: nowrap; }
+  .attempt-title strong { font-weight: 600; overflow: hidden; text-overflow: ellipsis; }
+  .attempt-title span { color: var(--muted); }
+  .divider { width: 1px; height: 20px; background: var(--line-strong); }
+
+  /* ---------- Budget meter ---------- */
+  .budget { flex: 0 1 460px; min-width: 200px; position: relative; }
+  .budget-btn { display: grid; gap: 5px; width: 100%; padding: 4px 6px; border: 0; border-radius: 4px; background: transparent; cursor: pointer; text-align: left; }
+  .budget-btn:hover { background: var(--chrome-hover); }
+  .budget-text { display: flex; justify-content: space-between; gap: 12px; font-size: 12px; color: var(--muted); font-variant-numeric: tabular-nums; }
+  .budget-text b { color: var(--text); font-weight: 600; }
+  .budget.full .budget-text b { color: var(--fail); }
+  .meter { display: flex; gap: 2px; height: 8px; }
+  .meter.mini { height: 6px; width: 180px; }
+  .seg { height: 100%; background: var(--seg); border-radius: 1px; position: relative; }
+  .seg.now { background: repeating-linear-gradient(135deg, var(--accent) 0 4px, var(--accent-soft) 4px 7px); box-shadow: inset 0 0 0 1px var(--accent); }
+  .seg.unknown { background: repeating-linear-gradient(135deg, var(--warn) 0 4px, var(--warn-bg) 4px 7px); box-shadow: inset 0 0 0 1px var(--warn); }
+  .seg.rest { flex: 1; background: var(--track); }
+  .budget-btn .seg:hover:not(.rest) { background: var(--text); }
+  .seg[data-tip]:hover::after { content: attr(data-tip); position: absolute; top: calc(100% + 8px); left: 50%; transform: translateX(-50%); white-space: pre;
+    background: var(--tip-bg); color: var(--tip-fg); padding: 6px 9px; border-radius: 4px; font-size: 12px; line-height: 1.4; z-index: 30; pointer-events: none; }
+  .popover { position: absolute; top: calc(100% + 6px); left: 50%; transform: translateX(-50%); width: 320px; z-index: 40; background: var(--editor);
+    border: 1px solid var(--line-strong); border-radius: 6px; box-shadow: 0 8px 24px rgba(0,0,0,.14); padding: 12px 14px; display: grid; gap: 10px; }
+  .popover dl { display: grid; grid-template-columns: 1fr auto; gap: 4px 16px; margin: 0; font-variant-numeric: tabular-nums; }
+  .popover dt { color: var(--muted); }
+  .popover dd { margin: 0; text-align: right; }
+  .popover dd.total { font-weight: 600; }
+  .popover p { color: var(--muted); font-size: 12px; }
+
+  .timer { display: flex; align-items: center; gap: 6px; color: var(--muted); font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .timer b { color: var(--text); font-weight: 600; }
+  .toggles { display: flex; gap: 2px; padding-left: 8px; border-left: 1px solid var(--line-strong); }
+
+  /* ---------- Home ---------- */
+  .page-scroll { overflow: auto; height: 100%; position: relative; }
+  .home-inner { max-width: 920px; margin: 0 auto; padding: 36px 32px 72px; display: grid; grid-template-columns: minmax(0, 1fr); gap: 36px; }
+  .table-wrap { overflow-x: auto; }
+  .home h2, .page h2 { font-size: 15px; font-weight: 600; }
+  .section-head { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px 12px; margin-bottom: 10px; }
+  .section-head .actions { display: flex; flex-wrap: wrap; gap: 6px; }
+  .notice { display: grid; grid-template-columns: auto 1fr auto; gap: 14px; align-items: start; padding: 16px 18px; border: 1px solid var(--line-strong);
+    border-left: 3px solid var(--accent); border-radius: 4px 6px 6px 4px; background: var(--editor); }
+  .notice svg { width: 20px; height: 20px; color: var(--accent); margin-top: 1px; }
+  .notice h3 { font-size: 14px; font-weight: 600; margin-bottom: 3px; }
+  .notice p { color: var(--muted); max-width: 62ch; }
+  .continue { display: grid; grid-template-columns: 1fr auto auto; gap: 20px; align-items: center; padding: 14px 16px; background: var(--editor);
+    border: 1px solid var(--line); border-radius: 6px; }
+  .continue.other { background: transparent; }
+  .continue h3 { font-size: 14px; font-weight: 600; }
+  .continue p { color: var(--muted); }
+  .continue .usage { display: grid; gap: 4px; font-size: 12px; color: var(--muted); font-variant-numeric: tabular-nums; }
+  .task-list { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--line); }
+  .task-list li { display: grid; grid-template-columns: minmax(0, 1fr) 150px auto; gap: 20px; align-items: center; padding: 14px 4px; border-bottom: 1px solid var(--line); }
+  .task-list h3 { font-size: 14px; font-weight: 600; margin-bottom: 2px; }
+  .task-list p { color: var(--muted); max-width: 64ch; }
+  .task-meta { font-size: 12px; color: var(--muted); display: grid; gap: 2px; }
+  .task-meta .state { color: var(--text); }
+  table.results { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; }
+  .results th { text-align: left; font-weight: 600; color: var(--muted); font-size: 12px; padding: 0 8px 6px; border-bottom: 1px solid var(--line); }
+  .results td { padding: 10px 8px; border-bottom: 1px solid var(--line); }
+  .results tr.row { cursor: pointer; }
+  .results tr.row:hover td { background: var(--side); }
+  .results td.num, .results th.num { text-align: right; }
+  .results .pass { color: var(--ok); }
+  .results .partial { color: var(--warn); }
+  .muted { color: var(--muted); }
+  .empty { color: var(--muted); padding: 14px 4px; border-top: 1px solid var(--line); }
+
+  /* ---------- Attempt (workbench) ---------- */
+  .attempt { display: grid; grid-template-rows: minmax(0, 1fr) 24px; }
+  .workbench { display: grid; grid-template-columns: 48px var(--side-w) minmax(0, 1fr) var(--agent-w); min-height: 0; }
+  .attempt.no-side { --side-w: 0px; } .attempt.no-agent { --agent-w: 0px; } .attempt.no-panel { --panel-h: 0px; }
+  .attempt.no-side .sidebar, .attempt.no-agent .agent, .attempt.no-panel .panel { display: none; }
+  .activity { grid-column: 1; background: var(--chrome); border-right: 1px solid var(--line); display: flex; flex-direction: column; align-items: center; padding: 6px 0; }
+  .activity .icon-btn { width: 48px; height: 44px; border-radius: 0; position: relative; color: var(--faint); }
+  .activity .icon-btn.active { color: var(--text); }
+  .activity .icon-btn.active::before { content: ""; position: absolute; left: 0; top: 10px; bottom: 10px; width: 2px; background: var(--accent); }
+  .activity .icon-btn svg { width: 20px; height: 20px; }
+  .activity .grow { flex: 1; }
+  .sidebar { grid-column: 2; background: var(--side); border-right: 1px solid var(--line); overflow: auto; min-width: 0; }
+  .side-title { height: 35px; display: flex; align-items: center; padding: 0 14px; font-weight: 600; color: var(--muted); }
+  .sec-head { display: flex; align-items: center; gap: 4px; width: 100%; height: 26px; padding: 0 8px; border: 0; border-top: 1px solid var(--line); background: transparent; font-weight: 600; cursor: pointer; }
+  .sec-head svg { width: 14px; height: 14px; color: var(--muted); transition: transform .12s; }
+  .sec-head[aria-expanded="false"] svg { transform: rotate(-90deg); }
+  .brief { padding: 6px 14px 14px 26px; display: grid; gap: 8px; }
+  .brief p { color: var(--muted); }
+  .brief dl { display: grid; grid-template-columns: auto 1fr; gap: 2px 10px; margin: 0; font-size: 12px; }
+  .brief dt { color: var(--faint); }
+  .brief dd { margin: 0; }
+  .tree { list-style: none; margin: 0; padding: 2px 0 10px; }
+  .tree .row { display: flex; align-items: center; gap: 6px; height: 24px; padding-left: calc(10px + var(--d, 0) * 14px); padding-right: 10px; white-space: nowrap; }
+  .tree .row:hover { background: var(--chrome-hover); }
+  .tree .row.active { background: var(--accent-soft); box-shadow: inset 2px 0 0 var(--accent); }
+  .tree svg { width: 14px; height: 14px; color: var(--muted); }
+  .tree .file { padding-left: calc(28px + var(--d, 0) * 14px); }
+  .tree .m { margin-left: auto; color: var(--warn); font-weight: 600; font-size: 12px; }
+
+  .center { grid-column: 3; display: grid; grid-template-rows: 35px 26px minmax(0, 1fr) var(--panel-h); grid-template-columns: minmax(0, 1fr); min-height: 0; }
+  .tabs { display: flex; background: var(--side); border-bottom: 1px solid var(--line); overflow: hidden; }
+  .tab { display: flex; align-items: center; gap: 8px; padding: 0 12px 0 14px; border: 0; border-right: 1px solid var(--line); background: transparent; color: var(--muted); white-space: nowrap; }
+  .tab.active { background: var(--editor); color: var(--text); box-shadow: inset 0 2px 0 var(--accent); margin-bottom: -1px; }
+  .tab .dot { background: var(--text); visibility: hidden; }
+  .tab.modified .dot { visibility: visible; }
+  .crumbs { display: flex; align-items: center; gap: 6px; padding: 0 16px; color: var(--muted); font-size: 12px; background: var(--editor); white-space: nowrap; }
+  .crumbs svg { width: 12px; height: 12px; }
+  .editor { overflow: auto; background: var(--editor); padding: 4px 0 24px; font: 13.5px/21px var(--mono); }
+  .ln { display: grid; grid-template-columns: 52px 6px 1fr; min-width: max-content; }
+  .ln .no { text-align: right; padding-right: 12px; color: var(--faint); user-select: none; }
+  .ln .code { white-space: pre; padding: 0 24px 0 10px; }
+  .ln.pending .mk { background: var(--accent); }
+  .ln.pending .code { background: color-mix(in srgb, var(--accent-soft) 70%, transparent); }
+  .ln.applied .mk { background: var(--ok); }
+  .k { color: var(--sx-k); } .f { color: var(--sx-f); } .s { color: var(--sx-s); } .c { color: var(--sx-c); font-style: italic; } .n { color: var(--sx-n); } .t { color: var(--sx-t); }
+
+  .panel { display: grid; grid-template-rows: 32px minmax(0, 1fr); border-top: 1px solid var(--line); background: var(--panel); min-height: 0; }
+  .panel-head { display: flex; align-items: center; padding: 0 8px 0 6px; gap: 2px; }
+  .ptab { height: 32px; padding: 0 10px; border: 0; background: transparent; color: var(--muted); cursor: pointer; display: flex; align-items: center; gap: 6px; }
+  .ptab[aria-selected="true"] { color: var(--text); box-shadow: inset 0 -2px 0 var(--accent); }
+  .ptab .count { background: var(--ok-bg); color: var(--ok); border-radius: 8px; padding: 0 6px; font-size: 11px; font-weight: 600; }
+  .panel-head .grow { flex: 1; }
+  .term { margin: 0; padding: 4px 16px 12px; overflow: auto; font-size: 13px; line-height: 19px; white-space: pre; }
+  .term .p { color: var(--accent); } .term .ok { color: var(--ok); } .term .dim { color: var(--faint); }
+  .tests { overflow: auto; padding: 6px 16px 12px; display: grid; gap: 8px; align-content: start; }
+  .tests .sum { font-weight: 600; }
+  .tests ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 2px; }
+  .tests li { display: flex; gap: 8px; align-items: center; font-family: var(--mono); font-size: 12.5px; }
+  .tests li svg { color: var(--ok); }
+  .tests .note { color: var(--muted); font-size: 12px; }
+
+  /* ---------- Agent pane ---------- */
+  .agent { grid-column: 4; display: grid; grid-template-rows: auto minmax(0, 1fr) auto auto; grid-template-columns: minmax(0, 1fr); background: var(--side); border-left: 1px solid var(--line); min-height: 0; overflow: hidden; position: relative; }
+  .agent-head { display: flex; align-items: center; gap: 8px; padding: 8px 8px 8px 16px; border-bottom: 1px solid var(--line); }
+  .agent-head .who { flex: 1; min-width: 0; }
+  .agent-head h2 { font-size: 13px; font-weight: 600; }
+  .agent-head .model { color: var(--muted); font-size: 12px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .pill { font-size: 12px; padding: 1px 8px; border-radius: 10px; background: var(--chrome); color: var(--muted); white-space: nowrap; }
+  .pill.wait { background: var(--accent-soft); color: var(--accent); font-weight: 600; }
+  .pill.busy { background: var(--accent-soft); color: var(--accent); }
+  .pill.stop { background: var(--warn-bg); color: var(--warn); font-weight: 600; }
+  .menu { position: absolute; right: 8px; top: 44px; z-index: 20; background: var(--editor); border: 1px solid var(--line-strong); border-radius: 6px;
+    box-shadow: 0 8px 24px rgba(0,0,0,.14); padding: 4px; min-width: 240px; display: grid; }
+  .menu button { display: grid; gap: 1px; text-align: left; padding: 7px 10px; border: 0; background: none; border-radius: 4px; cursor: pointer; }
+  .menu button:hover { background: var(--side); }
+  .menu small { color: var(--muted); }
+  .log { overflow: auto; padding: 12px 14px 20px; display: grid; grid-template-columns: minmax(0, 1fr); gap: 18px; align-content: start; }
+  .agent-empty { padding: 28px 18px; display: grid; gap: 8px; align-content: start; }
+  .agent-empty h3 { font-size: 14px; font-weight: 600; }
+  .agent-empty p { color: var(--muted); }
+  .agent-empty .btn { justify-self: start; margin-top: 4px; }
+  .agent-empty .example { margin-top: 6px; padding: 8px 10px; border-left: 3px solid var(--line-strong); background: var(--editor); color: var(--text); }
+  .turn { display: grid; gap: 10px; min-width: 0; }
+  .prompt { background: var(--editor); border: 1px solid var(--line); border-left: 3px solid var(--line-strong); border-radius: 2px 4px 4px 2px; padding: 8px 10px 9px; }
+  .turn.live .prompt { border-left-color: var(--accent); }
+  .reply { padding: 0 2px; }
+  .reply p + p { margin-top: 6px; }
+  code.inline { font-size: 12.5px; background: color-mix(in srgb, var(--line) 55%, transparent); padding: 1px 4px; border-radius: 3px; }
+  .step-row { display: flex; align-items: center; gap: 8px; color: var(--muted); font-size: 12.5px; padding: 0 2px; min-width: 0; }
+  .step-row .what { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .step-row .what code { color: var(--text); font-size: 12px; }
+  .step-row .res { margin-left: auto; white-space: nowrap; }
+  .res.ok { color: var(--ok); } .res.fail { color: var(--fail); } .res.warn { color: var(--warn); }
+  .cost { justify-self: end; color: var(--faint); font-size: 12px; font-variant-numeric: tabular-nums; }
+  .turn.live .cost { color: var(--accent); }
+  .approval { background: var(--editor); border: 1px solid var(--line-strong); border-radius: 6px; overflow: hidden; min-width: 0; }
+  .ap-head { display: flex; align-items: center; gap: 8px; padding: 8px 10px; border-bottom: 1px solid var(--line); }
+  .ap-head .title { font-weight: 600; flex: 1; min-width: 0; }
+  .ap-head .title code { font-weight: 500; font-size: 12.5px; }
+  .ap-head .meta { color: var(--muted); font-size: 12px; }
+  .diff { margin: 0; padding: 6px 0; font-size: 12.5px; line-height: 19px; overflow: auto; }
+  .diff div { display: grid; grid-template-columns: 30px 16px 1fr; white-space: pre; min-width: max-content; padding-right: 12px; }
+  .diff .n { color: var(--faint); text-align: right; padding-right: 8px; }
+  .diff .add { background: var(--add-bg); color: var(--add-fg); } .diff .del { background: var(--del-bg); color: var(--del-fg); }
+  .diff .add .n, .diff .del .n { color: inherit; }
+  .cmd { margin: 10px 10px 4px; padding: 8px 10px; background: var(--panel); border: 1px solid var(--line); border-radius: 4px; font-size: 12.5px; overflow: auto; }
+  .ap-note { padding: 0 10px 10px; color: var(--muted); font-size: 12px; }
+  .ap-actions { display: flex; gap: 6px; padding: 8px 10px; border-top: 1px solid var(--line); background: var(--side); }
+  .ap-actions .quiet { margin-left: auto; }
+  .banner { margin: 0 12px 10px; padding: 10px 12px; border: 1px solid var(--warn-line); background: var(--warn-bg); border-radius: 6px; display: grid; gap: 6px; }
+  .banner h3 { font-size: 13px; font-weight: 600; color: var(--warn); }
+  .banner p { color: var(--text); }
+  .banner .btn { justify-self: start; }
+  .composer { border-top: 1px solid var(--line); padding: 10px 12px 12px; background: var(--side); }
+  .composer textarea { width: 100%; resize: none; border: 1px solid var(--line-strong); border-radius: 6px; background: var(--editor); padding: 9px 10px; min-height: 70px; }
+  .composer textarea:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 1px var(--accent); }
+  .composer textarea:disabled { opacity: .6; }
+  .composer-bar { display: flex; align-items: center; gap: 10px; margin-top: 8px; }
+  .composer-bar .note { flex: 1; color: var(--faint); font-size: 12px; }
+  kbd { font-size: 11px; color: inherit; opacity: .8; border: 1px solid currentColor; border-radius: 3px; padding: 0 4px; }
+
+  .statusbar { display: flex; align-items: center; gap: 2px; padding: 0 6px; font-size: 12px; background: var(--chrome); border-top: 1px solid var(--line); color: var(--muted); white-space: nowrap; overflow: hidden; }
+  .statusbar span { padding: 0 8px; }
+  .statusbar .grow { flex: 1; }
+
+  /* ---------- Pages: report and settings ---------- */
+  .page-inner { max-width: 860px; margin: 0 auto; padding: 28px 32px 72px; display: grid; grid-template-columns: minmax(0, 1fr); gap: 28px; }
+  .back { justify-self: start; display: inline-flex; align-items: center; gap: 4px; }
+  .report-head { display: flex; justify-content: space-between; align-items: end; gap: 16px; flex-wrap: wrap; }
+  .report-head h1 { font-size: 22px; font-weight: 700; letter-spacing: -0.01em; }
+  .report-head p { color: var(--muted); margin-top: 4px; }
+  .outcome { padding: 18px 20px; border: 1px solid var(--line); border-radius: 6px; background: var(--editor); display: grid; gap: 12px; }
+  .outcome .verdict { font-size: 18px; font-weight: 700; display: flex; align-items: center; gap: 10px; }
+  .outcome .verdict svg { width: 22px; height: 22px; }
+  .outcome.pass .verdict svg { color: var(--ok); }
+  .outcome.partial .verdict svg { color: var(--warn); }
+  .checks { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
+  .checks li { display: grid; grid-template-columns: 18px 1fr; gap: 8px; }
+  .checks li svg { margin-top: 1px; }
+  .checks .ok svg { color: var(--ok); } .checks .bad svg { color: var(--fail); }
+  .checks .why { grid-column: 2; color: var(--muted); font-family: var(--mono); font-size: 12px; }
+  .figures { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); margin: 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  .figures div { padding: 12px 14px; border-left: 1px solid var(--line); }
+  .figures div:first-child { border-left: 0; padding-left: 0; }
+  .figures dt { color: var(--muted); font-size: 12px; }
+  .figures dd { margin: 2px 0 0; font-weight: 600; font-variant-numeric: tabular-nums; }
+  .figures dd small { font-weight: 400; color: var(--muted); }
+  .para { color: var(--muted); max-width: 70ch; }
+  .para strong { color: var(--text); }
+  .prompts { list-style: none; margin: 0; padding: 0; display: grid; gap: 0; border-top: 1px solid var(--line); }
+  .prompts li { display: grid; grid-template-columns: 28px 1fr 110px; gap: 4px 14px; padding: 14px 0; border-bottom: 1px solid var(--line); }
+  .prompts .idx { color: var(--faint); font-variant-numeric: tabular-nums; }
+  .prompts .text { font-style: normal; }
+  .prompts .tok { text-align: right; font-variant-numeric: tabular-nums; }
+  .prompts .bar { grid-column: 2 / 4; height: 6px; background: var(--track); border-radius: 1px; overflow: hidden; }
+  .prompts .bar span { display: block; height: 100%; background: var(--seg); }
+  .prompts .fb { grid-column: 2 / 4; color: var(--muted); }
+  .verdict-tag { display: inline-block; font-weight: 600; margin-right: 6px; }
+  .verdict-tag.good { color: var(--ok); } .verdict-tag.mid { color: var(--warn); } .verdict-tag.bad { color: var(--fail); }
+  .report-actions { display: flex; gap: 8px; flex-wrap: wrap; }
+
+  .settings-grid { display: grid; grid-template-columns: 180px minmax(0, 1fr); gap: 32px; max-width: 900px; margin: 0 auto; padding: 28px 32px 72px; }
+  .settings-nav { display: grid; gap: 2px; align-content: start; align-self: start; position: sticky; top: 0; }
+  .settings-nav a { color: var(--muted); text-decoration: none; padding: 6px 10px; border-radius: 4px; }
+  .settings-nav a:hover, .settings-nav a.on { color: var(--text); background: var(--side); }
+  .settings-body { display: grid; gap: 36px; }
+  .settings-body section { display: grid; gap: 14px; }
+  .settings-body h1 { font-size: 22px; font-weight: 700; }
+  .setting-card { padding: 14px 16px; border: 1px solid var(--line); border-radius: 6px; background: var(--editor); display: grid; gap: 10px; }
+  .setting-card .row { display: flex; align-items: start; justify-content: space-between; gap: 16px; }
+  .setting-card h3 { font-size: 14px; font-weight: 600; }
+  .setting-card p { color: var(--muted); max-width: 60ch; }
+  .switch { position: relative; width: 36px; height: 20px; flex: none; }
+  .switch input { position: absolute; inset: 0; opacity: 0; margin: 0; cursor: pointer; }
+  .switch span { position: absolute; inset: 0; border-radius: 10px; background: var(--line-strong); transition: background .12s; pointer-events: none; }
+  .switch span::after { content: ""; position: absolute; top: 2px; left: 2px; width: 16px; height: 16px; border-radius: 50%; background: var(--editor); transition: transform .12s; }
+  .switch input:checked + span { background: var(--accent); }
+  .switch input:checked + span::after { transform: translateX(16px); }
+  .switch input:focus-visible + span { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .kv { display: grid; grid-template-columns: 120px 1fr; gap: 4px 12px; margin: 0; }
+  .kv dt { color: var(--muted); }
+  .kv dd { margin: 0; word-break: break-all; }
+
+  /* ---------- Dialogs ---------- */
+  dialog { border: 1px solid var(--line-strong); border-radius: 8px; padding: 0; width: min(560px, 92vw); background: var(--editor); color: var(--text); box-shadow: 0 18px 48px rgba(0,0,0,.24); }
+  dialog::backdrop { background: var(--backdrop); }
+  .dlg-head { display: flex; align-items: start; gap: 12px; padding: 18px 20px 0; }
+  .dlg-head h2 { font-size: 17px; font-weight: 700; flex: 1; }
+  .dlg-body { padding: 12px 20px 4px; display: grid; gap: 16px; max-height: 64vh; overflow: auto; }
+  .dlg-body > p { color: var(--muted); }
+  .dlg-foot { display: flex; justify-content: flex-end; gap: 8px; padding: 16px 20px 18px; }
+  .dlg-foot .left { margin-right: auto; }
+  .facts { display: grid; grid-template-columns: 120px 1fr; gap: 10px 14px; margin: 0; }
+  .facts dt { color: var(--muted); }
+  .facts dd { margin: 0; display: grid; gap: 4px; justify-items: start; }
+  .facts dd .field { justify-self: stretch; }
+  .check { display: flex; align-items: center; gap: 6px; font-weight: 500; }
+  .check.ok svg { color: var(--ok); } .check.bad { color: var(--fail); } .check.bad svg { color: var(--fail); }
+  .help { color: var(--muted); font-size: 12px; }
+  .help code { font-size: 12px; }
+  .callout { padding: 10px 12px; border-radius: 6px; background: var(--side); color: var(--muted); }
+  .callout strong { color: var(--text); }
+  .steps { list-style: none; margin: 0; padding: 4px 0; display: grid; gap: 10px; }
+  .steps li { display: flex; align-items: center; gap: 10px; color: var(--faint); }
+  .steps li .mark { width: 18px; height: 18px; display: grid; place-items: center; }
+  .steps li.done { color: var(--text); } .steps li.done .mark { color: var(--ok); }
+  .steps li.doing { color: var(--text); font-weight: 600; }
+  .steps li.doing .mark::before { content: ""; width: 12px; height: 12px; border-radius: 50%; border: 2px solid var(--accent); border-right-color: transparent; animation: spin .8s linear infinite; }
+  .steps li.todo .mark::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--line-strong); }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .providers { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; border: 0; padding: 0; margin: 0; min-width: 0; }
+  .providers legend { font-weight: 600; margin-bottom: 6px; padding: 0; }
+  .prov { display: grid; grid-template-columns: auto 1fr; gap: 2px 10px; padding: 8px 10px; border: 1px solid var(--line); border-radius: 6px; cursor: pointer; }
+  .prov:hover { background: var(--side); }
+  .prov:has(input:checked) { border-color: var(--accent); background: var(--accent-soft); }
+  .prov input { grid-row: span 2; margin: 2px 0 0; accent-color: var(--accent); }
+  .prov small { color: var(--muted); }
+  .prov:nth-of-type(odd):last-of-type { grid-column: 1 / -1; }
+  .result-line { display: flex; gap: 6px; align-items: center; }
+  .result-line.ok { color: var(--ok); }
+  .grid3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+  .confirm { display: flex; gap: 8px; align-items: start; }
+  .confirm input { margin-top: 3px; accent-color: var(--accent); }
+
+  /* ---------- Prototype navigator (not part of the product) ---------- */
+  .proto { position: fixed; left: 12px; bottom: 34px; z-index: 100; font-size: 12px; }
+  .proto > button { display: inline-flex; align-items: center; gap: 6px; height: 28px; padding: 0 10px; border: 1px dashed var(--line-strong); border-radius: 14px;
+    background: var(--editor); color: var(--muted); cursor: pointer; box-shadow: 0 2px 8px rgba(0,0,0,.08); }
+  .proto-panel { position: absolute; bottom: 36px; left: 0; width: 280px; background: var(--editor); border: 1px dashed var(--line-strong); border-radius: 8px;
+    box-shadow: 0 8px 24px rgba(0,0,0,.16); padding: 10px; display: grid; gap: 8px; }
+  .proto-panel p { color: var(--muted); }
+  .proto-panel ol { margin: 0; padding-left: 22px; display: grid; gap: 1px; }
+  .proto-panel ol button { border: 0; background: none; padding: 3px 4px; cursor: pointer; text-align: left; width: 100%; border-radius: 3px; }
+  .proto-panel ol button:hover { background: var(--side); }
+  .proto-panel ol button.on { color: var(--accent); font-weight: 600; }
+  .proto-panel .row { display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--line); padding-top: 8px; }
+
+  @media (max-width: 1100px) { :root { --side-w: 220px; --agent-w: 340px; } .budget { flex-basis: 300px; } }
+  @media (max-width: 760px) {
+    .home-inner, .page-inner { padding-left: 16px; padding-right: 16px; }
+    .settings-grid { padding-left: 16px; padding-right: 16px; }
+    .notice { grid-template-columns: auto 1fr; } .notice .btn { grid-column: 2; justify-self: start; }
+    .task-list li { grid-template-columns: 1fr auto; } .task-meta { display: none; }
+    .continue { grid-template-columns: 1fr auto; } .continue .usage { display: none; }
+    .settings-grid { grid-template-columns: 1fr; } .settings-nav { display: none; }
+    .figures { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .figures div:nth-child(3) { border-left: 0; padding-left: 0; }
+    .prompts li { grid-template-columns: 22px minmax(0, 1fr) auto; }
+    .checks .why { word-break: break-word; }
+    .results .hide-sm { display: none; }
+  }
+  @media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="i-files" viewBox="0 0 24 24"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/></symbol>
+    <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"/><path d="m20 20-4.2-4.2"/></symbol>
+    <symbol id="i-sliders" viewBox="0 0 24 24"><path d="M4 7h10M18 7h2M4 17h4M12 17h8"/><circle cx="16" cy="7" r="2"/><circle cx="10" cy="17" r="2"/></symbol>
+    <symbol id="i-left" viewBox="0 0 24 24"><rect x="3.5" y="4.5" width="17" height="15" rx="2"/><path d="M9 4.5v15"/></symbol>
+    <symbol id="i-bottom" viewBox="0 0 24 24"><rect x="3.5" y="4.5" width="17" height="15" rx="2"/><path d="M3.5 14h17"/></symbol>
+    <symbol id="i-right" viewBox="0 0 24 24"><rect x="3.5" y="4.5" width="17" height="15" rx="2"/><path d="M15 4.5v15"/></symbol>
+    <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></symbol>
+    <symbol id="i-chev" viewBox="0 0 24 24"><path d="m7 9 5 5 5-5"/></symbol>
+    <symbol id="i-chev-r" viewBox="0 0 24 24"><path d="m9 6 6 6-6 6"/></symbol>
+    <symbol id="i-chev-l" viewBox="0 0 24 24"><path d="m15 6-6 6 6 6"/></symbol>
+    <symbol id="i-folder" viewBox="0 0 24 24"><path d="M3.5 7.5a2 2 0 0 1 2-2h4l2 2h7a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2h-13a2 2 0 0 1-2-2z"/></symbol>
+    <symbol id="i-file" viewBox="0 0 24 24"><path d="M14 3.5H7.5a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2h9a2 2 0 0 0 2-2V8z"/><path d="M14 3.5V8h4.5"/></symbol>
+    <symbol id="i-more" viewBox="0 0 24 24"><circle cx="6" cy="12" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="18" cy="12" r="1"/></symbol>
+    <symbol id="i-term" viewBox="0 0 24 24"><path d="m6 8 4 4-4 4M12 16h6"/></symbol>
+    <symbol id="i-read" viewBox="0 0 24 24"><path d="M2.5 12s3.5-6.5 9.5-6.5 9.5 6.5 9.5 6.5-3.5 6.5-9.5 6.5S2.5 12 2.5 12z"/><circle cx="12" cy="12" r="2.5"/></symbol>
+    <symbol id="i-edit" viewBox="0 0 24 24"><path d="M15.5 4.5 19.5 8.5 9 19H5v-4z"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12.5 4.5 4.5L19 7.5"/></symbol>
+    <symbol id="i-check-c" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="m8 12.5 3 3 5-6"/></symbol>
+    <symbol id="i-half-c" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 3a9 9 0 0 1 0 18z" fill="currentColor" stroke="none"/></symbol>
+    <symbol id="i-x" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></symbol>
+    <symbol id="i-play" viewBox="0 0 24 24"><path d="M8 5.5v13l10-6.5z"/></symbol>
+    <symbol id="i-stop" viewBox="0 0 24 24"><rect x="7" y="7" width="10" height="10" rx="1.5"/></symbol>
+    <symbol id="i-plug" viewBox="0 0 24 24"><path d="M9 3v5M15 3v5M6.5 8h11v3a5.5 5.5 0 0 1-11 0zM12 16.5V21"/></symbol>
+    <symbol id="i-zip" viewBox="0 0 24 24"><path d="M14 3.5H7.5a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2h9a2 2 0 0 0 2-2V8z"/><path d="M11 5h1M11 8h1M11 11h1M10.5 13.5h2v3h-2z"/></symbol>
+    <symbol id="i-flows" viewBox="0 0 24 24"><circle cx="6" cy="6" r="2"/><circle cx="18" cy="18" r="2"/><path d="M8 6h5a3 3 0 0 1 3 3v7"/></symbol>
+  </defs>
+</svg>
+
+<div class="window" id="win">
+  <!-- ======= Title bar ======= -->
+  <header class="titlebar">
+    <!-- Home, report and settings -->
+    <div class="tb-group" data-tb="home">
+      <span class="wordmark">Factoryze</span>
+    </div>
+    <div class="tb-spacer" data-tb="home"></div>
+    <div class="tb-group" data-tb="home">
+      <button class="model-chip" type="button" data-go-settings="model"><span class="dot" id="chip-dot"></span><span id="chip-label">MiniMax-M2.7</span></button>
+      <button class="icon-btn" type="button" aria-label="Settings" title="Settings" data-go-settings="model"><svg class="i"><use href="#i-sliders"/></svg></button>
+    </div>
+
+    <!-- Attempt -->
+    <div class="tb-group" data-tb="attempt">
+      <button class="btn quiet sm" type="button" id="to-home"><svg class="i"><use href="#i-chev-l"/></svg>Home</button>
+      <span class="divider"></span>
+      <span class="attempt-title"><strong id="attempt-task">Pagination API</strong><span id="attempt-n">Attempt 2</span></span>
+    </div>
+    <div class="tb-spacer" data-tb="attempt"></div>
+    <div class="budget" data-tb="attempt" id="budget">
+      <button class="budget-btn" type="button" id="budget-btn" aria-expanded="false" aria-controls="budget-pop">
+        <span class="budget-text"><span><b id="b-used">7,130</b> of <span id="b-limit">20,000</span> tokens</span><span id="b-left">12,870 left</span></span>
+        <span class="meter" id="b-meter"></span>
+      </button>
+      <div class="popover" id="budget-pop" hidden>
+        <dl>
+          <dt>Input</dt><dd id="p-in">8,550</dd>
+          <dt>Cached input, counted at a tenth</dt><dd id="p-cache">2,000</dd>
+          <dt>Output</dt><dd id="p-out">380</dd>
+          <dt>Counted against the budget</dt><dd class="total" id="p-total">7,130</dd>
+        </dl>
+        <p>Each segment is one prompt. Hover a segment to see what it cost. Cached input is cheaper for your provider, so it counts at a tenth.</p>
+      </div>
+    </div>
+    <div class="tb-spacer" data-tb="attempt"></div>
+    <div class="tb-group" data-tb="attempt">
+      <span class="timer" title="Time since this attempt started"><svg class="i"><use href="#i-clock"/></svg><b id="clock">12:05</b></span>
+      <button class="btn sm" type="button" id="run-tests"><svg class="i"><use href="#i-play"/></svg>Run tests</button>
+      <button class="btn primary sm" type="button" id="submit-btn">Submit</button>
+      <span class="toggles">
+        <button class="icon-btn" data-toggle="side" aria-pressed="true" aria-label="Show explorer" title="Explorer"><svg class="i"><use href="#i-left"/></svg></button>
+        <button class="icon-btn" data-toggle="panel" aria-pressed="true" aria-label="Show terminal and tests" title="Terminal and tests"><svg class="i"><use href="#i-bottom"/></svg></button>
+        <button class="icon-btn" data-toggle="agent" aria-pressed="true" aria-label="Show agent" title="Agent"><svg class="i"><use href="#i-right"/></svg></button>
+      </span>
+    </div>
+  </header>
+
+  <!-- ======= Home ======= -->
+  <section class="screen home" id="screen-home" aria-label="Home">
+    <div class="page-scroll">
+      <div class="home-inner">
+        <div class="notice" id="home-notice">
+          <svg class="i"><use href="#i-plug"/></svg>
+          <div>
+            <h3>Connect a model to use the agent</h3>
+            <p>Use your own provider key or a model running on this computer. You can open tasks, edit code, run tests and submit without one.</p>
+          </div>
+          <button class="btn primary" type="button" data-open="connect">Connect a model</button>
+        </div>
+
+        <section id="home-continue" aria-labelledby="h-continue">
+          <div class="section-head"><h2 id="h-continue">Continue</h2></div>
+          <div id="continue-list" style="display:grid; gap:8px"></div>
+        </section>
+
+        <section aria-labelledby="h-tasks">
+          <div class="section-head">
+            <h2 id="h-tasks">Practice tasks</h2>
+            <div class="actions">
+              <button class="btn sm" type="button" data-fake="Opens your system's folder picker"><svg class="i"><use href="#i-folder"/></svg>Open task folder…</button>
+              <button class="btn sm" type="button" data-fake="Opens your system's file picker for .zip files"><svg class="i"><use href="#i-zip"/></svg>Open task ZIP…</button>
+            </div>
+          </div>
+          <ul class="task-list">
+            <li>
+              <div><h3>Pagination API</h3><p>Customers say the last order on each page is missing from their history. Find the boundary error without changing the page numbering.</p></div>
+              <div class="task-meta"><span>About 35 minutes</span><span class="state" id="pag-state">Attempt 2 in progress</span></div>
+              <button class="btn" type="button" data-start="pagination">Start</button>
+            </li>
+            <li>
+              <div><h3>Stable customer IDs</h3><p>A customer export sometimes changes the order of IDs when duplicates appear. Keep the first occurrence of each ID in its original position.</p></div>
+              <div class="task-meta"><span>About 30 minutes</span><span class="state" id="ids-state">Best result: 2 of 2 checks</span></div>
+              <button class="btn" type="button" data-start="ids">Start</button>
+            </li>
+          </ul>
+        </section>
+
+        <section aria-labelledby="h-results">
+          <div class="section-head"><h2 id="h-results">Results</h2></div>
+          <div class="table-wrap"><table class="results" id="results-table">
+            <thead><tr><th>Task</th><th class="hide-sm">Submitted</th><th>Hidden checks</th><th class="num">Tokens</th><th class="hide-sm">Score</th></tr></thead>
+            <tbody id="results-body"></tbody>
+          </table></div>
+          <p class="empty" id="results-empty">When you submit an attempt, its report appears here.</p>
+        </section>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======= Attempt ======= -->
+  <section class="screen attempt" id="screen-attempt" aria-label="Attempt">
+    <div class="workbench">
+      <nav class="activity" aria-label="Views">
+        <button class="icon-btn active" aria-label="Explorer" title="Explorer"><svg class="i"><use href="#i-files"/></svg></button>
+        <button class="icon-btn" aria-label="Search" title="Search"><svg class="i"><use href="#i-search"/></svg></button>
+        <span class="grow"></span>
+        <button class="icon-btn" aria-label="Settings" title="Settings" data-go-settings="model"><svg class="i"><use href="#i-sliders"/></svg></button>
+      </nav>
+
+      <aside class="sidebar" aria-label="Explorer">
+        <div class="side-title">Explorer</div>
+        <button class="sec-head" aria-expanded="true" data-collapse="brief"><svg class="i"><use href="#i-chev"/></svg>Task</button>
+        <div class="brief" id="brief">
+          <p id="side-brief"></p>
+          <dl>
+            <dt>Time</dt><dd id="side-time"></dd>
+            <dt>Budget</dt><dd id="side-budget"></dd>
+            <dt>Python</dt><dd>3.12.4 in .venv</dd>
+          </dl>
+        </div>
+        <button class="sec-head" aria-expanded="true" data-collapse="tree"><svg class="i"><use href="#i-chev"/></svg><span id="side-folder"></span></button>
+        <ul class="tree" id="tree">
+          <li><div class="row" style="--d:0"><svg class="i"><use href="#i-chev"/></svg><svg class="i"><use href="#i-folder"/></svg>app</div></li>
+          <li><div class="row file" style="--d:1"><svg class="i"><use href="#i-file"/></svg>__init__.py</div></li>
+          <li><div class="row file active" style="--d:1"><svg class="i"><use href="#i-file"/></svg><span id="tree-file"></span><span class="m" id="tree-m" hidden>M</span></div></li>
+          <li><div class="row" style="--d:0"><svg class="i"><use href="#i-chev"/></svg><svg class="i"><use href="#i-folder"/></svg>tests</div></li>
+          <li><div class="row file" style="--d:1"><svg class="i"><use href="#i-file"/></svg>test_public.py</div></li>
+        </ul>
+      </aside>
+
+      <main class="center">
+        <div class="tabs"><span class="tab active" id="tab-file"><span id="tab-label"></span> <span class="dot"></span></span><span class="tab">test_public.py <span class="dot"></span></span></div>
+        <div class="crumbs"><span>app</span><svg class="i"><use href="#i-chev-r"/></svg><span id="crumb-file"></span><svg class="i"><use href="#i-chev-r"/></svg><span id="crumb-fn"></span></div>
+        <div class="editor" id="editor" tabindex="0" aria-label="Editor"></div>
+        <section class="panel" aria-label="Terminal and tests">
+          <div class="panel-head" role="tablist">
+            <button class="ptab" role="tab" aria-selected="true" data-ptab="term"><svg class="i"><use href="#i-term"/></svg>Terminal</button>
+            <button class="ptab" role="tab" aria-selected="false" data-ptab="tests">Tests <span class="count" id="tests-count" hidden>2 of 2</span></button>
+            <span class="grow"></span>
+            <button class="icon-btn" data-toggle="panel" aria-label="Hide panel" title="Hide"><svg class="i"><use href="#i-x"/></svg></button>
+          </div>
+<pre class="term" id="pane-term"></pre>
+          <div class="tests" id="pane-tests" hidden>
+            <div id="tests-idle" class="note">Run tests to check your code against the task's public tests.</div>
+            <div id="tests-done" hidden>
+              <p class="sum" id="tests-sum"></p>
+              <ul id="tests-list"></ul>
+              <p class="note">Public tests don't cover everything. Submitting runs the hidden checks as well.</p>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <aside class="agent" aria-label="Agent">
+        <div class="agent-head">
+          <div class="who"><h2>Factoryze agent</h2><div class="model" id="agent-model">MiniMax-M2.7</div></div>
+          <span class="pill" id="agent-pill">Ready</span>
+          <button class="icon-btn" type="button" id="agent-more" aria-label="Agent actions" aria-expanded="false"><svg class="i"><use href="#i-more"/></svg></button>
+        </div>
+        <div class="menu" id="agent-menu" hidden>
+          <button type="button" id="new-session">New session<small>Clears the conversation. Tokens already used stay counted.</small></button>
+          <button type="button" data-go-settings="model">Model settings<small>Change the provider, model or key.</small></button>
+        </div>
+        <div class="log" id="log" aria-live="polite"></div>
+        <div id="banner-slot"></div>
+        <form class="composer" id="composer">
+          <label for="prompt" hidden>Prompt for the agent</label>
+          <textarea id="prompt" rows="3" placeholder="Describe the change. Name the file, the function and what done looks like."></textarea>
+          <div class="composer-bar">
+            <span class="note" id="composer-note">Shift+Enter for a new line</span>
+            <button class="btn primary" type="submit" id="send-btn">Send <kbd>Enter</kbd></button>
+            <button class="btn" type="button" id="stop-btn" hidden><svg class="i"><use href="#i-stop"/></svg>Stop</button>
+          </div>
+        </form>
+      </aside>
+    </div>
+    <footer class="statusbar">
+      <span>Practice attempt, saved on this computer</span>
+      <span class="grow"></span>
+      <span>Python 3.12.4 (.venv)</span><span>UTF-8</span>
+    </footer>
+  </section>
+
+  <!-- ======= Report ======= -->
+  <section class="screen page" id="screen-report" aria-label="Report">
+    <div class="page-scroll">
+      <div class="page-inner" id="report"></div>
+    </div>
+  </section>
+
+  <!-- ======= Settings ======= -->
+  <section class="screen page" id="screen-settings" aria-label="Settings">
+    <div class="page-scroll">
+      <div class="settings-grid">
+        <nav class="settings-nav" aria-label="Settings sections">
+          <button class="btn quiet sm back" type="button" id="settings-back"><svg class="i"><use href="#i-chev-l"/></svg>Back</button>
+          <a href="#set-model" class="on">Model connection</a>
+          <a href="#set-practice">Practice</a>
+          <a href="#set-data">Data on this computer</a>
+        </nav>
+        <div class="settings-body">
+          <h1>Settings</h1>
+          <section id="set-model" aria-labelledby="h-set-model">
+            <h2 id="h-set-model">Model connection</h2>
+            <div class="setting-card" id="conn-on">
+              <div class="row">
+                <div><h3>MiniMax-M2.7</h3><p>OpenAI-compatible API. Your key is stored in your system keychain and never leaves Factoryze's backend.</p></div>
+                <span class="dot" title="Connected"></span>
+              </div>
+              <dl class="kv"><dt>Base URL</dt><dd>https://api.minimax.io/v1</dd><dt>Model ID</dt><dd>MiniMax-M2.7</dd><dt>Key</dt><dd>Saved</dd></dl>
+              <div class="report-actions"><button class="btn sm" type="button" data-open="connect">Change</button><button class="btn quiet sm" type="button" id="forget">Forget connection</button></div>
+            </div>
+            <div class="setting-card" id="conn-off" hidden>
+              <div class="row"><div><h3>No model connected</h3><p>The agent needs a model. Editing, tests and submitting work without one.</p></div><span class="dot off"></span></div>
+              <div><button class="btn primary sm" type="button" data-open="connect">Connect a model</button></div>
+            </div>
+          </section>
+
+          <section id="set-practice" aria-labelledby="h-set-practice">
+            <h2 id="h-set-practice">Practice</h2>
+            <div class="setting-card">
+              <div class="row">
+                <div><h3>Prompt feedback</h3><p>A second model call rates each prompt for how specific it is, with a short reason. It uses your provider and costs tokens, but those tokens don't count against the task budget.</p></div>
+                <label class="switch"><input type="checkbox" checked aria-label="Prompt feedback"><span></span></label>
+              </div>
+              <label class="field"><span>Feedback model</span><input class="input" value="" placeholder="Same as the agent's model"><small>A smaller, cheaper model from the same provider works well.</small></label>
+            </div>
+            <div class="setting-card">
+              <div class="row">
+                <div><h3>Score in reports</h3><p>Combines hidden checks, token efficiency and prompt feedback into one score from 0 to 100. Efficiency is only scored when there's an expert baseline for your model.</p></div>
+                <label class="switch"><input type="checkbox" checked aria-label="Score in reports"><span></span></label>
+              </div>
+            </div>
+            <div class="setting-card">
+              <div class="row">
+                <div><h3>Default token budget</h3><p>Used when a task doesn't set its own. You can change the budget for each attempt when you start it.</p></div>
+              </div>
+              <label class="field"><span>Tokens per attempt</span><input class="input" type="number" value="20000" style="max-width:180px"></label>
+            </div>
+          </section>
+
+          <section id="set-data" aria-labelledby="h-set-data">
+            <h2 id="h-set-data">Data on this computer</h2>
+            <div class="setting-card">
+              <p>Attempts, token usage and reports are stored locally. Nothing is uploaded.</p>
+              <dl class="kv"><dt>Location</dt><dd>~/Library/Application Support/Factoryze</dd><dt>Attempts</dt><dd>4</dd><dt>Reports</dt><dd id="reports-count">2</dd></dl>
+              <div><button class="btn sm" type="button" data-fake="Opens the folder in Finder">Show in Finder</button></div>
+            </div>
+          </section>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ======= Dialog: connect a model ======= -->
+<dialog id="dlg-connect" aria-labelledby="connect-title">
+  <form method="dialog" id="connect-form">
+    <div class="dlg-head"><h2 id="connect-title">Connect a model</h2><button class="icon-btn" value="cancel" aria-label="Close"><svg class="i"><use href="#i-x"/></svg></button></div>
+    <div class="dlg-body">
+      <p>The agent's requests go through Factoryze, which counts tokens against each attempt's budget. Your key is stored in your OS keychain.</p>
+      <fieldset class="providers" id="providers">
+        <legend>Where is your model?</legend>
+        <label class="prov"><input type="radio" name="prov" value="openai"><span>OpenAI</span><small>Uses api.openai.com</small></label>
+        <label class="prov"><input type="radio" name="prov" value="anthropic"><span>Anthropic</span><small>Uses api.anthropic.com</small></label>
+        <label class="prov"><input type="radio" name="prov" value="openrouter"><span>OpenRouter</span><small>One key for many models, including free ones</small></label>
+        <label class="prov"><input type="radio" name="prov" value="compatible" checked><span>Another OpenAI-compatible service</span><small>For example MiniMax, DeepSeek or Groq</small></label>
+        <label class="prov"><input type="radio" name="prov" value="local"><span>A model on this computer</span><small>Ollama, LM Studio or another local server</small></label>
+      </fieldset>
+      <div id="conn-fields" style="display:grid; gap:12px">
+        <label class="field"><span>Base URL</span><input class="input" id="f-url" value="https://api.minimax.io/v1"></label>
+        <label class="field" id="f-key-wrap"><span>API key</span><input class="input" id="f-key" type="password" value="••••••••••••••••••••"><small>Stored in your OS keychain.</small></label>
+        <label class="field"><span>Model ID</span><input class="input" id="f-model" value="MiniMax-M2.7"><small>Exactly as your provider lists it.</small></label>
+      </div>
+      <div class="result-line" id="conn-result" role="status"></div>
+    </div>
+    <div class="dlg-foot">
+      <button class="btn left" type="button" id="check-conn">Check connection</button>
+      <button class="btn" value="cancel">Cancel</button>
+      <button class="btn primary" type="button" id="save-conn">Save connection</button>
+    </div>
+  </form>
+</dialog>
+
+<!-- ======= Dialog: start an attempt ======= -->
+<dialog id="dlg-start" aria-labelledby="start-title">
+  <form method="dialog">
+    <div class="dlg-head"><h2 id="start-title">Pagination API</h2><button class="icon-btn" value="cancel" aria-label="Close"><svg class="i"><use href="#i-x"/></svg></button></div>
+    <div class="dlg-body" id="start-details">
+      <p id="start-brief">Customers say the last order on each page is missing from their history. Find the boundary error without changing the page numbering.</p>
+      <dl class="facts">
+        <dt>Time</dt><dd id="start-time">About 35 minutes. There's no time limit in practice.</dd>
+        <dt>Python</dt>
+        <dd id="py-ok"><span class="check ok"><svg class="i"><use href="#i-check"/></svg>Python 3.12.4 found</span></dd>
+        <dd id="py-bad" hidden>
+          <span class="check bad"><svg class="i"><use href="#i-x"/></svg>Python 3.11 or newer not found</span>
+          <span class="help">Install it from python.org, or with <code>brew install python@3.12</code>. Then check again. You don't need to restart Factoryze.</span>
+          <button class="btn sm" type="button" id="py-recheck" style="justify-self:start">Check again</button>
+        </dd>
+        <dt>Token budget</dt>
+        <dd>
+          <span id="budget-view">20,000 tokens <button class="link" type="button" id="budget-change">Change</button></span>
+          <label class="field" id="budget-edit" hidden><input class="input" type="number" id="budget-input" value="20000" min="1000" step="1000" style="max-width:160px" aria-label="Token budget for this attempt"><small>Your report shows the budget you chose.</small></label>
+        </dd>
+        <dt>Prompt feedback</dt><dd>On. Each prompt gets a specificity rating in your report. <button class="link" type="button" data-go-settings="practice">Change in Settings</button></dd>
+      </dl>
+      <p class="callout" id="start-existing"><strong>Attempt 2 is still in progress.</strong> Starting a new attempt keeps it, and you can continue it from Home.</p>
+      <p class="help">Each attempt starts from a fresh copy of the starter code and has its own token budget.</p>
+    </div>
+    <div class="dlg-body" id="start-progress" hidden>
+      <ol class="steps" id="steps">
+        <li><span class="mark"></span>Copying the task files</li>
+        <li><span class="mark"></span>Checking Python 3.12.4</li>
+        <li><span class="mark"></span>Creating the Python environment</li>
+        <li><span class="mark"></span>Opening the editor</li>
+      </ol>
+    </div>
+    <div class="dlg-foot" id="start-foot">
+      <button class="btn" value="cancel">Cancel</button>
+      <button class="btn primary" type="button" id="start-go">Start attempt</button>
+    </div>
+  </form>
+</dialog>
+
+<!-- ======= Dialog: submit ======= -->
+<dialog id="dlg-submit" aria-labelledby="submit-title">
+  <form method="dialog">
+    <div class="dlg-head"><h2 id="submit-title">Submit this attempt?</h2></div>
+    <div class="dlg-body" id="submit-body">
+      <p id="submit-text"></p>
+      <p class="callout" id="submit-pending" hidden><strong>The agent is waiting for your approval.</strong> Unapproved changes aren't part of the submission.</p>
+    </div>
+    <div class="dlg-body" id="submit-progress" hidden>
+      <ol class="steps"><li class="doing"><span class="mark"></span>Running hidden checks</li><li class="todo"><span class="mark"></span>Saving the report</li></ol>
+    </div>
+    <div class="dlg-foot" id="submit-foot">
+      <button class="btn" value="cancel">Cancel</button>
+      <button class="btn primary" type="button" id="submit-go">Submit</button>
+    </div>
+  </form>
+</dialog>
+
+<!-- ======= Dialog: raise budget ======= -->
+<dialog id="dlg-raise" aria-labelledby="raise-title">
+  <form method="dialog">
+    <div class="dlg-head"><h2 id="raise-title">Raise the token budget</h2></div>
+    <div class="dlg-body">
+      <p id="raise-text"></p>
+      <label class="field"><span>New budget</span><input class="input" type="number" id="raise-input" value="30000" min="20001" step="1000" style="max-width:180px"></label>
+    </div>
+    <div class="dlg-foot"><button class="btn" value="cancel">Cancel</button><button class="btn primary" type="button" id="raise-go">Raise budget</button></div>
+  </form>
+</dialog>
+
+<!-- ======= Dialog: fix token count ======= -->
+<dialog id="dlg-acct" aria-labelledby="acct-title">
+  <form method="dialog">
+    <div class="dlg-head"><h2 id="acct-title">Fix the token count</h2></div>
+    <div class="dlg-body">
+      <p>The last response ended before your provider reported its token usage, so Factoryze can't tell how much of your budget it used. The agent stays paused until the count is complete.</p>
+      <dl class="facts">
+        <dt>1. Find it</dt><dd>Open your provider's usage page and find the request sent today at 14:31:07 to MiniMax-M2.7. Factoryze saw at least 1,200 tokens before it ended.</dd>
+        <dt>2. Enter counts</dt>
+        <dd>
+          <div class="grid3">
+            <label class="field"><span>Input</span><input class="input" type="number" min="1100" value="1100"></label>
+            <label class="field"><span>Output</span><input class="input" type="number" min="100" value="100"></label>
+            <label class="field"><span>Cached input</span><input class="input" type="number" min="0" value="0"></label>
+          </div>
+          <label class="field"><span>Provider's request reference</span><input class="input" placeholder="For example the request ID"></label>
+        </dd>
+        <dt>3. Confirm</dt><dd><label class="confirm"><input type="checkbox">These counts match my provider's record.</label></dd>
+      </dl>
+      <p class="help">Counts can't be lower than what Factoryze already saw. The correction is kept in this attempt's history and shown on its report.</p>
+    </div>
+    <div class="dlg-foot"><button class="btn" value="cancel">Cancel</button><button class="btn primary" type="button" id="acct-go">Save counts</button></div>
+  </form>
+</dialog>
+
+<!-- ======= Prototype navigator ======= -->
+<div class="proto">
+  <div class="proto-panel" id="proto-panel" hidden>
+    <p>Prototype only. Jump to a step in the flow; everything inside the window is clickable.</p>
+    <ol id="proto-list">
+      <li><button data-flow="first">First launch, no model</button></li>
+      <li><button data-flow="connect">Connect a model</button></li>
+      <li><button data-flow="home">Home, returning</button></li>
+      <li><button data-flow="start">Start an attempt</button></li>
+      <li><button data-flow="python">Python not found</button></li>
+      <li><button data-flow="fresh">New attempt, agent ready</button></li>
+      <li><button data-flow="work">Approve the agent's edit</button></li>
+      <li><button data-flow="submit">Submit and read the report</button></li>
+      <li><button data-flow="results">Open a past result</button></li>
+      <li><button data-flow="budget">Budget used up</button></li>
+      <li><button data-flow="acct">Token count incomplete</button></li>
+      <li><button data-flow="settings">Settings</button></li>
+    </ol>
+    <div class="row"><span>Theme</span><button class="btn sm" type="button" id="theme-btn">Dark</button></div>
+  </div>
+  <button type="button" id="proto-btn" aria-expanded="false" aria-controls="proto-panel"><svg class="i"><use href="#i-flows"/></svg>Prototype flows</button>
+</div>
+
+<script>
+// Prototype behaviour for flows.html. Not product code: it fakes the engine so each flow can be reviewed.
+(() => {
+  const $ = id => document.getElementById(id);
+  const fmt = n => Math.round(n).toLocaleString('en-US');
+  const esc = s => s.replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+  const short = s => s.length > 52 ? s.slice(0, 50) + '…' : s;
+  const hhmm = ms => { const d = new Date(ms); return `${String(d.getHours()).padStart(2, '0')}:${String(d.getMinutes()).padStart(2, '0')}`; };
+
+  /* ---------- Task content (mirrors tasks/practice) ---------- */
+  const TASKS = {
+    pagination: {
+      title: 'Pagination API', folder: 'pagination-api', file: 'pagination.py', fn: 'page_of', time: 35,
+      brief: 'Customers say the last order on each page is missing from their history. Find the boundary error without changing the page numbering.',
+      lines: fixed => [
+        '<span class="k">def</span> <span class="f">page_of</span>(items: <span class="t">list</span>[<span class="t">str</span>], page: <span class="t">int</span>, page_size: <span class="t">int</span>) -&gt; <span class="t">list</span>[<span class="t">str</span>]:',
+        '    <span class="c">"""Return one 1-based page of items."""</span>',
+        '    <span class="k">if</span> page &lt; <span class="n">1</span> <span class="k">or</span> page_size &lt; <span class="n">1</span>:',
+        '        <span class="k">raise</span> <span class="t">ValueError</span>(<span class="s">"page and page_size must be positive"</span>)',
+        '    start = (page - <span class="n">1</span>) * page_size',
+        fixed ? '    <span class="k">return</span> items[start:start + page_size]' : '    <span class="k">return</span> items[start:start + page_size - <span class="n">1</span>]',
+      ],
+      changedLine: 6,
+      public: ['test_empty_history', 'test_invalid_page'],
+      hidden: [['Each page includes its last item', "page_of(orders, 1, 2) returned ['a'], expected ['a', 'b']"]],
+    },
+    ids: {
+      title: 'Stable customer IDs', folder: 'dedupe-ids', file: 'dedupe.py', fn: 'unique_ids', time: 30,
+      brief: 'A customer export sometimes changes the order of IDs when duplicates appear. Keep the first occurrence of each ID in its original position.',
+      lines: () => [
+        '<span class="k">def</span> <span class="f">unique_ids</span>(ids: <span class="t">list</span>[<span class="t">str</span>]) -&gt; <span class="t">list</span>[<span class="t">str</span>]:',
+        '    <span class="c">"""Return each ID once, keeping its first position."""</span>',
+        '    <span class="k">return</span> <span class="t">list</span>(<span class="t">set</span>(ids))',
+      ],
+      changedLine: 0,
+      public: ['test_no_duplicates'],
+      hidden: [['Duplicate IDs keep their first-seen order', "unique_ids(['c', 'a', 'c', 'b', 'a']) returned ['a', 'b', 'c'], expected ['c', 'a', 'b']"],
+               ['IDs such as 001 and 1 stay distinct and in order', "unique_ids(['001', '1', '001']) returned ['1', '001'], expected ['001', '1']"]],
+    },
+  };
+
+  /* ---------- Scripted attempt (Pagination API, attempt 2) ---------- */
+  const P1 = { t: 3180, text: 'Run the public tests and tell me what fails. Don’t change anything yet.', fb: ['mid', 'Fairly specific, 74.', 'Clear scope and a clear stop. Naming the test file would have saved a lookup.'] };
+  const P2 = { text: 'In page_of() in app/pagination.py, the slice end drops the last item of each page. Fix the end index without changing the 1-based numbering.', fb: ['good', 'Specific, 92.', 'Names the function, the file, the defect and the constraint on numbering.'] };
+  const P2_COST = [0, 3950, 4410, 4620];
+  const VAGUE = { t: 12200, text: 'it still doesn’t work, fix everything', fb: ['bad', 'Vague, 15.', 'Doesn’t say what’s wrong or where, so the agent re-read every file.'] };
+  const ACCT = { text: 'Add a test to tests/test_public.py that checks a full last page keeps all its items.', fb: ['good', 'Specific, 88.', 'Names the file and exactly what the test should prove.'] };
+  const BREAKDOWN = { 1: [8550, 2000, 380], 2: [8990, 2000, 400], 3: [9180, 2000, 420] };
+
+  /* ---------- Past results ---------- */
+  const PAST = [
+    { task: 'pagination', title: 'Pagination API', attempt: 'Attempt 1', when: 'Oct 21, 16:05', whenLong: 'Submitted Oct 21 at 16:05', subs: 1,
+      checks: [['Each page includes its last item', false, "page_of(orders, 1, 2) returned ['a'], expected ['a', 'b']"]],
+      tokens: 18400, budget: 20000, prompts: 5, time: '41 minutes', approvals: '3 approved, 1 declined', open: false,
+      list: [['fix pagination', 6900, ['bad', 'Vague, 18.', 'Doesn’t say what’s wrong or where, so the agent read every file first.']],
+             ['why is the last page wrong', 4100, ['bad', 'Vague, 31.', 'Names a symptom but not the function or the expected behaviour.']],
+             ['Look at page_of in app/pagination.py, something with the slice', 3200, ['mid', 'Fairly specific, 58.', 'Points at the right function. Saying what the slice should return would finish the job.']],
+             ['Run the tests', 1800, ['mid', 'Fairly specific, 62.', 'A clear action, though it doesn’t say which tests or what to report.']],
+             ['Undo your last change to app/pagination.py', 2400, ['good', 'Specific, 80.', 'Names the change and the file.']]] },
+    { task: 'ids', title: 'Stable customer IDs', attempt: 'Attempt 1', when: 'Oct 21, 11:40', whenLong: 'Submitted Oct 21 at 11:40', subs: 1,
+      checks: [['Duplicate IDs keep their first-seen order', true], ['IDs such as 001 and 1 stay distinct and in order', true]],
+      tokens: 6900, budget: 20000, prompts: 2, time: '22 minutes', approvals: '2 approved, none declined', open: false,
+      list: [['In unique_ids() in app/dedupe.py, list(set(ids)) loses the original order. Keep the first occurrence of each ID in place.', 4300, ['good', 'Specific, 95.', 'Names the function, the faulty expression and the expected behaviour.']],
+             ['Run tests/test_public.py and summarise the result', 2600, ['good', 'Specific, 81.', 'Names the file and the expected output.']]] },
+  ];
+
+  /* ---------- State ---------- */
+  const S = {};
+  function reset(extra = {}) {
+    Object.assign(S, {
+      screen: 'home', model: true, firstRun: false, hasAttempt: true, others: [],
+      task: 'pagination', attemptN: 2, mode: 'scripted', step: 1, editRejected: false, extra: [], working: false,
+      budget: 20000, raisedFrom: 0, acctFixed: false, approved: 1, declined: 0, skipped: false, testsRun: false,
+      results: [], subs: 0, report: null, reportFrom: 'attempt', settingsFrom: 'home', startedAt: Date.now() - 725000,
+    }, extra);
+  }
+
+  /* ---------- Usage ---------- */
+  const seg = (n, t, text, live = false, cls = '') => ({ t, tip: `Prompt ${n} ${live ? 'so far:' : 'used'} ${fmt(t)} tokens\n“${short(text)}”`, cls: live ? 'now' : cls });
+  function baseSegments() {
+    if (S.mode === 'fresh') return [];
+    const p1 = seg(1, P1.t, P1.text);
+    if (S.mode === 'budget') return [p1, seg(2, 4620, P2.text), seg(3, VAGUE.t, VAGUE.text)];
+    if (S.mode === 'acct') return [p1, seg(2, 4620, P2.text), S.acctFixed ? seg(3, 1340, ACCT.text) : { t: 1200, tip: 'Prompt 3: at least 1,200 tokens\nThe count is incomplete', cls: 'unknown' }];
+    const live = approvalPending();
+    return [p1, seg(2, S.editRejected ? 3990 : P2_COST[S.step], P2.text, live)];
+  }
+  const segments = () => { const base = baseSegments(); return base.concat(S.extra.map((p, i) => seg(base.length + i + 1, p.t, p.text, !p.done))); };
+  const used = () => segments().reduce((a, s) => a + s.t, 0);
+  const approvalPending = () => S.mode === 'scripted' && !S.editRejected && S.step < 3;
+  const exhausted = () => used() >= S.budget;
+  const acctPaused = () => S.mode === 'acct' && !S.acctFixed;
+  const codeFixed = () => S.task === 'pagination' && S.mode !== 'fresh' && !S.editRejected && !(S.mode === 'scripted' && S.step < 2);
+  function breakdown() {
+    const u = used();
+    if (S.mode === 'scripted' && !S.editRejected && !S.extra.length) return BREAKDOWN[S.step];
+    const cache = S.mode === 'fresh' ? 0 : 2000, out = Math.round(u * 0.05);
+    return [u - out - cache * 0.1 + cache, cache, out];
+  }
+  function drawMeter(el) {
+    el.replaceChildren();
+    for (const s of segments()) {
+      const span = document.createElement('span');
+      span.className = 'seg ' + s.cls;
+      span.style.width = (Math.min(s.t, S.budget) / S.budget * 100).toFixed(2) + '%';
+      span.dataset.tip = s.tip;
+      el.append(span);
+    }
+    const rest = document.createElement('span'); rest.className = 'seg rest'; el.append(rest);
+  }
+
+  /* ---------- Render ---------- */
+  function render() {
+    for (const id of ['home', 'attempt', 'report', 'settings']) $('screen-' + id).hidden = S.screen !== id;
+    document.querySelectorAll('[data-tb]').forEach(el => { el.hidden = (el.dataset.tb === 'attempt') !== (S.screen === 'attempt'); });
+    $('chip-dot').className = 'dot' + (S.model ? '' : ' off');
+    $('chip-label').textContent = S.model ? 'MiniMax-M2.7' : 'No model connected';
+    $('conn-on').hidden = !S.model; $('conn-off').hidden = S.model;
+    renderHome();
+    renderAttempt();
+    renderAgent();
+  }
+
+  function allResults() { return S.results.concat(S.firstRun ? [] : PAST); }
+  function bestFor(task) {
+    const r = allResults().filter(x => x.task === task);
+    if (!r.length) return null;
+    const best = r.reduce((a, b) => (b.checks.filter(c => c[1]).length > a.checks.filter(c => c[1]).length ? b : a));
+    return `${best.checks.filter(c => c[1]).length} of ${best.checks.length} checks`;
+  }
+
+  function renderHome() {
+    $('home-notice').hidden = S.model;
+    $('home-continue').hidden = !S.hasAttempt && !S.others.length;
+    const list = $('continue-list'); list.replaceChildren();
+    const rows = [];
+    if (S.hasAttempt) rows.push({ title: TASKS[S.task].title, n: S.attemptN, used: used(), budget: S.budget, current: true,
+      when: S.mode === 'fresh' && !S.extra.length ? 'started just now' : `started today at ${hhmm(S.startedAt)}. Last worked on a few minutes ago` });
+    rows.push(...S.others);
+    for (const r of rows) {
+      const art = document.createElement('article');
+      art.className = 'continue' + (r.current ? '' : ' other');
+      art.innerHTML = `<div><h3>${r.title}</h3><p>Attempt ${r.n}, ${r.when}.</p></div>
+        <div class="usage"><span class="meter mini"></span><span>${fmt(r.used)} of ${fmt(r.budget)} tokens</span></div>
+        <button class="btn ${r.current ? 'primary' : ''}" type="button">Continue</button>`;
+      if (r.current) drawMeter(art.querySelector('.meter'));
+      else { const m = art.querySelector('.meter'); m.innerHTML = `<span class="seg" style="width:${(r.used / r.budget * 100).toFixed(1)}%"></span><span class="seg rest"></span>`; }
+      art.querySelector('button').addEventListener('click', e => r.current ? go('attempt') : flash(e.currentTarget, 'Opens that attempt where you left it'));
+      list.append(art);
+    }
+    for (const key of Object.keys(TASKS)) {
+      const best = bestFor(key);
+      $(key === 'pagination' ? 'pag-state' : 'ids-state').textContent =
+        S.hasAttempt && S.task === key ? `Attempt ${S.attemptN} in progress` : best ? `Best result: ${best}` : 'Not attempted yet';
+    }
+    const results = allResults();
+    $('results-body').replaceChildren(...results.map(r => {
+      const passed = r.checks.filter(c => c[1]).length, all = r.checks.length;
+      const tr = document.createElement('tr'); tr.className = 'row'; tr.tabIndex = 0;
+      tr.innerHTML = `<td><strong>${r.title}</strong> <span class="muted">${r.attempt}</span></td><td class="hide-sm">${r.when}</td>
+        <td class="${passed === all ? 'pass' : 'partial'}">${passed} of ${all}</td><td class="num">${fmt(r.tokens)}</td><td class="hide-sm muted">Not scored</td>`;
+      const open = () => { S.report = r; S.reportFrom = 'home'; go('report'); };
+      tr.addEventListener('click', open); tr.addEventListener('keydown', e => { if (e.key === 'Enter') open(); });
+      return tr;
+    }));
+    $('results-table').parentElement.hidden = !results.length; $('results-empty').hidden = !!results.length;
+    $('reports-count').textContent = results.length;
+  }
+
+  function renderAttempt() {
+    const t = TASKS[S.task];
+    $('attempt-task').textContent = t.title; $('attempt-n').textContent = 'Attempt ' + S.attemptN;
+    const u = used(), left = Math.max(0, S.budget - u);
+    $('b-used').textContent = fmt(Math.min(u, S.budget)); $('b-limit').textContent = fmt(S.budget);
+    $('b-left').textContent = left ? `${fmt(left)} left` : 'Budget used up';
+    $('budget').classList.toggle('full', !left);
+    drawMeter($('b-meter'));
+    const [bi, bc, bo] = breakdown();
+    $('p-in').textContent = fmt(bi); $('p-cache').textContent = fmt(bc); $('p-out').textContent = fmt(bo); $('p-total').textContent = fmt(Math.min(u, S.budget));
+    $('side-brief').textContent = t.brief; $('side-time').textContent = `About ${t.time} minutes`;
+    $('side-budget').textContent = fmt(S.budget) + ' tokens' + (S.raisedFrom ? `, raised from ${fmt(S.raisedFrom)}` : '');
+    $('side-folder').textContent = t.folder; $('tree-file').textContent = t.file;
+    $('tab-label').textContent = t.file; $('crumb-file').textContent = t.file; $('crumb-fn').textContent = t.fn;
+    const fixed = codeFixed();
+    $('editor').innerHTML = t.lines(fixed).map((code, i) => {
+      const n = i + 1, changed = n === t.changedLine;
+      const cls = changed && approvalPending() ? ' pending' : changed && fixed ? ' applied' : '';
+      return `<div class="ln${cls}"${changed && approvalPending() ? ' title="The agent wants to change this line"' : ''}><span class="no">${n}</span><span class="mk"></span><span class="code">${code}</span></div>`;
+    }).join('');
+    $('tab-file').classList.toggle('modified', fixed); $('tree-m').hidden = !fixed;
+    const dots = t.public.map(() => '.').join('');
+    $('pane-term').innerHTML = `<span class="p">(.venv) ${t.folder} $</span> python -m pytest -q\n<span class="ok">${dots}</span>${' '.repeat(60 - dots.length)}<span class="dim">[100%]</span>\n<span class="ok">${t.public.length} passed</span> in 0.01s\n<span class="p">(.venv) ${t.folder} $</span> `;
+    $('tests-idle').hidden = S.testsRun; $('tests-done').hidden = !S.testsRun;
+    $('tests-count').hidden = !S.testsRun; $('tests-count').textContent = `${t.public.length} of ${t.public.length}`;
+    $('tests-sum').textContent = `${t.public.length} of ${t.public.length} public tests passed`;
+    $('tests-list').innerHTML = t.public.map(n => `<li><svg class="i"><use href="#i-check"/></svg>${n}</li>`).join('');
+  }
+
+  /* ---------- Agent pane ---------- */
+  const row = (icon, what, res = '', cls = '') => `<div class="step-row"><svg class="i"><use href="#i-${icon}"/></svg><span class="what">${what}</span>${res ? `<span class="res ${cls}">${res}</span>` : ''}</div>`;
+  const promptBox = text => `<div class="prompt"><p>${text}</p></div>`;
+  const cost = (t, live) => `<div class="cost">${fmt(t)} tokens${live ? ' so far' : ''}</div>`;
+  const pytestRow = n => row('term', 'Ran <code>python -m pytest -q</code>', `${n} passed`, 'ok');
+  const turn1 = () => `<article class="turn">${promptBox(P1.text)}${pytestRow(2)}
+    <div class="reply"><p>Both public tests pass. Neither checks a full page, so a boundary bug in <code class="inline">page_of()</code> could still be hiding.</p></div>${cost(P1.t)}</article>`;
+  const editCard = `<div class="approval" role="group" aria-label="Edit app/pagination.py">
+    <div class="ap-head"><svg class="i"><use href="#i-edit"/></svg><span class="title">Edit <code>app/pagination.py</code></span><span class="meta">1 line</span></div>
+<pre class="diff"><div><span class="n">5</span><span> </span><span>    start = (page - 1) * page_size</span></div><div class="del"><span class="n">6</span><span>-</span><span>    return items[start:start + page_size - 1]</span></div><div class="add"><span class="n">6</span><span>+</span><span>    return items[start:start + page_size]</span></div></pre>
+    <div class="ap-actions"><button class="btn primary sm" data-act="approve">Approve</button><button class="btn sm" data-act="reject">Reject</button><button class="btn quiet sm" data-act="side">Open side by side</button></div></div>`;
+  const shellCard = `<div class="approval" role="group" aria-label="Run a command">
+    <div class="ap-head"><svg class="i"><use href="#i-term"/></svg><span class="title">Run a command</span></div>
+    <pre class="cmd">python -m pytest -q</pre>
+    <p class="ap-note">Runs in pagination-api with this task's Python environment. It can't see your provider key.</p>
+    <div class="ap-actions"><button class="btn primary sm" data-act="run">Run</button><button class="btn sm" data-act="skip">Don’t run</button></div></div>`;
+  const p2Intro = () => promptBox(P2.text) + row('read', 'Read <code>app/pagination.py</code>') +
+    `<div class="reply"><p>The slice ends at <code class="inline">start + page_size - 1</code>, and Python slices already exclude the end index, so every page loses its last item.</p></div>`;
+  const p2Done = () => `<article class="turn">${promptBox(P2.text)}${row('check', 'Edited <code>app/pagination.py</code>', 'Approved', 'ok')}${pytestRow(2)}${cost(4620)}</article>`;
+  function turn2() {
+    if (S.editRejected) return `<article class="turn">${p2Intro()}${row('x', 'Edit to <code>app/pagination.py</code>', 'Rejected', 'fail')}<div class="reply"><p>I left the file unchanged. Tell me what you’d like instead.</p></div>${cost(3990)}</article>`;
+    if (S.step === 1) return `<article class="turn live">${p2Intro()}${editCard}${cost(P2_COST[1], true)}</article>`;
+    const edited = row('check', 'Edited <code>app/pagination.py</code>', 'Approved', 'ok');
+    if (S.step === 2) return `<article class="turn live">${p2Intro()}${edited}${shellCard}${cost(P2_COST[2], true)}</article>`;
+    const ran = S.skipped ? row('x', 'Didn’t run <code>python -m pytest -q</code>', 'Declined', 'fail') : pytestRow(2);
+    return `<article class="turn">${p2Intro()}${edited}${ran}<div class="reply"><p>Fixed. The slice now ends at <code class="inline">start + page_size</code>, so each page keeps its last item.${S.skipped ? '' : ' Both public tests still pass, but neither covers a full page. A test for that would catch this bug next time.'}</p></div>${cost(P2_COST[3])}</article>`;
+  }
+  const extraTurns = () => S.extra.map(p => `<article class="turn ${p.done ? '' : 'live'}">${promptBox(esc(p.text))}${
+    !p.done ? row('read', `Reading files in <code>${TASKS[S.task].folder}</code>`) : p.stopped ? row('x', 'Stopped: the token budget is used up') :
+    `<div class="reply"><p>The agent’s reply streams in here. Files it reads and commands it runs appear as rows, and anything that needs your approval appears as a card.</p></div>`}${cost(p.t, !p.done)}</article>`).join('');
+
+  function renderAgent() {
+    const log = $('log');
+    $('agent-model').textContent = S.model ? 'MiniMax-M2.7' : 'No model connected';
+    let html = '', pill = ['Ready', 'pill'], banner = '', block = '';
+    if (!S.model) {
+      html = `<div class="agent-empty"><h3>Connect a model to use the agent</h3><p>You can still edit, run tests and submit without one.</p><button class="btn primary" type="button" data-open="connect">Connect a model</button></div>`;
+      pill = ['Not connected', 'pill']; block = 'Connect a model to send prompts';
+    } else {
+      if (S.mode === 'fresh') html = S.extra.length ? '' : `<div class="agent-empty"><h3>Ask for a specific change</h3><p>Name the file, the function and what done looks like. Specific prompts cost fewer tokens. Each prompt’s cost appears here and in your report.</p><p class="example">${S.task === 'pagination'
+          ? 'In <code class="inline">page_of()</code> in app/pagination.py, make sure a full page keeps its last item. Keep pages numbered from 1.'
+          : 'In <code class="inline">unique_ids()</code> in app/dedupe.py, keep the first occurrence of each ID in its original position.'}</p></div>`;
+      else if (S.mode === 'budget') html = turn1() + p2Done() + `<article class="turn">${promptBox(VAGUE.text)}${row('read', 'Listed every file in the task')}${row('read', 'Read <code>app/pagination.py</code>')}${row('read', 'Read <code>tests/test_public.py</code>')}${pytestRow(2)}${row('x', 'Stopped: the token budget is used up')}${cost(VAGUE.t)}</article>`;
+      else if (S.mode === 'acct') html = turn1() + p2Done() + `<article class="turn">${promptBox(ACCT.text)}${row('read', 'Read <code>tests/test_public.py</code>')}${S.acctFixed
+          ? row('check', 'Token count entered from your provider’s record', '', '') + cost(1340)
+          : row('x', 'The response ended before the token count arrived') + '<div class="cost">At least 1,200 tokens</div>'}</article>`;
+      else html = turn1() + turn2();
+      html += extraTurns();
+      if (S.working) pill = ['Working', 'pill busy'];
+      else if (approvalPending()) { pill = ['Waiting for you', 'pill wait']; block = 'Approve or reject the agent’s change first'; }
+      if (acctPaused()) {
+        banner = `<div class="banner" role="status"><h3>Token count incomplete</h3><p>The last response ended before your provider reported its usage. The agent is paused until the count is fixed.</p><button class="btn sm" type="button" data-open="acct">Fix token count</button></div>`;
+        pill = ['Paused', 'pill stop']; block = 'The agent is paused';
+      } else if (exhausted()) {
+        banner = `<div class="banner" role="status"><h3>Token budget used up</h3><p>The agent is paused for this attempt. You can still edit, run tests and submit.</p><button class="btn sm" type="button" data-open="raise">Raise budget</button></div>`;
+        pill = ['Paused', 'pill stop']; block = 'The agent is paused';
+      }
+    }
+    log.innerHTML = html;
+    $('agent-pill').textContent = pill[0]; $('agent-pill').className = pill[1];
+    $('banner-slot').innerHTML = banner;
+    $('prompt').disabled = !!block && !S.working;
+    $('prompt').placeholder = block || 'Describe the change. Name the file, the function and what done looks like.';
+    $('send-btn').hidden = S.working; $('stop-btn').hidden = !S.working; $('send-btn').disabled = !!block;
+    $('composer-note').textContent = S.working ? 'The agent is working' : 'Shift+Enter for a new line';
+    log.scrollTop = log.scrollHeight;
+  }
+
+  /* ---------- Report ---------- */
+  function judge(text) {
+    const specific = /\w+\.py|\w+\(\)/.test(text), long = text.split(/\s+/).length >= 8;
+    if (specific && long) return ['good', 'Specific, 84.', 'Names where to look and what should change.'];
+    if (specific || long) return ['mid', 'Fairly specific, 55.', 'Add the file, the function or what done looks like.'];
+    return ['bad', 'Vague, 20.', 'Doesn’t say what’s wrong or where, so the agent has to search.'];
+  }
+  function currentReport() {
+    const t = TASKS[S.task], fixed = codeFixed();
+    const list = [];
+    if (S.mode !== 'fresh') {
+      list.push([P1.text, P1.t, P1.fb]);
+      list.push([P2.text, S.editRejected ? 3990 : P2_COST[S.mode === 'scripted' ? S.step : 3], P2.fb]);
+      if (S.mode === 'budget') list.push([VAGUE.text, VAGUE.t, VAGUE.fb]);
+      if (S.mode === 'acct') list.push([ACCT.text, S.acctFixed ? 1340 : 1200, ACCT.fb]);
+    }
+    S.extra.forEach(p => list.push([p.text, p.t, judge(p.text)]));
+    const minutes = Math.max(1, Math.round((Date.now() - S.startedAt) / 60000));
+    const at = hhmm(Date.now());
+    S.subs++;
+    return { task: S.task, title: t.title, attempt: `Attempt ${S.attemptN}`, when: `Today, ${at}`, whenLong: `Submitted today at ${at}`, subs: S.subs,
+      checks: t.hidden.map(h => fixed ? [h[0], true] : [h[0], false, h[1]]), tokens: used(), budget: S.budget, raisedFrom: S.raisedFrom,
+      acctFixed: S.mode === 'acct' && S.acctFixed, prompts: list.length, time: `${minutes} minute${minutes === 1 ? '' : 's'}`,
+      approvals: `${S.approved} approved, ${S.declined ? S.declined + ' declined' : 'none declined'}`, open: true, list };
+  }
+  function renderReport() {
+    const r = S.report, passed = r.checks.filter(c => c[1]).length, all = r.checks.length;
+    const max = Math.max(1, ...r.list.map(p => p[1]));
+    const state = passed === all ? 'pass' : 'partial';
+    const isCurrent = r.open && S.hasAttempt && r.task === S.task;
+    $('report').innerHTML = `
+      <button class="btn quiet sm back" type="button" data-report="back"><svg class="i"><use href="#i-chev-l"/></svg>${S.reportFrom === 'home' ? 'Home' : 'Back to attempt'}</button>
+      <div class="report-head">
+        <div><h1>${r.title}, ${r.attempt.toLowerCase()}</h1><p>${r.whenLong}. Practice result, not checked by an instructor.</p></div>
+        ${r.subs > 1 ? `<label class="field"><span class="muted" style="font-weight:400">Showing</span><select class="input">${Array.from({ length: r.subs }, (_, i) => `<option ${i === r.subs - 1 ? 'selected' : ''}>Submission ${i + 1} of ${r.subs}${i === r.subs - 1 ? ', latest' : ''}</option>`).join('')}</select></label>` : ''}
+      </div>
+      <div class="outcome ${state}">
+        <p class="verdict"><svg class="i"><use href="#i-${state === 'pass' ? 'check-c' : 'half-c'}"/></svg>${passed} of ${all} hidden check${all === 1 ? '' : 's'} passed</p>
+        <ul class="checks">${r.checks.map(c => `<li class="${c[1] ? 'ok' : 'bad'}"><svg class="i"><use href="#i-${c[1] ? 'check' : 'x'}"/></svg><span>${c[0]}</span>${c[2] ? `<span class="why">${esc(c[2])}</span>` : ''}</li>`).join('')}</ul>
+      </div>
+      <dl class="figures">
+        <div><dt>Tokens used</dt><dd>${fmt(r.tokens)} <small>of ${fmt(r.budget)}</small></dd></div>
+        <div><dt>Prompts</dt><dd>${r.prompts}</dd></div>
+        <div><dt>Time</dt><dd>${r.time}</dd></div>
+        <div><dt>Agent actions</dt><dd>${r.approvals}</dd></div>
+      </dl>
+      ${r.raisedFrom ? `<p class="para"><strong>Budget raised.</strong> You raised the budget from ${fmt(r.raisedFrom)} to ${fmt(r.budget)} tokens during this attempt.</p>` : ''}
+      ${r.acctFixed ? `<p class="para"><strong>One token count was entered by hand</strong> from your provider’s record after a response ended early.</p>` : ''}
+      <p class="para"><strong>No score yet.</strong> Scores compare your token use with an expert’s run of the same task on the same model, and there’s no expert baseline for MiniMax-M2.7 on this task yet. Hidden checks and prompt feedback are still accurate.</p>
+      <section style="display:grid; gap:10px">
+        <h2>Your prompts</h2>
+        ${r.list.length ? `<p class="para">Longer bars cost more tokens. Feedback comes from a separate model call and doesn’t count against your budget.</p>
+        <ol class="prompts">${r.list.map((p, i) => `<li><span class="idx">${i + 1}</span><span class="text">${esc(p[0])}</span><span class="tok">${fmt(p[1])} tokens</span>
+          <span class="bar"><span style="width:${(p[1] / max * 100).toFixed(1)}%"></span></span>
+          <span class="fb"><span class="verdict-tag ${p[2][0]}">${p[2][1]}</span>${p[2][2]}</span></li>`).join('')}</ol>`
+        : `<p class="para">You didn’t use the agent in this attempt, so there’s no prompt feedback.</p>`}
+      </section>
+      <div class="report-actions">
+        ${isCurrent ? `<button class="btn primary" type="button" data-report="keep">Keep working</button>` : ''}
+        <button class="btn${isCurrent ? '' : ' primary'}" type="button" data-report="new">New attempt</button>
+        <button class="btn quiet" type="button" data-report="home">Back to Home</button>
+      </div>`;
+  }
+
+  /* ---------- Navigation ---------- */
+  function go(screen) {
+    if (screen === 'settings' && S.screen !== 'settings') S.settingsFrom = S.screen;
+    S.screen = screen;
+    if (screen === 'report') renderReport();
+    closeFloating();
+    render();
+    if (screen !== 'attempt') document.querySelector(`#screen-${screen} .page-scroll`)?.scrollTo(0, 0);
+  }
+  function closeFloating() { $('budget-pop').hidden = true; $('budget-btn').setAttribute('aria-expanded', 'false'); $('agent-menu').hidden = true; $('agent-more').setAttribute('aria-expanded', 'false'); }
+  function openDialog(id) { closeFloating(); const d = $('dlg-' + id); if (!d.open) d.showModal(); }
+  function closeDialogs() { document.querySelectorAll('dialog[open]').forEach(d => d.close()); }
+
+  /* ---------- Start an attempt ---------- */
+  let startTask = 'pagination';
+  function openStart(task, pythonMissing = false) {
+    startTask = task;
+    const t = TASKS[task];
+    $('start-title').textContent = t.title; $('start-brief').textContent = t.brief;
+    $('start-time').textContent = `About ${t.time} minutes. There's no time limit in practice.`;
+    const existing = S.hasAttempt && S.task === task;
+    $('start-existing').hidden = !existing;
+    $('start-existing').innerHTML = `<strong>Attempt ${S.attemptN} is still in progress.</strong> Starting a new attempt keeps it, and you can continue it from Home.`;
+    $('py-ok').hidden = pythonMissing; $('py-bad').hidden = !pythonMissing; $('start-go').disabled = pythonMissing;
+    $('budget-view').hidden = false; $('budget-edit').hidden = true; $('budget-input').value = 20000;
+    $('start-details').hidden = false; $('start-progress').hidden = true; $('start-foot').hidden = false;
+    document.querySelector('#dlg-start .dlg-head .icon-btn').hidden = false;
+    openDialog('start');
+  }
+  $('budget-change').addEventListener('click', () => { $('budget-view').hidden = true; $('budget-edit').hidden = false; $('budget-input').focus(); });
+  $('py-recheck').addEventListener('click', () => { $('py-ok').hidden = false; $('py-bad').hidden = true; $('start-go').disabled = false; $('start-go').focus(); });
+  $('start-go').addEventListener('click', () => {
+    const budget = Math.max(1000, Number($('budget-input').value) || 20000);
+    $('start-details').hidden = true; $('start-foot').hidden = true; $('start-progress').hidden = false;
+    document.querySelector('#dlg-start .dlg-head .icon-btn').hidden = true;
+    const items = [...$('steps').children];
+    let i = 0;
+    const tick = () => {
+      items.forEach((li, k) => { li.className = k < i ? 'done' : k === i ? 'doing' : 'todo'; li.querySelector('.mark').innerHTML = k < i ? '<svg class="i"><use href="#i-check"/></svg>' : ''; });
+      if (i++ < items.length) return setTimeout(tick, i === 3 ? 900 : 450);
+      closeDialogs();
+      if (S.hasAttempt) S.others.unshift({ title: TASKS[S.task].title, n: S.attemptN, used: used(), budget: S.budget, when: `started today at ${hhmm(S.startedAt)}` });
+      const prior = allResults().filter(r => r.task === startTask).length + S.others.filter(o => o.title === TASKS[startTask].title).length;
+      Object.assign(S, { task: startTask, attemptN: prior + 1, mode: 'fresh', extra: [], working: false, budget, raisedFrom: 0, editRejected: false,
+        approved: 0, declined: 0, testsRun: false, hasAttempt: true, subs: 0, startedAt: Date.now() });
+      go('attempt');
+      $('prompt').focus();
+    };
+    tick();
+  });
+
+  /* ---------- Connect a model ---------- */
+  const PROV = { openai: ['https://api.openai.com/v1', 'gpt-5.1-mini', true], anthropic: ['https://api.anthropic.com/v1', 'claude-haiku-5-5', true],
+    openrouter: ['https://openrouter.ai/api/v1', 'nvidia/nemotron-3.5-lightning:free', true], compatible: ['https://api.minimax.io/v1', 'MiniMax-M2.7', true],
+    local: ['http://localhost:11434/v1', 'qwen3-coder:30b', false] };
+  $('providers').addEventListener('change', e => {
+    const v = e.target.value;
+    $('conn-result').textContent = ''; $('conn-result').className = 'result-line';
+    $('f-url').value = PROV[v][0]; $('f-model').value = PROV[v][1]; $('f-key-wrap').hidden = !PROV[v][2]; $('f-key').value = '';
+  });
+  $('check-conn').addEventListener('click', () => {
+    const r = $('conn-result'); r.className = 'result-line'; r.textContent = 'Checking…';
+    setTimeout(() => { r.className = 'result-line ok'; r.innerHTML = '<svg class="i"><use href="#i-check"/></svg>Connection works and the model is available. The check didn’t use any tokens.'; }, 700);
+  });
+  $('save-conn').addEventListener('click', () => { S.model = true; closeDialogs(); render(); });
+  $('forget').addEventListener('click', () => { S.model = false; render(); });
+
+  /* ---------- Agent ---------- */
+  $('log').addEventListener('click', e => {
+    const act = e.target.closest('[data-act]')?.dataset.act;
+    if (!act) return;
+    if (act === 'side') { flash(e.target, 'Opens a side-by-side diff in the editor'); return; }
+    if (act === 'approve') { S.step = 2; S.approved++; }
+    if (act === 'reject') { S.editRejected = true; S.declined++; }
+    if (act === 'run') { S.step = 3; S.approved++; S.skipped = false; }
+    if (act === 'skip') { S.step = 3; S.declined++; S.skipped = true; }
+    render();
+  });
+  $('composer').addEventListener('submit', e => {
+    e.preventDefault();
+    const text = $('prompt').value.trim();
+    if (!text || $('prompt').disabled || S.working) return;
+    const p = { text, t: 700, done: false };
+    S.extra.push(p); S.working = true; $('prompt').value = '';
+    render();
+    let n = 0;
+    const grow = setInterval(() => {
+      if (!S.working) return clearInterval(grow);
+      p.t += 450;
+      if (used() >= S.budget) { p.t -= used() - S.budget; p.done = p.stopped = true; S.working = false; }
+      else if (++n > 3) { p.done = true; S.working = false; }
+      render();
+    }, 550);
+  });
+  $('prompt').addEventListener('keydown', e => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); $('composer').requestSubmit(); } });
+  $('stop-btn').addEventListener('click', () => { S.working = false; const p = S.extra.at(-1); if (p) p.done = true; render(); });
+  $('agent-more').addEventListener('click', () => { const m = $('agent-menu'); m.hidden = !m.hidden; $('agent-more').setAttribute('aria-expanded', String(!m.hidden)); });
+  $('new-session').addEventListener('click', () => { closeFloating(); flash($('agent-more'), 'Conversation cleared. Tokens used so far stay counted.'); });
+
+  /* ---------- Title bar and panels ---------- */
+  $('budget-btn').addEventListener('click', () => { const p = $('budget-pop'); p.hidden = !p.hidden; $('budget-btn').setAttribute('aria-expanded', String(!p.hidden)); });
+  $('to-home').addEventListener('click', () => go('home'));
+  $('run-tests').addEventListener('click', () => { S.testsRun = true; $('screen-attempt').classList.remove('no-panel'); syncToggles(); selectPanel('tests'); render(); });
+  $('submit-btn').addEventListener('click', () => {
+    const n = TASKS[S.task].hidden.length;
+    $('submit-text').textContent = `Factoryze runs ${n} hidden check${n === 1 ? '' : 's'} on your code and saves a report. You can keep working afterwards and submit again. Every submission is kept.`;
+    $('submit-pending').hidden = !approvalPending();
+    $('submit-body').hidden = false; $('submit-progress').hidden = true; $('submit-foot').hidden = false;
+    openDialog('submit');
+  });
+  $('submit-go').addEventListener('click', () => {
+    $('submit-body').hidden = true; $('submit-foot').hidden = true; $('submit-progress').hidden = false;
+    setTimeout(() => {
+      closeDialogs();
+      const r = currentReport();
+      S.results = S.results.filter(x => !(x.task === r.task && x.attempt === r.attempt));
+      S.results.unshift(r);
+      S.report = r; S.reportFrom = 'attempt';
+      go('report');
+    }, 1300);
+  });
+  function selectPanel(which) {
+    document.querySelectorAll('[data-ptab]').forEach(b => b.setAttribute('aria-selected', String(b.dataset.ptab === which)));
+    $('pane-term').hidden = which !== 'term'; $('pane-tests').hidden = which !== 'tests';
+  }
+  document.querySelectorAll('[data-ptab]').forEach(b => b.addEventListener('click', () => selectPanel(b.dataset.ptab)));
+  function syncToggles() { document.querySelectorAll('.toggles [data-toggle]').forEach(b => b.setAttribute('aria-pressed', String(!$('screen-attempt').classList.contains('no-' + b.dataset.toggle)))); }
+  document.querySelectorAll('[data-toggle]').forEach(b => b.addEventListener('click', () => { $('screen-attempt').classList.toggle('no-' + b.dataset.toggle); syncToggles(); }));
+  document.querySelectorAll('[data-collapse]').forEach(h => h.addEventListener('click', () => { const open = h.getAttribute('aria-expanded') === 'true'; h.setAttribute('aria-expanded', String(!open)); $(h.dataset.collapse).hidden = open; }));
+
+  /* ---------- Shared handlers ---------- */
+  document.addEventListener('click', e => {
+    const t = e.target.closest('button, a');
+    if (!e.target.closest('#budget') && !e.target.closest('#agent-menu') && t?.id !== 'agent-more') closeFloating();
+    if (!t) return;
+    if (t.dataset.open === 'connect') openDialog('connect');
+    if (t.dataset.open === 'raise') {
+      $('raise-text').textContent = `This attempt has used all ${fmt(S.budget)} tokens. In practice you can raise the limit and keep going. Your report will show that you raised it.`;
+      $('raise-input').value = S.budget + 10000; $('raise-input').min = S.budget + 1; openDialog('raise');
+    }
+    if (t.dataset.open === 'acct') openDialog('acct');
+    if (t.dataset.goSettings) {
+      closeDialogs(); go('settings');
+      requestAnimationFrame(() => scrollSettings(t.dataset.goSettings === 'practice' ? 'set-practice' : 'set-model'));
+    }
+    if (t.matches('.settings-nav a')) { e.preventDefault(); scrollSettings(t.getAttribute('href').slice(1)); }
+    if (t.dataset.start) openStart(t.dataset.start);
+    if (t.dataset.fake) flash(t, t.dataset.fake);
+    if (t.dataset.report === 'back') go(S.reportFrom === 'home' ? 'home' : 'attempt');
+    if (t.dataset.report === 'keep') go('attempt');
+    if (t.dataset.report === 'home') go('home');
+    if (t.dataset.report === 'new') openStart(S.report.task);
+  });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeFloating(); });
+  $('settings-back').addEventListener('click', () => go(S.settingsFrom || 'home'));
+  $('raise-go').addEventListener('click', () => {
+    const next = Number($('raise-input').value);
+    if (!(next > S.budget)) { $('raise-input').focus(); return; }
+    if (!S.raisedFrom) S.raisedFrom = S.budget;
+    S.budget = next; closeDialogs(); render(); flash($('budget-btn'), `Budget raised to ${fmt(next)} tokens`);
+  });
+  $('acct-go').addEventListener('click', () => { S.acctFixed = true; closeDialogs(); render(); flash($('budget-btn'), 'Token count saved. The agent can continue.'); });
+
+  function scrollSettings(id) {
+    const sc = document.querySelector('#screen-settings .page-scroll'), target = $(id);
+    sc.scrollTo({ top: Math.max(0, target.offsetTop - 24) });
+    document.querySelectorAll('.settings-nav a').forEach(a => a.classList.toggle('on', a.getAttribute('href') === '#' + id));
+    window.scrollTo(0, 0); document.querySelector('.window').scrollTop = 0;
+  }
+
+  function flash(anchor, text) {
+    const tip = document.createElement('div');
+    tip.textContent = text; tip.setAttribute('role', 'status');
+    Object.assign(tip.style, { position: 'fixed', zIndex: 200, background: 'var(--tip-bg)', color: 'var(--tip-fg)', padding: '6px 10px', borderRadius: '4px', fontSize: '12px', pointerEvents: 'none' });
+    document.body.append(tip);
+    const r = anchor.getBoundingClientRect();
+    tip.style.left = Math.min(window.innerWidth - tip.offsetWidth - 8, Math.max(8, r.left)) + 'px';
+    tip.style.top = Math.min(window.innerHeight - tip.offsetHeight - 8, r.bottom + 6) + 'px';
+    setTimeout(() => tip.remove(), 1900);
+  }
+
+  setInterval(() => {
+    const s = Math.floor((Date.now() - S.startedAt) / 1000);
+    $('clock').textContent = `${Math.floor(s / 60)}:${String(s % 60).padStart(2, '0')}`;
+  }, 1000);
+
+  /* ---------- Prototype navigator ---------- */
+  const FLOWS = {
+    first:    () => { reset({ model: false, firstRun: true, hasAttempt: false }); go('home'); },
+    connect:  () => { FLOWS.first(); openDialog('connect'); },
+    home:     () => { reset(); go('home'); },
+    start:    () => { FLOWS.home(); openStart('pagination'); },
+    python:   () => { FLOWS.home(); openStart('ids', true); },
+    fresh:    () => { reset({ mode: 'fresh', attemptN: 3, approved: 0, startedAt: Date.now() }); go('attempt'); },
+    work:     () => { reset(); go('attempt'); },
+    submit:   () => { reset({ step: 3, approved: 3 }); go('attempt'); $('submit-btn').click(); },
+    results:  () => { reset(); S.report = PAST[0]; S.reportFrom = 'home'; go('report'); },
+    budget:   () => { reset({ mode: 'budget', approved: 3 }); go('attempt'); },
+    acct:     () => { reset({ mode: 'acct', approved: 3 }); go('attempt'); },
+    settings: () => { reset(); go('settings'); },
+  };
+  $('proto-list').addEventListener('click', e => {
+    const b = e.target.closest('[data-flow]'); if (!b) return;
+    closeDialogs();
+    $('screen-attempt').classList.remove('no-side', 'no-panel', 'no-agent');
+    if (window.innerWidth < 1000) $('screen-attempt').classList.add('no-side');
+    syncToggles(); selectPanel('term');
+    document.querySelectorAll('#proto-list button').forEach(x => x.classList.toggle('on', x === b));
+    FLOWS[b.dataset.flow]();
+  });
+  $('proto-btn').addEventListener('click', () => { const p = $('proto-panel'); p.hidden = !p.hidden; $('proto-btn').setAttribute('aria-expanded', String(!p.hidden)); });
+  $('theme-btn').addEventListener('click', () => {
+    const dark = document.documentElement.dataset.theme === 'dark';
+    document.documentElement.dataset.theme = dark ? 'light' : 'dark'; $('theme-btn').textContent = dark ? 'Dark' : 'Light';
+  });
+
+  if (window.innerWidth < 1000) $('screen-attempt').classList.add('no-side');
+  syncToggles();
+  reset();
+  go('home');
+})();
+</script>
+</body>
+</html>

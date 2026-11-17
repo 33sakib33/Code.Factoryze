@@ -1,0 +1,27 @@
+✔ Docker executor requires immutable Linux images and a local daemon, enforces isolation and cleans only its container (15.4436ms)
+✖ executor verifies actual container security configuration before allowing it to start (5.7791ms)
+✔ Docker executor fails closed when default seccomp or a local Linux engine is unavailable (0.9666ms)
+ℹ tests 3
+ℹ suites 0
+ℹ pass 2
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 281.6639
+
+✖ failing tests:
+
+test at packages\engine\test\docker-executor.test.ts:30:1
+✖ executor verifies actual container security configuration before allowing it to start (5.7791ms)
+  AssertionError [ERR_ASSERTION]: Missing expected rejection.
+      at async TestContext.<anonymous> (file:///E:/Projects/Factoryze/Factoryze/Factoryze/packages/engine/test/docker-executor.test.ts:32:2)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    expected: /security|isolation/i,
+    operator: 'rejects',
+    diff: 'simple'
+  }

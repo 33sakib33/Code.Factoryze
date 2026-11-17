@@ -1,0 +1,32 @@
+packages:
+  - packages/*
+  - packages/app/extensions/*
+
+allowBuilds:
+  '@parcel/watcher': set this to true or false
+  '@theia/ffmpeg': set this to true or false
+  drivelist: set this to true or false
+  electron-winstaller: set this to true or false
+  esbuild: set this to true or false
+  find-git-repositories: set this to true or false
+  keytar: set this to true or false
+  msgpackr-extract: set this to true or false
+  native-keymap: set this to true or false
+  node-pty: set this to true or false
+  puppeteer: set this to true or false
+
+onlyBuiltDependencies:
+  - '@parcel/watcher'
+  - '@theia/ffmpeg'
+  - drivelist
+  - electron
+  - esbuild
+  - find-git-repositories
+  - keytar
+  - lzma-native
+  - msgpackr-extract
+  - native-keymap
+  - node-pty
+
+patchedDependencies:
+  '@theia/application-manager@1.76.0': patches/@theia__application-manager@1.76.0.patch

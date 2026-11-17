@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#10231f">
+  <meta name="description" content="A quick, visual guide to the Factoryze v0.6 product spec: workflows, architecture, grading, trials, roadmap, and open decisions.">
+  <title>Factoryze — the spec, made clear</title>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <script defer src="script.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <div class="page-shell">
+    <aside class="sidebar" aria-label="Page navigation">
+      <a class="brand" href="#top" aria-label="Factoryze guide, back to top"><span class="brand-mark">F<span></span></span><span>Factoryze <small>SPEC GUIDE</small></span></a>
+      <div class="sidebar-meta"><span class="status-dot"></span> Draft v0.6 <span class="meta-date">20 Oct 2026</span></div>
+      <label class="search-label" for="topic-search">Find a topic <kbd>/</kbd></label>
+      <div class="search-wrap"><span aria-hidden="true">⌕</span><input id="topic-search" type="search" placeholder="Search this guide…" autocomplete="off"></div>
+      <div id="search-results" class="search-results" hidden></div>
+      <nav class="side-nav" id="side-nav">
+        <span class="nav-heading">THE SHORT VERSION</span>
+        <a href="#overview">Overview</a>
+        <a href="#experience">Student journey</a>
+        <a href="#modes">Deployment modes</a>
+        <span class="nav-heading">HOW IT WORKS</span>
+        <a href="#architecture">Architecture</a>
+        <a href="#profiles">Agent profiles</a>
+        <a href="#assessment">Assessment</a>
+        <a href="#trials">Trials & safety</a>
+        <span class="nav-heading">WHAT'S NEXT</span>
+        <a href="#roadmap">Roadmap</a>
+        <a href="#open-questions">Open questions</a>
+      </nav>
+      <a class="sidebar-source" href="SPEC.md" target="_blank" rel="noopener">Read the full spec <span aria-hidden="true">↗</span></a>
+    </aside>
+
+    <div class="main-column" id="top">
+      <header class="mobile-header"><a class="brand" href="#top"><span class="brand-mark">F<span></span></span><span>Factoryze <small>SPEC GUIDE</small></span></a><button id="menu-toggle" type="button" aria-expanded="false" aria-controls="side-nav" aria-label="Open navigation">☰</button></header>
+      <main id="main">
+        <section class="hero" id="overview" data-search="overview thesis what is factoryze ai coding students labs">
+          <div class="hero-topline"><span class="eyebrow">PRODUCT SPEC / V0.6</span><a href="SPEC.md" target="_blank" rel="noopener">Original document ↗</a></div>
+          <div class="hero-grid">
+            <div><h1>Learning to code <em>with</em> AI takes more than a working answer.</h1><p class="hero-intro">Factoryze is an open-source desktop coding environment for Windows, macOS, and Linux. It teaches and measures two skills: asking an agent precise questions, and judging what the agent does next.</p><div class="hero-actions"><a class="button button-primary" href="#experience">See how a lab works <span aria-hidden="true">↗</span></a><a class="button button-ghost" href="#architecture">Explore the system ↓</a></div></div>
+            <div class="hero-art" aria-label="A simple loop: prompt, agent, review, learn"><div class="art-label">THE LEARNING LOOP</div><div class="orbit orbit-one"><span>01</span><b>Prompt</b><small>Be specific</small></div><div class="orbit orbit-two"><span>02</span><b>Agent</b><small>Build with AI</small></div><div class="orbit orbit-three"><span>03</span><b>Review</b><small>Catch mistakes</small></div><div class="orbit orbit-four"><span>04</span><b>Learn</b><small>See the report</small></div><div class="art-center">AI<span>≠</span><small>autopilot</small></div></div>
+          </div>
+          <div class="fact-strip"><div><strong>3</strong><span>ways to run it</span></div><div><strong>2</strong><span>agent integration seams</span></div><div><strong>4</strong><span>assessment layers</span></div><div><strong>4</strong><span>trial families</span></div></div>
+        </section>
+
+        <section class="section section-white" id="experience" data-search="student journey flow judge prompt agent approval report token budget">
+          <div class="section-head"><div><span class="eyebrow">01 / THE EXPERIENCE</span><h2>What a student actually does</h2></div><p>In a timed lab, the student works in a familiar editor with an agent pane, a visible token budget, and a task to solve.</p></div>
+          <div class="journey" aria-label="Student lab journey">
+            <article><span class="step-index">01</span><div class="step-icon">⌨</div><h3>Describe the change</h3><p>The student prompts the agent. The judge scores specificity; practice mode can block vague prompts.</p></article>
+            <article><span class="step-index">02</span><div class="step-icon">✳</div><h3>Work with the agent</h3><p>The agent reads files, edits code, and uses tools. A per-student budget keeps usage visible.</p></article>
+            <article><span class="step-index">03</span><div class="step-icon">◫</div><h3>Review each action</h3><p>Diffs and shell commands appear as approval cards. Some mistakes are deliberate trials.</p></article>
+            <article><span class="step-index">04</span><div class="step-icon">✓</div><h3>Submit and reflect</h3><p>Hidden checks and the event log produce a report on correctness, efficiency, prompts, and verification.</p></article>
+          </div>
+          <div class="insight"><span class="insight-symbol">↗</span><p><strong>The central idea:</strong> “Replace the nested loop with a set lookup” shows understanding. “Make it faster” asks the agent to explore and guess. Factoryze measures that difference—and whether the student catches bad work.</p></div>
+        </section>
+
+        <section class="section section-tint" id="modes" data-search="solo lab hosted deployment modes server key results practice graded v0 v1">
+          <div class="section-head"><div><span class="eyebrow">02 / DEPLOYMENT</span><h2>One engine. Three settings.</h2></div><p>The desktop app stays the same. The engine moves depending on who runs the session and who needs to trust the result.</p></div>
+          <div class="mode-grid"><article class="mode-card"><div class="mode-top"><span class="mode-number">01</span><span class="pill">V0</span></div><h3>Solo</h3><p>One person practices on their own computer.</p><dl><div><dt>Engine</dt><dd>Inside the desktop app</dd></div><div><dt>LLM key</dt><dd>Student supplies their own</dd></div><div><dt>Result</dt><dd>Practice · unverified</dd></div></dl></article><article class="mode-card featured"><div class="mode-top"><span class="mode-number">02</span><span class="pill">FIRST AUDIENCE</span></div><h3>Lab</h3><p>An instructor runs a self-hosted server for a class.</p><dl><div><dt>Engine</dt><dd>Lab server</dd></div><div><dt>LLM key</dt><dd>Instructor/admin holds it on server</dd></div><div><dt>Result</dt><dd>Graded · CSV export</dd></div></dl></article><article class="mode-card"><div class="mode-top"><span class="mode-number">03</span><span class="pill">V1</span></div><h3>Hosted</h3><p>Factoryze runs the server for institutions and individuals.</p><dl><div><dt>Engine</dt><dd>Factoryze cloud</dd></div><div><dt>LLM key</dt><dd>Metered or organization supplied</dd></div><div><dt>Result</dt><dd>Graded</dd></div></dl></article></div>
+          <p class="section-note">In graded labs, the instructor pins one agent profile, version, and model so students have comparable conditions. Practice can allow a choice.</p>
+        </section>
+
+        <section class="section section-white" id="architecture" data-search="architecture ACP agent client protocol gateway theia engine model key tools mirror grader modules">
+          <div class="section-head"><div><span class="eyebrow">03 / ARCHITECTURE</span><h2>Two seams make the system flexible</h2></div><p>The IDE talks to an agent through ACP. The agent talks to a model through the engine gateway. That keeps the interface and measurement consistent across profiles.</p></div>
+          <div class="architecture-map" role="img" aria-label="Theia desktop app connects through ACP to an agent profile; the profile connects through the model gateway to providers and the engine's meter, trials, and grader.">
+            <div class="map-node"><span class="map-kicker">DESKTOP APP</span><strong>Theia workbench</strong><p>Editor · terminal · agent pane<br>Approval cards and diffs</p></div><div class="map-connector"><b>ACP</b><span>Agent ↔ IDE</span></div><div class="map-node map-agent"><span class="map-kicker">PLUGGABLE PROFILE</span><strong>Agent process</strong><p>Factoryze harness · OpenCode<br>Codex · Claude Code</p></div><div class="map-connector"><b>Gateway</b><span>Agent ↔ model</span></div><div class="map-node map-engine"><span class="map-kicker">ENGINE</span><strong>Trust & measurement</strong><p>Model key · token meter · trials<br>Workspace mirror · grader</p></div>
+          </div>
+          <div class="architecture-notes"><div><span class="mini-icon">🔒</span><h3>The key stays server-side</h3><p>In labs, agents use session tokens. The gateway holds the real provider key and enforces the budget.</p></div><div><span class="mini-icon">⟳</span><h3>Tools run near the code</h3><p>In v0 labs, external agents use the student machine’s workspace and shell: PowerShell on Windows, Bash on macOS/Linux. Trusted tests and trial definitions stay on the server.</p></div></div>
+        </section>
+
+        <section class="section section-dark" id="profiles" data-search="agent profiles harness opencode claude code codex plugin bundled user installed benchmark baseline">
+          <div class="section-head"><div><span class="eyebrow">04 / AGENTS</span><h2>Agent profiles are plug-ins</h2></div><p>Each profile supplies an ACP connection, model gateway settings, permission configuration, and tool translation.</p></div>
+          <div class="profile-grid"><article><span class="profile-tag">REFERENCE PROFILE</span><h3>Factoryze harness</h3><p>Our own lightweight agent. Its loop runs in the engine, giving exact trial targeting and control over dispatch.</p><span class="profile-foot">V0 · bundled</span></article><article><span class="profile-tag">EXTERNAL PROFILE</span><h3>OpenCode</h3><p>Native ACP and broad model support. The spec recommends it as the first external profile in v0.</p><span class="profile-foot">V0 target · bundled</span></article><article><span class="profile-tag">EXTERNAL PROFILE</span><h3>Codex</h3><p>Connects through an ACP adapter and the gateway’s OpenAI Responses endpoint.</p><span class="profile-foot">V0.x · bundled target</span></article><article><span class="profile-tag">EXTERNAL PROFILE</span><h3>Claude Code</h3><p>Connects through an ACP adapter. The user or IT installs it under Anthropic’s terms.</p><span class="profile-foot">V0.x · user installed</span></article></div>
+          <p class="dark-note">Benchmarks run the same task and model across profiles. Budgets and efficiency baselines are always set per <code>task × profile@version × model</code>.</p>
+        </section>
+
+        <section class="section section-white" id="assessment" data-search="scoring correctness efficiency specificity verification weights baseline hidden tests judge report">
+          <div class="section-head"><div><span class="eyebrow">05 / ASSESSMENT</span><h2>Four layers in the report</h2></div><p>The final code matters most. The report also shows how economically and carefully the student reached it. Percentages below come from the spec’s example lab config.</p></div>
+          <div class="score-layout"><div class="score-list"><div class="score-row"><div class="score-label"><strong>Correctness</strong><span>50%</span></div><div class="bar"><i style="--fill:50%;--bar:#d9654b"></i></div><p>Hidden tests and checks on the final workspace mirror. Acts as a gate.</p></div><div class="score-row"><div class="score-label"><strong>Efficiency</strong><span>20%</span></div><div class="bar"><i style="--fill:20%;--bar:#b8bf43"></i></div><p>Weighted tokens and turns compared with that exact profile and model baseline.</p></div><div class="score-row"><div class="score-label"><strong>Specificity</strong><span>15%</span></div><div class="bar"><i style="--fill:15%;--bar:#73a9a3"></i></div><p>Judge scores, weighted toward prompts that produced accepted edits.</p></div><div class="score-row"><div class="score-label"><strong>Verification</strong><span>15%</span></div><div class="bar"><i style="--fill:15%;--bar:#7867a3"></i></div><p>Trial outcomes, tests after edits, diff review, and approval decisions.</p></div></div><aside class="score-callout"><span class="callout-kicker">WHY THE BASELINE MATTERS</span><strong>Compare a student to the agent they actually used.</strong><p>Different agents consume tokens differently. Efficiency is a ratio to the same <code>profile@version + model</code> baseline. That makes cross-profile results approximate, so graded labs pin one profile.</p></aside></div>
+        </section>
+
+        <section class="section section-tint" id="trials" data-search="trials mutate side effect misleading context supply chain safety injection approval package canary">
+          <div class="section-head"><div><span class="eyebrow">06 / TRIALS</span><h2>Realistic mistakes, safe by design</h2></div><p>One to three deterministic trials may appear in a lab. Students know the agent can make mistakes; the specific trial stays hidden until after the lab.</p></div>
+          <div class="trial-grid"><article><span class="trial-icon coral">&lt;≤</span><h3>Code mutation</h3><p>A plausible bug is inserted into an edit, such as an off-by-one boundary.</p></article><article><span class="trial-icon olive">↪</span><h3>Side effect</h3><p>A planted file triggers an extra, unrelated edit after the agent reads it.</p></article><article><span class="trial-icon teal">“ ”</span><h3>Misleading context</h3><p>A false hint in the workspace tempts the student toward a bad solution.</p></article><article><span class="trial-icon purple">⌁</span><h3>Supply chain</h3><p>A package or command looks suspicious at the approval card, testing whether the student stops it.</p></article></div>
+          <div class="safety-band"><div><span class="safety-symbol">◎</span><h3>Safety rules that apply to every profile</h3></div><ul><li>Payloads are harmless even if run: decoy packages stay in the private index, URLs use <code>.invalid</code>, and planted “secrets” are fake.</li><li>Shell commands require approval for supply-chain trials; unsupported profiles skip those trials.</li><li>Only fired, supported trials count toward verification. A trial that never fires is reported as such.</li></ul></div>
+        </section>
+
+        <section class="section section-white" id="roadmap" data-search="roadmap v0 v1 v2 spike milestone scope effort installers python labs hiring hosted">
+          <div class="section-head"><div><span class="eyebrow">07 / DELIVERY</span><h2>Build the lab first</h2></div><p>The first release focuses on students in labs, with solo practice alongside it. Hosted service and hiring features come later.</p></div>
+          <div class="timeline"><div><span class="time-dot"></span><span class="time-label">V0</span><h3>Solo + self-hosted labs</h3><p>Desktop app, ACP pane, Factoryze harness, one external profile, judge, trials, scoring, light integrity, benchmark CLI, 2–3 Python tasks, and instructor tools.</p></div><div><span class="time-dot"></span><span class="time-label">V1</span><h3>Hosted</h3><p>Factoryze operates the server. Language-server diagnostics for the agent are also planned.</p></div><div><span class="time-dot"></span><span class="time-label">V2</span><h3>Hiring controls</h3><p>Lockdown, remote execution, proctoring, SSO, and replay.</p></div></div>
+          <div class="milestone"><div><span class="eyebrow">FIRST MILESTONE · 4–5 DAY SPIKE</span><h3>Prove the difficult connections early</h3></div><ol><li>Build branded Theia installers for Windows, macOS, and Linux.</li><li>Drive OpenCode from the ACP pane; meter and rewrite one edit through a stub gateway.</li><li>Run a thin Factoryze harness with basic tools, including PowerShell on Windows, and a simulated supply-chain trial.</li><li>Benchmark one task through both profiles on the same model.</li></ol></div>
+        </section>
+
+        <section class="section section-tint questions-section" id="open-questions" data-search="open questions assumptions risks licence python offline server csv lms code signing claude">
+          <div class="section-head"><div><span class="eyebrow">08 / DECISIONS TO MAKE</span><h2>What is still open?</h2></div><p>The spec is a draft. These choices affect rollout, packaging, and the first institution deployments.</p></div>
+          <div class="questions-grid"><details><summary>Which open-source licence? <span>01</span></summary><p>MIT or Apache-2.0 could favor adoption. AGPL-3.0 for the engine could protect the hosted offering.</p></details><details><summary>How does Python reach offline labs? <span>02</span></summary><p>Can <code>uv</code> download Python, or must installers bundle it for disconnected labs?</p></details><details><summary>Where does the lab server run? <span>03</span></summary><p>Choose a LAN machine or cloud VM. Remote execution would require more server capacity.</p></details><details><summary>Are CSV grades enough? <span>04</span></summary><p>Confirm whether institutions need an LMS-specific export.</p></details><details><summary>Who signs the installers? <span>05</span></summary><p>Assign ownership of Windows and macOS signing certificates.</p></details><details><summary>Is separate Claude Code installation acceptable? <span>06</span></summary><p>Its terms prevent bundling in the open-source distribution, so the user or IT would install it.</p></details></div>
+          <div class="assumption-note"><strong>Marked as assumptions in v0.6</strong><p>Lab size of 20–60 students; OpenCode’s plugin path for preventing dispatch of approved trial payloads; the Vercel AI SDK provider layer; the roughly 1.5× harness benchmark target; and the one-developer effort estimates.</p></div>
+        </section>
+      </main>
+      <footer><div><strong>Factoryze / Spec Guide</strong><p>A visual reading companion to the draft v0.6 spec. Details and exact implementation rules remain in the source.</p></div><a href="SPEC.md" target="_blank" rel="noopener">Open full SPEC.md ↗</a></footer>
+    </div>
+  </div>
+</body>
+</html>

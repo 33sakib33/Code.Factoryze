@@ -1,0 +1,365 @@
+{
+  "date": "2026-10-28",
+  "timezone": "Asia/Dhaka",
+  "recordedAtUtc": "2026-10-27T23:33:26.405Z",
+  "state": "completed-paused-signed-out",
+  "supersedesPreflight": "checks.json",
+  "scope": "Real SMTP OTP and OpenRouter through the existing packaged Windows desktop, local tools/approvals, public/hidden grading, saved report, monetary balance and sign-out. No public deployment or product UI/source change.",
+  "authorization": {
+    "approvedTotalCapMicro": 100000,
+    "priorSpendRetainedMicro": 14,
+    "capReset": false,
+    "extraTaskBenchmarksAuthorized": false
+  },
+  "identity": {
+    "desktopHead": "f80d8409d1f3d17673cf1c5bfa4b1bc8d123ac57",
+    "backendHeadBeforeAudit": "50258345305a87635e5e194ac720c5476ca282c7",
+    "frontendHead": "375afb50d2ee7ed24fe7062aa3f312868ccb1d93",
+    "backendExecutableSha256": "2b9f6706749100e52f91777c8935afd2186c0870e9cecd8c042c41d53f3b9f71",
+    "desktopAsarSha256": "2bccdd252b55537e19562dce4eb01c13df2bca00f35ddb054d05371a93a0ee11",
+    "desktopExecutableSha256": "e2b4f46a4a7a8ed4676aef15aa738a3361fcbb166f72d4421086bbdcc078fd66",
+    "packagedExecutable": true,
+    "downloadedInstalledArtifactTest": false
+  },
+  "setup": {
+    "privateEnvironment": ".env.local",
+    "environmentGitIgnored": true,
+    "providerKeyPrinted": false,
+    "providerKeyMetadataValid": true,
+    "providerCreditAvailable": true,
+    "bind": "127.0.0.1:8091",
+    "profileIsolated": true,
+    "originalByokProfileTouched": false,
+    "originalUnreadableEnvironmentPreserved": true,
+    "savedInferenceFlag": false,
+    "runtimeInferenceTemporarilyEnabled": true
+  },
+  "authentication": {
+    "realStandardLibrarySmtp": true,
+    "administratorOtpVerifications": 2,
+    "desktopOtpVerifications": 1,
+    "otpEmailsRequestedThisFlow": 5,
+    "expiredAdminCodeRejected": 1,
+    "desktopCredentialAtAdminEndpointStatus": 401,
+    "ownerAllowlistUnchanged": true,
+    "desktopSessionRetainedAcrossRestart": true,
+    "adminSignedOut": true,
+    "desktopSignedOut": true
+  },
+  "workflow": {
+    "task": "library-fines",
+    "model": {
+      "id": "openai/gpt-4.1-nano",
+      "upstream": "openai/gpt-4.1-nano",
+      "enabled": true,
+      "maxInputTokens": 32768,
+      "maxOutputTokens": 1024,
+      "inputMicroPerMillion": 110000,
+      "cachedMicroPerMillion": 33000,
+      "outputMicroPerMillion": 440000,
+      "outputParameter": "max_tokens"
+    },
+    "studentPrompts": 2,
+    "desktopModelRequests": 6,
+    "firstCodingAttemptRequests": 4,
+    "followUpRequests": 2,
+    "firstAttempt": "Nano changed the date call but omitted the import; no passing report was claimed at that stage.",
+    "followUp": "A narrow student prompt requested the missing local import, which was reviewed and approved.",
+    "approvals": [
+      {
+        "kind": "command",
+        "command": "python -m unittest",
+        "atUtc": "2026-10-27T23:20:11.738Z"
+      },
+      {
+        "kind": "edit",
+        "path": "library/returns.py",
+        "atUtc": "2026-10-27T23:22:14.718Z"
+      },
+      {
+        "kind": "edit",
+        "path": "library/returns.py",
+        "atUtc": "2026-10-27T23:28:05.492Z"
+      },
+      {
+        "kind": "command",
+        "command": "python -m unittest",
+        "atUtc": "2026-10-27T23:28:13.643Z"
+      }
+    ],
+    "rejectedActions": [
+      {
+        "command": "pip install --upgrade --quiet pip",
+        "decision": "declined",
+        "reason": "Unrequested package upgrade; only the public-test command is authorized for this test.",
+        "atUtc": "2026-10-27T23:22:45.180Z"
+      }
+    ],
+    "publicChecks": {
+      "passed": 5,
+      "total": 5
+    },
+    "hiddenChecks": {
+      "passed": 9,
+      "total": 9
+    },
+    "reportSaved": true,
+    "reportSuggestionsPresent": false,
+    "reportPromptScoresPresent": false,
+    "pageErrors": [],
+    "localMeter": "3,626 of 100,000 tokens\n96,374 left",
+    "localTokenUsage": {
+      "cached": 0,
+      "input": 3392,
+      "output": 234
+    },
+    "executionPins": [
+      {
+        "profile": "factoryze@0.1.0",
+        "model": "openai/gpt-4.1-nano",
+        "funding": "trial",
+        "providerHost": "127.0.0.1:8091",
+        "temperature": null,
+        "os": "win32"
+      }
+    ],
+    "reportSubmittedAt": "2026-10-27T23:28:21.740Z",
+    "sponsoredRequestEvents": [
+      {
+        "id": "50961cdc-d707-4c01-8a42-3e4e8a805d37",
+        "sessionId": "a1258ecc-d5c0-49da-b4e7-d472a6b5d3e3",
+        "type": "sponsored_request@1",
+        "at": "2026-10-27T23:19:58.103Z",
+        "data": {
+          "requestId": "1c6967db-bc37-4aa9-a678-4e9323180cbd",
+          "gatewayRequestId": "6ae1319b60330cf1e895b8c1",
+          "profile": "factoryze@0.1.0",
+          "model": "openai/gpt-4.1-nano"
+        }
+      },
+      {
+        "id": "22a09904-88dc-4b5f-99db-bc7fe871a663",
+        "sessionId": "a1258ecc-d5c0-49da-b4e7-d472a6b5d3e3",
+        "type": "sponsored_request@1",
+        "at": "2026-10-27T23:20:15.661Z",
+        "data": {
+          "requestId": "530be8f2-bffc-4e83-b2d0-7537dce6e8d4",
+          "gatewayRequestId": "6ae131ae60330cf1e895b8c2",
+          "profile": "factoryze@0.1.0",
+          "model": "openai/gpt-4.1-nano"
+        }
+      },
+      {
+        "id": "319ca219-f5d5-4283-9add-aa637a1d2ad0",
+        "sessionId": "a1258ecc-d5c0-49da-b4e7-d472a6b5d3e3",
+        "type": "sponsored_request@1",
+        "at": "2026-10-27T23:22:18.481Z",
+        "data": {
+          "requestId": "02c3954c-4824-4a40-992b-6f064fba9dbd",
+          "gatewayRequestId": "6ae1322860330cf1e895b8c3",
+          "profile": "factoryze@0.1.0",
+          "model": "openai/gpt-4.1-nano"
+        }
+      },
+      {
+        "id": "0795b6e6-8fdb-4b6a-bdcd-8a9f959174cc",
+        "sessionId": "a1258ecc-d5c0-49da-b4e7-d472a6b5d3e3",
+        "type": "sponsored_request@1",
+        "at": "2026-10-27T23:22:47.551Z",
+        "data": {
+          "requestId": "65c3e894-c676-4c1c-9698-94793c9b6dbe",
+          "gatewayRequestId": "6ae1324560330cf1e895b8c4",
+          "profile": "factoryze@0.1.0",
+          "model": "openai/gpt-4.1-nano"
+        }
+      },
+      {
+        "id": "f41655ef-1582-44ed-b64b-9d4d0d968596",
+        "sessionId": "d1c65e8e-e592-43f2-8359-cdc378cf20bc",
+        "type": "sponsored_request@1",
+        "at": "2026-10-27T23:27:59.916Z",
+        "data": {
+          "requestId": "d0b8754c-ffe3-4189-9439-2d8b4a6ca162",
+          "gatewayRequestId": "6ae1337d60330cf1e895b8c9",
+          "profile": "factoryze@0.1.0",
+          "model": "openai/gpt-4.1-nano"
+        }
+      },
+      {
+        "id": "3bceedfd-a535-46a1-ada2-bec781fc9ef7",
+        "sessionId": "d1c65e8e-e592-43f2-8359-cdc378cf20bc",
+        "type": "sponsored_request@1",
+        "at": "2026-10-27T23:28:15.919Z",
+        "data": {
+          "requestId": "6d92fc70-8859-4e42-bbff-4bf6820cf8d8",
+          "gatewayRequestId": "6ae1338e60330cf1e895b8ca",
+          "profile": "factoryze@0.1.0",
+          "model": "openai/gpt-4.1-nano"
+        }
+      }
+    ],
+    "monetaryBalanceBeforeMicro": 99987,
+    "monetaryBalanceAfterMicro": 99507,
+    "displayedCreditMatchesLedger": true
+  },
+  "accounting": {
+    "programBudgetMicro": 100000,
+    "priorSpendMicro": 14,
+    "desktopSpendMicro": 480,
+    "totalAccountedSpendMicro": 494,
+    "remainingProgramMicro": 99506,
+    "conservativeConfiguredRates": true,
+    "providerKeyUsageDeltaUsd": 0.0004328,
+    "providerDeltaAttribution": "Key-wide usage delta over the test interval; not a per-generation invoice. Other clients using the same key could affect it.",
+    "perGenerationInvoiceVerified": false,
+    "trialExpiryExtendedByMinimalOneMicroGrant": true,
+    "accountGrantedMicro": 100001,
+    "accountAvailableMicro": 99507,
+    "grantDidNotIncreaseProgramBudget": true
+  },
+  "gatewayRequests": [
+    {
+      "id": "6ae1338e60330cf1e895b8ca",
+      "state": "finished",
+      "outcome": "completed",
+      "costKind": "measured",
+      "costMicro": 60,
+      "usage": {
+        "input": 488,
+        "cached": 0,
+        "output": 13
+      },
+      "model": "openai/gpt-4.1-nano"
+    },
+    {
+      "id": "6ae1337d60330cf1e895b8c9",
+      "state": "finished",
+      "outcome": "completed",
+      "costKind": "measured",
+      "costMicro": 78,
+      "usage": {
+        "input": 389,
+        "cached": 0,
+        "output": 79
+      },
+      "model": "openai/gpt-4.1-nano"
+    },
+    {
+      "id": "6ae1324560330cf1e895b8c4",
+      "state": "finished",
+      "outcome": "completed",
+      "costKind": "measured",
+      "costMicro": 96,
+      "usage": {
+        "input": 752,
+        "cached": 0,
+        "output": 28
+      },
+      "model": "openai/gpt-4.1-nano"
+    },
+    {
+      "id": "6ae1322860330cf1e895b8c3",
+      "state": "finished",
+      "outcome": "completed",
+      "costKind": "measured",
+      "costMicro": 88,
+      "usage": {
+        "input": 717,
+        "cached": 0,
+        "output": 20
+      },
+      "model": "openai/gpt-4.1-nano"
+    },
+    {
+      "id": "6ae131ae60330cf1e895b8c2",
+      "state": "finished",
+      "outcome": "completed",
+      "costKind": "measured",
+      "costMicro": 93,
+      "usage": {
+        "input": 664,
+        "cached": 0,
+        "output": 44
+      },
+      "model": "openai/gpt-4.1-nano"
+    },
+    {
+      "id": "6ae1319b60330cf1e895b8c1",
+      "state": "finished",
+      "outcome": "completed",
+      "costKind": "measured",
+      "costMicro": 65,
+      "usage": {
+        "input": 382,
+        "cached": 0,
+        "output": 50
+      },
+      "model": "openai/gpt-4.1-nano"
+    }
+  ],
+  "cleanup": {
+    "programPaused": true,
+    "reservedMicro": 0,
+    "activeRequests": 0,
+    "activeAdminCredentials": 0,
+    "activeNativeOrGatewayCredentials": 0,
+    "packagedAppClosed": true,
+    "privateOperatorPortsClosed": true
+  },
+  "operatorCorrections": [
+    "Initial configuration was unreadable; reconstructed private SMTP settings and fresh OTP secrets, then saved the owner-provided OpenRouter key only locally.",
+    "Restarted the initial private helper before authentication to correct wait/balance checks; a later admin code expired and was rejected normally.",
+    "Continued the already verified app after an operator Connect a model/Manage trial account navigation mismatch, using the app test/debugging endpoint already created by Playwright; no authentication bypass.",
+    "Fixed an optional-element wait in the later helper. Failed/expired/navigation states remain in ignored local raw receipts.",
+    "The first coding response omitted a required import and proposed an unrequested pip upgrade, which was declined; a second explicit prompt completed the fix.",
+    "After report generation, returned Home to reach Settings and completed balance/sign-out checks through the ordinary UI after the helper navigation wait expired."
+  ],
+  "artifacts": [
+    {
+      "file": "account-before.png",
+      "sha256": "9b1770623ef877de345417de319aff8aa4bc8908bcf030529e90dbd9af619a27",
+      "privateEmailMasked": true
+    },
+    {
+      "file": "attempt.png",
+      "sha256": "296f984e7df5c1a55493bb0ba14e6484282190f5c5b47244fa1899fc0684cf06",
+      "privateEmailMasked": true
+    },
+    {
+      "file": "report.png",
+      "sha256": "a1654159d30e5199bfb3e2bfa9cb95dc6bcd507b7ea31afae64b7a24b9d7d2e0",
+      "privateEmailMasked": true
+    },
+    {
+      "file": "account-after.png",
+      "sha256": "1e52b236b998bed478e3e2bec217dbe0762cd95b3a0a3ba917bb660fda248e48",
+      "privateEmailMasked": true
+    }
+  ],
+  "independentDatabaseEvidence": "database.json",
+  "providerMetadataEvidence": "provider-usage.json",
+  "readOnlyVerifier": "read-only-database-verifier.go.txt",
+  "remainingReleaseGates": [
+    "Fresh macOS/Linux verification for current slices",
+    "Downloaded unsigned-installer and remaining manual release checks",
+    "Human review of authentication, credentials and draft contracts before merge",
+    "Two unchanged Windows symlink EPERM unit-test failures and installer-wrapper cleanup",
+    "Task-model benchmarks and promotion; Docker remains deferred"
+  ],
+  "artifactRepository": "33sakib33/Factoryze",
+  "artifactDirectory": "docs/verification/2026-10-28-real-desktop-trial",
+  "evidenceLocations": {
+    "desktop": {
+      "database": "database.json",
+      "provider": "provider-usage.json",
+      "verifier": "read-only-database-verifier.go.txt",
+      "log": "database-verification.log"
+    },
+    "backend": {
+      "database": "verification/2026-10-28-real-desktop-trial-database.json",
+      "provider": "verification/2026-10-28-real-desktop-trial-provider-usage.json",
+      "verifier": "verification/2026-10-28-real-desktop-trial-verifier.go.txt",
+      "log": "verification/2026-10-28-real-desktop-trial-database.log"
+    }
+  }
+}

@@ -1,0 +1,273 @@
+{
+  "date": "2026-10-28",
+  "timezone": "Asia/Dhaka",
+  "recordedAtUtc": "2026-10-28T00:15:02.547Z",
+  "state": "windows-verification-passed",
+  "request": "Fix two Windows symlink test failures and installer cleanup failure, retain an audit trail, then commit and push.",
+  "identity": {
+    "baseCommit": "2b5f683154919f1258f69bccab9cc4001f1486d5",
+    "branch": "feature/desktop-trial-credits",
+    "remote": "git@github.com:33sakib33/Factoryze.git",
+    "sourceHashes": [
+      {
+        "path": "packages/app/extensions/core/test/harness-tools.test.ts",
+        "normalization": "UTF-8 with CRLF converted to LF",
+        "sha256": "c11c09d04f69d70f89e82fc7b8ce8eb8d08df9dbd8d71b31dcf168e1eb8587f1"
+      },
+      {
+        "path": "packages/engine/test/task-import.test.ts",
+        "normalization": "UTF-8 with CRLF converted to LF",
+        "sha256": "26e7264f0ea0292eb8bfcfccefb9fddd488d1dca4fb47b87fd2c253290d69019"
+      },
+      {
+        "path": "packages/app/scripts/installer-cleanup.mjs",
+        "normalization": "UTF-8 with CRLF converted to LF",
+        "sha256": "6f1f29ad7ae1c4f4020bae014917a3aa61161f7dbf9e1e20054d305bf704fd35"
+      },
+      {
+        "path": "packages/app/scripts/installer-cleanup.test.mjs",
+        "normalization": "UTF-8 with CRLF converted to LF",
+        "sha256": "6dcbeabce09edf3ea11bfef39dd792c5245d154cc13b62cd88d2a2009f17ab9d"
+      },
+      {
+        "path": "packages/app/scripts/smoke-installer.mjs",
+        "normalization": "UTF-8 with CRLF converted to LF",
+        "sha256": "0dff45a3ad5211b053ab625365f80350c618d17d60718cb44b7db86ded0f9a92"
+      }
+    ]
+  },
+  "environment": {
+    "platform": "win32",
+    "architecture": "x64",
+    "osRelease": "10.0.19045",
+    "node": "v24.22.1",
+    "pnpm": "10.28.2",
+    "electron": "42.8.1",
+    "desktopVersion": "0.0.1",
+    "nodeExecutable": "C:\\Users\\Sakib\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\node\\bin\\node.exe",
+    "commandsUsePinnedPnpm": true
+  },
+  "initialFailures": [
+    {
+      "command": "node --experimental-strip-types --test packages/app/extensions/core/test/harness-tools.test.ts packages/engine/test/task-import.test.ts",
+      "exitCode": 1,
+      "tests": 7,
+      "passed": 5,
+      "failed": 2,
+      "skipped": 0,
+      "cause": "EPERM creating native Windows file-symlink fixtures before security assertions",
+      "log": "initial-focused-tests.log"
+    },
+    {
+      "command": "node --test packages/app/scripts/installer-cleanup.test.mjs",
+      "exitCode": 1,
+      "cause": "New regression initially failed because installer-cleanup.mjs did not exist yet; not a fresh pre-fix installed smoke",
+      "log": "initial-installer-cleanup-test.log"
+    },
+    {
+      "historical": true,
+      "log": "../2026-10-27-desktop-trial-credits/installer-smoke.log",
+      "exitCode": 1,
+      "cause": "App UI assertions passed; original NSIS wrapper then failed temporary-directory rm with EPERM"
+    }
+  ],
+  "checks": [
+    {
+      "command": "node --experimental-strip-types --test packages/app/extensions/core/test/harness-tools.test.ts packages/engine/test/task-import.test.ts packages/app/scripts/installer-cleanup.test.mjs",
+      "exitCode": 0,
+      "tests": 13,
+      "passed": 13,
+      "stage": "early focused run before two final cleanup guards",
+      "log": "focused-tests.log"
+    },
+    {
+      "command": "node --test packages/app/scripts/installer-cleanup.test.mjs",
+      "exitCode": 0,
+      "tests": 7,
+      "passed": 7,
+      "log": "cleanup-tests-final.log"
+    },
+    {
+      "command": "pnpm test",
+      "exitCode": 0,
+      "tests": 207,
+      "passed": 207,
+      "failed": 0,
+      "skipped": 0,
+      "log": "full-tests.log"
+    },
+    {
+      "command": "pnpm typecheck",
+      "exitCode": 0,
+      "log": "typecheck.log"
+    },
+    {
+      "command": "pnpm build:app",
+      "exitCode": 0,
+      "bundleErrors": 0,
+      "log": "build.log"
+    },
+    {
+      "command": "pnpm --filter @factoryze/app package:installer",
+      "exitCode": 0,
+      "log": "package-installer.log"
+    },
+    {
+      "command": "pnpm --filter @factoryze/app verify:package",
+      "exitCode": 0,
+      "log": "package-resource-check.log"
+    },
+    {
+      "command": "pnpm --filter @factoryze/app smoke:installer",
+      "exitCode": 0,
+      "temporaryParentContainsSpaces": true,
+      "temporaryParentWithinWorkspace": true,
+      "appSmokePassed": true,
+      "cleanupPassed": true,
+      "temporaryRootRemoved": true,
+      "inference": "synthetic",
+      "log": "installed-smoke.log",
+      "receipts": [
+        "installer-preflight.json",
+        "installed-app-result.json",
+        "installer-result.json"
+      ]
+    },
+    {
+      "command": "Independent PowerShell filesystem/registry/process checks",
+      "exitCode": 0,
+      "temporaryRootExists": false,
+      "factoryzeInstallRegistrationCount": 0,
+      "factoryzeProcessCount": 0,
+      "receipt": "post-cleanup.json"
+    }
+  ],
+  "coverage": {
+    "windowsRealJunctions": true,
+    "posixFileSymlinkFixtureRetained": true,
+    "zipFileAndDirectorySymlinksRejected": true,
+    "linkedReadAndWriteRejectedBeforeApproval": true,
+    "outsideFileUnchanged": true,
+    "searchAndListDoNotTraverseLinks": true,
+    "importStorageAbsentAfterRejection": true,
+    "cleanupRegressionTests": 7,
+    "cleanupFailurePreservesInstallation": true,
+    "unrelatedAndLinkedRootsRefused": true,
+    "tempParentAliasesSupported": true,
+    "noSkippedTests": true
+  },
+  "warnings": [
+    "Build could not resolve optional @types/react and @types/react-dom peers; bundles completed with zero errors.",
+    "electron-builder dependency collector failed and successfully used fallback manual traversal; full log retained.",
+    "Optional non-Windows dependency packages absent and signing skipped for the unsigned Windows installer."
+  ],
+  "constraints": {
+    "productionLinkPolicyChanged": false,
+    "applicationUiChanged": false,
+    "authenticationChanged": false,
+    "dependenciesChanged": false,
+    "osPrivilegesOrSecuritySettingsChanged": false,
+    "paidModelCalls": 0,
+    "smtpEmails": 0,
+    "dockerUsed": false,
+    "historicalFailedSmokeDirectoriesManuallyDeleted": false,
+    "mergePerformed": false,
+    "releasePublished": false
+  },
+  "limits": [
+    "Native Windows file-symlink fixtures were not run on this host; real directory junctions and ZIP file/directory symlink rejection were run.",
+    "Fresh macOS/Linux suite/build/installed-smoke verification remains pending; retained POSIX test branches were not executed here.",
+    "Downloaded-artifact Gatekeeper/SmartScreen/direct AppImage checks, remaining BYOK/manual provider checks and recorded human review remain open.",
+    "This run used synthetic inference; the separate prior real desktop pilot remains paused and is not repeated by this task.",
+    "Release 0.1 is unreleased; current desktop package version remains 0.0.1."
+  ],
+  "artifacts": [
+    {
+      "path": "dist/Factoryze Setup 0.0.1.exe",
+      "bytes": 174175950,
+      "sha256": "c611de54c024aed04d0d253631f37979b3241089a906c9e189a35fedb1f60795"
+    },
+    {
+      "path": "dist/win-unpacked/resources/app.asar",
+      "bytes": 407425190,
+      "sha256": "aa13c162eb8e65b91a9bf26b41df2cbe24aa516d6c6623ad5e207c473ffa95e2"
+    }
+  ],
+  "evidenceHashes": [
+    {
+      "path": "docs/verification/2026-10-28-windows-verification/build.log",
+      "bytes": 1178,
+      "sha256": "b61bae373d6e1a311d5a37f60dd209000a55e7464600c6fc912f1590725e1c2a"
+    },
+    {
+      "path": "docs/verification/2026-10-28-windows-verification/cleanup-tests-final.log",
+      "bytes": 766,
+      "sha256": "f60b9b35da4258d331bc721c91a59d1a496e008f78ef23ed6fa1ba6773a81520"
+    },
+    {
+      "path": "docs/verification/2026-10-28-windows-verification/focused-tests.log",
+      "bytes": 1975,
+      "sha256": "c6aa1bbd8f3228abcc2bb3fb68e0c41045c062c844e51c2bbfb978e322d52158"
+    },
+    {
+      "path": "docs/verification/2026-10-28-windows-verification/full-tests-before-temp-guards.log",
+      "bytes": 30718,
+      "sha256": "0a80b268ff2d5c9945d8dad0d5cc856a6515d43dbe9b0df75287480322bb412b"
+    },
+    {
+      "path": "docs/verification/2026-10-28-windows-verification/full-tests.log",
+      "bytes": 30910,
+      "sha256": "dfa2d467e46ed2bc68ceb3a5ef1c2e4edf82144fd9cc1045574836d7180e6115"
+    },
+    {
+      "path": "docs/verification/2026-10-28-windows-verification/initial-focused-tests.log",
+      "bytes": 3445,
+      "sha256": "691c52b014071e4c80207e50b941ccd31b01260f65c29deb69ef805df02f3dcd"
+    },
+    {
+      "path": "docs/verification/2026-10-28-windows-verification/initial-installer-cleanup-test.log",
+      "bytes": 1563,
+      "sha256": "5774784d67d472d29c7d4b72c050aa2a001d8a3f44d810bf36811d8b2ece14f3"
+    },
+    {
+      "path": "docs/verification/2026-10-28-windows-verification/installed-app-result.json",
+      "bytes": 2095,
+      "sha256": "220657cecc17298afa5a983b0f157e56fa36d975cc5b292d7131ae0c666f9a7a"
+    },
+    {
+      "path": "docs/verification/2026-10-28-windows-verification/installed-smoke.log",
+      "bytes": 2867,
+      "sha256": "57a4a6f3642f5788f4e0536fdcaa05c3308980757478e0248a10f22fa6b4df74"
+    },
+    {
+      "path": "docs/verification/2026-10-28-windows-verification/installer-preflight.json",
+      "bytes": 362,
+      "sha256": "123115223f2b658d359990455e90abe3edafa9fc20a716a151e53d64e4379ad1"
+    },
+    {
+      "path": "docs/verification/2026-10-28-windows-verification/installer-result.json",
+      "bytes": 316,
+      "sha256": "3b233e06c6ce86657b35ee1d628e505334bf86b237f6a4795f1939e71985b3b3"
+    },
+    {
+      "path": "docs/verification/2026-10-28-windows-verification/package-installer.log",
+      "bytes": 6691,
+      "sha256": "77781497349eebead5f6c262c4b3bbf3cfb905b86491b62b43f8a505a28edf4c"
+    },
+    {
+      "path": "docs/verification/2026-10-28-windows-verification/package-resource-check.log",
+      "bytes": 261,
+      "sha256": "197dbc0b00f7ff83c40c0669449a61dc13631d6b860a36d9aa5d8367db44c4ec"
+    },
+    {
+      "path": "docs/verification/2026-10-28-windows-verification/post-cleanup.json",
+      "bytes": 356,
+      "sha256": "750d810be5fbeff5e78bd361f4d750036fe316d41df2a49291427b2b251e6560"
+    },
+    {
+      "path": "docs/verification/2026-10-28-windows-verification/typecheck.log",
+      "bytes": 86,
+      "sha256": "20240eafcee9cc11f90dc917289fce05024a803aceb8a5946c65535db3041b77"
+    }
+  ]
+}

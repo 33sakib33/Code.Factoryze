@@ -1,0 +1,12 @@
+✔ lab joins are roster-bound, versioned, scoped and do not disclose operator secrets (46.3193ms)
+✔ trusted server metering survives reconnect/restart and cannot reset or cross student/lab budgets (48.3071ms)
+✔ closing or expiring a lab stops joins and requests while preserving readable usage (31.9887ms)
+✔ incomplete and overlapping requests fail closed, immutable pins and duplicate labs are rejected (28.9181ms)
+ℹ tests 4
+ℹ suites 0
+ℹ pass 4
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 2134.02

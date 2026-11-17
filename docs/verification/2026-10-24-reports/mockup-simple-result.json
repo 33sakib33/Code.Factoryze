@@ -1,0 +1,37 @@
+{
+  "passed": true,
+  "platform": "win32",
+  "browser": "155.0.8059.85",
+  "states": [
+    "complete",
+    "partial",
+    "older",
+    "manual"
+  ],
+  "widths": [
+    1280,
+    683,
+    390
+  ],
+  "lightAndDark": true,
+  "schemaValidation": true,
+  "legacyCostsUnknown": true,
+  "promptHtmlEscaped": true,
+  "keyboardControls": true,
+  "suggestionsRemoved": true,
+  "promptScoringRemoved": true,
+  "summaryLabelsExplained": true,
+  "analysisInFirstDesktopView": true,
+  "resultProgressCircle": true,
+  "accuratePassRate": true,
+  "checkDetailsModal": true,
+  "failureReasons": true,
+  "failuresShownFirst": true,
+  "passedChecksExpandable": true,
+  "modalEscapeAndFocusReturn": true,
+  "modalBackdropClose": true,
+  "externalRequests": 0,
+  "consoleErrors": 0,
+  "scope": "Mockup-only simplified circular pass-rate indicator",
+  "htmlSha256": "1710c315e5b075feac7ab809c5a7d4df3d4507e93921fba8e26c145c57ece5da"
+}

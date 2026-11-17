@@ -1,0 +1,16 @@
+tasks/** text eol=lf
+patches/** text eol=lf
+# Preserve captured verification output exactly, including its diagnostic whitespace.
+docs/verification/**/*.log -text -whitespace
+# Keep this task's captured JSON receipts byte-stable for their audit hashes.
+docs/verification/2026-10-27-desktop-trial-credits/*.json -text
+docs/verification/2026-10-27-local-pilot/*.json -text
+docs/verification/2026-10-28-activity-feed/*.json -text
+docs/verification/2026-10-28-real-desktop-trial/*.json -text
+docs/verification/2026-10-28-windows-verification/*.json -text
+docs/verification/2026-10-29-lab-foundation/*.json -text
+docs/verification/2026-10-29-lab-completion/*.json -text
+docs/verification/2026-10-29-docker-grading/*.json -text
+packages/engine/docker/** text eol=lf
+# The generated preview embeds dependency code with whitespace inside runtime strings.
+mockups/report.html -whitespace linguist-generated=true

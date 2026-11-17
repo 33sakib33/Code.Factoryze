@@ -1,0 +1,29 @@
+{
+  "passed": true,
+  "platform": "win32",
+  "installed": false,
+  "viewport": {
+    "width": 900,
+    "height": 700
+  },
+  "pinnedTLS": true,
+  "joinLab": true,
+  "pythonPrepared": true,
+  "serverBrainLocalHands": true,
+  "modelRequests": 4,
+  "approvals": 2,
+  "weightedTokens": 48,
+  "publicChecks": 5,
+  "submissionSaved": true,
+  "restartToHome": true,
+  "sessionResumed": true,
+  "readonlyLabSettings": true,
+  "byokPreserved": true,
+  "instructorReleaseRendered": true,
+  "gradingVerdictSynthetic": true,
+  "serverStudentCodeExecutions": 0,
+  "suggestionsAndPromptScoresAbsent": true,
+  "paidModelCalls": 0,
+  "realEmailsSent": 0,
+  "pageErrors": []
+}

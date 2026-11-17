@@ -1,0 +1,15 @@
+✔ Windows smoke waits for in-place NSIS uninstall before removing its owned directory (5.9623ms)
+✔ failed uninstall is reported and preserves the install for diagnosis (4.4257ms)
+✔ cleanup refuses an unrelated temporary directory before invoking any operation (1.4841ms)
+✔ an installed executable without an uninstaller is an explicit cleanup failure (2.8637ms)
+✔ cleanup removes an owned directory when setup never installed an app (1.4877ms)
+✔ cleanup permits a canonical temporary-parent alias without following a linked root (4.9984ms)
+✔ a linked smoke root cannot redirect cleanup into a different directory (3.8739ms)
+ℹ tests 7
+ℹ suites 0
+ℹ pass 7
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 119.1388

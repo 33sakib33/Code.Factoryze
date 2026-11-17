@@ -1,0 +1,22 @@
+✖ grading failures require instructor retry; v2 migration preserves snapshots and released CSV pins the grader image (91.97ms)
+✔ a private join binding recovers a lost response without allowing another client to claim the identity (64.0485ms)
+✔ lab task delivery excludes hidden material; mirror sync is bounded, scoped, versioned and idempotent (64.685ms)
+✔ submissions are immutable; closing auto-submits; grades remain private until instructor release (88.1119ms)
+✔ instructor session recovery preserves identity, budgets and snapshots; student events are untrusted flags (56.7163ms)
+ℹ tests 5
+ℹ suites 0
+ℹ pass 4
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 651.4932
+
+✖ failing tests:
+
+test at packages\engine\test\lab-workflow.test.ts:15:1
+✖ grading failures require instructor retry; v2 migration preserves snapshots and released CSV pins the grader image (91.97ms)
+  TypeError [Error]: engine.retryGrades is not a function
+      at TestContext.<anonymous> (file:///E:/Projects/Factoryze/Factoryze/Factoryze/packages/engine/test/lab-workflow.test.ts:22:23)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3)

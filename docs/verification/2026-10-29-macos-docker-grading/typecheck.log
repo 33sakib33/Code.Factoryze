@@ -1,0 +1,5 @@
+
+> factoryze@ typecheck /Users/sakib/Projects/Factoryze/Factoryze/Factoryze
+> tsc --noEmit
+
+exit=0

@@ -1,0 +1,10 @@
+{
+  "passed": true,
+  "platform": "win32",
+  "appSmokePassed": true,
+  "cleanupPassed": true,
+  "temporaryRoot": "E:\\Projects\\Factoryze\\Factoryze\\Factoryze\\dist\\installer temp with spaces\\factoryze-installer-smoke-Ecjk9G",
+  "temporaryRootRemoved": true,
+  "uninstallAttempted": true,
+  "rootRemoved": true
+}

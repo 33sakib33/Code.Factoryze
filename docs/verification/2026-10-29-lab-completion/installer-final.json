@@ -1,0 +1,12 @@
+{
+  "passed": true,
+  "platform": "win32",
+  "soloSmokePassed": true,
+  "labSmokePassed": true,
+  "appSmokePassed": true,
+  "cleanupPassed": true,
+  "temporaryRoot": "C:\\Users\\Sakib\\AppData\\Local\\Temp\\factoryze-installer-smoke-OEi4lK",
+  "temporaryRootRemoved": true,
+  "uninstallAttempted": true,
+  "rootRemoved": true
+}

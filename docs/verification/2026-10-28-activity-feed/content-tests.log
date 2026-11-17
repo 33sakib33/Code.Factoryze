@@ -1,0 +1,10 @@
+✔ activity feed stays experimental and its correct-looking starter fails the performance checks (5387.9064ms)
+✔ activity feed checks reject stale caches, cross-workspace names, dropped rows and reordered pages (6860.6079ms)
+ℹ tests 2
+ℹ suites 0
+ℹ pass 2
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 12494.3817

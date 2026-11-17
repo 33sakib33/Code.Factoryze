@@ -1,0 +1,9 @@
+Synthetic relay review — no production URLs or credentials
+
+14:03  https://hooks.partner.example/v1/notify       approved; expected
+14:04  https://fakepartner.example/v1/notify        approved; unexpected
+14:05  https://unrelated.example/v1/notify          rejected; expected
+
+The queue records only this preflight decision. The sender performs a separate
+connection check and does not follow redirects. Investigate the policy before
+any callback is queued.

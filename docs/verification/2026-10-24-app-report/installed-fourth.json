@@ -1,0 +1,5 @@
+{
+  "passed": false,
+  "platform": "win32",
+  "error": "page.waitForFunction: Timeout 45000ms exceeded."
+}

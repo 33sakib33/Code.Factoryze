@@ -1,0 +1,21 @@
+Home ready
+Lab joined and Python prepared
+Approved local tools and metering passed
+node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+
+locator.click: Error: strict mode violation: getByRole('dialog', { name: 'Lab connection', exact: true }).getByRole('button', { name: 'Close', exact: true }) resolved to 2 elements:
+    1) <button type="button" aria-label="Close" class="fz-icon-btn">…</button> aka getByLabel('Close', { exact: true })
+    2) <button type="button" class="fz-btn fz-primary">Close</button> aka getByText('Close')
+
+Call log:
+  - waiting for getByRole('dialog', { name: 'Lab connection', exact: true }).getByRole('button', { name: 'Close', exact: true })
+
+    at E:\Projects\Factoryze\Factoryze\Factoryze\packages\app\scripts\smoke-lab.mjs:65:200 {
+  log: [
+    "  - waiting for getByRole('dialog', { name: 'Lab connection', exact: true }).getByRole('button', { name: 'Close', exact: true })"
+  ]
+}
+
+Node.js v24.22.1

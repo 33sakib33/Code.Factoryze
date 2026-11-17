@@ -1,0 +1,1014 @@
+2026-10-24T00:47:39.870Z core:WebsocketFrontendConnectionService INFO creating connection for 1
+Opening channel for service path '/services/electron-window'.
+2026-10-24T00:47:40.586Z core:FrontendStopwatch INFO Start frontend contributions: 278.1 ms [1.946 s since frontend page start]
+2026-10-24T00:47:40.586Z core:FrontendApplicationStateService INFO Changed application state from 'init' to 'started_contributions'.
+2026-10-24T00:47:40.747Z core:IPCConnectionProvider ERROR [parcel-watcher: 10244] (node:10244) [DEP0180] DeprecationWarning: fs.Stats constructor is deprecated.
+2026-10-24T00:47:40.747Z core:IPCConnectionProvider ERROR [parcel-watcher: 10244] (Use `Factoryze --trace-deprecation ...` to show where the warning was created)
+2026-10-24T00:47:41.041Z core:FrontendApplicationStateService INFO Changed application state from 'started_contributions' to 'attached_shell'.
+2026-10-24T00:47:41.041Z core:ShellLayoutRestorer INFO >>> Restoring the layout state...
+2026-10-24T00:47:41.057Z core:ShellLayoutRestorer INFO <<< Nothing to restore.
+2026-10-24T00:47:41.151Z core:FrontendStopwatch WARN Frontend TerminalFrontendContribution.initializeLayout took longer than the expected maximum 100 milliseconds: 107.9 ms [2.527 s since frontend page start]
+2026-10-24T00:47:41.181Z core:FrontendStopwatch INFO Initialize the workbench layout: 133.9 ms [2.552 s since frontend page start]
+2026-10-24T00:47:41.181Z core:FrontendApplicationStateService INFO Changed application state from 'attached_shell' to 'initialized_layout'.
+2026-10-24T00:47:42.856Z core:Stopwatch INFO Frontend application startup sequence completed (async work may still be pending): 2460.9 ms [5.362 s since backend process start]
+2026-10-24T00:47:42.857Z core:FrontendStopwatch INFO Replace loading indicator with ready workbench UI (animation): 1667.4 ms [4.234 s since frontend page start]
+2026-10-24T00:47:42.857Z core:FrontendApplicationStateService INFO Changed application state from 'initialized_layout' to 'ready'.
+2026-10-24T00:47:42.857Z core:FrontendStopwatch INFO All frontend contributions settled: 2567.1 ms [4.234 s since frontend page start]
+Workbench page closed
+2026-10-24T00:47:52.761Z core:WebsocketFrontendConnectionService INFO socket closed
+2026-10-24T00:47:52.762Z core:WebsocketFrontendConnectionService INFO closing connection for 1
+2026-10-24T00:47:52.762Z core:DefaultMessagingService INFO Closing channel on service path '/localization-server'.
+2026-10-24T00:47:52.762Z core:DefaultMessagingService INFO Closing channel on service path '/os'.
+2026-10-24T00:47:52.762Z core:DefaultMessagingService INFO Closing channel on service path '/services/logger'.
+2026-10-24T00:47:52.762Z core:DefaultMessagingService INFO Closing channel on service path '/services/commands'.
+2026-10-24T00:47:52.762Z core:DefaultMessagingService INFO Closing channel on service path '/services/messageService'.
+2026-10-24T00:47:52.762Z core:DefaultMessagingService INFO Closing channel on service path '/services/ChannelCloseService'.
+2026-10-24T00:47:52.762Z core:DefaultMessagingService INFO Closing channel on service path '/services/remote-filesystem'.
+2026-10-24T00:47:52.762Z core:DefaultMessagingService INFO Closing channel on service path '/services/envs'.
+2026-10-24T00:47:52.762Z core:DefaultMessagingService INFO Closing channel on service path '/services/workspace'.
+2026-10-24T00:47:52.762Z core:DefaultMessagingService INFO Closing channel on service path '/services/keyboard'.
+2026-10-24T00:47:52.762Z core:DefaultMessagingService INFO Closing channel on service path '/services/quickInput'.
+2026-10-24T00:47:52.762Z core:DefaultMessagingService INFO Closing channel on service path '/services/stopwatch'.
+2026-10-24T00:47:52.762Z core:DefaultMessagingService INFO Closing channel on service path '/services/application'.
+2026-10-24T00:47:52.762Z core:DefaultMessagingService INFO Closing channel on service path '/services/i18n'.
+2026-10-24T00:47:52.762Z core:DefaultMessagingService INFO Closing channel on service path '/services/shell-terminal'.
+2026-10-24T00:47:52.762Z core:DefaultMessagingService INFO Closing channel on service path '/services/factoryze-tasks'.
+2026-10-24T00:47:52.762Z core:DefaultMessagingService INFO Closing channel on service path '/services/cli-preferences'.
+2026-10-24T00:47:52.762Z core:DefaultMessagingService INFO Closing channel on service path '/services/search'.
+2026-10-24T00:47:52.762Z core:DefaultMessagingService INFO Closing channel on service path '/services/terminals/1938565464'.
+Closing channel on service path '/services/electron-window'.
+2026-10-24T00:47:53.162Z core:WebsocketFrontendConnectionService INFO creating connection for 1
+Opening channel for service path '/services/electron-window'.
+2026-10-24T00:47:53.484Z core:FrontendStopwatch INFO Start frontend contributions: 139.2 ms [0.710 s since frontend page start]
+2026-10-24T00:47:53.484Z core:FrontendApplicationStateService INFO Changed application state from 'init' to 'started_contributions'.
+2026-10-24T00:47:53.486Z core:FrontendApplicationStateService INFO Changed application state from 'started_contributions' to 'attached_shell'.
+2026-10-24T00:47:53.486Z core:ShellLayoutRestorer INFO >>> Restoring the layout state...
+2026-10-24T00:47:53.503Z core:ShellLayoutRestorer INFO <<< Nothing to restore.
+2026-10-24T00:47:53.598Z core:FrontendStopwatch INFO Initialize the workbench layout: 118.4 ms [0.843 s since frontend page start]
+2026-10-24T00:47:53.598Z core:FrontendApplicationStateService INFO Changed application state from 'attached_shell' to 'initialized_layout'.
+2026-10-24T00:47:53.883Z core:FrontendStopwatch WARN Frontend FactoryzeSoloContribution.onDidInitializeLayout took longer than the expected maximum 100 milliseconds: 286.1 ms [1.131 s since frontend page start]
+(node:3084) UnhandledPromiseRejectionWarning: TypeError: Object has been destroyed
+    at showWindowAndCloseSplashScreen (C:\Users\Sakib\AppData\Local\Temp\factoryze-installer-smoke-UfzULc\installed\resources\app.asar\lib\backend\electron-main.js:155289:30)
+    at C:\Users\Sakib\AppData\Local\Temp\factoryze-installer-smoke-UfzULc\installed\resources\app.asar\lib\backend\electron-main.js:155293:32
+(node:3084) UnhandledPromiseRejectionWarning: Unhandled promise rejection. This error originated either by throwing inside of an async function without a catch block, or by rejecting a promise which was not handled with .catch(). To terminate the node process on unhandled promise rejection, use the CLI flag `--unhandled-rejections=strict` (see https://nodejs.org/api/cli.html#cli_unhandled_rejections_mode). (rejection id: 2)
+2026-10-24T00:47:54.690Z core:FrontendStopwatch INFO Replace loading indicator with ready workbench UI (animation): 806.6 ms [1.938 s since frontend page start]
+2026-10-24T00:47:54.691Z core:Stopwatch INFO Frontend application startup sequence completed (async work may still be pending): 1302.9 ms [17.196 s since backend process start]
+2026-10-24T00:47:54.691Z core:FrontendApplicationStateService INFO Changed application state from 'initialized_layout' to 'ready'.
+2026-10-24T00:47:54.691Z core:FrontendStopwatch INFO All frontend contributions settled: 1367.8 ms [1.939 s since frontend page start]
+2026-10-24T00:47:57.085Z core:ApplicationShell WARN Widget was activated, but did not accept focus after 2000ms: factoryze-tests
+(node:24964) Warning: AI SDK Warning System: To turn off warning logging, set the AI_SDK_LOG_WARNINGS global to false.
+(node:24964) Warning: AI SDK Warning (factoryze-judge.chat / judge-replay): The feature "responseFormat" is not supported. JSON response format schema is only supported with structuredOutputs
+2026-10-24T00:48:02.448Z core:ApplicationShell WARN Widget was activated, but did not accept focus after 2000ms: factoryze-report
+(node:24964) Warning: AI SDK Warning (factoryze-judge.chat / judge-replay): The feature "responseFormat" is not supported. JSON response format schema is only supported with structuredOutputs
+2026-10-24T00:48:07.354Z core:ApplicationShell WARN Widget was activated, but did not accept focus after 2000ms: factoryze-report
+Debugger ending on ws://127.0.0.1:58143/f68fd019-16b6-41f6-8fca-c065672f3e53
+For help, see: https://nodejs.org/learn/getting-started/debugging
+Closing channel on service path '/services/electron-window'.
+Workbench page closed
+2026-10-24T00:48:07.951Z core:WebsocketFrontendConnectionService INFO socket closed
+2026-10-24T00:48:07.951Z core:WebsocketFrontendConnectionService INFO closing connection for 1
+2026-10-24T00:48:07.951Z core:DefaultMessagingService INFO Closing channel on service path '/localization-server'.
+2026-10-24T00:48:07.951Z core:DefaultMessagingService INFO Closing channel on service path '/os'.
+2026-10-24T00:48:07.951Z core:DefaultMessagingService INFO Closing channel on service path '/services/logger'.
+2026-10-24T00:48:07.951Z core:DefaultMessagingService INFO Closing channel on service path '/services/commands'.
+2026-10-24T00:48:07.951Z core:DefaultMessagingService INFO Closing channel on service path '/services/messageService'.
+2026-10-24T00:48:07.951Z core:DefaultMessagingService INFO Closing channel on service path '/services/ChannelCloseService'.
+2026-10-24T00:48:07.951Z core:DefaultMessagingService INFO Closing channel on service path '/services/remote-filesystem'.
+2026-10-24T00:48:07.951Z core:DefaultMessagingService INFO Closing channel on service path '/services/envs'.
+2026-10-24T00:48:07.951Z core:DefaultMessagingService INFO Closing channel on service path '/services/workspace'.
+2026-10-24T00:48:07.951Z core:DefaultMessagingService INFO Closing channel on service path '/services/keyboard'.
+2026-10-24T00:48:07.951Z core:DefaultMessagingService INFO Closing channel on service path '/services/quickInput'.
+2026-10-24T00:48:07.951Z core:DefaultMessagingService INFO Closing channel on service path '/services/stopwatch'.
+2026-10-24T00:48:07.951Z core:DefaultMessagingService INFO Closing channel on service path '/services/application'.
+2026-10-24T00:48:07.951Z core:DefaultMessagingService INFO Closing channel on service path '/services/i18n'.
+2026-10-24T00:48:07.951Z core:DefaultMessagingService INFO Closing channel on service path '/services/shell-terminal'.
+2026-10-24T00:48:07.951Z core:DefaultMessagingService INFO Closing channel on service path '/services/factoryze-tasks'.
+2026-10-24T00:48:07.951Z core:DefaultMessagingService INFO Closing channel on service path '/services/cli-preferences'.
+2026-10-24T00:48:07.951Z core:DefaultMessagingService INFO Closing channel on service path '/services/search'.
+2026-10-24T00:48:07.951Z core:DefaultMessagingService INFO Closing channel on service path '/services/terminals/1460266788'.
+2026-10-24T00:48:07.951Z core:DefaultMessagingService INFO Closing channel on service path '/services/factoryze-agent'.
+Electron exit: code=0 signal=null
+2026-10-24T00:48:38.317Z core:WebsocketFrontendConnectionService INFO creating connection for 1
+Opening channel for service path '/services/electron-window'.
+2026-10-24T00:48:39.002Z core:FrontendStopwatch INFO Start frontend contributions: 259.3 ms [1.831 s since frontend page start]
+2026-10-24T00:48:39.002Z core:FrontendApplicationStateService INFO Changed application state from 'init' to 'started_contributions'.
+2026-10-24T00:48:39.150Z core:IPCConnectionProvider ERROR [parcel-watcher: 14280] (node:14280) [DEP0180] DeprecationWarning: fs.Stats constructor is deprecated.
+2026-10-24T00:48:39.150Z core:IPCConnectionProvider ERROR [parcel-watcher: 14280] (Use `Factoryze --trace-deprecation ...` to show where the warning was created)
+2026-10-24T00:48:39.473Z core:FrontendApplicationStateService INFO Changed application state from 'started_contributions' to 'attached_shell'.
+2026-10-24T00:48:39.473Z core:ShellLayoutRestorer INFO >>> Restoring the layout state...
+2026-10-24T00:48:39.486Z terminal:ShellTerminalServer WARN Couldn't attach - can't find terminal with id: 1938565464 
+2026-10-24T00:48:39.514Z core:ShellLayoutRestorer INFO <<< The layout has been successfully restored.
+2026-10-24T00:48:39.515Z core:FrontendStopwatch INFO Initialize the workbench layout: 42.5 ms [2.359 s since frontend page start]
+2026-10-24T00:48:39.515Z core:FrontendApplicationStateService INFO Changed application state from 'attached_shell' to 'initialized_layout'.
+2026-10-24T00:48:39.598Z terminal:TerminalWidgetImpl WARN Failed attaching to terminal id 1938565464, the terminal is most likely gone. Starting up a new terminal instead.
+2026-10-24T00:48:41.288Z core:Stopwatch INFO Frontend application startup sequence completed (async work may still be pending): 2467.9 ms [4.906 s since backend process start]
+2026-10-24T00:48:41.288Z core:FrontendStopwatch INFO Replace loading indicator with ready workbench UI (animation): 1765.0 ms [4.131 s since frontend page start]
+2026-10-24T00:48:41.288Z core:FrontendApplicationStateService INFO Changed application state from 'initialized_layout' to 'ready'.
+2026-10-24T00:48:41.288Z core:FrontendStopwatch INFO All frontend contributions settled: 2559.9 ms [4.131 s since frontend page start]
+Workbench page closed
+2026-10-24T00:48:42.253Z core:WebsocketFrontendConnectionService INFO socket closed
+2026-10-24T00:48:42.253Z core:WebsocketFrontendConnectionService INFO closing connection for 1
+2026-10-24T00:48:42.253Z core:DefaultMessagingService INFO Closing channel on service path '/localization-server'.
+2026-10-24T00:48:42.253Z core:DefaultMessagingService INFO Closing channel on service path '/os'.
+2026-10-24T00:48:42.253Z core:DefaultMessagingService INFO Closing channel on service path '/services/logger'.
+2026-10-24T00:48:42.253Z core:DefaultMessagingService INFO Closing channel on service path '/services/commands'.
+2026-10-24T00:48:42.253Z core:DefaultMessagingService INFO Closing channel on service path '/services/messageService'.
+2026-10-24T00:48:42.253Z core:DefaultMessagingService INFO Closing channel on service path '/services/ChannelCloseService'.
+2026-10-24T00:48:42.253Z core:DefaultMessagingService INFO Closing channel on service path '/services/remote-filesystem'.
+2026-10-24T00:48:42.253Z core:DefaultMessagingService INFO Closing channel on service path '/services/envs'.
+2026-10-24T00:48:42.253Z core:DefaultMessagingService INFO Closing channel on service path '/services/workspace'.
+2026-10-24T00:48:42.253Z core:DefaultMessagingService INFO Closing channel on service path '/services/keyboard'.
+2026-10-24T00:48:42.253Z core:DefaultMessagingService INFO Closing channel on service path '/services/quickInput'.
+2026-10-24T00:48:42.253Z core:DefaultMessagingService INFO Closing channel on service path '/services/stopwatch'.
+2026-10-24T00:48:42.253Z core:DefaultMessagingService INFO Closing channel on service path '/services/application'.
+2026-10-24T00:48:42.253Z core:DefaultMessagingService INFO Closing channel on service path '/services/i18n'.
+2026-10-24T00:48:42.253Z core:DefaultMessagingService INFO Closing channel on service path '/services/shell-terminal'.
+2026-10-24T00:48:42.253Z core:DefaultMessagingService INFO Closing channel on service path '/services/factoryze-tasks'.
+2026-10-24T00:48:42.253Z core:DefaultMessagingService INFO Closing channel on service path '/services/cli-preferences'.
+2026-10-24T00:48:42.253Z core:DefaultMessagingService INFO Closing channel on service path '/services/search'.
+2026-10-24T00:48:42.253Z core:DefaultMessagingService INFO Closing channel on service path '/services/terminals/1632946406'.
+Closing channel on service path '/services/electron-window'.
+2026-10-24T00:48:42.682Z core:WebsocketFrontendConnectionService INFO creating connection for 1
+Opening channel for service path '/services/electron-window'.
+2026-10-24T00:48:43.020Z core:FrontendStopwatch INFO Start frontend contributions: 150.3 ms [0.749 s since frontend page start]
+2026-10-24T00:48:43.020Z core:FrontendApplicationStateService INFO Changed application state from 'init' to 'started_contributions'.
+2026-10-24T00:48:43.024Z core:FrontendApplicationStateService INFO Changed application state from 'started_contributions' to 'attached_shell'.
+2026-10-24T00:48:43.024Z core:ShellLayoutRestorer INFO >>> Restoring the layout state...
+2026-10-24T00:48:43.044Z core:ShellLayoutRestorer INFO <<< Nothing to restore.
+2026-10-24T00:48:43.141Z core:FrontendStopwatch INFO Initialize the workbench layout: 128.1 ms [0.893 s since frontend page start]
+2026-10-24T00:48:43.167Z core:FrontendApplicationStateService INFO Changed application state from 'attached_shell' to 'initialized_layout'.
+2026-10-24T00:48:43.261Z core:FrontendStopwatch WARN Frontend FactoryzeSoloContribution.onDidInitializeLayout took longer than the expected maximum 100 milliseconds: 118.3 ms [1.013 s since frontend page start]
+(node:20320) UnhandledPromiseRejectionWarning: TypeError: Object has been destroyed
+    at showWindowAndCloseSplashScreen (C:\Users\Sakib\AppData\Local\Temp\factoryze-installer-smoke-UfzULc\installed\resources\app.asar\lib\backend\electron-main.js:155289:30)
+    at C:\Users\Sakib\AppData\Local\Temp\factoryze-installer-smoke-UfzULc\installed\resources\app.asar\lib\backend\electron-main.js:155293:32
+(node:20320) UnhandledPromiseRejectionWarning: Unhandled promise rejection. This error originated either by throwing inside of an async function without a catch block, or by rejecting a promise which was not handled with .catch(). To terminate the node process on unhandled promise rejection, use the CLI flag `--unhandled-rejections=strict` (see https://nodejs.org/api/cli.html#cli_unhandled_rejections_mode). (rejection id: 2)
+2026-10-24T00:48:44.079Z core:Stopwatch INFO Frontend application startup sequence completed (async work may still be pending): 1164.4 ms [7.697 s since backend process start]
+2026-10-24T00:48:44.080Z core:FrontendStopwatch INFO Replace loading indicator with ready workbench UI (animation): 817.5 ms [1.831 s since frontend page start]
+2026-10-24T00:48:44.080Z core:FrontendApplicationStateService INFO Changed application state from 'initialized_layout' to 'ready'.
+2026-10-24T00:48:44.080Z core:FrontendStopwatch INFO All frontend contributions settled: 1233.4 ms [1.832 s since frontend page start]
+2026-10-24T00:48:44.587Z core:WebsocketFrontendConnectionService INFO socket closed
+2026-10-24T00:48:44.587Z core:WebsocketFrontendConnectionService INFO closing connection for 1
+2026-10-24T00:48:44.587Z core:DefaultMessagingService INFO Closing channel on service path '/localization-server'.
+2026-10-24T00:48:44.587Z core:DefaultMessagingService INFO Closing channel on service path '/os'.
+2026-10-24T00:48:44.587Z core:DefaultMessagingService INFO Closing channel on service path '/services/logger'.
+2026-10-24T00:48:44.587Z core:DefaultMessagingService INFO Closing channel on service path '/services/commands'.
+2026-10-24T00:48:44.587Z core:DefaultMessagingService INFO Closing channel on service path '/services/messageService'.
+2026-10-24T00:48:44.587Z core:DefaultMessagingService INFO Closing channel on service path '/services/ChannelCloseService'.
+2026-10-24T00:48:44.587Z core:DefaultMessagingService INFO Closing channel on service path '/services/remote-filesystem'.
+2026-10-24T00:48:44.587Z core:DefaultMessagingService INFO Closing channel on service path '/services/envs'.
+2026-10-24T00:48:44.587Z core:DefaultMessagingService INFO Closing channel on service path '/services/workspace'.
+2026-10-24T00:48:44.587Z core:DefaultMessagingService INFO Closing channel on service path '/services/keyboard'.
+2026-10-24T00:48:44.587Z core:DefaultMessagingService INFO Closing channel on service path '/services/quickInput'.
+2026-10-24T00:48:44.587Z core:DefaultMessagingService INFO Closing channel on service path '/services/stopwatch'.
+2026-10-24T00:48:44.587Z core:DefaultMessagingService INFO Closing channel on service path '/services/application'.
+2026-10-24T00:48:44.587Z core:DefaultMessagingService INFO Closing channel on service path '/services/i18n'.
+2026-10-24T00:48:44.587Z core:DefaultMessagingService INFO Closing channel on service path '/services/shell-terminal'.
+2026-10-24T00:48:44.587Z core:DefaultMessagingService INFO Closing channel on service path '/services/factoryze-tasks'.
+2026-10-24T00:48:44.587Z core:DefaultMessagingService INFO Closing channel on service path '/services/cli-preferences'.
+2026-10-24T00:48:44.587Z core:DefaultMessagingService INFO Closing channel on service path '/services/search'.
+2026-10-24T00:48:44.587Z core:DefaultMessagingService INFO Closing channel on service path '/services/terminals/323037530'.
+2026-10-24T00:48:44.587Z core:DefaultMessagingService INFO Closing channel on service path '/services/factoryze-agent'.
+Closing channel on service path '/services/electron-window'.
+2026-10-24T00:48:45.076Z core:WebsocketFrontendConnectionService INFO creating connection for 1
+Opening channel for service path '/services/electron-window'.
+2026-10-24T00:48:45.461Z core:FrontendStopwatch INFO Start frontend contributions: 173.4 ms [0.875 s since frontend page start]
+2026-10-24T00:48:45.461Z core:FrontendApplicationStateService INFO Changed application state from 'init' to 'started_contributions'.
+2026-10-24T00:48:45.463Z core:FrontendApplicationStateService INFO Changed application state from 'started_contributions' to 'attached_shell'.
+2026-10-24T00:48:45.463Z core:ShellLayoutRestorer INFO >>> Restoring the layout state...
+2026-10-24T00:48:45.498Z core:ShellLayoutRestorer INFO <<< The layout has been successfully restored.
+2026-10-24T00:48:45.498Z core:FrontendStopwatch INFO Initialize the workbench layout: 34.9 ms [0.922 s since frontend page start]
+2026-10-24T00:48:45.499Z core:FrontendApplicationStateService INFO Changed application state from 'attached_shell' to 'initialized_layout'.
+(node:20320) UnhandledPromiseRejectionWarning: TypeError: Object has been destroyed
+    at showWindowAndCloseSplashScreen (C:\Users\Sakib\AppData\Local\Temp\factoryze-installer-smoke-UfzULc\installed\resources\app.asar\lib\backend\electron-main.js:155289:30)
+    at C:\Users\Sakib\AppData\Local\Temp\factoryze-installer-smoke-UfzULc\installed\resources\app.asar\lib\backend\electron-main.js:155293:32
+(node:20320) UnhandledPromiseRejectionWarning: Unhandled promise rejection. This error originated either by throwing inside of an async function without a catch block, or by rejecting a promise which was not handled with .catch(). To terminate the node process on unhandled promise rejection, use the CLI flag `--unhandled-rejections=strict` (see https://nodejs.org/api/cli.html#cli_unhandled_rejections_mode). (rejection id: 3)
+2026-10-24T00:48:46.357Z core:Stopwatch INFO Frontend application startup sequence completed (async work may still be pending): 1005.9 ms [9.974 s since backend process start]
+2026-10-24T00:48:46.357Z core:FrontendStopwatch INFO Replace loading indicator with ready workbench UI (animation): 852.6 ms [1.779 s since frontend page start]
+2026-10-24T00:48:46.357Z core:FrontendApplicationStateService INFO Changed application state from 'initialized_layout' to 'ready'.
+2026-10-24T00:48:46.357Z core:FrontendStopwatch INFO All frontend contributions settled: 1077.7 ms [1.780 s since frontend page start]
+2026-10-24T00:48:46.483Z core:WebsocketFrontendConnectionService INFO socket closed
+2026-10-24T00:48:46.483Z core:WebsocketFrontendConnectionService INFO closing connection for 1
+2026-10-24T00:48:46.483Z core:DefaultMessagingService INFO Closing channel on service path '/localization-server'.
+2026-10-24T00:48:46.483Z core:DefaultMessagingService INFO Closing channel on service path '/os'.
+2026-10-24T00:48:46.483Z core:DefaultMessagingService INFO Closing channel on service path '/services/logger'.
+2026-10-24T00:48:46.483Z core:DefaultMessagingService INFO Closing channel on service path '/services/commands'.
+2026-10-24T00:48:46.483Z core:DefaultMessagingService INFO Closing channel on service path '/services/messageService'.
+2026-10-24T00:48:46.483Z core:DefaultMessagingService INFO Closing channel on service path '/services/ChannelCloseService'.
+2026-10-24T00:48:46.483Z core:DefaultMessagingService INFO Closing channel on service path '/services/remote-filesystem'.
+2026-10-24T00:48:46.483Z core:DefaultMessagingService INFO Closing channel on service path '/services/envs'.
+2026-10-24T00:48:46.483Z core:DefaultMessagingService INFO Closing channel on service path '/services/workspace'.
+2026-10-24T00:48:46.483Z core:DefaultMessagingService INFO Closing channel on service path '/services/keyboard'.
+2026-10-24T00:48:46.483Z core:DefaultMessagingService INFO Closing channel on service path '/services/quickInput'.
+2026-10-24T00:48:46.483Z core:DefaultMessagingService INFO Closing channel on service path '/services/stopwatch'.
+2026-10-24T00:48:46.483Z core:DefaultMessagingService INFO Closing channel on service path '/services/application'.
+2026-10-24T00:48:46.483Z core:DefaultMessagingService INFO Closing channel on service path '/services/i18n'.
+2026-10-24T00:48:46.483Z core:DefaultMessagingService INFO Closing channel on service path '/services/shell-terminal'.
+2026-10-24T00:48:46.483Z core:DefaultMessagingService INFO Closing channel on service path '/services/factoryze-tasks'.
+2026-10-24T00:48:46.483Z core:DefaultMessagingService INFO Closing channel on service path '/services/cli-preferences'.
+2026-10-24T00:48:46.483Z core:DefaultMessagingService INFO Closing channel on service path '/services/search'.
+2026-10-24T00:48:46.483Z core:DefaultMessagingService INFO Closing channel on service path '/services/terminals/1632946406'.
+Closing channel on service path '/services/electron-window'.
+2026-10-24T00:48:46.929Z core:WebsocketFrontendConnectionService INFO creating connection for 1
+Opening channel for service path '/services/electron-window'.
+2026-10-24T00:48:47.266Z core:FrontendStopwatch INFO Start frontend contributions: 128.8 ms [0.762 s since frontend page start]
+2026-10-24T00:48:47.266Z core:FrontendApplicationStateService INFO Changed application state from 'init' to 'started_contributions'.
+2026-10-24T00:48:47.277Z core:FrontendApplicationStateService INFO Changed application state from 'started_contributions' to 'attached_shell'.
+2026-10-24T00:48:47.277Z core:ShellLayoutRestorer INFO >>> Restoring the layout state...
+2026-10-24T00:48:47.291Z core:ShellLayoutRestorer INFO <<< Nothing to restore.
+2026-10-24T00:48:47.376Z core:FrontendStopwatch INFO Initialize the workbench layout: 115.0 ms [0.896 s since frontend page start]
+2026-10-24T00:48:47.377Z core:FrontendApplicationStateService INFO Changed application state from 'attached_shell' to 'initialized_layout'.
+(node:20320) UnhandledPromiseRejectionWarning: TypeError: Object has been destroyed
+    at showWindowAndCloseSplashScreen (C:\Users\Sakib\AppData\Local\Temp\factoryze-installer-smoke-UfzULc\installed\resources\app.asar\lib\backend\electron-main.js:155289:30)
+    at C:\Users\Sakib\AppData\Local\Temp\factoryze-installer-smoke-UfzULc\installed\resources\app.asar\lib\backend\electron-main.js:155293:32
+(node:20320) UnhandledPromiseRejectionWarning: Unhandled promise rejection. This error originated either by throwing inside of an async function without a catch block, or by rejecting a promise which was not handled with .catch(). To terminate the node process on unhandled promise rejection, use the CLI flag `--unhandled-rejections=strict` (see https://nodejs.org/api/cli.html#cli_unhandled_rejections_mode). (rejection id: 4)
+2026-10-24T00:48:48.278Z core:FrontendStopwatch INFO Replace loading indicator with ready workbench UI (animation): 814.0 ms [1.797 s since frontend page start]
+2026-10-24T00:48:48.278Z core:Stopwatch INFO Frontend application startup sequence completed (async work may still be pending): 1108.0 ms [11.896 s since backend process start]
+2026-10-24T00:48:48.278Z core:FrontendApplicationStateService INFO Changed application state from 'initialized_layout' to 'ready'.
+2026-10-24T00:48:48.278Z core:FrontendStopwatch INFO All frontend contributions settled: 1164.1 ms [1.797 s since frontend page start]
+2026-10-24T00:48:51.314Z core:ApplicationShell WARN Widget was activated, but did not accept focus after 2000ms: factoryze-report
+2026-10-24T00:48:51.868Z core:WebsocketFrontendConnectionService INFO socket closed
+2026-10-24T00:48:51.868Z core:WebsocketFrontendConnectionService INFO closing connection for 1
+2026-10-24T00:48:51.868Z core:DefaultMessagingService INFO Closing channel on service path '/localization-server'.
+2026-10-24T00:48:51.868Z core:DefaultMessagingService INFO Closing channel on service path '/os'.
+2026-10-24T00:48:51.868Z core:DefaultMessagingService INFO Closing channel on service path '/services/logger'.
+2026-10-24T00:48:51.868Z core:DefaultMessagingService INFO Closing channel on service path '/services/commands'.
+2026-10-24T00:48:51.868Z core:DefaultMessagingService INFO Closing channel on service path '/services/messageService'.
+2026-10-24T00:48:51.868Z core:DefaultMessagingService INFO Closing channel on service path '/services/ChannelCloseService'.
+2026-10-24T00:48:51.868Z core:DefaultMessagingService INFO Closing channel on service path '/services/remote-filesystem'.
+2026-10-24T00:48:51.868Z core:DefaultMessagingService INFO Closing channel on service path '/services/envs'.
+2026-10-24T00:48:51.868Z core:DefaultMessagingService INFO Closing channel on service path '/services/workspace'.
+2026-10-24T00:48:51.868Z core:DefaultMessagingService INFO Closing channel on service path '/services/keyboard'.
+2026-10-24T00:48:51.868Z core:DefaultMessagingService INFO Closing channel on service path '/services/quickInput'.
+2026-10-24T00:48:51.868Z core:DefaultMessagingService INFO Closing channel on service path '/services/stopwatch'.
+2026-10-24T00:48:51.868Z core:DefaultMessagingService INFO Closing channel on service path '/services/application'.
+2026-10-24T00:48:51.868Z core:DefaultMessagingService INFO Closing channel on service path '/services/i18n'.
+2026-10-24T00:48:51.868Z core:DefaultMessagingService INFO Closing channel on service path '/services/shell-terminal'.
+2026-10-24T00:48:51.868Z core:DefaultMessagingService INFO Closing channel on service path '/services/factoryze-tasks'.
+2026-10-24T00:48:51.868Z core:DefaultMessagingService INFO Closing channel on service path '/services/cli-preferences'.
+2026-10-24T00:48:51.868Z core:DefaultMessagingService INFO Closing channel on service path '/services/search'.
+2026-10-24T00:48:51.868Z core:DefaultMessagingService INFO Closing channel on service path '/services/terminals/80652394'.
+2026-10-24T00:48:51.868Z core:DefaultMessagingService INFO Closing channel on service path '/services/factoryze-agent'.
+Closing channel on service path '/services/electron-window'.
+2026-10-24T00:48:52.276Z core:WebsocketFrontendConnectionService INFO creating connection for 1
+Opening channel for service path '/services/electron-window'.
+2026-10-24T00:48:52.618Z core:FrontendStopwatch INFO Start frontend contributions: 123.7 ms [0.690 s since frontend page start]
+2026-10-24T00:48:52.618Z core:FrontendApplicationStateService INFO Changed application state from 'init' to 'started_contributions'.
+2026-10-24T00:48:52.654Z core:FrontendApplicationStateService INFO Changed application state from 'started_contributions' to 'attached_shell'.
+2026-10-24T00:48:52.654Z core:ShellLayoutRestorer INFO >>> Restoring the layout state...
+2026-10-24T00:48:52.654Z core:ShellLayoutRestorer INFO <<< The layout has been successfully restored.
+2026-10-24T00:48:52.654Z core:FrontendStopwatch INFO Initialize the workbench layout: 45.3 ms [0.749 s since frontend page start]
+2026-10-24T00:48:52.654Z core:FrontendApplicationStateService INFO Changed application state from 'attached_shell' to 'initialized_layout'.
+(node:20320) UnhandledPromiseRejectionWarning: TypeError: Object has been destroyed
+    at showWindowAndCloseSplashScreen (C:\Users\Sakib\AppData\Local\Temp\factoryze-installer-smoke-UfzULc\installed\resources\app.asar\lib\backend\electron-main.js:155289:30)
+    at C:\Users\Sakib\AppData\Local\Temp\factoryze-installer-smoke-UfzULc\installed\resources\app.asar\lib\backend\electron-main.js:155293:32
+(node:20320) UnhandledPromiseRejectionWarning: Unhandled promise rejection. This error originated either by throwing inside of an async function without a catch block, or by rejecting a promise which was not handled with .catch(). To terminate the node process on unhandled promise rejection, use the CLI flag `--unhandled-rejections=strict` (see https://nodejs.org/api/cli.html#cli_unhandled_rejections_mode). (rejection id: 5)
+2026-10-24T00:48:53.419Z core:Stopwatch INFO Frontend application startup sequence completed (async work may still be pending): 940.0 ms [17.037 s since backend process start]
+2026-10-24T00:48:53.419Z core:FrontendStopwatch INFO Replace loading indicator with ready workbench UI (animation): 805.9 ms [1.559 s since frontend page start]
+2026-10-24T00:48:53.419Z core:FrontendApplicationStateService INFO Changed application state from 'initialized_layout' to 'ready'.
+2026-10-24T00:48:53.420Z core:FrontendStopwatch INFO All frontend contributions settled: 992.6 ms [1.559 s since frontend page start]
+2026-10-24T00:48:53.715Z core:WebsocketFrontendConnectionService INFO socket closed
+2026-10-24T00:48:53.715Z core:WebsocketFrontendConnectionService INFO closing connection for 1
+2026-10-24T00:48:53.715Z core:DefaultMessagingService INFO Closing channel on service path '/localization-server'.
+2026-10-24T00:48:53.715Z core:DefaultMessagingService INFO Closing channel on service path '/os'.
+2026-10-24T00:48:53.715Z core:DefaultMessagingService INFO Closing channel on service path '/services/logger'.
+2026-10-24T00:48:53.715Z core:DefaultMessagingService INFO Closing channel on service path '/services/commands'.
+2026-10-24T00:48:53.715Z core:DefaultMessagingService INFO Closing channel on service path '/services/messageService'.
+2026-10-24T00:48:53.715Z core:DefaultMessagingService INFO Closing channel on service path '/services/ChannelCloseService'.
+2026-10-24T00:48:53.715Z core:DefaultMessagingService INFO Closing channel on service path '/services/remote-filesystem'.
+2026-10-24T00:48:53.715Z core:DefaultMessagingService INFO Closing channel on service path '/services/envs'.
+2026-10-24T00:48:53.715Z core:DefaultMessagingService INFO Closing channel on service path '/services/workspace'.
+2026-10-24T00:48:53.715Z core:DefaultMessagingService INFO Closing channel on service path '/services/keyboard'.
+2026-10-24T00:48:53.715Z core:DefaultMessagingService INFO Closing channel on service path '/services/quickInput'.
+2026-10-24T00:48:53.715Z core:DefaultMessagingService INFO Closing channel on service path '/services/stopwatch'.
+2026-10-24T00:48:53.715Z core:DefaultMessagingService INFO Closing channel on service path '/services/application'.
+2026-10-24T00:48:53.715Z core:DefaultMessagingService INFO Closing channel on service path '/services/i18n'.
+2026-10-24T00:48:53.715Z core:DefaultMessagingService INFO Closing channel on service path '/services/shell-terminal'.
+2026-10-24T00:48:53.715Z core:DefaultMessagingService INFO Closing channel on service path '/services/factoryze-tasks'.
+2026-10-24T00:48:53.715Z core:DefaultMessagingService INFO Closing channel on service path '/services/cli-preferences'.
+2026-10-24T00:48:53.715Z core:DefaultMessagingService INFO Closing channel on service path '/services/search'.
+2026-10-24T00:48:53.715Z core:DefaultMessagingService INFO Closing channel on service path '/services/terminals/1632946406'.
+Closing channel on service path '/services/electron-window'.
+2026-10-24T00:48:54.130Z core:WebsocketFrontendConnectionService INFO creating connection for 1
+Opening channel for service path '/services/electron-window'.
+2026-10-24T00:48:54.428Z core:FrontendStopwatch INFO Start frontend contributions: 123.8 ms [0.695 s since frontend page start]
+2026-10-24T00:48:54.428Z core:FrontendApplicationStateService INFO Changed application state from 'init' to 'started_contributions'.
+2026-10-24T00:48:54.443Z core:FrontendApplicationStateService INFO Changed application state from 'started_contributions' to 'attached_shell'.
+2026-10-24T00:48:54.443Z core:ShellLayoutRestorer INFO >>> Restoring the layout state...
+2026-10-24T00:48:54.455Z core:ShellLayoutRestorer INFO <<< Nothing to restore.
+2026-10-24T00:48:54.540Z core:FrontendStopwatch INFO Initialize the workbench layout: 116.9 ms [0.828 s since frontend page start]
+2026-10-24T00:48:54.542Z core:FrontendApplicationStateService INFO Changed application state from 'attached_shell' to 'initialized_layout'.
+(node:20320) UnhandledPromiseRejectionWarning: TypeError: Object has been destroyed
+    at showWindowAndCloseSplashScreen (C:\Users\Sakib\AppData\Local\Temp\factoryze-installer-smoke-UfzULc\installed\resources\app.asar\lib\backend\electron-main.js:155289:30)
+    at C:\Users\Sakib\AppData\Local\Temp\factoryze-installer-smoke-UfzULc\installed\resources\app.asar\lib\backend\electron-main.js:155293:32
+(node:20320) UnhandledPromiseRejectionWarning: Unhandled promise rejection. This error originated either by throwing inside of an async function without a catch block, or by rejecting a promise which was not handled with .catch(). To terminate the node process on unhandled promise rejection, use the CLI flag `--unhandled-rejections=strict` (see https://nodejs.org/api/cli.html#cli_unhandled_rejections_mode). (rejection id: 6)
+2026-10-24T00:48:55.440Z core:FrontendStopwatch INFO Replace loading indicator with ready workbench UI (animation): 805.6 ms [1.728 s since frontend page start]
+2026-10-24T00:48:55.440Z core:Stopwatch INFO Frontend application startup sequence completed (async work may still be pending): 1105.2 ms [19.058 s since backend process start]
+2026-10-24T00:48:55.440Z core:FrontendApplicationStateService INFO Changed application state from 'initialized_layout' to 'ready'.
+2026-10-24T00:48:55.440Z core:FrontendStopwatch INFO All frontend contributions settled: 1157.1 ms [1.728 s since frontend page start]
+2026-10-24T00:48:57.878Z core:ApplicationShell WARN Widget was activated, but did not accept focus after 2000ms: factoryze-report
+2026-10-24T00:48:58.569Z core:WebsocketFrontendConnectionService INFO socket closed
+2026-10-24T00:48:58.569Z core:WebsocketFrontendConnectionService INFO closing connection for 1
+2026-10-24T00:48:58.569Z core:DefaultMessagingService INFO Closing channel on service path '/localization-server'.
+2026-10-24T00:48:58.569Z core:DefaultMessagingService INFO Closing channel on service path '/os'.
+2026-10-24T00:48:58.569Z core:DefaultMessagingService INFO Closing channel on service path '/services/logger'.
+2026-10-24T00:48:58.569Z core:DefaultMessagingService INFO Closing channel on service path '/services/commands'.
+2026-10-24T00:48:58.569Z core:DefaultMessagingService INFO Closing channel on service path '/services/messageService'.
+2026-10-24T00:48:58.569Z core:DefaultMessagingService INFO Closing channel on service path '/services/ChannelCloseService'.
+2026-10-24T00:48:58.569Z core:DefaultMessagingService INFO Closing channel on service path '/services/remote-filesystem'.
+2026-10-24T00:48:58.569Z core:DefaultMessagingService INFO Closing channel on service path '/services/envs'.
+2026-10-24T00:48:58.569Z core:DefaultMessagingService INFO Closing channel on service path '/services/workspace'.
+2026-10-24T00:48:58.569Z core:DefaultMessagingService INFO Closing channel on service path '/services/keyboard'.
+2026-10-24T00:48:58.569Z core:DefaultMessagingService INFO Closing channel on service path '/services/quickInput'.
+2026-10-24T00:48:58.569Z core:DefaultMessagingService INFO Closing channel on service path '/services/stopwatch'.
+2026-10-24T00:48:58.569Z core:DefaultMessagingService INFO Closing channel on service path '/services/application'.
+2026-10-24T00:48:58.569Z core:DefaultMessagingService INFO Closing channel on service path '/services/i18n'.
+2026-10-24T00:48:58.569Z core:DefaultMessagingService INFO Closing channel on service path '/services/shell-terminal'.
+2026-10-24T00:48:58.569Z core:DefaultMessagingService INFO Closing channel on service path '/services/factoryze-tasks'.
+2026-10-24T00:48:58.569Z core:DefaultMessagingService INFO Closing channel on service path '/services/cli-preferences'.
+2026-10-24T00:48:58.569Z core:DefaultMessagingService INFO Closing channel on service path '/services/search'.
+2026-10-24T00:48:58.569Z core:DefaultMessagingService INFO Closing channel on service path '/services/terminals/1294405513'.
+2026-10-24T00:48:58.569Z core:DefaultMessagingService INFO Closing channel on service path '/services/factoryze-agent'.
+Closing channel on service path '/services/electron-window'.
+2026-10-24T00:48:58.978Z core:WebsocketFrontendConnectionService INFO creating connection for 1
+Opening channel for service path '/services/electron-window'.
+2026-10-24T00:48:59.326Z core:FrontendStopwatch INFO Start frontend contributions: 127.8 ms [0.700 s since frontend page start]
+2026-10-24T00:48:59.326Z core:FrontendApplicationStateService INFO Changed application state from 'init' to 'started_contributions'.
+2026-10-24T00:48:59.335Z core:FrontendApplicationStateService INFO Changed application state from 'started_contributions' to 'attached_shell'.
+2026-10-24T00:48:59.335Z core:ShellLayoutRestorer INFO >>> Restoring the layout state...
+2026-10-24T00:48:59.335Z core:ShellLayoutRestorer INFO <<< The layout has been successfully restored.
+2026-10-24T00:48:59.335Z core:FrontendStopwatch INFO Initialize the workbench layout: 42.4 ms [0.757 s since frontend page start]
+2026-10-24T00:48:59.335Z core:FrontendApplicationStateService INFO Changed application state from 'attached_shell' to 'initialized_layout'.
+(node:20320) UnhandledPromiseRejectionWarning: TypeError: Object has been destroyed
+    at showWindowAndCloseSplashScreen (C:\Users\Sakib\AppData\Local\Temp\factoryze-installer-smoke-UfzULc\installed\resources\app.asar\lib\backend\electron-main.js:155289:30)
+    at C:\Users\Sakib\AppData\Local\Temp\factoryze-installer-smoke-UfzULc\installed\resources\app.asar\lib\backend\electron-main.js:155293:32
+(node:20320) UnhandledPromiseRejectionWarning: Unhandled promise rejection. This error originated either by throwing inside of an async function without a catch block, or by rejecting a promise which was not handled with .catch(). To terminate the node process on unhandled promise rejection, use the CLI flag `--unhandled-rejections=strict` (see https://nodejs.org/api/cli.html#cli_unhandled_rejections_mode). (rejection id: 7)
+2026-10-24T00:49:00.131Z core:Stopwatch INFO Frontend application startup sequence completed (async work may still be pending): 941.9 ms [23.749 s since backend process start]
+2026-10-24T00:49:00.131Z core:FrontendStopwatch INFO Replace loading indicator with ready workbench UI (animation): 810.5 ms [1.571 s since frontend page start]
+2026-10-24T00:49:00.131Z core:FrontendApplicationStateService INFO Changed application state from 'initialized_layout' to 'ready'.
+2026-10-24T00:49:00.131Z core:FrontendStopwatch INFO All frontend contributions settled: 998.6 ms [1.571 s since frontend page start]
+2026-10-24T00:49:00.532Z core:WebsocketFrontendConnectionService INFO socket closed
+2026-10-24T00:49:00.532Z core:WebsocketFrontendConnectionService INFO closing connection for 1
+2026-10-24T00:49:00.532Z core:DefaultMessagingService INFO Closing channel on service path '/localization-server'.
+2026-10-24T00:49:00.532Z core:DefaultMessagingService INFO Closing channel on service path '/os'.
+2026-10-24T00:49:00.532Z core:DefaultMessagingService INFO Closing channel on service path '/services/logger'.
+2026-10-24T00:49:00.532Z core:DefaultMessagingService INFO Closing channel on service path '/services/commands'.
+2026-10-24T00:49:00.532Z core:DefaultMessagingService INFO Closing channel on service path '/services/messageService'.
+2026-10-24T00:49:00.532Z core:DefaultMessagingService INFO Closing channel on service path '/services/ChannelCloseService'.
+2026-10-24T00:49:00.532Z core:DefaultMessagingService INFO Closing channel on service path '/services/remote-filesystem'.
+2026-10-24T00:49:00.532Z core:DefaultMessagingService INFO Closing channel on service path '/services/envs'.
+2026-10-24T00:49:00.532Z core:DefaultMessagingService INFO Closing channel on service path '/services/workspace'.
+2026-10-24T00:49:00.532Z core:DefaultMessagingService INFO Closing channel on service path '/services/keyboard'.
+2026-10-24T00:49:00.532Z core:DefaultMessagingService INFO Closing channel on service path '/services/quickInput'.
+2026-10-24T00:49:00.532Z core:DefaultMessagingService INFO Closing channel on service path '/services/stopwatch'.
+2026-10-24T00:49:00.532Z core:DefaultMessagingService INFO Closing channel on service path '/services/application'.
+2026-10-24T00:49:00.532Z core:DefaultMessagingService INFO Closing channel on service path '/services/i18n'.
+2026-10-24T00:49:00.532Z core:DefaultMessagingService INFO Closing channel on service path '/services/shell-terminal'.
+2026-10-24T00:49:00.532Z core:DefaultMessagingService INFO Closing channel on service path '/services/factoryze-tasks'.
+2026-10-24T00:49:00.532Z core:DefaultMessagingService INFO Closing channel on service path '/services/cli-preferences'.
+2026-10-24T00:49:00.532Z core:DefaultMessagingService INFO Closing channel on service path '/services/search'.
+2026-10-24T00:49:00.532Z core:DefaultMessagingService INFO Closing channel on service path '/services/terminals/1632946406'.
+Closing channel on service path '/services/electron-window'.
+2026-10-24T00:49:00.940Z core:WebsocketFrontendConnectionService INFO creating connection for 1
+Opening channel for service path '/services/electron-window'.
+2026-10-24T00:49:01.244Z core:FrontendStopwatch INFO Start frontend contributions: 129.1 ms [0.693 s since frontend page start]
+2026-10-24T00:49:01.244Z core:FrontendApplicationStateService INFO Changed application state from 'init' to 'started_contributions'.
+2026-10-24T00:49:01.256Z core:FrontendApplicationStateService INFO Changed application state from 'started_contributions' to 'attached_shell'.
+2026-10-24T00:49:01.256Z core:ShellLayoutRestorer INFO >>> Restoring the layout state...
+2026-10-24T00:49:01.276Z terminal:ShellTerminalServer WARN Couldn't attach - can't find terminal with id: 1460266788 
+2026-10-24T00:49:01.315Z terminal:TerminalWidgetImpl WARN Failed attaching to terminal id 1460266788, the terminal is most likely gone. Starting up a new terminal instead.
+2026-10-24T00:49:01.637Z core:ShellLayoutRestorer INFO <<< The layout has been successfully restored.
+2026-10-24T00:49:01.644Z core:FrontendStopwatch INFO Initialize the workbench layout: 399.6 ms [1.109 s since frontend page start]
+2026-10-24T00:49:01.645Z core:FrontendApplicationStateService INFO Changed application state from 'attached_shell' to 'initialized_layout'.
+(node:20320) UnhandledPromiseRejectionWarning: TypeError: Object has been destroyed
+    at showWindowAndCloseSplashScreen (C:\Users\Sakib\AppData\Local\Temp\factoryze-installer-smoke-UfzULc\installed\resources\app.asar\lib\backend\electron-main.js:155289:30)
+    at C:\Users\Sakib\AppData\Local\Temp\factoryze-installer-smoke-UfzULc\installed\resources\app.asar\lib\backend\electron-main.js:155293:32
+(node:20320) UnhandledPromiseRejectionWarning: Unhandled promise rejection. This error originated either by throwing inside of an async function without a catch block, or by rejecting a promise which was not handled with .catch(). To terminate the node process on unhandled promise rejection, use the CLI flag `--unhandled-rejections=strict` (see https://nodejs.org/api/cli.html#cli_unhandled_rejections_mode). (rejection id: 8)
+2026-10-24T00:49:02.513Z core:Stopwatch INFO Frontend application startup sequence completed (async work may still be pending): 1369.7 ms [26.131 s since backend process start]
+2026-10-24T00:49:02.513Z core:FrontendStopwatch INFO Replace loading indicator with ready workbench UI (animation): 811.6 ms [1.984 s since frontend page start]
+2026-10-24T00:49:02.513Z core:FrontendApplicationStateService INFO Changed application state from 'initialized_layout' to 'ready'.
+2026-10-24T00:49:02.514Z core:FrontendStopwatch INFO All frontend contributions settled: 1420.7 ms [1.985 s since frontend page start]
+2026-10-24T00:49:05.209Z core:WebsocketFrontendConnectionService INFO socket closed
+2026-10-24T00:49:05.209Z core:WebsocketFrontendConnectionService INFO closing connection for 1
+2026-10-24T00:49:05.209Z core:DefaultMessagingService INFO Closing channel on service path '/localization-server'.
+2026-10-24T00:49:05.209Z core:DefaultMessagingService INFO Closing channel on service path '/os'.
+2026-10-24T00:49:05.209Z core:DefaultMessagingService INFO Closing channel on service path '/services/logger'.
+2026-10-24T00:49:05.209Z core:DefaultMessagingService INFO Closing channel on service path '/services/commands'.
+2026-10-24T00:49:05.209Z core:DefaultMessagingService INFO Closing channel on service path '/services/messageService'.
+2026-10-24T00:49:05.209Z core:DefaultMessagingService INFO Closing channel on service path '/services/ChannelCloseService'.
+2026-10-24T00:49:05.209Z core:DefaultMessagingService INFO Closing channel on service path '/services/remote-filesystem'.
+2026-10-24T00:49:05.209Z core:DefaultMessagingService INFO Closing channel on service path '/services/envs'.
+2026-10-24T00:49:05.209Z core:DefaultMessagingService INFO Closing channel on service path '/services/workspace'.
+2026-10-24T00:49:05.209Z core:DefaultMessagingService INFO Closing channel on service path '/services/keyboard'.
+2026-10-24T00:49:05.209Z core:DefaultMessagingService INFO Closing channel on service path '/services/quickInput'.
+2026-10-24T00:49:05.209Z core:DefaultMessagingService INFO Closing channel on service path '/services/stopwatch'.
+2026-10-24T00:49:05.209Z core:DefaultMessagingService INFO Closing channel on service path '/services/application'.
+2026-10-24T00:49:05.209Z core:DefaultMessagingService INFO Closing channel on service path '/services/i18n'.
+2026-10-24T00:49:05.209Z core:DefaultMessagingService INFO Closing channel on service path '/services/shell-terminal'.
+2026-10-24T00:49:05.209Z core:DefaultMessagingService INFO Closing channel on service path '/services/factoryze-tasks'.
+2026-10-24T00:49:05.209Z core:DefaultMessagingService INFO Closing channel on service path '/services/cli-preferences'.
+2026-10-24T00:49:05.209Z core:DefaultMessagingService INFO Closing channel on service path '/services/search'.
+2026-10-24T00:49:05.209Z core:DefaultMessagingService INFO Closing channel on service path '/services/factoryze-agent'.
+2026-10-24T00:49:05.209Z core:DefaultMessagingService INFO Closing channel on service path '/services/terminals/1524375952'.
+Closing channel on service path '/services/electron-window'.
+2026-10-24T00:49:05.628Z core:WebsocketFrontendConnectionService INFO creating connection for 1
+Opening channel for service path '/services/electron-window'.
+2026-10-24T00:49:05.969Z core:FrontendStopwatch INFO Start frontend contributions: 137.3 ms [0.721 s since frontend page start]
+2026-10-24T00:49:05.969Z core:FrontendApplicationStateService INFO Changed application state from 'init' to 'started_contributions'.
+2026-10-24T00:49:05.981Z core:FrontendApplicationStateService INFO Changed application state from 'started_contributions' to 'attached_shell'.
+2026-10-24T00:49:05.981Z core:ShellLayoutRestorer INFO >>> Restoring the layout state...
+2026-10-24T00:49:05.981Z core:ShellLayoutRestorer INFO <<< The layout has been successfully restored.
+2026-10-24T00:49:05.981Z core:FrontendStopwatch INFO Initialize the workbench layout: 29.9 ms [0.765 s since frontend page start]
+2026-10-24T00:49:05.981Z core:FrontendApplicationStateService INFO Changed application state from 'attached_shell' to 'initialized_layout'.
+(node:20320) UnhandledPromiseRejectionWarning: TypeError: Object has been destroyed
+    at showWindowAndCloseSplashScreen (C:\Users\Sakib\AppData\Local\Temp\factoryze-installer-smoke-UfzULc\installed\resources\app.asar\lib\backend\electron-main.js:155289:30)
+    at C:\Users\Sakib\AppData\Local\Temp\factoryze-installer-smoke-UfzULc\installed\resources\app.asar\lib\backend\electron-main.js:155293:32
+(node:20320) UnhandledPromiseRejectionWarning: Unhandled promise rejection. This error originated either by throwing inside of an async function without a catch block, or by rejecting a promise which was not handled with .catch(). To terminate the node process on unhandled promise rejection, use the CLI flag `--unhandled-rejections=strict` (see https://nodejs.org/api/cli.html#cli_unhandled_rejections_mode). (rejection id: 9)
+2026-10-24T00:49:06.772Z core:Stopwatch INFO Frontend application startup sequence completed (async work may still be pending): 927.1 ms [30.390 s since backend process start]
+2026-10-24T00:49:06.773Z core:FrontendStopwatch INFO Replace loading indicator with ready workbench UI (animation): 808.9 ms [1.577 s since frontend page start]
+2026-10-24T00:49:06.773Z core:FrontendApplicationStateService INFO Changed application state from 'initialized_layout' to 'ready'.
+2026-10-24T00:49:06.773Z core:FrontendStopwatch INFO All frontend contributions settled: 994.0 ms [1.578 s since frontend page start]
+2026-10-24T00:49:14.387Z core:WebsocketFrontendConnectionService INFO socket closed
+2026-10-24T00:49:14.387Z core:WebsocketFrontendConnectionService INFO closing connection for 1
+2026-10-24T00:49:14.387Z core:DefaultMessagingService INFO Closing channel on service path '/localization-server'.
+2026-10-24T00:49:14.387Z core:DefaultMessagingService INFO Closing channel on service path '/os'.
+2026-10-24T00:49:14.387Z core:DefaultMessagingService INFO Closing channel on service path '/services/logger'.
+2026-10-24T00:49:14.387Z core:DefaultMessagingService INFO Closing channel on service path '/services/commands'.
+2026-10-24T00:49:14.387Z core:DefaultMessagingService INFO Closing channel on service path '/services/messageService'.
+2026-10-24T00:49:14.387Z core:DefaultMessagingService INFO Closing channel on service path '/services/ChannelCloseService'.
+2026-10-24T00:49:14.387Z core:DefaultMessagingService INFO Closing channel on service path '/services/remote-filesystem'.
+2026-10-24T00:49:14.387Z core:DefaultMessagingService INFO Closing channel on service path '/services/envs'.
+2026-10-24T00:49:14.387Z core:DefaultMessagingService INFO Closing channel on service path '/services/workspace'.
+2026-10-24T00:49:14.387Z core:DefaultMessagingService INFO Closing channel on service path '/services/keyboard'.
+2026-10-24T00:49:14.387Z core:DefaultMessagingService INFO Closing channel on service path '/services/quickInput'.
+2026-10-24T00:49:14.387Z core:DefaultMessagingService INFO Closing channel on service path '/services/stopwatch'.
+2026-10-24T00:49:14.387Z core:DefaultMessagingService INFO Closing channel on service path '/services/application'.
+2026-10-24T00:49:14.387Z core:DefaultMessagingService INFO Closing channel on service path '/services/i18n'.
+2026-10-24T00:49:14.387Z core:DefaultMessagingService INFO Closing channel on service path '/services/shell-terminal'.
+2026-10-24T00:49:14.387Z core:DefaultMessagingService INFO Closing channel on service path '/services/factoryze-tasks'.
+2026-10-24T00:49:14.387Z core:DefaultMessagingService INFO Closing channel on service path '/services/cli-preferences'.
+2026-10-24T00:49:14.387Z core:DefaultMessagingService INFO Closing channel on service path '/services/search'.
+2026-10-24T00:49:14.387Z core:DefaultMessagingService INFO Closing channel on service path '/services/terminals/1632946406'.
+Closing channel on service path '/services/electron-window'.
+2026-10-24T00:49:14.807Z core:WebsocketFrontendConnectionService INFO creating connection for 1
+Opening channel for service path '/services/electron-window'.
+(node:20320) MaxListenersExceededWarning: Possible EventEmitter memory leak detected. 11 destroyed listeners added to [WebContents]. MaxListeners is 10. Use emitter.setMaxListeners() to increase limit
+2026-10-24T00:49:15.126Z core:FrontendStopwatch INFO Start frontend contributions: 138.1 ms [0.720 s since frontend page start]
+2026-10-24T00:49:15.127Z core:FrontendApplicationStateService INFO Changed application state from 'init' to 'started_contributions'.
+2026-10-24T00:49:15.137Z core:FrontendApplicationStateService INFO Changed application state from 'started_contributions' to 'attached_shell'.
+2026-10-24T00:49:15.137Z core:ShellLayoutRestorer INFO >>> Restoring the layout state...
+2026-10-24T00:49:15.149Z core:ShellLayoutRestorer INFO <<< Nothing to restore.
+2026-10-24T00:49:15.232Z core:FrontendStopwatch INFO Initialize the workbench layout: 114.3 ms [0.848 s since frontend page start]
+2026-10-24T00:49:15.233Z core:FrontendApplicationStateService INFO Changed application state from 'attached_shell' to 'initialized_layout'.
+2026-10-24T00:49:15.387Z core:FrontendStopwatch WARN Frontend FactoryzeSoloContribution.onDidInitializeLayout took longer than the expected maximum 100 milliseconds: 153.4 ms [1.002 s since frontend page start]
+(node:20320) UnhandledPromiseRejectionWarning: TypeError: Object has been destroyed
+    at showWindowAndCloseSplashScreen (C:\Users\Sakib\AppData\Local\Temp\factoryze-installer-smoke-UfzULc\installed\resources\app.asar\lib\backend\electron-main.js:155289:30)
+    at C:\Users\Sakib\AppData\Local\Temp\factoryze-installer-smoke-UfzULc\installed\resources\app.asar\lib\backend\electron-main.js:155293:32
+(node:20320) UnhandledPromiseRejectionWarning: Unhandled promise rejection. This error originated either by throwing inside of an async function without a catch block, or by rejecting a promise which was not handled with .catch(). To terminate the node process on unhandled promise rejection, use the CLI flag `--unhandled-rejections=strict` (see https://nodejs.org/api/cli.html#cli_unhandled_rejections_mode). (rejection id: 10)
+2026-10-24T00:49:16.198Z core:Stopwatch INFO Frontend application startup sequence completed (async work may still be pending): 1174.0 ms [39.815 s since backend process start]
+2026-10-24T00:49:16.198Z core:FrontendStopwatch INFO Replace loading indicator with ready workbench UI (animation): 809.9 ms [1.814 s since frontend page start]
+2026-10-24T00:49:16.198Z core:FrontendApplicationStateService INFO Changed application state from 'initialized_layout' to 'ready'.
+2026-10-24T00:49:16.198Z core:FrontendStopwatch INFO All frontend contributions settled: 1232.6 ms [1.814 s since frontend page start]
+2026-10-24T00:49:16.756Z core:WebsocketFrontendConnectionService INFO socket closed
+2026-10-24T00:49:16.756Z core:WebsocketFrontendConnectionService INFO closing connection for 1
+2026-10-24T00:49:16.756Z core:DefaultMessagingService INFO Closing channel on service path '/localization-server'.
+2026-10-24T00:49:16.756Z core:DefaultMessagingService INFO Closing channel on service path '/os'.
+2026-10-24T00:49:16.756Z core:DefaultMessagingService INFO Closing channel on service path '/services/logger'.
+2026-10-24T00:49:16.756Z core:DefaultMessagingService INFO Closing channel on service path '/services/commands'.
+2026-10-24T00:49:16.756Z core:DefaultMessagingService INFO Closing channel on service path '/services/messageService'.
+2026-10-24T00:49:16.756Z core:DefaultMessagingService INFO Closing channel on service path '/services/ChannelCloseService'.
+2026-10-24T00:49:16.756Z core:DefaultMessagingService INFO Closing channel on service path '/services/remote-filesystem'.
+2026-10-24T00:49:16.756Z core:DefaultMessagingService INFO Closing channel on service path '/services/envs'.
+2026-10-24T00:49:16.756Z core:DefaultMessagingService INFO Closing channel on service path '/services/workspace'.
+2026-10-24T00:49:16.756Z core:DefaultMessagingService INFO Closing channel on service path '/services/keyboard'.
+2026-10-24T00:49:16.756Z core:DefaultMessagingService INFO Closing channel on service path '/services/quickInput'.
+2026-10-24T00:49:16.756Z core:DefaultMessagingService INFO Closing channel on service path '/services/stopwatch'.
+2026-10-24T00:49:16.756Z core:DefaultMessagingService INFO Closing channel on service path '/services/application'.
+2026-10-24T00:49:16.756Z core:DefaultMessagingService INFO Closing channel on service path '/services/i18n'.
+2026-10-24T00:49:16.756Z core:DefaultMessagingService INFO Closing channel on service path '/services/shell-terminal'.
+2026-10-24T00:49:16.756Z core:DefaultMessagingService INFO Closing channel on service path '/services/factoryze-tasks'.
+2026-10-24T00:49:16.756Z core:DefaultMessagingService INFO Closing channel on service path '/services/cli-preferences'.
+2026-10-24T00:49:16.756Z core:DefaultMessagingService INFO Closing channel on service path '/services/search'.
+2026-10-24T00:49:16.756Z core:DefaultMessagingService INFO Closing channel on service path '/services/terminals/2072394961'.
+2026-10-24T00:49:16.756Z core:DefaultMessagingService INFO Closing channel on service path '/services/factoryze-agent'.
+Closing channel on service path '/services/electron-window'.
+2026-10-24T00:49:17.175Z core:WebsocketFrontendConnectionService INFO creating connection for 1
+Opening channel for service path '/services/electron-window'.
+2026-10-24T00:49:17.522Z core:FrontendStopwatch INFO Start frontend contributions: 145.0 ms [0.723 s since frontend page start]
+2026-10-24T00:49:17.522Z core:FrontendApplicationStateService INFO Changed application state from 'init' to 'started_contributions'.
+2026-10-24T00:49:17.532Z core:FrontendApplicationStateService INFO Changed application state from 'started_contributions' to 'attached_shell'.
+2026-10-24T00:49:17.532Z core:ShellLayoutRestorer INFO >>> Restoring the layout state...
+2026-10-24T00:49:17.533Z core:ShellLayoutRestorer INFO <<< The layout has been successfully restored.
+2026-10-24T00:49:17.533Z core:FrontendStopwatch INFO Initialize the workbench layout: 30.9 ms [0.769 s since frontend page start]
+2026-10-24T00:49:17.533Z core:FrontendApplicationStateService INFO Changed application state from 'attached_shell' to 'initialized_layout'.
+(node:20320) UnhandledPromiseRejectionWarning: TypeError: Object has been destroyed
+    at showWindowAndCloseSplashScreen (C:\Users\Sakib\AppData\Local\Temp\factoryze-installer-smoke-UfzULc\installed\resources\app.asar\lib\backend\electron-main.js:155289:30)
+    at C:\Users\Sakib\AppData\Local\Temp\factoryze-installer-smoke-UfzULc\installed\resources\app.asar\lib\backend\electron-main.js:155293:32
+(node:20320) UnhandledPromiseRejectionWarning: Unhandled promise rejection. This error originated either by throwing inside of an async function without a catch block, or by rejecting a promise which was not handled with .catch(). To terminate the node process on unhandled promise rejection, use the CLI flag `--unhandled-rejections=strict` (see https://nodejs.org/api/cli.html#cli_unhandled_rejections_mode). (rejection id: 11)
+2026-10-24T00:49:18.322Z core:Stopwatch INFO Frontend application startup sequence completed (async work may still be pending): 930.2 ms [41.940 s since backend process start]
+2026-10-24T00:49:18.323Z core:FrontendStopwatch INFO Replace loading indicator with ready workbench UI (animation): 805.7 ms [1.578 s since frontend page start]
+2026-10-24T00:49:18.323Z core:FrontendApplicationStateService INFO Changed application state from 'initialized_layout' to 'ready'.
+2026-10-24T00:49:18.323Z core:FrontendStopwatch INFO All frontend contributions settled: 1000.0 ms [1.579 s since frontend page start]
+2026-10-24T00:49:25.362Z core:WebsocketFrontendConnectionService INFO socket closed
+2026-10-24T00:49:25.362Z core:WebsocketFrontendConnectionService INFO closing connection for 1
+2026-10-24T00:49:25.362Z core:DefaultMessagingService INFO Closing channel on service path '/localization-server'.
+2026-10-24T00:49:25.362Z core:DefaultMessagingService INFO Closing channel on service path '/os'.
+2026-10-24T00:49:25.362Z core:DefaultMessagingService INFO Closing channel on service path '/services/logger'.
+2026-10-24T00:49:25.362Z core:DefaultMessagingService INFO Closing channel on service path '/services/commands'.
+2026-10-24T00:49:25.362Z core:DefaultMessagingService INFO Closing channel on service path '/services/messageService'.
+2026-10-24T00:49:25.362Z core:DefaultMessagingService INFO Closing channel on service path '/services/ChannelCloseService'.
+2026-10-24T00:49:25.362Z core:DefaultMessagingService INFO Closing channel on service path '/services/remote-filesystem'.
+2026-10-24T00:49:25.362Z core:DefaultMessagingService INFO Closing channel on service path '/services/envs'.
+2026-10-24T00:49:25.362Z core:DefaultMessagingService INFO Closing channel on service path '/services/workspace'.
+2026-10-24T00:49:25.362Z core:DefaultMessagingService INFO Closing channel on service path '/services/keyboard'.
+2026-10-24T00:49:25.362Z core:DefaultMessagingService INFO Closing channel on service path '/services/quickInput'.
+2026-10-24T00:49:25.362Z core:DefaultMessagingService INFO Closing channel on service path '/services/stopwatch'.
+2026-10-24T00:49:25.362Z core:DefaultMessagingService INFO Closing channel on service path '/services/application'.
+2026-10-24T00:49:25.362Z core:DefaultMessagingService INFO Closing channel on service path '/services/i18n'.
+2026-10-24T00:49:25.362Z core:DefaultMessagingService INFO Closing channel on service path '/services/shell-terminal'.
+2026-10-24T00:49:25.362Z core:DefaultMessagingService INFO Closing channel on service path '/services/factoryze-tasks'.
+2026-10-24T00:49:25.362Z core:DefaultMessagingService INFO Closing channel on service path '/services/cli-preferences'.
+2026-10-24T00:49:25.362Z core:DefaultMessagingService INFO Closing channel on service path '/services/search'.
+2026-10-24T00:49:25.362Z core:DefaultMessagingService INFO Closing channel on service path '/services/terminals/1632946406'.
+Closing channel on service path '/services/electron-window'.
+2026-10-24T00:49:26.331Z core:WebsocketFrontendConnectionService INFO creating connection for 1
+Opening channel for service path '/services/electron-window'.
+2026-10-24T00:49:26.624Z core:FrontendStopwatch INFO Start frontend contributions: 133.1 ms [1.257 s since frontend page start]
+2026-10-24T00:49:26.624Z core:FrontendApplicationStateService INFO Changed application state from 'init' to 'started_contributions'.
+2026-10-24T00:49:26.628Z core:FrontendApplicationStateService INFO Changed application state from 'started_contributions' to 'attached_shell'.
+2026-10-24T00:49:26.628Z core:ShellLayoutRestorer INFO >>> Restoring the layout state...
+2026-10-24T00:49:26.653Z core:ShellLayoutRestorer INFO <<< Nothing to restore.
+2026-10-24T00:49:26.740Z core:FrontendStopwatch INFO Initialize the workbench layout: 109.9 ms [1.379 s since frontend page start]
+2026-10-24T00:49:26.741Z core:FrontendApplicationStateService INFO Changed application state from 'attached_shell' to 'initialized_layout'.
+2026-10-24T00:49:26.896Z core:FrontendStopwatch WARN Frontend FactoryzeSoloContribution.onDidInitializeLayout took longer than the expected maximum 100 milliseconds: 154.7 ms [1.536 s since frontend page start]
+(node:20320) UnhandledPromiseRejectionWarning: TypeError: Object has been destroyed
+    at showWindowAndCloseSplashScreen (C:\Users\Sakib\AppData\Local\Temp\factoryze-installer-smoke-UfzULc\installed\resources\app.asar\lib\backend\electron-main.js:155289:30)
+    at C:\Users\Sakib\AppData\Local\Temp\factoryze-installer-smoke-UfzULc\installed\resources\app.asar\lib\backend\electron-main.js:155293:32
+(node:20320) UnhandledPromiseRejectionWarning: Unhandled promise rejection. This error originated either by throwing inside of an async function without a catch block, or by rejecting a promise which was not handled with .catch(). To terminate the node process on unhandled promise rejection, use the CLI flag `--unhandled-rejections=strict` (see https://nodejs.org/api/cli.html#cli_unhandled_rejections_mode). (rejection id: 12)
+2026-10-24T00:49:27.706Z core:Stopwatch INFO Frontend application startup sequence completed (async work may still be pending): 1152.7 ms [51.324 s since backend process start]
+2026-10-24T00:49:27.706Z core:FrontendStopwatch INFO Replace loading indicator with ready workbench UI (animation): 809.8 ms [2.347 s since frontend page start]
+2026-10-24T00:49:27.706Z core:FrontendApplicationStateService INFO Changed application state from 'initialized_layout' to 'ready'.
+2026-10-24T00:49:27.706Z core:FrontendStopwatch INFO All frontend contributions settled: 1222.7 ms [2.347 s since frontend page start]
+2026-10-24T00:49:30.195Z core:ApplicationShell WARN Widget was activated, but did not accept focus after 2000ms: factoryze-tests
+2026-10-24T00:49:33.393Z core:ApplicationShell WARN Widget was activated, but did not accept focus after 2000ms: factoryze-report
+2026-10-24T00:49:34.019Z core:WebsocketFrontendConnectionService INFO socket closed
+2026-10-24T00:49:34.019Z core:WebsocketFrontendConnectionService INFO closing connection for 1
+2026-10-24T00:49:34.019Z core:DefaultMessagingService INFO Closing channel on service path '/localization-server'.
+2026-10-24T00:49:34.019Z core:DefaultMessagingService INFO Closing channel on service path '/os'.
+2026-10-24T00:49:34.019Z core:DefaultMessagingService INFO Closing channel on service path '/services/logger'.
+2026-10-24T00:49:34.019Z core:DefaultMessagingService INFO Closing channel on service path '/services/commands'.
+2026-10-24T00:49:34.019Z core:DefaultMessagingService INFO Closing channel on service path '/services/messageService'.
+2026-10-24T00:49:34.019Z core:DefaultMessagingService INFO Closing channel on service path '/services/ChannelCloseService'.
+2026-10-24T00:49:34.019Z core:DefaultMessagingService INFO Closing channel on service path '/services/remote-filesystem'.
+2026-10-24T00:49:34.019Z core:DefaultMessagingService INFO Closing channel on service path '/services/envs'.
+2026-10-24T00:49:34.019Z core:DefaultMessagingService INFO Closing channel on service path '/services/workspace'.
+2026-10-24T00:49:34.019Z core:DefaultMessagingService INFO Closing channel on service path '/services/keyboard'.
+2026-10-24T00:49:34.019Z core:DefaultMessagingService INFO Closing channel on service path '/services/quickInput'.
+2026-10-24T00:49:34.019Z core:DefaultMessagingService INFO Closing channel on service path '/services/stopwatch'.
+2026-10-24T00:49:34.019Z core:DefaultMessagingService INFO Closing channel on service path '/services/application'.
+2026-10-24T00:49:34.019Z core:DefaultMessagingService INFO Closing channel on service path '/services/i18n'.
+2026-10-24T00:49:34.019Z core:DefaultMessagingService INFO Closing channel on service path '/services/shell-terminal'.
+2026-10-24T00:49:34.019Z core:DefaultMessagingService INFO Closing channel on service path '/services/factoryze-tasks'.
+2026-10-24T00:49:34.019Z core:DefaultMessagingService INFO Closing channel on service path '/services/cli-preferences'.
+2026-10-24T00:49:34.019Z core:DefaultMessagingService INFO Closing channel on service path '/services/search'.
+2026-10-24T00:49:34.019Z core:DefaultMessagingService INFO Closing channel on service path '/services/terminals/691280354'.
+2026-10-24T00:49:34.019Z core:DefaultMessagingService INFO Closing channel on service path '/services/factoryze-agent'.
+Closing channel on service path '/services/electron-window'.
+2026-10-24T00:49:34.721Z core:WebsocketFrontendConnectionService INFO creating connection for 1
+Opening channel for service path '/services/electron-window'.
+2026-10-24T00:49:35.075Z core:FrontendStopwatch INFO Start frontend contributions: 108.4 ms [1.059 s since frontend page start]
+2026-10-24T00:49:35.076Z core:FrontendApplicationStateService INFO Changed application state from 'init' to 'started_contributions'.
+2026-10-24T00:49:35.123Z core:FrontendApplicationStateService INFO Changed application state from 'started_contributions' to 'attached_shell'.
+2026-10-24T00:49:35.123Z core:ShellLayoutRestorer INFO >>> Restoring the layout state...
+2026-10-24T00:49:35.167Z core:ShellLayoutRestorer INFO <<< The layout has been successfully restored.
+2026-10-24T00:49:35.167Z core:FrontendStopwatch INFO Initialize the workbench layout: 44.0 ms [1.158 s since frontend page start]
+2026-10-24T00:49:35.167Z core:FrontendApplicationStateService INFO Changed application state from 'attached_shell' to 'initialized_layout'.
+(node:20320) UnhandledPromiseRejectionWarning: TypeError: Object has been destroyed
+    at showWindowAndCloseSplashScreen (C:\Users\Sakib\AppData\Local\Temp\factoryze-installer-smoke-UfzULc\installed\resources\app.asar\lib\backend\electron-main.js:155289:30)
+    at C:\Users\Sakib\AppData\Local\Temp\factoryze-installer-smoke-UfzULc\installed\resources\app.asar\lib\backend\electron-main.js:155293:32
+(node:20320) UnhandledPromiseRejectionWarning: Unhandled promise rejection. This error originated either by throwing inside of an async function without a catch block, or by rejecting a promise which was not handled with .catch(). To terminate the node process on unhandled promise rejection, use the CLI flag `--unhandled-rejections=strict` (see https://nodejs.org/api/cli.html#cli_unhandled_rejections_mode). (rejection id: 13)
+2026-10-24T00:49:35.980Z core:Stopwatch INFO Frontend application startup sequence completed (async work may still be pending): 988.6 ms [59.598 s since backend process start]
+2026-10-24T00:49:35.980Z core:FrontendStopwatch INFO Replace loading indicator with ready workbench UI (animation): 808.3 ms [1.970 s since frontend page start]
+2026-10-24T00:49:35.980Z core:FrontendApplicationStateService INFO Changed application state from 'initialized_layout' to 'ready'.
+2026-10-24T00:49:35.980Z core:FrontendStopwatch INFO All frontend contributions settled: 1019.9 ms [1.970 s since frontend page start]
+2026-10-24T00:49:42.818Z core:WebsocketFrontendConnectionService INFO socket closed
+2026-10-24T00:49:42.818Z core:WebsocketFrontendConnectionService INFO closing connection for 1
+2026-10-24T00:49:42.818Z core:DefaultMessagingService INFO Closing channel on service path '/localization-server'.
+2026-10-24T00:49:42.818Z core:DefaultMessagingService INFO Closing channel on service path '/os'.
+2026-10-24T00:49:42.818Z core:DefaultMessagingService INFO Closing channel on service path '/services/logger'.
+2026-10-24T00:49:42.818Z core:DefaultMessagingService INFO Closing channel on service path '/services/commands'.
+2026-10-24T00:49:42.818Z core:DefaultMessagingService INFO Closing channel on service path '/services/messageService'.
+2026-10-24T00:49:42.818Z core:DefaultMessagingService INFO Closing channel on service path '/services/ChannelCloseService'.
+2026-10-24T00:49:42.818Z core:DefaultMessagingService INFO Closing channel on service path '/services/remote-filesystem'.
+2026-10-24T00:49:42.818Z core:DefaultMessagingService INFO Closing channel on service path '/services/envs'.
+2026-10-24T00:49:42.818Z core:DefaultMessagingService INFO Closing channel on service path '/services/workspace'.
+2026-10-24T00:49:42.818Z core:DefaultMessagingService INFO Closing channel on service path '/services/keyboard'.
+2026-10-24T00:49:42.818Z core:DefaultMessagingService INFO Closing channel on service path '/services/quickInput'.
+2026-10-24T00:49:42.818Z core:DefaultMessagingService INFO Closing channel on service path '/services/stopwatch'.
+2026-10-24T00:49:42.818Z core:DefaultMessagingService INFO Closing channel on service path '/services/application'.
+2026-10-24T00:49:42.818Z core:DefaultMessagingService INFO Closing channel on service path '/services/i18n'.
+2026-10-24T00:49:42.818Z core:DefaultMessagingService INFO Closing channel on service path '/services/shell-terminal'.
+2026-10-24T00:49:42.818Z core:DefaultMessagingService INFO Closing channel on service path '/services/factoryze-tasks'.
+2026-10-24T00:49:42.818Z core:DefaultMessagingService INFO Closing channel on service path '/services/cli-preferences'.
+2026-10-24T00:49:42.818Z core:DefaultMessagingService INFO Closing channel on service path '/services/search'.
+2026-10-24T00:49:42.818Z core:DefaultMessagingService INFO Closing channel on service path '/services/terminals/1632946406'.
+Closing channel on service path '/services/electron-window'.
+2026-10-24T00:49:43.791Z core:WebsocketFrontendConnectionService INFO creating connection for 1
+Opening channel for service path '/services/electron-window'.
+2026-10-24T00:49:44.106Z core:FrontendStopwatch INFO Start frontend contributions: 148.8 ms [1.282 s since frontend page start]
+2026-10-24T00:49:44.106Z core:FrontendApplicationStateService INFO Changed application state from 'init' to 'started_contributions'.
+2026-10-24T00:49:44.109Z core:FrontendApplicationStateService INFO Changed application state from 'started_contributions' to 'attached_shell'.
+2026-10-24T00:49:44.109Z core:ShellLayoutRestorer INFO >>> Restoring the layout state...
+2026-10-24T00:49:44.149Z core:ShellLayoutRestorer INFO <<< Nothing to restore.
+2026-10-24T00:49:44.252Z core:FrontendStopwatch INFO Initialize the workbench layout: 142.6 ms [1.437 s since frontend page start]
+2026-10-24T00:49:44.253Z core:FrontendApplicationStateService INFO Changed application state from 'attached_shell' to 'initialized_layout'.
+2026-10-24T00:49:44.362Z core:FrontendStopwatch WARN Frontend FactoryzeSoloContribution.onDidInitializeLayout took longer than the expected maximum 100 milliseconds: 108.8 ms [1.546 s since frontend page start]
+(node:20320) UnhandledPromiseRejectionWarning: TypeError: Object has been destroyed
+    at showWindowAndCloseSplashScreen (C:\Users\Sakib\AppData\Local\Temp\factoryze-installer-smoke-UfzULc\installed\resources\app.asar\lib\backend\electron-main.js:155289:30)
+    at C:\Users\Sakib\AppData\Local\Temp\factoryze-installer-smoke-UfzULc\installed\resources\app.asar\lib\backend\electron-main.js:155293:32
+(node:20320) UnhandledPromiseRejectionWarning: Unhandled promise rejection. This error originated either by throwing inside of an async function without a catch block, or by rejecting a promise which was not handled with .catch(). To terminate the node process on unhandled promise rejection, use the CLI flag `--unhandled-rejections=strict` (see https://nodejs.org/api/cli.html#cli_unhandled_rejections_mode). (rejection id: 14)
+2026-10-24T00:49:45.173Z core:Stopwatch INFO Frontend application startup sequence completed (async work may still be pending): 1143.2 ms [68.791 s since backend process start]
+2026-10-24T00:49:45.173Z core:FrontendStopwatch INFO Replace loading indicator with ready workbench UI (animation): 809.4 ms [2.357 s since frontend page start]
+2026-10-24T00:49:45.173Z core:FrontendApplicationStateService INFO Changed application state from 'initialized_layout' to 'ready'.
+2026-10-24T00:49:45.173Z core:FrontendStopwatch INFO All frontend contributions settled: 1224.1 ms [2.358 s since frontend page start]
+2026-10-24T00:49:47.676Z core:ApplicationShell WARN Widget was activated, but did not accept focus after 2000ms: factoryze-tests
+2026-10-24T00:49:50.888Z core:ApplicationShell WARN Widget was activated, but did not accept focus after 2000ms: factoryze-report
+Debugger ending on ws://127.0.0.1:58201/f812e96f-0f69-44ed-9402-d60ebca41544
+For help, see: https://nodejs.org/learn/getting-started/debugging
+2026-10-24T00:49:51.483Z core:WebsocketFrontendConnectionService INFO socket closed
+2026-10-24T00:49:51.483Z core:WebsocketFrontendConnectionService INFO closing connection for 1
+2026-10-24T00:49:51.483Z core:DefaultMessagingService INFO Closing channel on service path '/localization-server'.
+2026-10-24T00:49:51.483Z core:DefaultMessagingService INFO Closing channel on service path '/os'.
+2026-10-24T00:49:51.483Z core:DefaultMessagingService INFO Closing channel on service path '/services/logger'.
+2026-10-24T00:49:51.483Z core:DefaultMessagingService INFO Closing channel on service path '/services/commands'.
+2026-10-24T00:49:51.483Z core:DefaultMessagingService INFO Closing channel on service path '/services/messageService'.
+2026-10-24T00:49:51.483Z core:DefaultMessagingService INFO Closing channel on service path '/services/ChannelCloseService'.
+2026-10-24T00:49:51.483Z core:DefaultMessagingService INFO Closing channel on service path '/services/remote-filesystem'.
+2026-10-24T00:49:51.483Z core:DefaultMessagingService INFO Closing channel on service path '/services/envs'.
+2026-10-24T00:49:51.483Z core:DefaultMessagingService INFO Closing channel on service path '/services/workspace'.
+2026-10-24T00:49:51.483Z core:DefaultMessagingService INFO Closing channel on service path '/services/keyboard'.
+2026-10-24T00:49:51.483Z core:DefaultMessagingService INFO Closing channel on service path '/services/quickInput'.
+2026-10-24T00:49:51.483Z core:DefaultMessagingService INFO Closing channel on service path '/services/stopwatch'.
+2026-10-24T00:49:51.483Z core:DefaultMessagingService INFO Closing channel on service path '/services/application'.
+2026-10-24T00:49:51.483Z core:DefaultMessagingService INFO Closing channel on service path '/services/i18n'.
+2026-10-24T00:49:51.483Z core:DefaultMessagingService INFO Closing channel on service path '/services/shell-terminal'.
+2026-10-24T00:49:51.483Z core:DefaultMessagingService INFO Closing channel on service path '/services/factoryze-tasks'.
+2026-10-24T00:49:51.483Z core:DefaultMessagingService INFO Closing channel on service path '/services/cli-preferences'.
+2026-10-24T00:49:51.483Z core:DefaultMessagingService INFO Closing channel on service path '/services/search'.
+2026-10-24T00:49:51.483Z core:DefaultMessagingService INFO Closing channel on service path '/services/terminals/2131722424'.
+2026-10-24T00:49:51.483Z core:DefaultMessagingService INFO Closing channel on service path '/services/factoryze-agent'.
+Closing channel on service path '/services/electron-window'.
+Workbench page closed
+Electron exit: code=0 signal=null
+2026-10-24T00:49:53.928Z core:WebsocketFrontendConnectionService INFO creating connection for 1
+Opening channel for service path '/services/electron-window'.
+2026-10-24T00:49:54.590Z core:FrontendStopwatch INFO Start frontend contributions: 234.0 ms [1.774 s since frontend page start]
+2026-10-24T00:49:54.590Z core:FrontendApplicationStateService INFO Changed application state from 'init' to 'started_contributions'.
+2026-10-24T00:49:54.699Z core:IPCConnectionProvider ERROR [parcel-watcher: 5772] (node:5772) [DEP0180] DeprecationWarning: fs.Stats constructor is deprecated.
+2026-10-24T00:49:54.699Z core:IPCConnectionProvider ERROR [parcel-watcher: 5772] (Use `Factoryze --trace-deprecation ...` to show where the warning was created)
+2026-10-24T00:49:55.089Z core:FrontendApplicationStateService INFO Changed application state from 'started_contributions' to 'attached_shell'.
+2026-10-24T00:49:55.089Z core:ShellLayoutRestorer INFO >>> Restoring the layout state...
+2026-10-24T00:49:55.102Z terminal:ShellTerminalServer WARN Couldn't attach - can't find terminal with id: 1632946406 
+2026-10-24T00:49:55.128Z core:ShellLayoutRestorer INFO <<< The layout has been successfully restored.
+2026-10-24T00:49:55.128Z core:FrontendStopwatch INFO Initialize the workbench layout: 39.6 ms [2.359 s since frontend page start]
+2026-10-24T00:49:55.129Z core:FrontendApplicationStateService INFO Changed application state from 'attached_shell' to 'initialized_layout'.
+2026-10-24T00:49:55.217Z terminal:TerminalWidgetImpl WARN Failed attaching to terminal id 1632946406, the terminal is most likely gone. Starting up a new terminal instead.
+2026-10-24T00:49:56.893Z core:Stopwatch INFO Frontend application startup sequence completed (async work may still be pending): 2498.5 ms [4.871 s since backend process start]
+2026-10-24T00:49:56.894Z core:FrontendStopwatch INFO Replace loading indicator with ready workbench UI (animation): 1757.7 ms [4.124 s since frontend page start]
+2026-10-24T00:49:56.894Z core:FrontendApplicationStateService INFO Changed application state from 'initialized_layout' to 'ready'.
+2026-10-24T00:49:56.894Z core:FrontendStopwatch INFO All frontend contributions settled: 2584.6 ms [4.124 s since frontend page start]
+Workbench page closed
+2026-10-24T00:50:04.375Z core:WebsocketFrontendConnectionService INFO socket closed
+2026-10-24T00:50:04.375Z core:WebsocketFrontendConnectionService INFO closing connection for 1
+2026-10-24T00:50:04.375Z core:DefaultMessagingService INFO Closing channel on service path '/localization-server'.
+2026-10-24T00:50:04.375Z core:DefaultMessagingService INFO Closing channel on service path '/os'.
+2026-10-24T00:50:04.375Z core:DefaultMessagingService INFO Closing channel on service path '/services/logger'.
+2026-10-24T00:50:04.375Z core:DefaultMessagingService INFO Closing channel on service path '/services/commands'.
+2026-10-24T00:50:04.375Z core:DefaultMessagingService INFO Closing channel on service path '/services/messageService'.
+2026-10-24T00:50:04.375Z core:DefaultMessagingService INFO Closing channel on service path '/services/ChannelCloseService'.
+2026-10-24T00:50:04.375Z core:DefaultMessagingService INFO Closing channel on service path '/services/remote-filesystem'.
+2026-10-24T00:50:04.375Z core:DefaultMessagingService INFO Closing channel on service path '/services/envs'.
+2026-10-24T00:50:04.375Z core:DefaultMessagingService INFO Closing channel on service path '/services/workspace'.
+2026-10-24T00:50:04.375Z core:DefaultMessagingService INFO Closing channel on service path '/services/keyboard'.
+2026-10-24T00:50:04.375Z core:DefaultMessagingService INFO Closing channel on service path '/services/quickInput'.
+2026-10-24T00:50:04.375Z core:DefaultMessagingService INFO Closing channel on service path '/services/stopwatch'.
+2026-10-24T00:50:04.375Z core:DefaultMessagingService INFO Closing channel on service path '/services/application'.
+2026-10-24T00:50:04.375Z core:DefaultMessagingService INFO Closing channel on service path '/services/i18n'.
+2026-10-24T00:50:04.375Z core:DefaultMessagingService INFO Closing channel on service path '/services/shell-terminal'.
+2026-10-24T00:50:04.375Z core:DefaultMessagingService INFO Closing channel on service path '/services/factoryze-tasks'.
+2026-10-24T00:50:04.375Z core:DefaultMessagingService INFO Closing channel on service path '/services/cli-preferences'.
+2026-10-24T00:50:04.375Z core:DefaultMessagingService INFO Closing channel on service path '/services/search'.
+2026-10-24T00:50:04.375Z core:DefaultMessagingService INFO Closing channel on service path '/services/terminals/1995453470'.
+Closing channel on service path '/services/electron-window'.
+2026-10-24T00:50:04.768Z core:WebsocketFrontendConnectionService INFO creating connection for 1
+Opening channel for service path '/services/electron-window'.
+2026-10-24T00:50:05.121Z core:FrontendStopwatch INFO Start frontend contributions: 163.7 ms [0.729 s since frontend page start]
+2026-10-24T00:50:05.121Z core:FrontendApplicationStateService INFO Changed application state from 'init' to 'started_contributions'.
+2026-10-24T00:50:05.124Z core:FrontendApplicationStateService INFO Changed application state from 'started_contributions' to 'attached_shell'.
+2026-10-24T00:50:05.124Z core:ShellLayoutRestorer INFO >>> Restoring the layout state...
+2026-10-24T00:50:05.138Z core:ShellLayoutRestorer INFO <<< Nothing to restore.
+2026-10-24T00:50:05.223Z core:FrontendStopwatch INFO Initialize the workbench layout: 108.8 ms [0.852 s since frontend page start]
+2026-10-24T00:50:05.225Z core:FrontendApplicationStateService INFO Changed application state from 'attached_shell' to 'initialized_layout'.
+2026-10-24T00:50:05.475Z core:FrontendStopwatch WARN Frontend FactoryzeSoloContribution.onDidInitializeLayout took longer than the expected maximum 100 milliseconds: 250.3 ms [1.103 s since frontend page start]
+(node:11928) UnhandledPromiseRejectionWarning: TypeError: Object has been destroyed
+    at showWindowAndCloseSplashScreen (C:\Users\Sakib\AppData\Local\Temp\factoryze-installer-smoke-UfzULc\installed\resources\app.asar\lib\backend\electron-main.js:155289:30)
+    at C:\Users\Sakib\AppData\Local\Temp\factoryze-installer-smoke-UfzULc\installed\resources\app.asar\lib\backend\electron-main.js:155293:32
+(node:11928) UnhandledPromiseRejectionWarning: Unhandled promise rejection. This error originated either by throwing inside of an async function without a catch block, or by rejecting a promise which was not handled with .catch(). To terminate the node process on unhandled promise rejection, use the CLI flag `--unhandled-rejections=strict` (see https://nodejs.org/api/cli.html#cli_unhandled_rejections_mode). (rejection id: 2)
+2026-10-24T00:50:06.319Z core:FrontendStopwatch INFO Replace loading indicator with ready workbench UI (animation): 843.4 ms [1.948 s since frontend page start]
+2026-10-24T00:50:06.319Z core:Stopwatch INFO Frontend application startup sequence completed (async work may still be pending): 1300.5 ms [14.297 s since backend process start]
+2026-10-24T00:50:06.320Z core:FrontendApplicationStateService INFO Changed application state from 'initialized_layout' to 'ready'.
+2026-10-24T00:50:06.320Z core:FrontendStopwatch INFO All frontend contributions settled: 1383.8 ms [1.948 s since frontend page start]
+Debugger ending on ws://127.0.0.1:58290/9b57c348-3d0b-4885-a8c1-a2775fbd3b9b
+For help, see: https://nodejs.org/learn/getting-started/debugging
+Closing channel on service path '/services/electron-window'.
+Workbench page closed
+2026-10-24T00:50:08.653Z core:WebsocketFrontendConnectionService INFO socket closed
+2026-10-24T00:50:08.653Z core:WebsocketFrontendConnectionService INFO closing connection for 1
+2026-10-24T00:50:08.653Z core:DefaultMessagingService INFO Closing channel on service path '/localization-server'.
+2026-10-24T00:50:08.653Z core:DefaultMessagingService INFO Closing channel on service path '/os'.
+2026-10-24T00:50:08.653Z core:DefaultMessagingService INFO Closing channel on service path '/services/logger'.
+2026-10-24T00:50:08.653Z core:DefaultMessagingService INFO Closing channel on service path '/services/commands'.
+2026-10-24T00:50:08.653Z core:DefaultMessagingService INFO Closing channel on service path '/services/messageService'.
+2026-10-24T00:50:08.653Z core:DefaultMessagingService INFO Closing channel on service path '/services/ChannelCloseService'.
+2026-10-24T00:50:08.653Z core:DefaultMessagingService INFO Closing channel on service path '/services/remote-filesystem'.
+2026-10-24T00:50:08.653Z core:DefaultMessagingService INFO Closing channel on service path '/services/envs'.
+2026-10-24T00:50:08.653Z core:DefaultMessagingService INFO Closing channel on service path '/services/workspace'.
+2026-10-24T00:50:08.653Z core:DefaultMessagingService INFO Closing channel on service path '/services/keyboard'.
+2026-10-24T00:50:08.653Z core:DefaultMessagingService INFO Closing channel on service path '/services/quickInput'.
+2026-10-24T00:50:08.653Z core:DefaultMessagingService INFO Closing channel on service path '/services/stopwatch'.
+2026-10-24T00:50:08.653Z core:DefaultMessagingService INFO Closing channel on service path '/services/application'.
+2026-10-24T00:50:08.653Z core:DefaultMessagingService INFO Closing channel on service path '/services/i18n'.
+2026-10-24T00:50:08.653Z core:DefaultMessagingService INFO Closing channel on service path '/services/shell-terminal'.
+2026-10-24T00:50:08.653Z core:DefaultMessagingService INFO Closing channel on service path '/services/factoryze-tasks'.
+2026-10-24T00:50:08.653Z core:DefaultMessagingService INFO Closing channel on service path '/services/cli-preferences'.
+2026-10-24T00:50:08.653Z core:DefaultMessagingService INFO Closing channel on service path '/services/search'.
+2026-10-24T00:50:08.653Z core:DefaultMessagingService INFO Closing channel on service path '/services/terminals/1931684367'.
+2026-10-24T00:50:08.653Z core:DefaultMessagingService INFO Closing channel on service path '/services/factoryze-agent'.
+Electron exit: code=0 signal=null
+2026-10-24T00:50:11.071Z core:WebsocketFrontendConnectionService INFO creating connection for 1
+Opening channel for service path '/services/electron-window'.
+2026-10-24T00:50:11.729Z core:FrontendStopwatch INFO Start frontend contributions: 230.5 ms [1.771 s since frontend page start]
+2026-10-24T00:50:11.729Z core:FrontendApplicationStateService INFO Changed application state from 'init' to 'started_contributions'.
+2026-10-24T00:50:11.847Z core:IPCConnectionProvider ERROR [parcel-watcher: 26700] (node:26700) [DEP0180] DeprecationWarning: fs.Stats constructor is deprecated.
+2026-10-24T00:50:11.847Z core:IPCConnectionProvider ERROR [parcel-watcher: 26700] (Use `Factoryze --trace-deprecation ...` to show where the warning was created)
+2026-10-24T00:50:12.222Z core:FrontendApplicationStateService INFO Changed application state from 'started_contributions' to 'attached_shell'.
+2026-10-24T00:50:12.222Z core:ShellLayoutRestorer INFO >>> Restoring the layout state...
+2026-10-24T00:50:12.235Z terminal:ShellTerminalServer WARN Couldn't attach - can't find terminal with id: 1995453470 
+2026-10-24T00:50:12.262Z core:ShellLayoutRestorer INFO <<< The layout has been successfully restored.
+2026-10-24T00:50:12.263Z core:FrontendStopwatch INFO Initialize the workbench layout: 40.5 ms [2.343 s since frontend page start]
+2026-10-24T00:50:12.263Z core:FrontendApplicationStateService INFO Changed application state from 'attached_shell' to 'initialized_layout'.
+2026-10-24T00:50:12.358Z terminal:TerminalWidgetImpl WARN Failed attaching to terminal id 1995453470, the terminal is most likely gone. Starting up a new terminal instead.
+2026-10-24T00:50:14.045Z core:Stopwatch INFO Frontend application startup sequence completed (async work may still be pending): 2493.5 ms [4.892 s since backend process start]
+2026-10-24T00:50:14.045Z core:FrontendStopwatch INFO Replace loading indicator with ready workbench UI (animation): 1774.9 ms [4.125 s since frontend page start]
+2026-10-24T00:50:14.045Z core:FrontendApplicationStateService INFO Changed application state from 'initialized_layout' to 'ready'.
+2026-10-24T00:50:14.045Z core:FrontendStopwatch INFO All frontend contributions settled: 2584.9 ms [4.125 s since frontend page start]
+Workbench page closed
+2026-10-24T00:50:14.467Z core:WebsocketFrontendConnectionService INFO socket closed
+2026-10-24T00:50:14.467Z core:WebsocketFrontendConnectionService INFO closing connection for 1
+2026-10-24T00:50:14.467Z core:DefaultMessagingService INFO Closing channel on service path '/localization-server'.
+2026-10-24T00:50:14.467Z core:DefaultMessagingService INFO Closing channel on service path '/os'.
+2026-10-24T00:50:14.467Z core:DefaultMessagingService INFO Closing channel on service path '/services/logger'.
+2026-10-24T00:50:14.467Z core:DefaultMessagingService INFO Closing channel on service path '/services/commands'.
+2026-10-24T00:50:14.467Z core:DefaultMessagingService INFO Closing channel on service path '/services/messageService'.
+2026-10-24T00:50:14.467Z core:DefaultMessagingService INFO Closing channel on service path '/services/ChannelCloseService'.
+2026-10-24T00:50:14.467Z core:DefaultMessagingService INFO Closing channel on service path '/services/remote-filesystem'.
+2026-10-24T00:50:14.467Z core:DefaultMessagingService INFO Closing channel on service path '/services/envs'.
+2026-10-24T00:50:14.467Z core:DefaultMessagingService INFO Closing channel on service path '/services/workspace'.
+2026-10-24T00:50:14.467Z core:DefaultMessagingService INFO Closing channel on service path '/services/keyboard'.
+2026-10-24T00:50:14.467Z core:DefaultMessagingService INFO Closing channel on service path '/services/quickInput'.
+2026-10-24T00:50:14.467Z core:DefaultMessagingService INFO Closing channel on service path '/services/stopwatch'.
+2026-10-24T00:50:14.467Z core:DefaultMessagingService INFO Closing channel on service path '/services/application'.
+2026-10-24T00:50:14.467Z core:DefaultMessagingService INFO Closing channel on service path '/services/i18n'.
+2026-10-24T00:50:14.467Z core:DefaultMessagingService INFO Closing channel on service path '/services/shell-terminal'.
+2026-10-24T00:50:14.467Z core:DefaultMessagingService INFO Closing channel on service path '/services/factoryze-tasks'.
+2026-10-24T00:50:14.467Z core:DefaultMessagingService INFO Closing channel on service path '/services/cli-preferences'.
+2026-10-24T00:50:14.467Z core:DefaultMessagingService INFO Closing channel on service path '/services/search'.
+2026-10-24T00:50:14.467Z core:DefaultMessagingService INFO Closing channel on service path '/services/terminals/37200847'.
+Closing channel on service path '/services/electron-window'.
+2026-10-24T00:50:14.852Z core:WebsocketFrontendConnectionService INFO creating connection for 1
+Opening channel for service path '/services/electron-window'.
+2026-10-24T00:50:15.168Z core:FrontendStopwatch INFO Start frontend contributions: 138.8 ms [0.685 s since frontend page start]
+2026-10-24T00:50:15.168Z core:FrontendApplicationStateService INFO Changed application state from 'init' to 'started_contributions'.
+2026-10-24T00:50:15.172Z core:FrontendApplicationStateService INFO Changed application state from 'started_contributions' to 'attached_shell'.
+2026-10-24T00:50:15.172Z core:ShellLayoutRestorer INFO >>> Restoring the layout state...
+2026-10-24T00:50:15.199Z terminal:ShellTerminalServer WARN Couldn't attach - can't find terminal with id: 1931684367 
+2026-10-24T00:50:15.309Z terminal:TerminalWidgetImpl WARN Failed attaching to terminal id 1931684367, the terminal is most likely gone. Starting up a new terminal instead.
+2026-10-24T00:50:15.492Z core:ShellLayoutRestorer INFO <<< The layout has been successfully restored.
+2026-10-24T00:50:15.499Z core:FrontendStopwatch INFO Initialize the workbench layout: 331.5 ms [1.030 s since frontend page start]
+2026-10-24T00:50:15.500Z core:FrontendApplicationStateService INFO Changed application state from 'attached_shell' to 'initialized_layout'.
+2026-10-24T00:50:15.681Z core:FrontendStopwatch WARN Frontend FactoryzeSoloContribution.onDidInitializeLayout took longer than the expected maximum 100 milliseconds: 180.8 ms [1.217 s since frontend page start]
+(node:9744) UnhandledPromiseRejectionWarning: TypeError: Object has been destroyed
+    at showWindowAndCloseSplashScreen (C:\Users\Sakib\AppData\Local\Temp\factoryze-installer-smoke-UfzULc\installed\resources\app.asar\lib\backend\electron-main.js:155289:30)
+    at C:\Users\Sakib\AppData\Local\Temp\factoryze-installer-smoke-UfzULc\installed\resources\app.asar\lib\backend\electron-main.js:155293:32
+(node:9744) UnhandledPromiseRejectionWarning: Unhandled promise rejection. This error originated either by throwing inside of an async function without a catch block, or by rejecting a promise which was not handled with .catch(). To terminate the node process on unhandled promise rejection, use the CLI flag `--unhandled-rejections=strict` (see https://nodejs.org/api/cli.html#cli_unhandled_rejections_mode). (rejection id: 2)
+2026-10-24T00:50:16.504Z core:FrontendStopwatch INFO Replace loading indicator with ready workbench UI (animation): 821.9 ms [2.041 s since frontend page start]
+2026-10-24T00:50:16.505Z core:Stopwatch INFO Frontend application startup sequence completed (async work may still be pending): 1426.1 ms [7.352 s since backend process start]
+2026-10-24T00:50:16.505Z core:FrontendApplicationStateService INFO Changed application state from 'initialized_layout' to 'ready'.
+2026-10-24T00:50:16.505Z core:FrontendStopwatch INFO All frontend contributions settled: 1495.1 ms [2.041 s since frontend page start]
+2026-10-24T00:50:16.675Z core:WebsocketFrontendConnectionService INFO socket closed
+2026-10-24T00:50:16.675Z core:WebsocketFrontendConnectionService INFO closing connection for 1
+2026-10-24T00:50:16.675Z core:DefaultMessagingService INFO Closing channel on service path '/localization-server'.
+2026-10-24T00:50:16.675Z core:DefaultMessagingService INFO Closing channel on service path '/os'.
+2026-10-24T00:50:16.675Z core:DefaultMessagingService INFO Closing channel on service path '/services/logger'.
+2026-10-24T00:50:16.675Z core:DefaultMessagingService INFO Closing channel on service path '/services/commands'.
+2026-10-24T00:50:16.675Z core:DefaultMessagingService INFO Closing channel on service path '/services/messageService'.
+2026-10-24T00:50:16.675Z core:DefaultMessagingService INFO Closing channel on service path '/services/ChannelCloseService'.
+2026-10-24T00:50:16.675Z core:DefaultMessagingService INFO Closing channel on service path '/services/remote-filesystem'.
+2026-10-24T00:50:16.675Z core:DefaultMessagingService INFO Closing channel on service path '/services/envs'.
+2026-10-24T00:50:16.675Z core:DefaultMessagingService INFO Closing channel on service path '/services/workspace'.
+2026-10-24T00:50:16.675Z core:DefaultMessagingService INFO Closing channel on service path '/services/keyboard'.
+2026-10-24T00:50:16.675Z core:DefaultMessagingService INFO Closing channel on service path '/services/quickInput'.
+2026-10-24T00:50:16.675Z core:DefaultMessagingService INFO Closing channel on service path '/services/stopwatch'.
+2026-10-24T00:50:16.675Z core:DefaultMessagingService INFO Closing channel on service path '/services/application'.
+2026-10-24T00:50:16.675Z core:DefaultMessagingService INFO Closing channel on service path '/services/i18n'.
+2026-10-24T00:50:16.675Z core:DefaultMessagingService INFO Closing channel on service path '/services/shell-terminal'.
+2026-10-24T00:50:16.675Z core:DefaultMessagingService INFO Closing channel on service path '/services/factoryze-tasks'.
+2026-10-24T00:50:16.675Z core:DefaultMessagingService INFO Closing channel on service path '/services/cli-preferences'.
+2026-10-24T00:50:16.675Z core:DefaultMessagingService INFO Closing channel on service path '/services/search'.
+2026-10-24T00:50:16.675Z core:DefaultMessagingService INFO Closing channel on service path '/services/factoryze-agent'.
+2026-10-24T00:50:16.675Z core:DefaultMessagingService INFO Closing channel on service path '/services/terminals/400858310'.
+Closing channel on service path '/services/electron-window'.
+2026-10-24T00:50:17.067Z core:WebsocketFrontendConnectionService INFO creating connection for 1
+Opening channel for service path '/services/electron-window'.
+2026-10-24T00:50:17.413Z core:FrontendStopwatch INFO Start frontend contributions: 137.5 ms [0.698 s since frontend page start]
+2026-10-24T00:50:17.413Z core:FrontendApplicationStateService INFO Changed application state from 'init' to 'started_contributions'.
+2026-10-24T00:50:17.426Z core:FrontendApplicationStateService INFO Changed application state from 'started_contributions' to 'attached_shell'.
+2026-10-24T00:50:17.426Z core:ShellLayoutRestorer INFO >>> Restoring the layout state...
+2026-10-24T00:50:17.426Z core:ShellLayoutRestorer INFO <<< The layout has been successfully restored.
+2026-10-24T00:50:17.426Z core:FrontendStopwatch INFO Initialize the workbench layout: 29.6 ms [0.743 s since frontend page start]
+2026-10-24T00:50:17.426Z core:FrontendApplicationStateService INFO Changed application state from 'attached_shell' to 'initialized_layout'.
+(node:9744) UnhandledPromiseRejectionWarning: TypeError: Object has been destroyed
+    at showWindowAndCloseSplashScreen (C:\Users\Sakib\AppData\Local\Temp\factoryze-installer-smoke-UfzULc\installed\resources\app.asar\lib\backend\electron-main.js:155289:30)
+    at C:\Users\Sakib\AppData\Local\Temp\factoryze-installer-smoke-UfzULc\installed\resources\app.asar\lib\backend\electron-main.js:155293:32
+(node:9744) UnhandledPromiseRejectionWarning: Unhandled promise rejection. This error originated either by throwing inside of an async function without a catch block, or by rejecting a promise which was not handled with .catch(). To terminate the node process on unhandled promise rejection, use the CLI flag `--unhandled-rejections=strict` (see https://nodejs.org/api/cli.html#cli_unhandled_rejections_mode). (rejection id: 3)
+2026-10-24T00:50:18.213Z core:FrontendStopwatch INFO Replace loading indicator with ready workbench UI (animation): 804.8 ms [1.551 s since frontend page start]
+2026-10-24T00:50:18.213Z core:Stopwatch INFO Frontend application startup sequence completed (async work may still be pending): 925.1 ms [9.061 s since backend process start]
+2026-10-24T00:50:18.214Z core:FrontendApplicationStateService INFO Changed application state from 'initialized_layout' to 'ready'.
+2026-10-24T00:50:18.214Z core:FrontendStopwatch INFO All frontend contributions settled: 990.3 ms [1.551 s since frontend page start]
+2026-10-24T00:50:25.449Z core:WebsocketFrontendConnectionService INFO socket closed
+2026-10-24T00:50:25.449Z core:WebsocketFrontendConnectionService INFO closing connection for 1
+2026-10-24T00:50:25.449Z core:DefaultMessagingService INFO Closing channel on service path '/localization-server'.
+2026-10-24T00:50:25.449Z core:DefaultMessagingService INFO Closing channel on service path '/os'.
+2026-10-24T00:50:25.449Z core:DefaultMessagingService INFO Closing channel on service path '/services/logger'.
+2026-10-24T00:50:25.449Z core:DefaultMessagingService INFO Closing channel on service path '/services/commands'.
+2026-10-24T00:50:25.449Z core:DefaultMessagingService INFO Closing channel on service path '/services/messageService'.
+2026-10-24T00:50:25.449Z core:DefaultMessagingService INFO Closing channel on service path '/services/ChannelCloseService'.
+2026-10-24T00:50:25.449Z core:DefaultMessagingService INFO Closing channel on service path '/services/remote-filesystem'.
+2026-10-24T00:50:25.449Z core:DefaultMessagingService INFO Closing channel on service path '/services/envs'.
+2026-10-24T00:50:25.449Z core:DefaultMessagingService INFO Closing channel on service path '/services/workspace'.
+2026-10-24T00:50:25.449Z core:DefaultMessagingService INFO Closing channel on service path '/services/keyboard'.
+2026-10-24T00:50:25.449Z core:DefaultMessagingService INFO Closing channel on service path '/services/quickInput'.
+2026-10-24T00:50:25.449Z core:DefaultMessagingService INFO Closing channel on service path '/services/stopwatch'.
+2026-10-24T00:50:25.449Z core:DefaultMessagingService INFO Closing channel on service path '/services/application'.
+2026-10-24T00:50:25.449Z core:DefaultMessagingService INFO Closing channel on service path '/services/i18n'.
+2026-10-24T00:50:25.449Z core:DefaultMessagingService INFO Closing channel on service path '/services/shell-terminal'.
+2026-10-24T00:50:25.449Z core:DefaultMessagingService INFO Closing channel on service path '/services/factoryze-tasks'.
+2026-10-24T00:50:25.449Z core:DefaultMessagingService INFO Closing channel on service path '/services/cli-preferences'.
+2026-10-24T00:50:25.449Z core:DefaultMessagingService INFO Closing channel on service path '/services/search'.
+2026-10-24T00:50:25.449Z core:DefaultMessagingService INFO Closing channel on service path '/services/terminals/37200847'.
+Closing channel on service path '/services/electron-window'.
+2026-10-24T00:50:25.839Z core:WebsocketFrontendConnectionService INFO creating connection for 1
+Opening channel for service path '/services/electron-window'.
+2026-10-24T00:50:26.125Z core:FrontendStopwatch INFO Start frontend contributions: 117.2 ms [0.658 s since frontend page start]
+2026-10-24T00:50:26.125Z core:FrontendApplicationStateService INFO Changed application state from 'init' to 'started_contributions'.
+2026-10-24T00:50:26.135Z core:FrontendApplicationStateService INFO Changed application state from 'started_contributions' to 'attached_shell'.
+2026-10-24T00:50:26.135Z core:ShellLayoutRestorer INFO >>> Restoring the layout state...
+2026-10-24T00:50:26.153Z core:ShellLayoutRestorer INFO <<< Nothing to restore.
+2026-10-24T00:50:26.261Z core:FrontendStopwatch INFO Initialize the workbench layout: 141.4 ms [0.815 s since frontend page start]
+2026-10-24T00:50:26.262Z core:FrontendApplicationStateService INFO Changed application state from 'attached_shell' to 'initialized_layout'.
+2026-10-24T00:50:26.376Z core:FrontendStopwatch WARN Frontend FactoryzeSoloContribution.onDidInitializeLayout took longer than the expected maximum 100 milliseconds: 112.5 ms [0.928 s since frontend page start]
+(node:9744) UnhandledPromiseRejectionWarning: TypeError: Object has been destroyed
+    at showWindowAndCloseSplashScreen (C:\Users\Sakib\AppData\Local\Temp\factoryze-installer-smoke-UfzULc\installed\resources\app.asar\lib\backend\electron-main.js:155289:30)
+    at C:\Users\Sakib\AppData\Local\Temp\factoryze-installer-smoke-UfzULc\installed\resources\app.asar\lib\backend\electron-main.js:155293:32
+(node:9744) UnhandledPromiseRejectionWarning: Unhandled promise rejection. This error originated either by throwing inside of an async function without a catch block, or by rejecting a promise which was not handled with .catch(). To terminate the node process on unhandled promise rejection, use the CLI flag `--unhandled-rejections=strict` (see https://nodejs.org/api/cli.html#cli_unhandled_rejections_mode). (rejection id: 4)
+2026-10-24T00:50:27.189Z core:Stopwatch INFO Frontend application startup sequence completed (async work may still be pending): 1154.1 ms [18.037 s since backend process start]
+2026-10-24T00:50:27.189Z core:FrontendStopwatch INFO Replace loading indicator with ready workbench UI (animation): 812.8 ms [1.743 s since frontend page start]
+2026-10-24T00:50:27.189Z core:FrontendApplicationStateService INFO Changed application state from 'initialized_layout' to 'ready'.
+2026-10-24T00:50:27.189Z core:FrontendStopwatch INFO All frontend contributions settled: 1202.7 ms [1.743 s since frontend page start]
+Debugger ending on ws://127.0.0.1:58322/b8c3a676-8c94-47ac-9413-75dc4d8d1fd2
+For help, see: https://nodejs.org/learn/getting-started/debugging
+Closing channel on service path '/services/electron-window'.
+2026-10-24T00:50:27.497Z core:WebsocketFrontendConnectionService INFO socket closed
+2026-10-24T00:50:27.497Z core:WebsocketFrontendConnectionService INFO closing connection for 1
+2026-10-24T00:50:27.497Z core:DefaultMessagingService INFO Closing channel on service path '/localization-server'.
+2026-10-24T00:50:27.497Z core:DefaultMessagingService INFO Closing channel on service path '/os'.
+2026-10-24T00:50:27.497Z core:DefaultMessagingService INFO Closing channel on service path '/services/logger'.
+2026-10-24T00:50:27.497Z core:DefaultMessagingService INFO Closing channel on service path '/services/commands'.
+2026-10-24T00:50:27.497Z core:DefaultMessagingService INFO Closing channel on service path '/services/messageService'.
+2026-10-24T00:50:27.497Z core:DefaultMessagingService INFO Closing channel on service path '/services/ChannelCloseService'.
+2026-10-24T00:50:27.497Z core:DefaultMessagingService INFO Closing channel on service path '/services/remote-filesystem'.
+2026-10-24T00:50:27.497Z core:DefaultMessagingService INFO Closing channel on service path '/services/envs'.
+2026-10-24T00:50:27.497Z core:DefaultMessagingService INFO Closing channel on service path '/services/workspace'.
+2026-10-24T00:50:27.497Z core:DefaultMessagingService INFO Closing channel on service path '/services/keyboard'.
+2026-10-24T00:50:27.497Z core:DefaultMessagingService INFO Closing channel on service path '/services/quickInput'.
+2026-10-24T00:50:27.497Z core:DefaultMessagingService INFO Closing channel on service path '/services/stopwatch'.
+2026-10-24T00:50:27.497Z core:DefaultMessagingService INFO Closing channel on service path '/services/application'.
+2026-10-24T00:50:27.497Z core:DefaultMessagingService INFO Closing channel on service path '/services/i18n'.
+2026-10-24T00:50:27.497Z core:DefaultMessagingService INFO Closing channel on service path '/services/shell-terminal'.
+2026-10-24T00:50:27.497Z core:DefaultMessagingService INFO Closing channel on service path '/services/factoryze-tasks'.
+2026-10-24T00:50:27.497Z core:DefaultMessagingService INFO Closing channel on service path '/services/cli-preferences'.
+2026-10-24T00:50:27.497Z core:DefaultMessagingService INFO Closing channel on service path '/services/search'.
+2026-10-24T00:50:27.497Z core:DefaultMessagingService INFO Closing channel on service path '/services/terminals/1718970771'.
+2026-10-24T00:50:27.497Z core:DefaultMessagingService INFO Closing channel on service path '/services/factoryze-agent'.
+Workbench page closed
+Electron exit: code=0 signal=null
+2026-10-24T00:50:29.929Z core:WebsocketFrontendConnectionService INFO creating connection for 1
+Opening channel for service path '/services/electron-window'.
+2026-10-24T00:50:30.594Z core:FrontendStopwatch INFO Start frontend contributions: 234.5 ms [1.771 s since frontend page start]
+2026-10-24T00:50:30.594Z core:FrontendApplicationStateService INFO Changed application state from 'init' to 'started_contributions'.
+2026-10-24T00:50:30.705Z core:IPCConnectionProvider ERROR [parcel-watcher: 19412] (node:19412) [DEP0180] DeprecationWarning: fs.Stats constructor is deprecated.
+2026-10-24T00:50:30.705Z core:IPCConnectionProvider ERROR [parcel-watcher: 19412] (Use `Factoryze --trace-deprecation ...` to show where the warning was created)
+2026-10-24T00:50:31.121Z core:FrontendApplicationStateService INFO Changed application state from 'started_contributions' to 'attached_shell'.
+2026-10-24T00:50:31.122Z core:ShellLayoutRestorer INFO >>> Restoring the layout state...
+2026-10-24T00:50:31.134Z terminal:ShellTerminalServer WARN Couldn't attach - can't find terminal with id: 37200847 
+2026-10-24T00:50:31.162Z core:ShellLayoutRestorer INFO <<< The layout has been successfully restored.
+2026-10-24T00:50:31.163Z core:FrontendStopwatch INFO Initialize the workbench layout: 41.4 ms [2.380 s since frontend page start]
+2026-10-24T00:50:31.163Z core:FrontendApplicationStateService INFO Changed application state from 'attached_shell' to 'initialized_layout'.
+2026-10-24T00:50:31.250Z terminal:TerminalWidgetImpl WARN Failed attaching to terminal id 37200847, the terminal is most likely gone. Starting up a new terminal instead.
+2026-10-24T00:50:32.951Z core:Stopwatch INFO Frontend application startup sequence completed (async work may still be pending): 2543.2 ms [4.950 s since backend process start]
+2026-10-24T00:50:32.951Z core:FrontendStopwatch INFO Replace loading indicator with ready workbench UI (animation): 1780.8 ms [4.168 s since frontend page start]
+2026-10-24T00:50:32.951Z core:FrontendApplicationStateService INFO Changed application state from 'initialized_layout' to 'ready'.
+2026-10-24T00:50:32.951Z core:FrontendStopwatch INFO All frontend contributions settled: 2631.4 ms [4.168 s since frontend page start]
+Workbench page closed
+2026-10-24T00:50:33.317Z core:WebsocketFrontendConnectionService INFO socket closed
+2026-10-24T00:50:33.317Z core:WebsocketFrontendConnectionService INFO closing connection for 1
+2026-10-24T00:50:33.317Z core:DefaultMessagingService INFO Closing channel on service path '/localization-server'.
+2026-10-24T00:50:33.317Z core:DefaultMessagingService INFO Closing channel on service path '/os'.
+2026-10-24T00:50:33.317Z core:DefaultMessagingService INFO Closing channel on service path '/services/logger'.
+2026-10-24T00:50:33.317Z core:DefaultMessagingService INFO Closing channel on service path '/services/commands'.
+2026-10-24T00:50:33.317Z core:DefaultMessagingService INFO Closing channel on service path '/services/messageService'.
+2026-10-24T00:50:33.317Z core:DefaultMessagingService INFO Closing channel on service path '/services/ChannelCloseService'.
+2026-10-24T00:50:33.317Z core:DefaultMessagingService INFO Closing channel on service path '/services/remote-filesystem'.
+2026-10-24T00:50:33.317Z core:DefaultMessagingService INFO Closing channel on service path '/services/envs'.
+2026-10-24T00:50:33.317Z core:DefaultMessagingService INFO Closing channel on service path '/services/workspace'.
+2026-10-24T00:50:33.317Z core:DefaultMessagingService INFO Closing channel on service path '/services/keyboard'.
+2026-10-24T00:50:33.317Z core:DefaultMessagingService INFO Closing channel on service path '/services/quickInput'.
+2026-10-24T00:50:33.317Z core:DefaultMessagingService INFO Closing channel on service path '/services/stopwatch'.
+2026-10-24T00:50:33.317Z core:DefaultMessagingService INFO Closing channel on service path '/services/application'.
+2026-10-24T00:50:33.317Z core:DefaultMessagingService INFO Closing channel on service path '/services/i18n'.
+2026-10-24T00:50:33.317Z core:DefaultMessagingService INFO Closing channel on service path '/services/shell-terminal'.
+2026-10-24T00:50:33.317Z core:DefaultMessagingService INFO Closing channel on service path '/services/factoryze-tasks'.
+2026-10-24T00:50:33.317Z core:DefaultMessagingService INFO Closing channel on service path '/services/cli-preferences'.
+2026-10-24T00:50:33.317Z core:DefaultMessagingService INFO Closing channel on service path '/services/search'.
+2026-10-24T00:50:33.317Z core:DefaultMessagingService INFO Closing channel on service path '/services/terminals/1876728971'.
+Closing channel on service path '/services/electron-window'.
+2026-10-24T00:50:33.703Z core:WebsocketFrontendConnectionService INFO creating connection for 1
+Opening channel for service path '/services/electron-window'.
+2026-10-24T00:50:34.031Z core:FrontendStopwatch INFO Start frontend contributions: 143.6 ms [0.696 s since frontend page start]
+2026-10-24T00:50:34.031Z core:FrontendApplicationStateService INFO Changed application state from 'init' to 'started_contributions'.
+2026-10-24T00:50:34.033Z core:FrontendApplicationStateService INFO Changed application state from 'started_contributions' to 'attached_shell'.
+2026-10-24T00:50:34.033Z core:ShellLayoutRestorer INFO >>> Restoring the layout state...
+2026-10-24T00:50:34.058Z terminal:ShellTerminalServer WARN Couldn't attach - can't find terminal with id: 1718970771 
+2026-10-24T00:50:34.137Z terminal:TerminalWidgetImpl WARN Failed attaching to terminal id 1718970771, the terminal is most likely gone. Starting up a new terminal instead.
+2026-10-24T00:50:34.376Z core:ShellLayoutRestorer INFO <<< The layout has been successfully restored.
+2026-10-24T00:50:34.382Z core:FrontendStopwatch INFO Initialize the workbench layout: 352.0 ms [1.064 s since frontend page start]
+2026-10-24T00:50:34.383Z core:FrontendApplicationStateService INFO Changed application state from 'attached_shell' to 'initialized_layout'.
+2026-10-24T00:50:34.563Z core:FrontendStopwatch WARN Frontend FactoryzeSoloContribution.onDidInitializeLayout took longer than the expected maximum 100 milliseconds: 179.3 ms [1.250 s since frontend page start]
+(node:22384) UnhandledPromiseRejectionWarning: TypeError: Object has been destroyed
+    at showWindowAndCloseSplashScreen (C:\Users\Sakib\AppData\Local\Temp\factoryze-installer-smoke-UfzULc\installed\resources\app.asar\lib\backend\electron-main.js:155289:30)
+    at C:\Users\Sakib\AppData\Local\Temp\factoryze-installer-smoke-UfzULc\installed\resources\app.asar\lib\backend\electron-main.js:155293:32
+(node:22384) UnhandledPromiseRejectionWarning: Unhandled promise rejection. This error originated either by throwing inside of an async function without a catch block, or by rejecting a promise which was not handled with .catch(). To terminate the node process on unhandled promise rejection, use the CLI flag `--unhandled-rejections=strict` (see https://nodejs.org/api/cli.html#cli_unhandled_rejections_mode). (rejection id: 2)
+2026-10-24T00:50:35.373Z core:FrontendStopwatch INFO Replace loading indicator with ready workbench UI (animation): 808.9 ms [2.060 s since frontend page start]
+2026-10-24T00:50:35.373Z core:Stopwatch INFO Frontend application startup sequence completed (async work may still be pending): 1444.0 ms [7.372 s since backend process start]
+2026-10-24T00:50:35.373Z core:FrontendApplicationStateService INFO Changed application state from 'initialized_layout' to 'ready'.
+2026-10-24T00:50:35.374Z core:FrontendStopwatch INFO All frontend contributions settled: 1507.9 ms [2.060 s since frontend page start]
+2026-10-24T00:50:35.574Z core:WebsocketFrontendConnectionService INFO socket closed
+2026-10-24T00:50:35.574Z core:WebsocketFrontendConnectionService INFO closing connection for 1
+2026-10-24T00:50:35.574Z core:DefaultMessagingService INFO Closing channel on service path '/localization-server'.
+2026-10-24T00:50:35.574Z core:DefaultMessagingService INFO Closing channel on service path '/os'.
+2026-10-24T00:50:35.574Z core:DefaultMessagingService INFO Closing channel on service path '/services/logger'.
+2026-10-24T00:50:35.574Z core:DefaultMessagingService INFO Closing channel on service path '/services/commands'.
+2026-10-24T00:50:35.574Z core:DefaultMessagingService INFO Closing channel on service path '/services/messageService'.
+2026-10-24T00:50:35.574Z core:DefaultMessagingService INFO Closing channel on service path '/services/ChannelCloseService'.
+2026-10-24T00:50:35.574Z core:DefaultMessagingService INFO Closing channel on service path '/services/remote-filesystem'.
+2026-10-24T00:50:35.574Z core:DefaultMessagingService INFO Closing channel on service path '/services/envs'.
+2026-10-24T00:50:35.574Z core:DefaultMessagingService INFO Closing channel on service path '/services/workspace'.
+2026-10-24T00:50:35.574Z core:DefaultMessagingService INFO Closing channel on service path '/services/keyboard'.
+2026-10-24T00:50:35.574Z core:DefaultMessagingService INFO Closing channel on service path '/services/quickInput'.
+2026-10-24T00:50:35.574Z core:DefaultMessagingService INFO Closing channel on service path '/services/stopwatch'.
+2026-10-24T00:50:35.574Z core:DefaultMessagingService INFO Closing channel on service path '/services/application'.
+2026-10-24T00:50:35.574Z core:DefaultMessagingService INFO Closing channel on service path '/services/i18n'.
+2026-10-24T00:50:35.574Z core:DefaultMessagingService INFO Closing channel on service path '/services/shell-terminal'.
+2026-10-24T00:50:35.574Z core:DefaultMessagingService INFO Closing channel on service path '/services/factoryze-tasks'.
+2026-10-24T00:50:35.574Z core:DefaultMessagingService INFO Closing channel on service path '/services/cli-preferences'.
+2026-10-24T00:50:35.574Z core:DefaultMessagingService INFO Closing channel on service path '/services/search'.
+2026-10-24T00:50:35.574Z core:DefaultMessagingService INFO Closing channel on service path '/services/factoryze-agent'.
+2026-10-24T00:50:35.574Z core:DefaultMessagingService INFO Closing channel on service path '/services/terminals/129394286'.
+Closing channel on service path '/services/electron-window'.
+2026-10-24T00:50:36.058Z core:WebsocketFrontendConnectionService INFO creating connection for 1
+Opening channel for service path '/services/electron-window'.
+2026-10-24T00:50:36.429Z core:FrontendStopwatch INFO Start frontend contributions: 168.9 ms [0.858 s since frontend page start]
+2026-10-24T00:50:36.429Z core:FrontendApplicationStateService INFO Changed application state from 'init' to 'started_contributions'.
+2026-10-24T00:50:36.439Z core:FrontendApplicationStateService INFO Changed application state from 'started_contributions' to 'attached_shell'.
+2026-10-24T00:50:36.439Z core:ShellLayoutRestorer INFO >>> Restoring the layout state...
+2026-10-24T00:50:36.468Z core:ShellLayoutRestorer INFO <<< The layout has been successfully restored.
+2026-10-24T00:50:36.468Z core:FrontendStopwatch INFO Initialize the workbench layout: 29.8 ms [0.907 s since frontend page start]
+2026-10-24T00:50:36.469Z core:FrontendApplicationStateService INFO Changed application state from 'attached_shell' to 'initialized_layout'.
+(node:22384) UnhandledPromiseRejectionWarning: TypeError: Object has been destroyed
+    at showWindowAndCloseSplashScreen (C:\Users\Sakib\AppData\Local\Temp\factoryze-installer-smoke-UfzULc\installed\resources\app.asar\lib\backend\electron-main.js:155289:30)
+    at C:\Users\Sakib\AppData\Local\Temp\factoryze-installer-smoke-UfzULc\installed\resources\app.asar\lib\backend\electron-main.js:155293:32
+(node:22384) UnhandledPromiseRejectionWarning: Unhandled promise rejection. This error originated either by throwing inside of an async function without a catch block, or by rejecting a promise which was not handled with .catch(). To terminate the node process on unhandled promise rejection, use the CLI flag `--unhandled-rejections=strict` (see https://nodejs.org/api/cli.html#cli_unhandled_rejections_mode). (rejection id: 3)
+2026-10-24T00:50:37.306Z core:Stopwatch INFO Frontend application startup sequence completed (async work may still be pending): 974.3 ms [9.305 s since backend process start]
+2026-10-24T00:50:37.306Z core:FrontendStopwatch INFO Replace loading indicator with ready workbench UI (animation): 828.9 ms [1.744 s since frontend page start]
+2026-10-24T00:50:37.306Z core:FrontendApplicationStateService INFO Changed application state from 'initialized_layout' to 'ready'.
+2026-10-24T00:50:37.306Z core:FrontendStopwatch INFO All frontend contributions settled: 1055.0 ms [1.744 s since frontend page start]
+Toolbar overlap after load: replay (under div#theia-main-content-panel.lm-Widget.lm-DockPanel.lm-SplitPanel-child), Settings (under div.lm-TabBar-tabIcon.codicon.codicon-symbol-class)

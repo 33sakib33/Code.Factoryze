@@ -1,0 +1,15 @@
+{
+  "request": {
+    "method": "POST",
+    "path": "/v1/chat/completions",
+    "body": "{\"model\":\"replay\",\"messages\":[{\"role\":\"user\",\"content\":\"hello\"}]}"
+  },
+  "response": {
+    "status": 200,
+    "headers": { "content-type": "text/event-stream" },
+    "chunks": [
+      "data: {\"choices\":[{\"delta\":{\"content\":\"Hello\"}}]}\n\n",
+      "data: [DONE]\n\n"
+    ]
+  }
+}

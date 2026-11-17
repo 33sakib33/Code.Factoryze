@@ -1,0 +1,26 @@
+✖ a private join binding recovers a lost response without allowing another client to claim the identity (70.7697ms)
+✔ lab task delivery excludes hidden material; mirror sync is bounded, scoped, versioned and idempotent (56.5392ms)
+✔ submissions are immutable; closing auto-submits; grades remain private until instructor release (79.8899ms)
+✔ instructor session recovery preserves identity, budgets and snapshots; student events are untrusted flags (48.6391ms)
+ℹ tests 4
+ℹ suites 0
+ℹ pass 3
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 538.311
+
+✖ failing tests:
+
+test at packages\engine\test\lab-workflow.test.ts:14:1
+✖ a private join binding recovers a lost response without allowing another client to claim the identity (70.7697ms)
+  Error: Student already joined; reconnect with the saved session
+      at LabEngine.join (file:///E:/Projects/Factoryze/Factoryze/Factoryze/packages/engine/src/lab.ts:82:13)
+      at TestContext.<anonymous> (file:///E:/Projects/Factoryze/Factoryze/Factoryze/packages/engine/test/lab-workflow.test.ts:18:23)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.start (node:internal/test_runner/test:1262:17)
+      at startSubtestAfterBootstrap (node:internal/test_runner/harness:387:17) {
+    status: 409
+  }

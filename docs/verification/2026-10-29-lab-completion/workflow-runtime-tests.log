@@ -1,0 +1,13 @@
+✔ server agent dispatches tools to the student, meters provider usage and deduplicates prompts/results (187.7151ms)
+✔ a private join binding recovers a lost response without allowing another client to claim the identity (92.9226ms)
+✔ lab task delivery excludes hidden material; mirror sync is bounded, scoped, versioned and idempotent (65.2338ms)
+✔ submissions are immutable; closing auto-submits; grades remain private until instructor release (90.6979ms)
+✔ instructor session recovery preserves identity, budgets and snapshots; student events are untrusted flags (51.4595ms)
+ℹ tests 5
+ℹ suites 0
+ℹ pass 5
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 600.0917

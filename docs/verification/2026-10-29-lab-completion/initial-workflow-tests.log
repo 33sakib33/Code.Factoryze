@@ -1,0 +1,44 @@
+✖ lab task delivery excludes hidden material; mirror sync is bounded, scoped, versioned and idempotent (60.8801ms)
+✖ submissions are immutable; closing auto-submits; grades remain private until instructor release (29.0142ms)
+✖ instructor session recovery preserves identity, budgets and snapshots; student events are untrusted flags (25.4046ms)
+ℹ tests 3
+ℹ suites 0
+ℹ pass 0
+ℹ fail 3
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 593.9211
+
+✖ failing tests:
+
+test at packages\engine\test\lab-workflow.test.ts:14:1
+✖ lab task delivery excludes hidden material; mirror sync is bounded, scoped, versioned and idempotent (60.8801ms)
+  TypeError [Error]: engine.task is not a function
+      at TestContext.<anonymous> (file:///E:/Projects/Factoryze/Factoryze/Factoryze/packages/engine/test/lab-workflow.test.ts:19:25)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.start (node:internal/test_runner/test:1262:17)
+      at startSubtestAfterBootstrap (node:internal/test_runner/harness:387:17)
+
+test at packages\engine\test\lab-workflow.test.ts:38:1
+✖ submissions are immutable; closing auto-submits; grades remain private until instructor release (29.0142ms)
+  TypeError [Error]: engine.submit is not a function
+      at TestContext.<anonymous> (file:///E:/Projects/Factoryze/Factoryze/Factoryze/packages/engine/test/lab-workflow.test.ts:43:28)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3)
+
+test at packages\engine\test\lab-workflow.test.ts:68:1
+✖ instructor session recovery preserves identity, budgets and snapshots; student events are untrusted flags (25.4046ms)
+  TypeError [Error]: engine.recordClientEvent is not a function
+      at TestContext.<anonymous> (file:///E:/Projects/Factoryze/Factoryze/Factoryze/packages/engine/test/lab-workflow.test.ts:73:12)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7)

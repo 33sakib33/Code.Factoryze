@@ -1,0 +1,125 @@
+{
+  "verifiedAt": "2026-11-07T09:53:15.893551+00:00",
+  "scope": "Disabled authored guidance and explicit private practice submissions/results; Go backend retained",
+  "platform": "macOS arm64; local Docker Linux arm64 engine",
+  "passed": true,
+  "go": {
+    "command": "go test -count=1 -json ./...",
+    "testAndSubtestPassEvents": 105,
+    "topLevelPasses": 78,
+    "failures": 0,
+    "skippedInteractiveTests": [
+      "TestBrowserPreview",
+      "TestInitializePreviewReplica"
+    ],
+    "browserFixtureExplicitlyRun": true,
+    "vetPassed": true
+  },
+  "base": {
+    "tests": 261,
+    "passed": 261,
+    "failed": 0,
+    "typecheckPassed": true,
+    "node": "22.22.0",
+    "pnpm": "10.28.2"
+  },
+  "frontend": {
+    "mockedRegressionTests": 36,
+    "liveJourneys": 3,
+    "uniqueTestsPassed": 39,
+    "additionalGuidedVisualRepeatPassed": 1,
+    "build": {
+      "passed": true,
+      "errors": 0,
+      "warnings": 0,
+      "hints": 0,
+      "staticRoutes": 11
+    },
+    "accessibilityAndResponsiveTests": true,
+    "screenshotsInspected": [
+      ".verification/guided-workspace.png",
+      ".verification/guided-result.png",
+      ".verification/guided-result-mobile.png"
+    ]
+  },
+  "liveJourney": {
+    "realDocker": true,
+    "authoredHintsReviewed": true,
+    "partialFinish": {
+      "revision": 0,
+      "passed": 1,
+      "total": 2
+    },
+    "correctedFinish": {
+      "revision": 1,
+      "passed": 2,
+      "total": 2
+    },
+    "previousSubmissionComparison": true,
+    "firstSnapshotUnchangedAfterEditingAndClaim": true,
+    "foreignBrowserDenied": true,
+    "publicStarterUnchanged": true,
+    "realLocalTLSSMTPEmailVerification": true,
+    "explicitResultAccountClaim": true,
+    "liveSubmissionRetentionExtendedOnClaim": true,
+    "accountResumeWithoutAnonymousCookie": true,
+    "draftDeletionRevokesAndScrubsResults": true,
+    "rewardEligible": false,
+    "image": "sha256:7f36a9ff7bd392d95d44124709f6cff3244550eaa15c38ba87f3a7df9ccdf8ad"
+  },
+  "verificationCorrections": [
+    "The first new live test captured the draft ID before asynchronous navigation; it now waits for the attempt URL.",
+    "An initial combined run had an admin sign-in navigation/reload race while the dev build was updating; the stable post-build run passed without authentication-policy changes.",
+    "Full-page screenshot artifacts during scrolling/resizing were resolved by waiting for fonts/frames and resetting scroll before capture; the actual mobile DOM has one header and no overflow."
+  ],
+  "retention": {
+    "anonymousHours": 24,
+    "accountMaxDays": 90,
+    "maxSubmissionCopiesPerAttempt": 10,
+    "expiredHistoryExcludedFromComparisons": true
+  },
+  "cleanup": {
+    "controllerStopped": true,
+    "apiFixtureStopped": true,
+    "astroPreviewStopped": true,
+    "temporaryMongoContainerRemoved": true,
+    "executorContainersRemaining": 0
+  },
+  "paidModelCalls": 0,
+  "externalEmailsSent": 0,
+  "hostStudentCodeExecutions": 0,
+  "xpGranted": 0,
+  "deployed": false,
+  "merged": false,
+  "limitations": [
+    "Feature flag defaults false; no public rollout.",
+    "Authored guidance is not AI and hint reveals are page-local, not reward/analytics evidence.",
+    "Shared student/test interpreter means public-check outcomes are practice feedback, not tamper-resistant grading or reward credentials.",
+    "New public security/content review, curated production task review, cross-platform operational checks and learner observation remain open.",
+    "Guided AI, trusted evaluation, XP/reward outbox and public social recognition remain future work."
+  ],
+  "sourceSHA256": {
+    "backend/cmd/server/main.go": "89d8f1405ba94fbcccb415a479f1bcc407127dadeb427bd583534bf92e957871",
+    "backend/internal/practice/store.go": "35f71e2b8e8201f8999a0c73dd9fc3abc292fad81cf9c5585dcc8d07611b9f27",
+    "backend/internal/checks/evidence.go": "6911ea3d8d6457df322836faf8474446509c794509d471a27aa9ad8374f9cd47",
+    "backend/internal/checks/store.go": "49c8c9ca3a87532bcab3f4eb6e07ae29b079d1e7de23885d804b8ffe4afc616a",
+    "backend/internal/attempts/store.go": "5c117a4229d2e79aa0cabe6bed57ca94a770b18fd67ee2941dc57eaf4e0a9ef9",
+    "backend/internal/trial/practice.go": "3bfad0ee21c48318ad1fd282d6553289c97d6a96c65696793484186b93173009",
+    "backend/internal/trial/practice_test.go": "c15782bd59239ac6737304c5489c07ef21b56f5c105386eb512bbeffa6030787",
+    "backend/internal/trial/checks.go": "24e04de2976423d5213988faae666f26691221df3d0d61f9d18ed47c9b349077",
+    "backend/internal/trial/service.go": "0d3e312ce7c845740e4ef08e588db8d943cc2615e0b11c410d5691d6f596bad8",
+    "backend/internal/trial/community_test.go": "910e18e98d07306781f5448925afc67b5e3633d7adcd9ffc782661544f667c44",
+    "backend/internal/trial/browser_test.go": "ff9b26a32ec70b6e7b2155a0672e363613abcf5b2db3142e21a9d5f3b2ea34db",
+    "backend/docs/practice.openapi.json": "cfee78493c2fa9b6397d672aec3ae20957ffd3fa71ea1bed25088d811d64feb2",
+    "backend/examples/invoice-cents-guide.json": "59d89da33b9c81f8e632bc7133b141ac722e6b6b6532a915d36fe9451a6a22b6",
+    "frontend/src/scripts/practice.ts": "c7bcc1c4f3dc370f8fde6c57254232805dab60b2bebc93638a17cd9d571c26e4",
+    "frontend/src/scripts/practice-result.ts": "7dcb50c427345a6788e8fba55863895b76ee4cd158d01f3939bf4949659a0ebc",
+    "frontend/src/scripts/draft.ts": "03e30104f425365e72b389f142c3ec87f3ba4bad2124451d625df3f6bebc2770",
+    "frontend/src/scripts/draft-checks.ts": "d74da7fa1d1a01c0891783bf8399f0d0a0b5827532f33ceeeaab8dd48084f905",
+    "frontend/src/pages/challenges/attempt.astro": "f1caa16b4a83d41254395e453677f93555c930711f6a906565065d0bf1115cec",
+    "frontend/src/pages/challenges/result.astro": "6d14a140db3deebd1733598de407c2c4c33c08685fbc56bdd2e144fdea96b632",
+    "frontend/src/styles/practice.css": "8334f3f9b6929fbd16c5ce198a8e4edfb5dbd3fd1c9614ffa72831b64d02e217",
+    "frontend/tests/practice.spec.ts": "ad05c5aad09894c60a356712909fb77567eedc4e3aa90e2ef97b5bd0d679fa09",
+    "frontend/tests/practice-live.spec.ts": "e4b921c2714d46b147f00d7dd98f327c82509698d50fc3dccc24b051bff6db74"
+  }
+}

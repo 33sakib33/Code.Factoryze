@@ -1,0 +1,45 @@
+(node:3400) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///E:/Projects/Factoryze/Factoryze/Factoryze/packages/app/extensions/core/test/trial-connection.test.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to \\?\E:\Projects\Factoryze\Factoryze\Factoryze\packages\app\extensions\core\package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✖ trial signup exposes only account data, preserves BYOK and survives a desktop restart (10.5975ms)
+✔ gateway renewal is single-flight, short-lived and never rewrites the saved BYOK key (9.7479ms)
+✔ revocation, lack of credit and paused service never fall back to BYOK (4.5966ms)
+✔ trial logout clears the device credential and keeps the saved BYOK connection (5.3777ms)
+✔ an unavailable trial service leaves an explicit BYOK route without selecting it automatically (2.8273ms)
+ℹ tests 5
+ℹ suites 0
+ℹ pass 4
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 525.7854
+
+✖ failing tests:
+
+test at packages\app\extensions\core\test\trial-connection.test.ts:30:1
+✖ trial signup exposes only account data, preserves BYOK and survives a desktop restart (10.5975ms)
+  AssertionError [ERR_ASSERTION]: The input did not match the regular expression /incorrect or expired/. Input:
+  
+  'Error: Your trial sign-in expired. Sign in again.'
+  
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async TestContext.<anonymous> (file:///E:/Projects/Factoryze/Factoryze/Factoryze/packages/app/extensions/core/test/trial-connection.test.ts:32:51)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: Error: Your trial sign-in expired. Sign in again.
+        at TrialClient.call (file:///E:/Projects/Factoryze/Factoryze/Factoryze/packages/engine/src/trial-client.ts:30:20)
+        at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+        at async TrialConnectionStore.verify (file:///E:/Projects/Factoryze/Factoryze/Factoryze/packages/app/extensions/core/src/node/trial-connection.ts:27:16)
+        at async waitForActual (node:assert:646:5)
+        at async strict.rejects (node:assert:769:25)
+        at async TestContext.<anonymous> (file:///E:/Projects/Factoryze/Factoryze/Factoryze/packages/app/extensions/core/test/trial-connection.test.ts:32:51)
+        at async Test.run (node:internal/test_runner/test:1389:7)
+        at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3),
+    expected: /incorrect or expired/,
+    operator: 'rejects',
+    diff: 'simple'
+  }

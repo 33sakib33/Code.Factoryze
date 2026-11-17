@@ -1,0 +1,8 @@
+schema: 1
+taskId: library-fines
+expert:
+  - "In library/returns.py, process_return uses returned_at.date(), which is the UTC date, so evening returns at branches behind UTC count as the next day. Use clock.local_day(returned_at, branch) instead, change nothing else, then run python -m unittest."
+middle:
+  - "Riverside members are fined a day when they return items on the due date in the evening, but morning returns are fine. It looks like return times aren't judged in the branch's local time. Fix it and run the tests."
+naive:
+  - "Members are being fined wrongly. Fix it and run the tests."

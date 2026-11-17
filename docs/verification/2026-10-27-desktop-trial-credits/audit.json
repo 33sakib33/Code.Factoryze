@@ -1,0 +1,397 @@
+{
+  "date": "2026-10-27",
+  "timezone": "Asia/Dhaka",
+  "recordedAtUtc": "2026-10-26T22:12:05.537Z",
+  "codeCommits": {
+    "desktop": "980f21a9eb2984a13c88dff4aaa653ba2f14eb90",
+    "backend": "0cf0ede479b103b1d3ad19f90925825b4847f459",
+    "frontend": "375afb50d2ee7ed24fe7062aa3f312868ccb1d93"
+  },
+  "branches": {
+    "desktop": "feature/desktop-trial-credits",
+    "backend": "feature/desktop-trial-auth",
+    "frontend": "feature/trial-admin"
+  },
+  "baseCommits": {
+    "desktop": "0e6f6008c0eb387cc139c69c731f5ea12a4c17ca",
+    "backend": "097ce1036e952ff372279e85d10770f7f74bef3a"
+  },
+  "administratorAuthority": "Only the server owner through ADMIN_EMAILS and the separate administrator OTP flow. Native/public sign-in never promotes a user.",
+  "realEmailsSent": 0,
+  "paidModelCalls": 0,
+  "releaseGatesCleared": false,
+  "sourceFiles": {
+    "desktop": [
+      {
+        "path": "README.md",
+        "sha256": "0f9da695dd0165431762fecbe894da808b65a820c07fbd8b12059ce59a9ecbfb",
+        "encoding": "Git blob bytes"
+      },
+      {
+        "path": "SPEC.md",
+        "sha256": "73662c1160c27dd3fed08123863a61725d9e81b0c16da63176a44bfb6ec15638",
+        "encoding": "Git blob bytes"
+      },
+      {
+        "path": "docs/trial-credits.md",
+        "sha256": "e4f97e33a34d65cb489fabfed679a03f64024149cdb257ec083bdfe3cf206415",
+        "encoding": "Git blob bytes"
+      },
+      {
+        "path": "packages/app/extensions/core/package.json",
+        "sha256": "a60b404ab268b59d9b7606fb4d57abda06c87af821e70f31f0c8452bf02cfbca",
+        "encoding": "Git blob bytes"
+      },
+      {
+        "path": "packages/app/extensions/core/src/browser/dialogs.ts",
+        "sha256": "f4f469ad223092cf9c1b6be9e931a31bcb2e7fd8d17f96389b35b8aeeaa0ec74",
+        "encoding": "Git blob bytes"
+      },
+      {
+        "path": "packages/app/extensions/core/src/browser/factoryze-agent-widget.ts",
+        "sha256": "ede1a1cec640201834afeb946457602cecdd4d6ba27bda350cc31bfc8a90f135",
+        "encoding": "Git blob bytes"
+      },
+      {
+        "path": "packages/app/extensions/core/src/browser/factoryze-home-widget.ts",
+        "sha256": "045db775a932addae06a3501d0eab73a44ab48ef67eba5cc31c2d2cc5ef00a28",
+        "encoding": "Git blob bytes"
+      },
+      {
+        "path": "packages/app/extensions/core/src/browser/factoryze-report-widget.ts",
+        "sha256": "1dcf7206499d2a693528bd598ea869af87a9fb4d9dd58ac8c0e7d29d63c6507e",
+        "encoding": "Git blob bytes"
+      },
+      {
+        "path": "packages/app/extensions/core/src/browser/factoryze-settings-widget.ts",
+        "sha256": "9538e027e592a84725384cdca989ea4a6bc3c3986aaffacd7b0e74f1904d273b",
+        "encoding": "Git blob bytes"
+      },
+      {
+        "path": "packages/app/extensions/core/src/browser/factoryze-solo-contribution.ts",
+        "sha256": "a6f9cd56b44fe2aba5a61629edf9b44522e0b3a9beb61caad42313332aa2c888",
+        "encoding": "Git blob bytes"
+      },
+      {
+        "path": "packages/app/extensions/core/src/browser/style/factoryze.css",
+        "sha256": "e344f8313da58b5d9f66080e30c2a98b5eb6cc5fb5c495f1a6c1708c6f131b74",
+        "encoding": "Git blob bytes"
+      },
+      {
+        "path": "packages/app/extensions/core/src/browser/trial-dialog.ts",
+        "sha256": "f1a6d86aa7bfa0f04c3f246569284b283b464283e003d8bf34b0bfa280ca4f17",
+        "encoding": "Git blob bytes"
+      },
+      {
+        "path": "packages/app/extensions/core/src/common/task-service.ts",
+        "sha256": "39316e1a68f96aa753d01b236a88ddf26418779824c731c5e5f8f4e193f7c080",
+        "encoding": "Git blob bytes"
+      },
+      {
+        "path": "packages/app/extensions/core/src/node/model-settings.ts",
+        "sha256": "66613dcaa2456a08a15757daf8989e2e4cc5a94726b352d7f3ed91696acb40cc",
+        "encoding": "Git blob bytes"
+      },
+      {
+        "path": "packages/app/extensions/core/src/node/task-backend-service.ts",
+        "sha256": "c03d8594dd2b3e558e4e3bfaee819b65c1648e1f7e062d0ea2826564bb0e906a",
+        "encoding": "Git blob bytes"
+      },
+      {
+        "path": "packages/app/extensions/core/src/node/trial-connection.ts",
+        "sha256": "3bedd804f22092b31ddbc51112c8c767cab74f9c5f20c76058c87d7ece69dedf",
+        "encoding": "Git blob bytes"
+      },
+      {
+        "path": "packages/app/extensions/core/test/trial-connection.test.ts",
+        "sha256": "ad4fc60651da5e8318d6c1e1bafcb15fcf502bb414485971a51dea3ee89c5413",
+        "encoding": "Git blob bytes"
+      },
+      {
+        "path": "packages/app/scripts/check-trial-dialog.mjs",
+        "sha256": "c5bea713935ba8c97fbf40dd16a5301e2eec6bae7adceb163da24346ff3eb5da",
+        "encoding": "Git blob bytes"
+      },
+      {
+        "path": "packages/app/scripts/smoke-trial.mjs",
+        "sha256": "7878988036e116caf281a65dcf36a4c51b4c8f1c94825fec4bb01609708dd98c",
+        "encoding": "Git blob bytes"
+      },
+      {
+        "path": "packages/engine/package.json",
+        "sha256": "1d9c4e5341b001144f5a5029d48d0b8d5de356b8d8d8d179113433ad8bee34c7",
+        "encoding": "Git blob bytes"
+      },
+      {
+        "path": "packages/engine/src/gateway.ts",
+        "sha256": "f8014d09db50f3d7e1ee10a42d31d29a31d6e0fc3365a5d710d6986520f34fa4",
+        "encoding": "Git blob bytes"
+      },
+      {
+        "path": "packages/engine/src/harness.ts",
+        "sha256": "01aaecb4616e60567af2f73069e53a559e5785d391b85d1dbf9d9f4d7066a434",
+        "encoding": "Git blob bytes"
+      },
+      {
+        "path": "packages/engine/src/provider.ts",
+        "sha256": "3eebab3031b9479081b2117f1b0805703be49603c03735e86f01abbb6f6031d2",
+        "encoding": "Git blob bytes"
+      },
+      {
+        "path": "packages/engine/src/solo.ts",
+        "sha256": "32c8e2fc889ed87e5311eac0d3f20122a5404db7b34a84a0321687348f01db3a",
+        "encoding": "Git blob bytes"
+      },
+      {
+        "path": "packages/engine/src/trial-client.ts",
+        "sha256": "ea57ba107bbead34f71272c9d6c48034ccc17a4228a57ea22f79ee00f52ad36f",
+        "encoding": "Git blob bytes"
+      },
+      {
+        "path": "packages/engine/src/trial-provider.ts",
+        "sha256": "44a9d4248e88a5baf51e9ba6fba3e97d38890216cdaba51c7eaa263f28b359dd",
+        "encoding": "Git blob bytes"
+      },
+      {
+        "path": "packages/engine/test/harness.test.ts",
+        "sha256": "b9edd233ed0ca9e3386a4d488d68210522531eda68c204d35a13ad7af796edd4",
+        "encoding": "Git blob bytes"
+      },
+      {
+        "path": "packages/engine/test/trial-provider.test.ts",
+        "sha256": "ee92a413d3f455d81eab2ff2bab5a6735e5ab7bd875e554ad736db4ebe07bb3d",
+        "encoding": "Git blob bytes"
+      },
+      {
+        "path": "packages/protocol/src/index.ts",
+        "sha256": "5c53cb20bbb3bd221bc7ff63b8668a632f6afc205e19158a2d1db193db753dcb",
+        "encoding": "Git blob bytes"
+      }
+    ],
+    "backend": [
+      {
+        "path": "README.md",
+        "sha256": "b38fb8703aaf344ba6163e509b15835dc9cbe169b13d11893880a37731c6516b",
+        "encoding": "Git blob bytes"
+      },
+      {
+        "path": "internal/httpapi/server.go",
+        "sha256": "fe99fd037577e74804f1cfb8eafa14bb815c53946023dc3ebf875b5737b5fea1",
+        "encoding": "Git blob bytes"
+      },
+      {
+        "path": "internal/trial/browser_desktop_test.go",
+        "sha256": "03d6f4789203188cff647b349e48133161d252a5b2b2da980b2efe61cbd99a41",
+        "encoding": "Git blob bytes"
+      },
+      {
+        "path": "internal/trial/browser_test.go",
+        "sha256": "f236405d3e874f32ea7173f3c983207970979b07c84e37921e042ae057b720ae",
+        "encoding": "Git blob bytes"
+      },
+      {
+        "path": "internal/trial/desktop.go",
+        "sha256": "a64b6cb0910ae768f6731fdd011d9d1c3b6eee4a10ed87092c2972996bcc24b6",
+        "encoding": "Git blob bytes"
+      },
+      {
+        "path": "internal/trial/desktop_test.go",
+        "sha256": "320c4998fdc576bd929bc9bd4e7fbc79692322267773ff249f435b5520fd82fe",
+        "encoding": "Git blob bytes"
+      },
+      {
+        "path": "internal/trial/email_auth.go",
+        "sha256": "2357092cd4eee09374b403f1ab8e9d71a1d299c4b5daed008b4445b9ee731fea",
+        "encoding": "Git blob bytes"
+      },
+      {
+        "path": "internal/trial/service.go",
+        "sha256": "65be1c7d2a02bf9ffd46d2bd1739061cd6b02b5ce1ae983b686c432456a3b71d",
+        "encoding": "Git blob bytes"
+      },
+      {
+        "path": "internal/trial/store.go",
+        "sha256": "456c66223b8a7642d7853773a7ca07eb03194d6b60394d7cf26aad4f98356d7f",
+        "encoding": "Git blob bytes"
+      },
+      {
+        "path": "internal/trial/types.go",
+        "sha256": "3f3a8f7ef8a579c12fdb7faddd06ae5ef4c735c227e123150c7a7820c390468f",
+        "encoding": "Git blob bytes"
+      }
+    ]
+  },
+  "gitBlobHashes": true,
+  "configuredSecretScan": {
+    "passed": true,
+    "valuesPrinted": false
+  },
+  "workingTreeBuildSetup": [
+    {
+      "path": "INSTALL.md",
+      "sha256": "7c273ed2fbd6a56eee4bd0e6853c2e16115a96e5cd8085663df7c177edaf7718",
+      "committedByThisTask": false
+    },
+    {
+      "path": "packages/app/package.json",
+      "sha256": "ced496da58770b5de85690993e18a10dc1eddb83bbb8f0de3361c65cdc612046",
+      "committedByThisTask": false
+    }
+  ],
+  "frontendUnchanged": true,
+  "evidence": [
+    {
+      "path": "app-build.log",
+      "sha256": "d1b82eaea7a30a8fa3f9d08e3eb21a4515cb75cd2baad7e58e04cea836cb1b43"
+    },
+    {
+      "path": "cleanup.json",
+      "sha256": "69f74cd4b9769af55708b04e79ee484c96bce0e9efc3cbe921a71e1aa8b724e9"
+    },
+    {
+      "path": "dialog-checks.json",
+      "sha256": "7216456ecf4a20c8787ef55991b7f494fca93661a9ac1745991a9b0a9b6f270d"
+    },
+    {
+      "path": "dialog-checks.log",
+      "sha256": "e847a7447cb346c87148756bd01929654650913b8903fdbeac7942e986df078f"
+    },
+    {
+      "path": "electron-development.json",
+      "sha256": "45a49f6876cecdc1a4faf23c21cfa51d8dba815546b9b4862f5acfd21aed8df1"
+    },
+    {
+      "path": "electron-development.log",
+      "sha256": "2e1ddeb5b9b47bef01d164041b27d730e7b001c972e75ef3990b0fab83b58958"
+    },
+    {
+      "path": "electron-trial-account.png",
+      "sha256": "7544a5a18448dcab25370f34d745850e22e1f06890aa1d988a7c4b3e010cd96d"
+    },
+    {
+      "path": "electron-trial-attempt.png",
+      "sha256": "79fe44c47e9abdde50c1bbbb570c5b1bd2d7333df16c411e15ede331f00f2cce"
+    },
+    {
+      "path": "electron-trial-report.png",
+      "sha256": "ba6093ef21530018b013153534e5f4fbf47aa937579b7f8def86dd658ac045ee"
+    },
+    {
+      "path": "electron-trial-result.json",
+      "sha256": "45a49f6876cecdc1a4faf23c21cfa51d8dba815546b9b4862f5acfd21aed8df1"
+    },
+    {
+      "path": "electron-trial-signin.png",
+      "sha256": "5048183884070738dd7269372d336aa4cfced7d19e1fa5eb9e0207eec535ad91"
+    },
+    {
+      "path": "electron-trial.log",
+      "sha256": "2e1ddeb5b9b47bef01d164041b27d730e7b001c972e75ef3990b0fab83b58958"
+    },
+    {
+      "path": "first-failing.log",
+      "sha256": "3e0f7519ea7fea37482a9e2b40370e66349252c23867815f98a5170c1d778f6f"
+    },
+    {
+      "path": "fourth-electron-trial-result.json",
+      "sha256": "45e111709edb16e2e57febe73acf6d1b7882f69b086c0539612bc405f64eab51"
+    },
+    {
+      "path": "grader-rerun.log",
+      "sha256": "9b9a452e940e1c485d42b0c0299fee55e1085dcc55ab03c52faca425ee11da9d"
+    },
+    {
+      "path": "initial-electron-trial-result.json",
+      "sha256": "b412c6115e93d7203ec78c46bd6a9e3a0874c836d197dd745b4c59990c519137"
+    },
+    {
+      "path": "installed-byok.json",
+      "sha256": "220657cecc17298afa5a983b0f157e56fa36d975cc5b292d7131ae0c666f9a7a"
+    },
+    {
+      "path": "installer-smoke.log",
+      "sha256": "9b61cf48a3a7fa2e5e94f6013973e6daa8ecead6d5b8899ca12aac70f7d9feca"
+    },
+    {
+      "path": "invalid-code-red.log",
+      "sha256": "3ec985c9f98796a4c3adc8472f425773f92c22c7b89acf72cb6fde0e2b2a8ed4"
+    },
+    {
+      "path": "package-final.log",
+      "sha256": "a744b2bf3455cc9a181a82405ae7a6c373dc35d0fc66833384b905d085bab73f"
+    },
+    {
+      "path": "second-electron-trial-result.json",
+      "sha256": "b6e53ca3d94ef504fb4e78a30e4ac0089430de014a3d5aa998e4e747f805d477"
+    },
+    {
+      "path": "third-electron-trial-result.json",
+      "sha256": "45e111709edb16e2e57febe73acf6d1b7882f69b086c0539612bc405f64eab51"
+    },
+    {
+      "path": "trial-account-683-dark.png",
+      "sha256": "9a22d54036b9d0b2b0ca2883a8a627f44c086853cea40f2ac098523d62461572"
+    },
+    {
+      "path": "trial-tests-final.log",
+      "sha256": "485a6d3918df028d9f349acc71bb832228e957504b867ba578db593989cc1ae7"
+    },
+    {
+      "path": "typecheck-final.log",
+      "sha256": "20240eafcee9cc11f90dc917289fce05024a803aceb8a5946c65535db3041b77"
+    },
+    {
+      "path": "unit-tests-final.log",
+      "sha256": "d60d81cd313d6717bb4fe4a98a0d2299d6bfc12c0e5adf54f715e05c93c70817"
+    },
+    {
+      "path": "unit-tests-packaging-load.log",
+      "sha256": "9f7b47121c0aa9df1a373265aaa70754c60a334c4aa096a6496b23efda4b744c"
+    },
+    {
+      "path": "unit-tests.log",
+      "sha256": "e9a7c6d108862d387446ea6f8e1485ed831cabeaca2d2d11d04ce5721fb13ad8"
+    },
+    {
+      "path": "verify-package.log",
+      "sha256": "197dbc0b00f7ff83c40c0669449a61dc13631d6b860a36d9aa5d8367db44c4ec"
+    }
+  ],
+  "cleanup": {
+    "installerWrapper": {
+      "exitCode": 1,
+      "appFlowPassed": true,
+      "error": "EPERM removing its owned temporary install"
+    },
+    "optionalFollowUp": {
+      "status": "rejected_by_automatic_approval_review",
+      "reason": "blocked by policy",
+      "performed": false,
+      "target": "C:/Users/Sakib/AppData/Local/Temp/factoryze-installer-smoke-lmu9Z5"
+    },
+    "projectWorkCompleted": true
+  },
+  "documentation": {
+    "passed": true,
+    "files": 5,
+    "localPaths": 74,
+    "anchors": 16
+  },
+  "finalValidation": {
+    "passed": true,
+    "rawEvidenceFiles": 29,
+    "sourceGitBlobs": 39,
+    "artifactHashes": true,
+    "receiptConsistency": true,
+    "documentation": {
+      "passed": true,
+      "files": 5,
+      "localPaths": 74,
+      "anchors": 16
+    },
+    "configuredSecretScan": {
+      "passed": true,
+      "valuesPrinted": false
+    }
+  }
+}

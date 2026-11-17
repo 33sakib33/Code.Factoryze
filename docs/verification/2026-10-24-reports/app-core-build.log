@@ -1,0 +1,4 @@
+
+> @factoryze/app-core@0.0.1 build E:\Projects\Factoryze\Factoryze\Factoryze\packages\app\extensions\core
+> tsc -p tsconfig.json
+

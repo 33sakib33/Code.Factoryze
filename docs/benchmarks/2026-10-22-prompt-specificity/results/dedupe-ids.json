@@ -1,0 +1,631 @@
+{
+  "taskId": "dedupe-ids",
+  "profile": "factoryze@0.1.0",
+  "model": "deepseek/deepseek-v4.1-flash-1017",
+  "temperature": 0,
+  "promptsHash": "e6bb54d10af59d6c7694835a1126e491c81f3a1d344da251b425fc4ffdf8b8eb",
+  "recordedAt": "2026-10-21T20:50:46.503Z",
+  "expert": [
+    {
+      "correctness": {
+        "passed": 2,
+        "total": 2
+      },
+      "raw": {
+        "input": 9220,
+        "output": 1211,
+        "cacheRead": 7168,
+        "cacheWrite": 0
+      },
+      "weightedTokens": 3979.8,
+      "requests": 8,
+      "turns": 1,
+      "elapsedMs": 14507
+    },
+    {
+      "correctness": {
+        "passed": 2,
+        "total": 2
+      },
+      "raw": {
+        "input": 9151,
+        "output": 1358,
+        "cacheRead": 7680,
+        "cacheWrite": 0
+      },
+      "weightedTokens": 3597,
+      "requests": 8,
+      "turns": 1,
+      "elapsedMs": 15430
+    },
+    {
+      "correctness": {
+        "passed": 2,
+        "total": 2
+      },
+      "raw": {
+        "input": 14937,
+        "output": 2153,
+        "cacheRead": 12800,
+        "cacheWrite": 0
+      },
+      "weightedTokens": 5570,
+      "requests": 11,
+      "turns": 1,
+      "elapsedMs": 24175
+    },
+    {
+      "error": "Stopped after 16 model steps. Start a new session and ask for a smaller change."
+    },
+    {
+      "correctness": {
+        "passed": 2,
+        "total": 2
+      },
+      "raw": {
+        "input": 8594,
+        "output": 1768,
+        "cacheRead": 6912,
+        "cacheWrite": 0
+      },
+      "weightedTokens": 4141.2,
+      "requests": 8,
+      "turns": 1,
+      "elapsedMs": 19567
+    },
+    {
+      "correctness": {
+        "passed": 2,
+        "total": 2
+      },
+      "raw": {
+        "input": 9103,
+        "output": 1122,
+        "cacheRead": 7680,
+        "cacheWrite": 0
+      },
+      "weightedTokens": 3313,
+      "requests": 8,
+      "turns": 1,
+      "elapsedMs": 14640
+    },
+    {
+      "correctness": {
+        "passed": 2,
+        "total": 2
+      },
+      "raw": {
+        "input": 8076,
+        "output": 1761,
+        "cacheRead": 6400,
+        "cacheWrite": 0
+      },
+      "weightedTokens": 4077,
+      "requests": 7,
+      "turns": 1,
+      "elapsedMs": 16274
+    },
+    {
+      "correctness": {
+        "passed": 2,
+        "total": 2
+      },
+      "raw": {
+        "input": 9070,
+        "output": 1646,
+        "cacheRead": 7424,
+        "cacheWrite": 0
+      },
+      "weightedTokens": 4034.4,
+      "requests": 8,
+      "turns": 1,
+      "elapsedMs": 18459
+    },
+    {
+      "correctness": {
+        "passed": 2,
+        "total": 2
+      },
+      "raw": {
+        "input": 9190,
+        "output": 1609,
+        "cacheRead": 7680,
+        "cacheWrite": 0
+      },
+      "weightedTokens": 3887,
+      "requests": 8,
+      "turns": 1,
+      "elapsedMs": 18744
+    },
+    {
+      "error": "Stopped after 16 model steps. Start a new session and ask for a smaller change."
+    }
+  ],
+  "naive": [
+    {
+      "correctness": {
+        "passed": 2,
+        "total": 2
+      },
+      "raw": {
+        "input": 4741,
+        "output": 583,
+        "cacheRead": 4224,
+        "cacheWrite": 0
+      },
+      "weightedTokens": 1522.4,
+      "requests": 5,
+      "turns": 1,
+      "elapsedMs": 7218
+    },
+    {
+      "correctness": {
+        "passed": 2,
+        "total": 2
+      },
+      "raw": {
+        "input": 4741,
+        "output": 526,
+        "cacheRead": 4352,
+        "cacheWrite": 0
+      },
+      "weightedTokens": 1350.2,
+      "requests": 5,
+      "turns": 1,
+      "elapsedMs": 8367
+    },
+    {
+      "correctness": {
+        "passed": 2,
+        "total": 2
+      },
+      "raw": {
+        "input": 4731,
+        "output": 527,
+        "cacheRead": 4224,
+        "cacheWrite": 0
+      },
+      "weightedTokens": 1456.4,
+      "requests": 5,
+      "turns": 1,
+      "elapsedMs": 6900
+    },
+    {
+      "correctness": {
+        "passed": 2,
+        "total": 2
+      },
+      "raw": {
+        "input": 4731,
+        "output": 530,
+        "cacheRead": 4352,
+        "cacheWrite": 0
+      },
+      "weightedTokens": 1344.2,
+      "requests": 5,
+      "turns": 1,
+      "elapsedMs": 6920
+    },
+    {
+      "correctness": {
+        "passed": 2,
+        "total": 2
+      },
+      "raw": {
+        "input": 4731,
+        "output": 527,
+        "cacheRead": 4352,
+        "cacheWrite": 0
+      },
+      "weightedTokens": 1341.2,
+      "requests": 5,
+      "turns": 1,
+      "elapsedMs": 6924
+    },
+    {
+      "correctness": {
+        "passed": 2,
+        "total": 2
+      },
+      "raw": {
+        "input": 4628,
+        "output": 459,
+        "cacheRead": 3968,
+        "cacheWrite": 0
+      },
+      "weightedTokens": 1515.8,
+      "requests": 5,
+      "turns": 1,
+      "elapsedMs": 6020
+    },
+    {
+      "correctness": {
+        "passed": 2,
+        "total": 2
+      },
+      "raw": {
+        "input": 4731,
+        "output": 541,
+        "cacheRead": 4352,
+        "cacheWrite": 0
+      },
+      "weightedTokens": 1355.2,
+      "requests": 5,
+      "turns": 1,
+      "elapsedMs": 6425
+    },
+    {
+      "correctness": {
+        "passed": 2,
+        "total": 2
+      },
+      "raw": {
+        "input": 4731,
+        "output": 510,
+        "cacheRead": 4352,
+        "cacheWrite": 0
+      },
+      "weightedTokens": 1324.2,
+      "requests": 5,
+      "turns": 1,
+      "elapsedMs": 6100
+    },
+    {
+      "correctness": {
+        "passed": 2,
+        "total": 2
+      },
+      "raw": {
+        "input": 6126,
+        "output": 729,
+        "cacheRead": 5504,
+        "cacheWrite": 0
+      },
+      "weightedTokens": 1901.4,
+      "requests": 6,
+      "turns": 1,
+      "elapsedMs": 9904
+    },
+    {
+      "correctness": {
+        "passed": 2,
+        "total": 2
+      },
+      "raw": {
+        "input": 4721,
+        "output": 576,
+        "cacheRead": 4224,
+        "cacheWrite": 0
+      },
+      "weightedTokens": 1495.4,
+      "requests": 5,
+      "turns": 1,
+      "elapsedMs": 7076
+    }
+  ],
+  "summary": {
+    "expert": {
+      "completed": 8,
+      "failed": 2,
+      "solved": 8,
+      "min": 3313,
+      "median": 4007.1,
+      "max": 5570,
+      "mean": 4074.9,
+      "stdev": 622
+    },
+    "naive": {
+      "completed": 10,
+      "failed": 0,
+      "solved": 10,
+      "min": 1324.2,
+      "median": 1405.8,
+      "max": 1901.4,
+      "mean": 1460.6,
+      "stdev": 165
+    },
+    "separated": false
+  },
+  "shell": [
+    {
+      "scenario": "expert",
+      "command": "cd . && python -m pytest tests -q 2>&1 | tail -20",
+      "approved": true
+    },
+    {
+      "scenario": "expert",
+      "command": "cd . && ls -a && cat pyproject.toml setup.cfg 2>/dev/null; python -c \"\nfrom app.dedupe import unique_ids\nprint(unique_ids(['a','a']))\nprint(unique_ids(['b','A','b','A','c']))\nprint(unique_ids([]))\n\"",
+      "approved": false
+    },
+    {
+      "scenario": "expert",
+      "command": "python -c \"\nfrom app.dedupe import unique_ids\nprint(unique_ids(['a','a']))\nprint(unique_ids(['b','A','b','A','c']))\nprint(unique_ids([]))\n\"",
+      "approved": false
+    },
+    {
+      "scenario": "naive",
+      "command": "cd /workspace 2>/dev/null || cd .; python -m pytest -q 2>&1 | tail -5; python -c \"from app.dedupe import unique_ids; print(unique_ids(['b','a','b','c','a']))\"",
+      "approved": false
+    },
+    {
+      "scenario": "expert",
+      "command": "cd . && python -m pytest tests/ -v 2>&1 | tail -20",
+      "approved": true
+    },
+    {
+      "scenario": "expert",
+      "command": "cd . && ls -a && cat pyproject.toml setup.cfg 2>/dev/null; python -c \"\nfrom app.dedupe import unique_ids\nassert unique_ids(['a','a']) == ['a']\nprint(unique_ids(['b','a','b','C','a']))\nprint(unique_ids([]))\n\"",
+      "approved": false
+    },
+    {
+      "scenario": "expert",
+      "command": "python -c \"from app.dedupe import unique_ids; print(unique_ids(['b','a','b','C','a'])); print(unique_ids([])); print(unique_ids(['a','a']))\"",
+      "approved": false
+    },
+    {
+      "scenario": "naive",
+      "command": "cd /workspace 2>/dev/null || cd .; python -m pytest -q 2>&1 | tail -5; python -c \"from app.dedupe import unique_ids; print(unique_ids(['b','a','b','c','a']))\"",
+      "approved": false
+    },
+    {
+      "scenario": "expert",
+      "command": "ls -la; cat README* 2>/dev/null; ls tests",
+      "approved": false
+    },
+    {
+      "scenario": "expert",
+      "command": "python -m pytest tests -q",
+      "approved": true
+    },
+    {
+      "scenario": "expert",
+      "command": "python -c \"\nfrom app.dedupe import unique_ids\nfrom tests.test_public import test_no_duplicates\ntest_no_duplicates()\nprint('public test passed')\nprint(unique_ids(['b','a','b','A','a']))\n\"",
+      "approved": false
+    },
+    {
+      "scenario": "expert",
+      "command": "python -m unittest discover -s tests -v",
+      "approved": true
+    },
+    {
+      "scenario": "expert",
+      "command": "python run_tests.py",
+      "approved": false
+    },
+    {
+      "scenario": "expert",
+      "command": "python -m unittest discover -s tests -p \"test_*.py\" -t . -v",
+      "approved": false
+    },
+    {
+      "scenario": "naive",
+      "command": "cd . && python -m pytest -q 2>&1 | tail -5 && python -c \"from app.dedupe import unique_ids; print(unique_ids(['b','a','b','c','a']))\"",
+      "approved": false
+    },
+    {
+      "scenario": "expert",
+      "command": "cd . && python -m pytest tests/ -q 2>&1 | tail -20",
+      "approved": true
+    },
+    {
+      "scenario": "expert",
+      "command": "cd . && ls -a && cat pyproject.toml setup.cfg 2>/dev/null; python -c \"\nfrom app.dedupe import unique_ids\nprint(unique_ids(['a','a']))\nprint(unique_ids(['B','a','B','c','a']))\nprint(unique_ids([]))\n\"",
+      "approved": false
+    },
+    {
+      "scenario": "expert",
+      "command": "python -c \"\nfrom app.dedupe import unique_ids\nprint(unique_ids(['a','a']))\nprint(unique_ids(['B','a','B','c','a']))\nprint(unique_ids([]))\n\"",
+      "approved": false
+    },
+    {
+      "scenario": "expert",
+      "command": "python -m pytest tests/test_public.py -q",
+      "approved": true
+    },
+    {
+      "scenario": "expert",
+      "command": "python -c \"from app.dedupe import unique_ids; assert unique_ids(['a','a'])==['a']; print(unique_ids(['B','a','B','c','a'])); print(unique_ids([]))\"",
+      "approved": false
+    },
+    {
+      "scenario": "expert",
+      "command": "python run_checks.py",
+      "approved": false
+    },
+    {
+      "scenario": "expert",
+      "command": "python3 -m pytest tests/test_public.py -q",
+      "approved": true
+    },
+    {
+      "scenario": "expert",
+      "command": "python -m pip install pytest -q",
+      "approved": false
+    },
+    {
+      "scenario": "expert",
+      "command": "pytest tests/test_public.py -q",
+      "approved": true
+    },
+    {
+      "scenario": "expert",
+      "command": "PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 pytest tests/test_public.py -q -p no:cacheprovider",
+      "approved": false
+    },
+    {
+      "scenario": "expert",
+      "command": "pytest tests/test_public.py -q -p no:cacheprovider -p no:dash",
+      "approved": true
+    },
+    {
+      "scenario": "naive",
+      "command": "cd . && python -m pytest -q 2>&1 | tail -5 && python -c \"from app.dedupe import unique_ids; print(unique_ids(['b','a','b','c','a']))\"",
+      "approved": false
+    },
+    {
+      "scenario": "expert",
+      "command": "ls -la; git log --oneline -20 2>/dev/null; cat README* 2>/dev/null; ls tests",
+      "approved": false
+    },
+    {
+      "scenario": "expert",
+      "command": "python -m pytest tests -q",
+      "approved": true
+    },
+    {
+      "scenario": "expert",
+      "command": "python -c \"\nfrom app.dedupe import unique_ids\nassert unique_ids(['a','a']) == ['a']\nassert unique_ids(['b','a','b','A','a']) == ['b','a','A']\nassert unique_ids([]) == []\nprint('ok')\n\"",
+      "approved": false
+    },
+    {
+      "scenario": "naive",
+      "command": "cd . && python -m pytest -q 2>&1 | tail -5 && python -c \"from app.dedupe import unique_ids; print(unique_ids(['b','a','b','c','a']))\"",
+      "approved": false
+    },
+    {
+      "scenario": "expert",
+      "command": "cd . && python -m pytest tests/ -v 2>&1 | tail -20",
+      "approved": true
+    },
+    {
+      "scenario": "expert",
+      "command": "cd . && ls -a && cat pyproject.toml setup.cfg pytest.ini 2>/dev/null; python -c \"import sys; print(sys.version)\"",
+      "approved": false
+    },
+    {
+      "scenario": "expert",
+      "command": "cd . && python -c \"\nfrom app.dedupe import unique_ids\nprint(unique_ids(['a','a']))\nprint(unique_ids(['b','A','b','A','c']))\nprint(unique_ids([]))\n\"",
+      "approved": false
+    },
+    {
+      "scenario": "naive",
+      "command": "python -m pytest -q 2>&1 | tail -5; python -c \"from app.dedupe import unique_ids; print(unique_ids(['b','a','b','c','a']))\"",
+      "approved": false
+    },
+    {
+      "scenario": "expert",
+      "command": "ls -la; find . -name \"*.md\" -o -name \"*.toml\" -o -name \"*.cfg\" -o -name \"*.txt\" | head -20",
+      "approved": false
+    },
+    {
+      "scenario": "expert",
+      "command": "python -m pytest tests/ -v",
+      "approved": true
+    },
+    {
+      "scenario": "expert",
+      "command": "python -c \"\nimport sys; sys.path.insert(0,'.')\nfrom tests.test_public import test_no_duplicates, test_keeps_first_occurrence_order_and_spelling\ntest_no_duplicates(); test_keeps_first_occurrence_order_and_spelling(); print('both tests passed')\n\"",
+      "approved": false
+    },
+    {
+      "scenario": "naive",
+      "command": "cd . && python -m pytest -q 2>&1 | tail -5 && python -c \"from app.dedupe import unique_ids; print(unique_ids(['b','a','b','c','a']))\"",
+      "approved": false
+    },
+    {
+      "scenario": "expert",
+      "command": "ls -a; python -m pytest -q 2>&1 | tail -20",
+      "approved": false
+    },
+    {
+      "scenario": "expert",
+      "command": "python -m pytest -q",
+      "approved": true
+    },
+    {
+      "scenario": "expert",
+      "command": "python -c \"\nfrom app.dedupe import unique_ids\nfrom tests.test_public import test_no_duplicates\ntest_no_duplicates()\nprint('public test passed')\nprint(unique_ids(['b','a','b','A','a']))\nprint(unique_ids([]))\n\"",
+      "approved": false
+    },
+    {
+      "scenario": "naive",
+      "command": "cd . && python -m pytest -q 2>&1 | tail -5 && python -c \"from app.dedupe import unique_ids; print(unique_ids(['b','a','b','c','a']))\"",
+      "approved": false
+    },
+    {
+      "scenario": "expert",
+      "command": "ls -la; find . -name \"*.md\" -o -name \"*.toml\" -o -name \"*.cfg\" -o -name \"*.txt\" | grep -v node_modules | head -20",
+      "approved": false
+    },
+    {
+      "scenario": "expert",
+      "command": "python -m pytest tests/ -v",
+      "approved": true
+    },
+    {
+      "scenario": "expert",
+      "command": "python -c \"\nfrom app.dedupe import unique_ids\nprint(unique_ids(['a','a']))\nprint(unique_ids(['b','A','b','A','c']))\nprint(unique_ids([]))\n\"",
+      "approved": false
+    },
+    {
+      "scenario": "expert",
+      "command": "python -m pytest tests/test_public.py -v 2>&1 | tail -5; python -c \"import tests.test_public as t; t.test_no_duplicates(); print('test_no_duplicates passed')\"",
+      "approved": false
+    },
+    {
+      "scenario": "naive",
+      "command": "cd /workspace 2>/dev/null || cd .; python -m pytest -q 2>&1 | tail -5; python -c \"from app.dedupe import unique_ids; print(unique_ids(['b','a','b','c','a']))\"",
+      "approved": false
+    },
+    {
+      "scenario": "expert",
+      "command": "cd . && python -m pytest -q 2>&1 | tail -20",
+      "approved": true
+    },
+    {
+      "scenario": "expert",
+      "command": "cd . && ls -a && cat pyproject.toml setup.cfg pytest.ini 2>/dev/null; python -c \"import sys; print(sys.version)\"",
+      "approved": false
+    },
+    {
+      "scenario": "expert",
+      "command": "python -m pytest -q",
+      "approved": true
+    },
+    {
+      "scenario": "expert",
+      "command": "python -m pip list 2>/dev/null | head -30",
+      "approved": false
+    },
+    {
+      "scenario": "expert",
+      "command": "python -c \"\nfrom app.dedupe import unique_ids\nprint(unique_ids(['a','a']))\nprint(unique_ids(['b','a','b','c','a']))\nprint(unique_ids([]))\nprint(unique_ids(['ID-1','id-1','ID-1']))\n\"",
+      "approved": false
+    },
+    {
+      "scenario": "expert",
+      "command": "python -c \"from app.dedupe import unique_ids; print(unique_ids(['b','a','b','c','a']))\"",
+      "approved": false
+    },
+    {
+      "scenario": "expert",
+      "command": "python -m unittest discover -s tests -v",
+      "approved": true
+    },
+    {
+      "scenario": "expert",
+      "command": "python run_checks.py",
+      "approved": false
+    },
+    {
+      "scenario": "expert",
+      "command": "python -m unittest discover -s tests -t . -v",
+      "approved": true
+    },
+    {
+      "scenario": "expert",
+      "command": "python -m unittest discover -s . -p \"test_public.py\" -v",
+      "approved": false
+    },
+    {
+      "scenario": "expert",
+      "command": "python -m unittest tests.test_public -v",
+      "approved": true
+    },
+    {
+      "scenario": "naive",
+      "command": "cd . && python -m pytest -q 2>&1 | tail -5 && python -c \"from app.dedupe import unique_ids; print(unique_ids(['b','a','b','c','a']))\"",
+      "approved": false
+    }
+  ]
+}

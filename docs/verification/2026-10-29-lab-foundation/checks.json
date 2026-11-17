@@ -1,0 +1,372 @@
+{
+  "date": "2026-10-29",
+  "timezone": "Asia/Dhaka",
+  "recordedAtUtc": "2026-10-28T19:02:55.475Z",
+  "request": "Start Phase 2 on a new branch in the existing desktop repository.",
+  "state": "lab-foundation-implemented-windows-verified",
+  "phase2Complete": false,
+  "identity": {
+    "branch": "feature/lab-pilot",
+    "baseCommit": "21dc2eff87782f38abc4b0690dddc431fa2a69ca",
+    "remote": "git@github.com:33sakib33/Factoryze.git",
+    "sourceHashes": [
+      {
+        "path": ".gitattributes",
+        "normalization": "UTF-8 with CRLF converted to LF",
+        "sha256": "e03885088166ac980811d1ec26664ac3ef1ce855c70ccb5e6b2371249a120dd0"
+      },
+      {
+        "path": ".github/workflows/ci.yml",
+        "normalization": "UTF-8 with CRLF converted to LF",
+        "sha256": "ef81fc1f0d69bbc4c4aaae8adb87a7a03d6e096f4b6473cd7697d72725cf80da"
+      },
+      {
+        "path": ".github/workflows/installers.yml",
+        "normalization": "UTF-8 with CRLF converted to LF",
+        "sha256": "e1fadd04c3f8586c07b5ba3da4d2cca8383819f71402312e7014e80bcec75ccc"
+      },
+      {
+        "path": ".gitignore",
+        "normalization": "UTF-8 with CRLF converted to LF",
+        "sha256": "451bc990792960f4e9c88a208779caeea1fd878c75a0a223c0ad68dd287d27a8"
+      },
+      {
+        "path": "PLAN.md",
+        "normalization": "UTF-8 with CRLF converted to LF",
+        "sha256": "bd4b729f5530c88bbbe9b7286391c710f3bc2196166d28dbb821896bc5ca37fc"
+      },
+      {
+        "path": "PROGRESS.md",
+        "normalization": "UTF-8 with CRLF converted to LF",
+        "sha256": "0546a7a21dc8a7071b32af250f0bac40871eb8ff7f6f44ebe3b0847befd5b6d8"
+      },
+      {
+        "path": "README.md",
+        "normalization": "UTF-8 with CRLF converted to LF",
+        "sha256": "8289d8bed2c8d4a604b21322b9cbb248a7902bede086e85c47f8c7e087cfaa64"
+      },
+      {
+        "path": "SPEC.md",
+        "normalization": "UTF-8 with CRLF converted to LF",
+        "sha256": "4779823f44fbf5fa603654ab2af2c43d86e31b1a02e61efd9960c818e4f0b046"
+      },
+      {
+        "path": "package.json",
+        "normalization": "UTF-8 with CRLF converted to LF",
+        "sha256": "af154a98f6e7063771aa0c61b833bcf7b067c2566e7a24545cccb8a4ab0b98e0"
+      },
+      {
+        "path": "packages/engine/package.json",
+        "normalization": "UTF-8 with CRLF converted to LF",
+        "sha256": "b3ef6835371347c2d2d7084c2daacebf151bb756fad2f0aeab046f9871bcf9ea"
+      },
+      {
+        "path": "packages/protocol/src/index.ts",
+        "normalization": "UTF-8 with CRLF converted to LF",
+        "sha256": "6a2b4720aa1619ed78e01f0777a6fe1faecd23c220c908576826a08b69690316"
+      },
+      {
+        "path": "pnpm-lock.yaml",
+        "normalization": "UTF-8 with CRLF converted to LF",
+        "sha256": "3e2c16ba03c27b86de9ba3ec6e672eefd4e0be2f0688dff18c6574d864b51674"
+      },
+      {
+        "path": "docs/lab-pilot.md",
+        "normalization": "UTF-8 with CRLF converted to LF",
+        "sha256": "0d2f8816f7b9d7206f40b60b8b2b2d3a5ef95b25248ba1451738bc52b7d36ebb"
+      },
+      {
+        "path": "packages/engine/src/lab.ts",
+        "normalization": "UTF-8 with CRLF converted to LF",
+        "sha256": "efbfb591eae5f9fe2101a8ca620aefea46f5848dcacc3595bccb3c8f55446ae5"
+      },
+      {
+        "path": "packages/engine/test/lab.test.ts",
+        "normalization": "UTF-8 with CRLF converted to LF",
+        "sha256": "bfe957b676312d4d0d0e267ff748aec81bdcfeee9e906019add50f9bed435b3a"
+      },
+      {
+        "path": "packages/protocol/test/lab-contracts.test.ts",
+        "normalization": "UTF-8 with CRLF converted to LF",
+        "sha256": "182776ff3c35f8d50207407682c4eb844a2d813948e77193f9ee7481f226a110"
+      },
+      {
+        "path": "packages/server/examples/lab.json",
+        "normalization": "UTF-8 with CRLF converted to LF",
+        "sha256": "ce84dae0863c35ccdbcb9bcc8a692ec6296673f8d1c6bb79c70ff4bcb1027e5b"
+      },
+      {
+        "path": "packages/server/package.json",
+        "normalization": "UTF-8 with CRLF converted to LF",
+        "sha256": "d07287208e3f8d087f1fb827523b2f8bddc38db42c1ebebd0dc1dc5881fb9a2c"
+      },
+      {
+        "path": "packages/server/src/cli.ts",
+        "normalization": "UTF-8 with CRLF converted to LF",
+        "sha256": "73f2ad94fb2c7f6b4638ce3b53eec1619fceae5f09eaef4bfb41477de8eae08d"
+      },
+      {
+        "path": "packages/server/src/client.ts",
+        "normalization": "UTF-8 with CRLF converted to LF",
+        "sha256": "492fa89d131bf1266543d348309f6baf276f65467b96298417d02be0b9c6203f"
+      },
+      {
+        "path": "packages/server/src/identity.ts",
+        "normalization": "UTF-8 with CRLF converted to LF",
+        "sha256": "eb44414e6bda4da29e5f000a3c80126474d4c1dff05a303a6298a18bf27093ee"
+      },
+      {
+        "path": "packages/server/src/index.ts",
+        "normalization": "UTF-8 with CRLF converted to LF",
+        "sha256": "e262b6578cace0aa0fcdaa4acbd56400a59f08ce8a9cbf2b150f0dfbb95694c5"
+      },
+      {
+        "path": "packages/server/src/server.ts",
+        "normalization": "UTF-8 with CRLF converted to LF",
+        "sha256": "80369350b9c771ee108a694ad14b51033970da12c8a94b39b4eb2f17d8013b0d"
+      },
+      {
+        "path": "packages/server/test/lab-server.test.ts",
+        "normalization": "UTF-8 with CRLF converted to LF",
+        "sha256": "de22c36b0968fcce5669a8546c9c629687f21af2bc42f09b7380b768529dbaf9"
+      }
+    ]
+  },
+  "environment": {
+    "platform": "win32",
+    "architecture": "x64",
+    "osRelease": "10.0.19045",
+    "node": "v24.22.1",
+    "pnpm": "10.28.2",
+    "openssl": "OpenSSL 3.0.15 3 Sep 2024 (Library: OpenSSL 3.0.15 3 Sep 2024)"
+  },
+  "implementation": {
+    "independentServerWorkspace": true,
+    "engineOwnsLifecycleAndAccounting": true,
+    "additiveDraftProtocol": true,
+    "pinnedTlsWithHostnameValidation": true,
+    "operatorFileOnly": true,
+    "studentTokensDeniedInstructorEndpoints": true,
+    "rosterBoundJoin": true,
+    "joinCodesAndTokensHashed": true,
+    "duplicateClaimsCannotResetBudget": true,
+    "durablePerStudentAndLabBudgets": true,
+    "serializedTrustedMetering": true,
+    "missingUsageBlocksWork": true,
+    "automaticDeadlines": true,
+    "manualClosure": true,
+    "activeWorkCancellationSignal": true,
+    "instructorCli": [
+      "init",
+      "serve",
+      "create",
+      "watch",
+      "close",
+      "usage-csv"
+    ],
+    "actualCliServeSubprocessTested": true,
+    "studentClientCountInHttpsTest": 2,
+    "csvContainsGrades": false,
+    "inferenceEnabled": false,
+    "gradingEnabled": false,
+    "desktopUiChanged": false
+  },
+  "checks": [
+    {
+      "command": "node --experimental-strip-types --test packages/engine/test/lab.test.ts packages/server/test/lab-server.test.ts",
+      "stage": "red before implementation",
+      "exitCode": 1,
+      "testFileFailures": 2,
+      "log": "initial-tests.log"
+    },
+    {
+      "command": "node --experimental-strip-types --test packages/engine/test/lab.test.ts packages/server/test/lab-server.test.ts packages/protocol/test/lab-contracts.test.ts",
+      "exitCode": 0,
+      "passed": 10,
+      "log": "focused-tests-final.log"
+    },
+    {
+      "command": "node --experimental-strip-types --test packages/server/test/lab-server.test.ts",
+      "exitCode": 0,
+      "passed": 3,
+      "log": "cli-serve-tests.log"
+    },
+    {
+      "command": "pnpm test",
+      "exitCode": 0,
+      "tests": 217,
+      "passed": 217,
+      "failed": 0,
+      "skipped": 0,
+      "log": "full-tests-final.log"
+    },
+    {
+      "command": "pnpm typecheck",
+      "exitCode": 0,
+      "log": "typecheck-final.log"
+    },
+    {
+      "command": "pnpm install --lockfile-only --offline --ignore-scripts --frozen-lockfile",
+      "exitCode": 0,
+      "log": "lockfile-check.log"
+    },
+    {
+      "command": "pnpm factoryze --help",
+      "exitCode": 0,
+      "log": "cli-help.log"
+    },
+    {
+      "command": "node --experimental-strip-types docs/verification/2026-10-29-lab-foundation/check-configuration.mjs",
+      "exitCode": 0,
+      "workflowFiles": 2,
+      "exampleConfigurationValid": true,
+      "log": "configuration-check.log"
+    },
+    {
+      "command": "Local source/evidence scan and documentation-link validation",
+      "passed": true,
+      "generatedPrivateKeysPresent": false,
+      "providerKeyPatternPresent": false
+    }
+  ],
+  "setupRecovery": {
+    "normalInstallAttemptsPassed": false,
+    "modulePurgePerformed": false,
+    "invalidOptionAttemptRetained": true,
+    "logs": [
+      "workspace-install.log",
+      "workspace-install-retry.log",
+      "workspace-install-final.log",
+      "workspace-server-install.log"
+    ],
+    "resolution": "Frozen offline lockfile-only validation succeeded. Only new packages/server/node_modules/@factoryze/{engine,protocol} junctions were created to the existing packages; existing native modules were preserved.",
+    "externalPackageVersionsAdded": 0
+  },
+  "constraints": {
+    "paidModelCalls": 0,
+    "smtpEmails": 0,
+    "dockerUsed": false,
+    "existingHarnessBehaviorChanged": false,
+    "existingSoloSchemaRepurposed": false,
+    "webBackendChanged": false,
+    "webFrontendChanged": false,
+    "osTrustOrSecuritySettingsChanged": false,
+    "privateKeysCommitted": false,
+    "pushPerformed": false,
+    "mergePerformed": false,
+    "publicDeployment": false
+  },
+  "remaining": [
+    "Desktop Join lab and keychain-backed student reconnect",
+    "Public task distribution and separate lab attempt",
+    "Server agent loop and client tools/approval bridge",
+    "Workspace mirror, offline events and full version/tool handshake",
+    "Frozen submission snapshots",
+    "Queued isolated grading (Docker still deferred)",
+    "Server reports/release and grade CSV",
+    "Instructor session/device revocation and incomplete-usage recovery",
+    "Verified student enrollment for graded use",
+    "Fresh CI/macOS/Linux and desktop installer checks",
+    "Current pilot task/model measurements with approved spend",
+    "60-client load, 10-machine dry run and accepted classroom pilot",
+    "Pilot lab/date/server and student OS decisions",
+    "Existing 0.1 manual/review gates"
+  ],
+  "evidenceHashes": [
+    {
+      "path": "docs/verification/2026-10-29-lab-foundation/check-configuration.mjs",
+      "bytes": 1076,
+      "sha256": "0afa5cde24184ca19b089b46ec0d75321616ebf7e7cd127b5cf063744d4ff86b"
+    },
+    {
+      "path": "docs/verification/2026-10-29-lab-foundation/cli-help.log",
+      "bytes": 718,
+      "sha256": "2c08d9402d1fe8561dd5178cd58bdb95b83363ebd1ce9e59c270cfbeaa8cf94c"
+    },
+    {
+      "path": "docs/verification/2026-10-29-lab-foundation/cli-serve-tests.log",
+      "bytes": 437,
+      "sha256": "58ec289d1a4399e76ea5b802ee9ec2b08d549fc11655cf1ae4a895fc5c46ad65"
+    },
+    {
+      "path": "docs/verification/2026-10-29-lab-foundation/configuration-check.log",
+      "bytes": 133,
+      "sha256": "e39c2ab895397e75e90c64ceef5e939ad26bb5026efb17a2eea5448ab08030b7"
+    },
+    {
+      "path": "docs/verification/2026-10-29-lab-foundation/engine-tests.log",
+      "bytes": 547,
+      "sha256": "ecddfa7abcf783a6699eee3e13979157925c8763615a4976e4c72bcd13c4aefa"
+    },
+    {
+      "path": "docs/verification/2026-10-29-lab-foundation/focused-tests-final.log",
+      "bytes": 1166,
+      "sha256": "16a83d14544bf54b303a87584e8b64e3766638e8bc6fdea4771076a00017328e"
+    },
+    {
+      "path": "docs/verification/2026-10-29-lab-foundation/focused-tests.log",
+      "bytes": 657,
+      "sha256": "624578edb59b0e8c414505fb1c66e8e90baf2d770ecb73ad1c9932fe67eb9f15"
+    },
+    {
+      "path": "docs/verification/2026-10-29-lab-foundation/full-tests-final.log",
+      "bytes": 31932,
+      "sha256": "ca68e39ad59b1b6ccb0df8d9bb4c4d59e49bcd8c8758c24b595397e7cfc295c4"
+    },
+    {
+      "path": "docs/verification/2026-10-29-lab-foundation/full-tests.log",
+      "bytes": 31939,
+      "sha256": "0533548a264185f6afb0f336f113404f141b9e7bbc4b49ee5832af7e82137791"
+    },
+    {
+      "path": "docs/verification/2026-10-29-lab-foundation/initial-tests.log",
+      "bytes": 2832,
+      "sha256": "ca05ff05d5cdf7711580bd7b7062bc95422026baa83187a289497855626da518"
+    },
+    {
+      "path": "docs/verification/2026-10-29-lab-foundation/lockfile-check.log",
+      "bytes": 68,
+      "sha256": "62300b40d7b5b83adc607ffc06676d2352ce9d6c3e23e518df7a2ca17e4d21b1"
+    },
+    {
+      "path": "docs/verification/2026-10-29-lab-foundation/README.md",
+      "bytes": 5255,
+      "sha256": "ee352a4d064a0f31a6f0fb5c5c4e71297089c8dedadb245b6ba41c55fb224d41"
+    },
+    {
+      "path": "docs/verification/2026-10-29-lab-foundation/typecheck-final.log",
+      "bytes": 86,
+      "sha256": "20240eafcee9cc11f90dc917289fce05024a803aceb8a5946c65535db3041b77"
+    },
+    {
+      "path": "docs/verification/2026-10-29-lab-foundation/typecheck-initial.log",
+      "bytes": 86,
+      "sha256": "20240eafcee9cc11f90dc917289fce05024a803aceb8a5946c65535db3041b77"
+    },
+    {
+      "path": "docs/verification/2026-10-29-lab-foundation/typecheck.log",
+      "bytes": 86,
+      "sha256": "20240eafcee9cc11f90dc917289fce05024a803aceb8a5946c65535db3041b77"
+    },
+    {
+      "path": "docs/verification/2026-10-29-lab-foundation/workspace-install-final.log",
+      "bytes": 211,
+      "sha256": "f11c8471d5dc579f98f39100c9ee4f9664e4d1f5e1eed6315a3950bf91d24f52"
+    },
+    {
+      "path": "docs/verification/2026-10-29-lab-foundation/workspace-install-retry.log",
+      "bytes": 110,
+      "sha256": "357f7f6a737fda72f2d587d041135c2923da81329ab5c4976a8595d8fd08fe4b"
+    },
+    {
+      "path": "docs/verification/2026-10-29-lab-foundation/workspace-install.log",
+      "bytes": 211,
+      "sha256": "f11c8471d5dc579f98f39100c9ee4f9664e4d1f5e1eed6315a3950bf91d24f52"
+    },
+    {
+      "path": "docs/verification/2026-10-29-lab-foundation/workspace-server-install.log",
+      "bytes": 178,
+      "sha256": "7a097336adf1e05b8033915f6764bea5a6d0878836c6bdccb1dfae5fe1cfe09b"
+    }
+  ]
+}

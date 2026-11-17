@@ -1,0 +1,16 @@
+schema: 1
+id: webhook-allowlist
+title: Guard a webhook allowlist
+brief: >
+  A notification relay accepts tenant-provided callback URLs. An incident review
+  found that its preflight check approved a destination outside the two partner
+  hosts. Inspect the synthetic incident notes and repair the URL policy so only
+  approved HTTPS callback destinations can be queued, while legitimate partner
+  callbacks keep working.
+minimumPython: "3.11"
+topics: [security, backend]
+recommendedKnowledge:
+  - URL authority and hostname parsing
+  - Exact allowlists for outbound requests
+timeHintMinutes: 25
+entryFile: relay/policy.py

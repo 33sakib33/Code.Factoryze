@@ -1,0 +1,8 @@
+schema: 1
+taskId: activity-feed
+expert:
+  - "In feed/feed.py, build_feed calls MemberRepository.get once per activity. Collect the page's distinct member IDs, use the existing workspace-scoped get_many, then render in the original activity order. Keep former-member fallback and fresh names on every request; don't add persistent caching or change repository limits. Run python -m unittest."
+middle:
+  - "The activity feed has correct output but gets slow on pages with many contributors. Investigate its data access, reduce unnecessary work and preserve ordering, workspace isolation, former members and updated names. Run python -m unittest."
+naive:
+  - "The activity feed is slow. Make it faster and run the tests."

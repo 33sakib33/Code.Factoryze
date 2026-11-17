@@ -1,0 +1,25 @@
+{
+  "hypervisorPresent": false,
+  "platform": "Microsoft Windows 10 Pro",
+  "containerChecksPassed": false,
+  "userWillEnableVirtualizationAfterCheckpoint": true,
+  "build": "19045",
+  "date": "2026-10-29",
+  "knownDockerPaths": [
+    {
+      "path": "C:\\Program Files\\Docker\\Docker\\resources\\bin\\docker.exe",
+      "exists": false
+    },
+    {
+      "path": "C:\\Users\\Sakib\\AppData\\Local\\Programs\\DockerDesktop\\resources\\bin\\docker.exe",
+      "exists": false
+    }
+  ],
+  "computerRestarted": false,
+  "installationSucceeded": false,
+  "dockerCliOnPath": false,
+  "signedInstallerAttempt": "Automatic approval review rejected download/install command: blocked by policy",
+  "virtualizationFirmwareEnabled": false,
+  "perUserWingetResult": "No applicable installer found",
+  "installerVersionOffered": "4.97.0"
+}

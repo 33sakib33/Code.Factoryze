@@ -1,0 +1,143 @@
+TAP version 13
+# file:///Users/sakib/Projects/Factoryze/Factoryze/Factoryze/packages/app/extensions/core/test/flow-model.test.ts:3
+# import { checkLabel, continueAttempts, dateLabel, practiceAttempts, relativeTime, taskState, unifiedDiff, workspaceRelative, attemptLabel } from '../src/browser/flow-model.ts';
+#                                                   ^^^^^^^^^^^^^^^^
+# SyntaxError: The requested module '../src/browser/flow-model.ts' does not provide an export named 'practiceAttempts'
+#     at ModuleJob._instantiate (node:internal/modules/esm/module_job:226:21)
+#     at async ModuleJob.run (node:internal/modules/esm/module_job:335:5)
+#     at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:681:26)
+#     at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:117:5)
+# Node.js v22.23.2
+# Subtest: packages/app/extensions/core/test/flow-model.test.ts
+not ok 1 - packages/app/extensions/core/test/flow-model.test.ts
+  ---
+  duration_ms: 154.87975
+  type: 'test'
+  location: '/Users/sakib/Projects/Factoryze/Factoryze/Factoryze/packages/app/extensions/core/test/flow-model.test.ts:1:1'
+  failureType: 'testCodeFailure'
+  exitCode: 1
+  signal: ~
+  error: 'test failed'
+  code: 'ERR_TEST_FAILURE'
+  ...
+# (node:58725) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///Users/sakib/Projects/Factoryze/Factoryze/Factoryze/packages/app/extensions/core/test/lab-connection.test.ts is not specified and it doesn't parse as CommonJS.
+# Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+# To eliminate this warning, add "type": "module" to /Users/sakib/Projects/Factoryze/Factoryze/Factoryze/packages/app/extensions/core/package.json.
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# (node:58725) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+# Subtest: desktop lab connection stores tokens only in credentials, resumes safely and retains concurrent offline work/events
+not ok 2 - desktop lab connection stores tokens only in credentials, resumes safely and retains concurrent offline work/events
+  ---
+  duration_ms: 298.309166
+  type: 'test'
+  location: '/Users/sakib/Projects/Factoryze/Factoryze/Factoryze/packages/app/extensions/core/test/lab-connection.test.ts:12:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    lab attempts are marked so Practice tasks can ignore them
+    + actual - expected
+    
+      [
+        [
+          'library-fines',
+    +     undefined
+    -     'desktop'
+        ]
+      ]
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected:
+    0:
+      0: 'library-fines'
+      1: 'desktop'
+  actual:
+    0:
+      0: 'library-fines'
+  operator: 'deepStrictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///Users/sakib/Projects/Factoryze/Factoryze/Factoryze/packages/app/extensions/core/test/lab-connection.test.ts:27:10)
+    process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    async Test.run (node:internal/test_runner/test:1054:7)
+    async startSubtestAfterBootstrap (node:internal/test_runner/harness:296:3)
+  ...
+# Subtest: report insights are optional for old submissions and enforce bounded count structure
+ok 3 - report insights are optional for old submissions and enforce bounded count structure
+  ---
+  duration_ms: 3.910333
+  type: 'test'
+  ...
+# Subtest: Python check diagnostics are optional and bounded, preserving existing clients
+ok 4 - Python check diagnostics are optional and bounded, preserving existing clients
+  ---
+  duration_ms: 0.9875
+  type: 'test'
+  ...
+# Subtest: report execution pins are optional for old reports and validate metadata without credentials
+ok 5 - report execution pins are optional for old reports and validate metadata without credentials
+  ---
+  duration_ms: 1.626458
+  type: 'test'
+  ...
+# Subtest: connection temperature is optional, finite and bounded without changing old defaults
+ok 6 - connection temperature is optional, finite and bounded without changing old defaults
+  ---
+  duration_ms: 1.1585
+  type: 'test'
+  ...
+# Subtest: task packs require schema 1 and a valid Python minimum
+ok 7 - task packs require schema 1 and a valid Python minimum
+  ---
+  duration_ms: 0.469458
+  type: 'test'
+  ...
+# Subtest: task retirement is optional and preserves existing schema 1 manifests
+ok 8 - task retirement is optional and preserves existing schema 1 manifests
+  ---
+  duration_ms: 0.200625
+  type: 'test'
+  ...
+# Subtest: lab config pins an agent profile and keeps keys out of the contract
+ok 9 - lab config pins an agent profile and keeps keys out of the contract
+  ---
+  duration_ms: 0.742625
+  type: 'test'
+  ...
+# Subtest: events are versioned and readers can retain unknown event types
+ok 10 - events are versioned and readers can retain unknown event types
+  ---
+  duration_ms: 0.689416
+  type: 'test'
+  ...
+# Subtest: attempt and report summaries carry only counts, never prompts or keys
+not ok 11 - attempt and report summaries carry only counts, never prompts or keys
+  ---
+  duration_ms: 0.911417
+  type: 'test'
+  location: '/Users/sakib/Projects/Factoryze/Factoryze/Factoryze/packages/protocol/test/contracts.test.ts:75:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    [
+      {
+        "code": "unrecognized_keys",
+        "keys": [
+          "lab"
+        ],
+        "path": [],
+        "message": "Unrecognized key: \"lab\""
+      }
+    ]
+  code: 'ERR_TEST_FAILURE'
+  stack: |-
+    TestContext.<anonymous> (file:///Users/sakib/Projects/Factoryze/Factoryze/Factoryze/packages/protocol/test/contracts.test.ts:82:41)
+    async Test.run (node:internal/test_runner/test:1054:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+  ...
+1..11
+# tests 11
+# suites 0
+# pass 8
+# fail 3
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 671.3345

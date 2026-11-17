@@ -1,0 +1,5 @@
+(node:21680) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///E:/Projects/Factoryze/Factoryze/Factoryze/packages/app/extensions/core/src/node/lab-connection.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to \\?\E:\Projects\Factoryze\Factoryze\Factoryze\packages\app\extensions\core\package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+{"date":"2026-10-29","passed":true,"clients":60,"joined":60,"completedPrompts":60,"syntheticModelRequests":120,"readToolRoundTrips":60,"immutableSubmissions":60,"distinctSnapshotHashes":60,"totalWeightedTokens":14400,"crossStudentBudgetLeak":false,"closedLabRejectsReleaseUntilGraded":true,"gradingExecuted":false,"paidModelCalls":0,"realMachines":0,"elapsedMs":12003,"clientWorkElapsedMs":11521,"scope":"Single-host functional load with real TLS, desktop backend stores, unchanged server harness, real local read tools and SQLite. No provider-throughput or classroom hardware capacity claim."}

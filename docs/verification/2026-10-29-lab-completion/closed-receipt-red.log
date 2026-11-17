@@ -1,0 +1,29 @@
+✔ a private join binding recovers a lost response without allowing another client to claim the identity (191.8793ms)
+✔ lab task delivery excludes hidden material; mirror sync is bounded, scoped, versioned and idempotent (161.3794ms)
+✖ submissions are immutable; closing auto-submits; grades remain private until instructor release (172.1361ms)
+✔ instructor session recovery preserves identity, budgets and snapshots; student events are untrusted flags (137.9747ms)
+ℹ tests 4
+ℹ suites 0
+ℹ pass 3
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1025.7992
+
+✖ failing tests:
+
+test at packages\engine\test\lab-workflow.test.ts:47:1
+✖ submissions are immutable; closing auto-submits; grades remain private until instructor release (172.1361ms)
+  Error: Lab is closed
+      at LabEngine.requireOpen (file:///E:/Projects/Factoryze/Factoryze/Factoryze/packages/engine/src/lab.ts:72:69)
+      at LabEngine.submit (file:///E:/Projects/Factoryze/Factoryze/Factoryze/packages/engine/src/lab.ts:127:75)
+      at TestContext.<anonymous> (file:///E:/Projects/Factoryze/Factoryze/Factoryze/packages/engine/test/lab-workflow.test.ts:59:29)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    status: 409
+  }

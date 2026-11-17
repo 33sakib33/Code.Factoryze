@@ -1,0 +1,18 @@
+✔ lab joins are roster-bound, versioned, scoped and do not disclose operator secrets (103.3433ms)
+✔ trusted server metering survives reconnect/restart and cannot reset or cross student/lab budgets (137.7691ms)
+✔ closing or expiring a lab stops joins and requests while preserving readable usage (131.3345ms)
+✔ incomplete requests fail closed, immutable pins and duplicate labs are rejected (92.4479ms)
+✔ queued requests recheck budget and closure before dispatch; invalid usage cannot become complete (102.5557ms)
+✔ lab connection contracts require a pinned HTTPS origin and exclude credentials (4.1839ms)
+✔ lab join and creation inputs exclude student-assigned roles, budget overrides and keys (6.7349ms)
+✔ real TLS clients join/reconnect, cannot administer or self-report usage, and observe closure (524.0845ms)
+✔ instructor CLI creates, watches, closes and exports over real HTTPS without leaking its token (2400.7646ms)
+✔ failed initialization does not overwrite an identity or leave partial keys (2.7642ms)
+ℹ tests 10
+ℹ suites 0
+ℹ pass 10
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 3205.3929

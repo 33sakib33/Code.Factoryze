@@ -1,0 +1,21 @@
+{
+  "schema": 1,
+  "config": {
+    "schema": 1,
+    "lab": "cs201",
+    "task": "library-fines",
+    "timeLimitMinutes": 60,
+    "agent": {
+      "profile": "factoryze@0.1.0",
+      "model": "synthetic",
+      "permissions": { "edit": "ask", "shell": "ask" }
+    },
+    "budget": {
+      "limit": 25000,
+      "weights": { "input": 1, "output": 1, "cacheRead": 0.1, "cacheWrite": 1 }
+    }
+  },
+  "providerHost": "provider.invalid",
+  "temperature": 0,
+  "roster": ["s001", "s002"]
+}

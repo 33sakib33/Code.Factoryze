@@ -1,0 +1,898 @@
+{
+  "taskId": "library-fines",
+  "profile": "factoryze@0.1.0",
+  "model": "deepseek/deepseek-v4.1-flash-1017",
+  "temperature": 0,
+  "promptsHash": "42dfbf2504973e6caef3c826cb863e8949713aee325e94c1f0bfe737239915fc",
+  "recordedAt": "2026-10-22T08:44:31.643Z",
+  "expert": [
+    {
+      "correctness": {
+        "passed": 9,
+        "total": 9
+      },
+      "raw": {
+        "input": 10104,
+        "output": 574,
+        "cacheRead": 7552,
+        "cacheWrite": 0
+      },
+      "weightedTokens": 3881.2,
+      "requests": 6,
+      "turns": 1,
+      "elapsedMs": 10714
+    },
+    {
+      "correctness": {
+        "passed": 9,
+        "total": 9
+      },
+      "raw": {
+        "input": 16619,
+        "output": 853,
+        "cacheRead": 14208,
+        "cacheWrite": 0
+      },
+      "weightedTokens": 4684.8,
+      "requests": 10,
+      "turns": 1,
+      "elapsedMs": 13815
+    },
+    {
+      "correctness": {
+        "passed": 9,
+        "total": 9
+      },
+      "raw": {
+        "input": 11510,
+        "output": 719,
+        "cacheRead": 9984,
+        "cacheWrite": 0
+      },
+      "weightedTokens": 3243.4,
+      "requests": 7,
+      "turns": 1,
+      "elapsedMs": 10148
+    },
+    {
+      "correctness": {
+        "passed": 9,
+        "total": 9
+      },
+      "raw": {
+        "input": 13755,
+        "output": 764,
+        "cacheRead": 10752,
+        "cacheWrite": 0
+      },
+      "weightedTokens": 4842.2,
+      "requests": 9,
+      "turns": 1,
+      "elapsedMs": 14684
+    },
+    {
+      "correctness": {
+        "passed": 9,
+        "total": 9
+      },
+      "raw": {
+        "input": 12427,
+        "output": 549,
+        "cacheRead": 10880,
+        "cacheWrite": 0
+      },
+      "weightedTokens": 3184,
+      "requests": 8,
+      "turns": 1,
+      "elapsedMs": 7662
+    },
+    {
+      "correctness": {
+        "passed": 9,
+        "total": 9
+      },
+      "raw": {
+        "input": 18999,
+        "output": 1156,
+        "cacheRead": 16896,
+        "cacheWrite": 0
+      },
+      "weightedTokens": 4948.6,
+      "requests": 9,
+      "turns": 1,
+      "elapsedMs": 13128
+    },
+    {
+      "correctness": {
+        "passed": 9,
+        "total": 9
+      },
+      "raw": {
+        "input": 22082,
+        "output": 946,
+        "cacheRead": 16000,
+        "cacheWrite": 0
+      },
+      "weightedTokens": 8628,
+      "requests": 12,
+      "turns": 1,
+      "elapsedMs": 18742
+    },
+    {
+      "correctness": {
+        "passed": 9,
+        "total": 9
+      },
+      "raw": {
+        "input": 12307,
+        "output": 683,
+        "cacheRead": 10240,
+        "cacheWrite": 0
+      },
+      "weightedTokens": 3774,
+      "requests": 7,
+      "turns": 1,
+      "elapsedMs": 11019
+    },
+    {
+      "correctness": {
+        "passed": 9,
+        "total": 9
+      },
+      "raw": {
+        "input": 19677,
+        "output": 829,
+        "cacheRead": 16768,
+        "cacheWrite": 0
+      },
+      "weightedTokens": 5414.8,
+      "requests": 9,
+      "turns": 1,
+      "elapsedMs": 9732
+    },
+    {
+      "correctness": {
+        "passed": 9,
+        "total": 9
+      },
+      "raw": {
+        "input": 14778,
+        "output": 747,
+        "cacheRead": 6912,
+        "cacheWrite": 0
+      },
+      "weightedTokens": 9304.2,
+      "requests": 8,
+      "turns": 1,
+      "elapsedMs": 15008
+    }
+  ],
+  "naive": [
+    {
+      "correctness": {
+        "passed": 9,
+        "total": 9
+      },
+      "raw": {
+        "input": 71896,
+        "output": 7574,
+        "cacheRead": 64000,
+        "cacheWrite": 0
+      },
+      "weightedTokens": 21870,
+      "requests": 14,
+      "turns": 1,
+      "elapsedMs": 62561
+    },
+    {
+      "correctness": {
+        "passed": 9,
+        "total": 9
+      },
+      "raw": {
+        "input": 62986,
+        "output": 5691,
+        "cacheRead": 57344,
+        "cacheWrite": 0
+      },
+      "weightedTokens": 17067.4,
+      "requests": 13,
+      "turns": 1,
+      "elapsedMs": 41576
+    },
+    {
+      "correctness": {
+        "passed": 5,
+        "total": 9
+      },
+      "raw": {
+        "input": 86604,
+        "output": 7242,
+        "cacheRead": 79744,
+        "cacheWrite": 0
+      },
+      "weightedTokens": 22076.4,
+      "requests": 16,
+      "turns": 0,
+      "elapsedMs": 64976,
+      "error": "Stopped after 16 model steps. Start a new session and ask for a smaller change."
+    },
+    {
+      "correctness": {
+        "passed": 9,
+        "total": 9
+      },
+      "raw": {
+        "input": 67459,
+        "output": 9970,
+        "cacheRead": 60160,
+        "cacheWrite": 0
+      },
+      "weightedTokens": 23285,
+      "requests": 14,
+      "turns": 1,
+      "elapsedMs": 67643
+    },
+    {
+      "correctness": {
+        "passed": 5,
+        "total": 9
+      },
+      "raw": {
+        "input": 88334,
+        "output": 7926,
+        "cacheRead": 81536,
+        "cacheWrite": 0
+      },
+      "weightedTokens": 22877.6,
+      "requests": 16,
+      "turns": 0,
+      "elapsedMs": 56256,
+      "error": "Stopped after 16 model steps. Start a new session and ask for a smaller change."
+    },
+    {
+      "correctness": {
+        "passed": 9,
+        "total": 9
+      },
+      "raw": {
+        "input": 55158,
+        "output": 4431,
+        "cacheRead": 35456,
+        "cacheWrite": 0
+      },
+      "weightedTokens": 27678.6,
+      "requests": 12,
+      "turns": 1,
+      "elapsedMs": 83509
+    },
+    {
+      "correctness": {
+        "passed": 9,
+        "total": 9
+      },
+      "raw": {
+        "input": 80580,
+        "output": 8932,
+        "cacheRead": 56064,
+        "cacheWrite": 0
+      },
+      "weightedTokens": 39054.4,
+      "requests": 16,
+      "turns": 0,
+      "elapsedMs": 71771,
+      "error": "Stopped after 16 model steps. Start a new session and ask for a smaller change."
+    },
+    {
+      "correctness": {
+        "passed": 9,
+        "total": 9
+      },
+      "raw": {
+        "input": 41822,
+        "output": 3859,
+        "cacheRead": 28288,
+        "cacheWrite": 0
+      },
+      "weightedTokens": 20221.8,
+      "requests": 10,
+      "turns": 1,
+      "elapsedMs": 51400
+    },
+    {
+      "correctness": {
+        "passed": 9,
+        "total": 9
+      },
+      "raw": {
+        "input": 49413,
+        "output": 4051,
+        "cacheRead": 42752,
+        "cacheWrite": 0
+      },
+      "weightedTokens": 14987.2,
+      "requests": 11,
+      "turns": 1,
+      "elapsedMs": 29951
+    },
+    {
+      "correctness": {
+        "passed": 9,
+        "total": 9
+      },
+      "raw": {
+        "input": 82428,
+        "output": 10535,
+        "cacheRead": 69888,
+        "cacheWrite": 0
+      },
+      "weightedTokens": 30063.8,
+      "requests": 16,
+      "turns": 0,
+      "elapsedMs": 85912,
+      "error": "Stopped after 16 model steps. Start a new session and ask for a smaller change."
+    }
+  ],
+  "middle": [
+    {
+      "correctness": {
+        "passed": 9,
+        "total": 9
+      },
+      "raw": {
+        "input": 41382,
+        "output": 1347,
+        "cacheRead": 35072,
+        "cacheWrite": 0
+      },
+      "weightedTokens": 11164.2,
+      "requests": 10,
+      "turns": 1,
+      "elapsedMs": 12265
+    },
+    {
+      "correctness": {
+        "passed": 9,
+        "total": 9
+      },
+      "raw": {
+        "input": 39032,
+        "output": 1634,
+        "cacheRead": 33152,
+        "cacheWrite": 0
+      },
+      "weightedTokens": 10829.2,
+      "requests": 10,
+      "turns": 1,
+      "elapsedMs": 17061
+    },
+    {
+      "correctness": {
+        "passed": 9,
+        "total": 9
+      },
+      "raw": {
+        "input": 40992,
+        "output": 1867,
+        "cacheRead": 34816,
+        "cacheWrite": 0
+      },
+      "weightedTokens": 11524.6,
+      "requests": 10,
+      "turns": 1,
+      "elapsedMs": 15139
+    },
+    {
+      "correctness": {
+        "passed": 9,
+        "total": 9
+      },
+      "raw": {
+        "input": 44832,
+        "output": 1711,
+        "cacheRead": 32512,
+        "cacheWrite": 0
+      },
+      "weightedTokens": 17282.2,
+      "requests": 10,
+      "turns": 1,
+      "elapsedMs": 28473
+    },
+    {
+      "correctness": {
+        "passed": 9,
+        "total": 9
+      },
+      "raw": {
+        "input": 45094,
+        "output": 1927,
+        "cacheRead": 38656,
+        "cacheWrite": 0
+      },
+      "weightedTokens": 12230.6,
+      "requests": 11,
+      "turns": 1,
+      "elapsedMs": 15697
+    },
+    {
+      "correctness": {
+        "passed": 9,
+        "total": 9
+      },
+      "raw": {
+        "input": 35131,
+        "output": 1705,
+        "cacheRead": 29312,
+        "cacheWrite": 0
+      },
+      "weightedTokens": 10455.2,
+      "requests": 9,
+      "turns": 1,
+      "elapsedMs": 15066
+    },
+    {
+      "correctness": {
+        "passed": 9,
+        "total": 9
+      },
+      "raw": {
+        "input": 38743,
+        "output": 1470,
+        "cacheRead": 30848,
+        "cacheWrite": 0
+      },
+      "weightedTokens": 12449.8,
+      "requests": 9,
+      "turns": 1,
+      "elapsedMs": 12667
+    },
+    {
+      "correctness": {
+        "passed": 9,
+        "total": 9
+      },
+      "raw": {
+        "input": 49016,
+        "output": 1706,
+        "cacheRead": 42496,
+        "cacheWrite": 0
+      },
+      "weightedTokens": 12475.6,
+      "requests": 11,
+      "turns": 1,
+      "elapsedMs": 16447
+    },
+    {
+      "correctness": {
+        "passed": 9,
+        "total": 9
+      },
+      "raw": {
+        "input": 50871,
+        "output": 1838,
+        "cacheRead": 44032,
+        "cacheWrite": 0
+      },
+      "weightedTokens": 13080.2,
+      "requests": 11,
+      "turns": 1,
+      "elapsedMs": 20325
+    },
+    {
+      "correctness": {
+        "passed": 9,
+        "total": 9
+      },
+      "raw": {
+        "input": 48402,
+        "output": 1545,
+        "cacheRead": 40704,
+        "cacheWrite": 0
+      },
+      "weightedTokens": 13313.4,
+      "requests": 11,
+      "turns": 1,
+      "elapsedMs": 17385
+    }
+  ],
+  "summary": {
+    "expert": {
+      "completed": 10,
+      "failed": 0,
+      "solved": 10,
+      "min": 3184,
+      "median": 4763.5,
+      "max": 9304.2,
+      "mean": 5190.5,
+      "stdev": 2019
+    },
+    "naive": {
+      "completed": 6,
+      "failed": 4,
+      "solved": 8,
+      "min": 14987.2,
+      "median": 22477,
+      "max": 39054.4,
+      "mean": 23918.2,
+      "stdev": 6560.8
+    },
+    "middle": {
+      "completed": 10,
+      "failed": 0,
+      "solved": 10,
+      "min": 10455.2,
+      "median": 12340.2,
+      "max": 17282.2,
+      "mean": 12480.5,
+      "stdev": 1834.3
+    },
+    "separated": true
+  },
+  "shell": [
+    {
+      "scenario": "expert",
+      "command": "python -m unittest",
+      "approved": true
+    },
+    {
+      "scenario": "middle",
+      "command": "cd . && python -m unittest discover -s tests -v 2>&1 | tail -20",
+      "approved": true
+    },
+    {
+      "scenario": "middle",
+      "command": "cd . && python -m library.cli return L-201 --at 2026-03-11T01:00:00+00:00 && python -m library.cli return L-201 --at 2026-03-11T14:00:00+00:00",
+      "approved": false
+    },
+    {
+      "scenario": "naive",
+      "command": "cd . && python -m unittest 2>&1 | tail -20",
+      "approved": true
+    },
+    {
+      "scenario": "naive",
+      "command": "cd . && python -m library.cli return L-201 --at 2026-03-11T02:00:00+00:00 && python -m library.cli return L-204 --at 2026-03-10T20:00:00+00:00 && python -m library.cli notices --at 2026-03-11T02:00:00+00:00",
+      "approved": false
+    },
+    {
+      "scenario": "naive",
+      "command": "cd . && python -m unittest 2>&1 | tail -20",
+      "approved": true
+    },
+    {
+      "scenario": "expert",
+      "command": "python -m unittest 2>&1 | tail -30",
+      "approved": true
+    },
+    {
+      "scenario": "expert",
+      "command": "python -m unittest discover -v 2>&1 | tail -30; ls",
+      "approved": false
+    },
+    {
+      "scenario": "middle",
+      "command": "cd . && python -m unittest discover -s tests -t . -v 2>&1 | tail -20",
+      "approved": true
+    },
+    {
+      "scenario": "middle",
+      "command": "cd . && python -m library.cli return L-201 --at 2026-03-10T20:00:00-05:00 && python -m library.cli return L-201 --at 2026-03-11T09:00:00-05:00",
+      "approved": false
+    },
+    {
+      "scenario": "naive",
+      "command": "cd . && python -m unittest 2>&1 | tail -20",
+      "approved": true
+    },
+    {
+      "scenario": "naive",
+      "command": "cd . && git log --oneline -15 2>&1",
+      "approved": false
+    },
+    {
+      "scenario": "naive",
+      "command": "cd . && python -c \"\nfrom datetime import datetime\nfrom library.storage import load\nfrom library.returns import process_return\nb,i,m,l = load()\n# Riverside is UTC-5. 2026-03-11T02:00Z is still 2026-03-10 21:00 local -> on time.\nloan = l['L-201']\nr = process_return(loan, i[loan.item_id], m[loan.member_id], b[loan.branch_id], datetime.fromisoformat('2026-03-11T02:00:00+00:00'))\nprint('RIV due', loan.due_on, '->', r.returned_on, r.open_days_late, r.fine_cents)\n\"",
+      "approved": false
+    },
+    {
+      "scenario": "naive",
+      "command": "cd . && python -m unittest 2>&1 | tail -5",
+      "approved": true
+    },
+    {
+      "scenario": "naive",
+      "command": "cd . && python -m unittest 2>&1 | tail -5",
+      "approved": true
+    },
+    {
+      "scenario": "expert",
+      "command": "python -m unittest 2>&1 | tail -30",
+      "approved": true
+    },
+    {
+      "scenario": "middle",
+      "command": "cd . && python -m unittest -v 2>&1 | tail -20",
+      "approved": true
+    },
+    {
+      "scenario": "middle",
+      "command": "cd . && python -m library.cli return L-201 --at 2026-03-10T20:00:00-05:00 && python -m library.cli return L-201 --at 2026-03-10T09:00:00-05:00 && python -m library.cli return L-201 --at 2026-03-11T09:00:00-05:00",
+      "approved": false
+    },
+    {
+      "scenario": "naive",
+      "command": "cd . && python -m unittest 2>&1 | tail -30",
+      "approved": true
+    },
+    {
+      "scenario": "naive",
+      "command": "cd . && python -m library.cli return L-201 --at 2026-03-10T20:30:00-05:00 && python -m library.cli return L-204 --at 2026-03-11T03:00:00+00:00",
+      "approved": false
+    },
+    {
+      "scenario": "naive",
+      "command": "cd . && git log --oneline -10 2>&1 | head -20",
+      "approved": false
+    },
+    {
+      "scenario": "naive",
+      "command": "cd . && python -m unittest -v 2>&1 | tail -20",
+      "approved": true
+    },
+    {
+      "scenario": "naive",
+      "command": "cd . && python -c \"\nfrom datetime import datetime\nfrom library.storage import load\nfrom library.returns import process_return\nb,i,m,l = load()\n# L-201: Riverside (UTC-5), due 2026-03-10. Returned 20:30 local on the 10th = 01:30 UTC on the 11th.\nr = process_return(l['L-201'], i['B1'], m['M2'], b['RIV'], datetime.fromisoformat('2026-03-11T01:30:00+00:00'))\nprint('Riverside on-time evening return ->', r.returned_on, r.open_days_late, r.fine_cents)\n# L-204: Harbour (UTC+10), due 2026-03-10. Returned 08:00 local on the 11th = 22:00 UTC on the 10th.\nr = process_return(l['L-204'], i['B3'], m['M4'], b['HBR'], datetime.fromisoformat('2026-03-10T22:00:00+00:00'))\nprint('Harbour one-day-late return ->', r.returned_on, r.open_days_late, r.fine_cents)\n\"",
+      "approved": false
+    },
+    {
+      "scenario": "naive",
+      "command": "cd . && python -m unittest -v 2>&1 | tail -25",
+      "approved": true
+    },
+    {
+      "scenario": "expert",
+      "command": "python -m unittest",
+      "approved": true
+    },
+    {
+      "scenario": "middle",
+      "command": "cd . && python -m unittest -v 2>&1 | tail -20",
+      "approved": true
+    },
+    {
+      "scenario": "middle",
+      "command": "cd . && python -m library.cli return L-201 --at 2026-03-10T20:30:00-05:00 && python -m library.cli return L-201 --at 2026-03-10T09:00:00-05:00 && python -m library.cli return L-201 --at 2026-03-11T09:00:00-05:00",
+      "approved": false
+    },
+    {
+      "scenario": "naive",
+      "command": "cd /workspace 2>/dev/null || cd .; python -m unittest 2>&1 | tail -20",
+      "approved": false
+    },
+    {
+      "scenario": "naive",
+      "command": "git log --oneline -10 2>&1 | head -20",
+      "approved": false
+    },
+    {
+      "scenario": "expert",
+      "command": "python -m unittest",
+      "approved": true
+    },
+    {
+      "scenario": "middle",
+      "command": "cd . && python -m unittest discover -s tests -v 2>&1 | tail -20",
+      "approved": true
+    },
+    {
+      "scenario": "middle",
+      "command": "cd . && python -m library.cli return L-201 --at 2026-03-10T20:00:00-05:00 && python -m library.cli return L-201 --at 2026-03-10T09:00:00-05:00 && python -m library.cli return L-201 --at 2026-03-11T09:00:00-05:00",
+      "approved": false
+    },
+    {
+      "scenario": "naive",
+      "command": "cd . && python -m unittest 2>&1 | tail -30",
+      "approved": true
+    },
+    {
+      "scenario": "naive",
+      "command": "cd . && git log --oneline -12 2>&1 | head -20",
+      "approved": false
+    },
+    {
+      "scenario": "naive",
+      "command": "cd . && python -c \"\nfrom datetime import datetime\nfrom library.storage import load\nfrom library.returns import process_return\nb,i,m,l = load()\n# L-204 HBR (UTC+10) due 2026-03-10\nfor lid, at in [('L-204','2026-03-10T20:00:00+00:00'),('L-201','2026-03-11T02:00:00+00:00'),('L-202','2026-03-11T02:00:00+00:00')]:\n    loan=l[lid]\n    r=process_return(loan,i[loan.item_id],m[loan.member_id],b[loan.branch_id],datetime.fromisoformat(at))\n    print(lid, loan.branch_id, 'due',loan.due_on, 'utc',at, '->', r.returned_on, r.open_days_late, r.fine_cents)\n\"",
+      "approved": false
+    },
+    {
+      "scenario": "naive",
+      "command": "cd . && python -m unittest 2>&1 | tail -20",
+      "approved": true
+    },
+    {
+      "scenario": "naive",
+      "command": "cd . && python -m unittest 2>&1 | tail -20",
+      "approved": true
+    },
+    {
+      "scenario": "expert",
+      "command": "cd . && python -m unittest 2>&1 | tail -20",
+      "approved": true
+    },
+    {
+      "scenario": "expert",
+      "command": "cd . && python -c \"\nfrom datetime import datetime\nfrom library.storage import load\nfrom library.returns import process_return\nbranches, items, members, loans = load()\nfor b in branches.values(): print(b.id, b.utc_offset_minutes)\n\"",
+      "approved": false
+    },
+    {
+      "scenario": "middle",
+      "command": "cd /workspace 2>/dev/null || cd .; python -m unittest discover -s tests -v 2>&1 | tail -20",
+      "approved": false
+    },
+    {
+      "scenario": "naive",
+      "command": "cd /workspace 2>/dev/null || cd .; python -m unittest -v 2>&1 | tail -30",
+      "approved": false
+    },
+    {
+      "scenario": "naive",
+      "command": "python -m unittest -v",
+      "approved": true
+    },
+    {
+      "scenario": "naive",
+      "command": "python -m library.cli return L-201 --at 2026-03-11T02:00:00+00:00 && python -m library.cli return L-204 --at 2026-03-11T09:00:00+00:00 && python -m library.cli notices --at 2026-03-11T02:00:00+00:00",
+      "approved": false
+    },
+    {
+      "scenario": "expert",
+      "command": "python -m unittest 2>&1 | tail -30",
+      "approved": true
+    },
+    {
+      "scenario": "middle",
+      "command": "cd . && python -m unittest -v 2>&1 | tail -20",
+      "approved": true
+    },
+    {
+      "scenario": "middle",
+      "command": "cd . && python -m library.cli return L-201 --at 2026-03-10T20:30:00-05:00 && python -m library.cli return L-201 --at 2026-03-11T20:30:00-05:00",
+      "approved": false
+    },
+    {
+      "scenario": "naive",
+      "command": "cd . && python -m unittest 2>&1 | tail -20",
+      "approved": true
+    },
+    {
+      "scenario": "naive",
+      "command": "cd . && python -m library.cli return L-201 --at 2026-03-11T02:00:00+00:00 && python -m library.cli return L-204 --at 2026-03-10T20:00:00+00:00",
+      "approved": false
+    },
+    {
+      "scenario": "naive",
+      "command": "cd . && python -m unittest 2>&1 | tail -20",
+      "approved": true
+    },
+    {
+      "scenario": "naive",
+      "command": "cd . && git log --oneline -15 2>&1 | head -20",
+      "approved": false
+    },
+    {
+      "scenario": "naive",
+      "command": "cd . && python -c \"\nfrom datetime import datetime\nfrom library.storage import load\nfrom library.returns import process_return\nb,i,m,l = load()\n# Riverside (UTC-5) member returns L-201 on the evening of its due date, local time\nr = process_return(l['L-201'], i['B1'], m['M2'], b['RIV'], datetime.fromisoformat('2026-03-11T02:00:00+00:00'))\nprint('RIV local 2026-03-10 21:00 ->', r.returned_on, r.open_days_late, r.fine_cents)\n# Harbour (UTC+10) member returns L-204 on the morning after its due date, local time\nr = process_return(l['L-204'], i['B3'], m['M4'], b['HBR'], datetime.fromisoformat('2026-03-10T20:00:00+00:00'))\nprint('HBR local 2026-03-11 06:00 ->', r.returned_on, r.open_days_late, r.fine_cents)\n\"",
+      "approved": false
+    },
+    {
+      "scenario": "expert",
+      "command": "python -m unittest 2>&1 | tail -20",
+      "approved": true
+    },
+    {
+      "scenario": "middle",
+      "command": "cd . && python -m unittest -v 2>&1 | tail -20",
+      "approved": true
+    },
+    {
+      "scenario": "middle",
+      "command": "cd . && python -m library.cli return L-201 --at 2026-03-10T20:30:00-05:00 && python -m library.cli return L-201 --at 2026-03-11T09:00:00-05:00",
+      "approved": false
+    },
+    {
+      "scenario": "naive",
+      "command": "cd /workspace 2>/dev/null || cd .; python -m unittest -v 2>&1 | tail -30",
+      "approved": false
+    },
+    {
+      "scenario": "naive",
+      "command": "python -m unittest -v",
+      "approved": true
+    },
+    {
+      "scenario": "naive",
+      "command": "python -c \"\nfrom datetime import datetime\nfrom library.storage import load\nfrom library.returns import process_return\nfrom library.clock import local_day\nfrom library.calendar import open_days_between\n\nbranches, items, members, loans = load()\nfor lid, at in [('L-201','2026-03-11T02:00:00+00:00'), ('L-204','2026-03-10T15:00:00+00:00'), ('L-202','2026-03-11T03:00:00+00:00')]:\n    loan = loans[lid]; b = branches[loan.branch_id]\n    r = process_return(loan, items[loan.item_id], members[loan.member_id], b, datetime.fromisoformat(at))\n    utc_days = open_days_between(b, loan.due_on, datetime.fromisoformat(at).date())\n    print(f'{lid} {b.id} utc_day={datetime.fromisoformat(at).date()} local_day={r.returned_on} | old(utc)={utc_days}d | new(local)={r.open_days_late}d fine={r.fine_cents}c')\n\"",
+      "approved": false
+    },
+    {
+      "scenario": "expert",
+      "command": "cd . && python -m unittest 2>&1 | tail -20",
+      "approved": true
+    },
+    {
+      "scenario": "middle",
+      "command": "cd . && python -m unittest -v 2>&1 | tail -20",
+      "approved": true
+    },
+    {
+      "scenario": "middle",
+      "command": "cd . && python -m library.cli return L-201 --at 2026-03-10T20:00:00-05:00 && python -m library.cli return L-201 --at 2026-03-11T09:00:00-05:00",
+      "approved": false
+    },
+    {
+      "scenario": "naive",
+      "command": "cd . && python -m unittest -v 2>&1 | tail -40",
+      "approved": true
+    },
+    {
+      "scenario": "naive",
+      "command": "cd . && python - <<'EOF'\nfrom datetime import datetime\nfrom library.storage import load\nfrom library.clock import local_day\nfrom library.returns import process_return\n\nbranches, items, members, loans = load()\nfor lid, at in [(\"L-204\",\"2026-03-10T20:00:00+00:00\"),(\"L-201\",\"2026-03-11T02:00:00+00:00\"),(\"L-202\",\"2026-03-11T02:00:00+00:00\")]:\n    loan = loans[lid]; b = branches[loan.branch_id]\n    r = process_return(loan, items[loan.item_id], members[loan.member_id], b, datetime.fromisoformat(at))\n    print(lid, b.id, \"utc_date\", r.returned_on, \"local_date\", local_day(datetime.fromisoformat(at), b), \"late\", r.open_days_late, \"fine\", r.fine_cents)\nEOF",
+      "approved": false
+    },
+    {
+      "scenario": "naive",
+      "command": "cd . && python -m unittest -v 2>&1 | tail -20",
+      "approved": true
+    },
+    {
+      "scenario": "expert",
+      "command": "cd . && python -m unittest 2>&1 | tail -20",
+      "approved": true
+    },
+    {
+      "scenario": "middle",
+      "command": "cd . && python -m unittest discover -s tests -v 2>&1 | tail -20",
+      "approved": true
+    },
+    {
+      "scenario": "middle",
+      "command": "cd . && python -m library.cli return L-201 --at 2026-03-10T20:00:00-05:00 && python -m library.cli return L-201 --at 2026-03-10T09:00:00-05:00",
+      "approved": false
+    },
+    {
+      "scenario": "naive",
+      "command": "cd . && python -m unittest 2>&1 | tail -30",
+      "approved": true
+    },
+    {
+      "scenario": "naive",
+      "command": "cd . && git log --oneline -15 2>&1 | head -20",
+      "approved": false
+    },
+    {
+      "scenario": "naive",
+      "command": "cd . && python -m library.cli return L-201 --at 2026-03-11T02:00:00+00:00; python -m library.cli return L-204 --at 2026-03-10T20:00:00+00:00; python -m library.cli notices --at 2026-03-11T02:00:00+00:00",
+      "approved": false
+    },
+    {
+      "scenario": "naive",
+      "command": "cd . && python -m library.cli return L-201 --at 2026-03-11T02:00:00+00:00",
+      "approved": false
+    },
+    {
+      "scenario": "naive",
+      "command": "cd . && python -m unittest 2>&1 | tail -20",
+      "approved": true
+    },
+    {
+      "scenario": "naive",
+      "command": "cd . && python -c \"\nfrom datetime import datetime\nfrom library.storage import load\nfrom library.returns import process_return\nb,i,m,l = load()\nfor lid, at in [('L-201','2026-03-11T02:00:00+00:00'),('L-202','2026-03-11T02:00:00+00:00'),('L-204','2026-03-10T20:00:00+00:00'),('L-203','2026-03-16T10:00:00+00:00')]:\n    loan=l[lid]\n    r=process_return(loan,i[loan.item_id],m[loan.member_id],b[loan.branch_id],datetime.fromisoformat(at))\n    print(lid, loan.branch_id, 'due',loan.due_on,'returned_on',r.returned_on,'late',r.open_days_late,'fine',r.fine_cents)\n\"",
+      "approved": false
+    },
+    {
+      "scenario": "naive",
+      "command": "cd . && python -m library.cli return L-201 --at 2026-03-11T02:00:00+00:00",
+      "approved": false
+    }
+  ]
+}

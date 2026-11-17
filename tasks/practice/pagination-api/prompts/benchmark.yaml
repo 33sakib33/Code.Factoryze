@@ -1,0 +1,6 @@
+schema: 1
+taskId: pagination-api
+expert:
+  - "Inspect the pagination function and its public test. Check the 1-based page boundaries and the short final page. Make the smallest fix and run the tests."
+naive:
+  - "Fix the pagination bug."

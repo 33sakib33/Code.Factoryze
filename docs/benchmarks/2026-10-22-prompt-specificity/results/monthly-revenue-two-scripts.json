@@ -1,0 +1,622 @@
+{
+  "taskId": "monthly-revenue",
+  "profile": "factoryze@0.1.0",
+  "model": "deepseek/deepseek-v4.1-flash-1017",
+  "temperature": 0,
+  "promptsHash": "d5b7132e919b8379533c590a69b6a1b3ca862f2d33c5a0f7679b7e2a100f3987",
+  "recordedAt": "2026-10-21T21:17:10.359Z",
+  "expert": [
+    {
+      "correctness": {
+        "passed": 9,
+        "total": 9
+      },
+      "raw": {
+        "input": 19910,
+        "output": 1357,
+        "cacheRead": 17024,
+        "cacheWrite": 0
+      },
+      "weightedTokens": 5945.4,
+      "requests": 10,
+      "turns": 1,
+      "elapsedMs": 18391
+    },
+    {
+      "correctness": {
+        "passed": 9,
+        "total": 9
+      },
+      "raw": {
+        "input": 16342,
+        "output": 1069,
+        "cacheRead": 15104,
+        "cacheWrite": 0
+      },
+      "weightedTokens": 3817.4,
+      "requests": 9,
+      "turns": 1,
+      "elapsedMs": 11184
+    },
+    {
+      "correctness": {
+        "passed": 9,
+        "total": 9
+      },
+      "raw": {
+        "input": 18124,
+        "output": 1116,
+        "cacheRead": 16640,
+        "cacheWrite": 0
+      },
+      "weightedTokens": 4264,
+      "requests": 9,
+      "turns": 1,
+      "elapsedMs": 9973
+    },
+    {
+      "correctness": {
+        "passed": 9,
+        "total": 9
+      },
+      "raw": {
+        "input": 7284,
+        "output": 419,
+        "cacheRead": 6784,
+        "cacheWrite": 0
+      },
+      "weightedTokens": 1597.4,
+      "requests": 5,
+      "turns": 1,
+      "elapsedMs": 4169
+    },
+    {
+      "correctness": {
+        "passed": 9,
+        "total": 9
+      },
+      "raw": {
+        "input": 7342,
+        "output": 413,
+        "cacheRead": 5376,
+        "cacheWrite": 0
+      },
+      "weightedTokens": 2916.6,
+      "requests": 5,
+      "turns": 1,
+      "elapsedMs": 8169
+    },
+    {
+      "correctness": {
+        "passed": 9,
+        "total": 9
+      },
+      "raw": {
+        "input": 14129,
+        "output": 946,
+        "cacheRead": 13056,
+        "cacheWrite": 0
+      },
+      "weightedTokens": 3324.6,
+      "requests": 8,
+      "turns": 1,
+      "elapsedMs": 9447
+    },
+    {
+      "correctness": {
+        "passed": 9,
+        "total": 9
+      },
+      "raw": {
+        "input": 7292,
+        "output": 423,
+        "cacheRead": 6912,
+        "cacheWrite": 0
+      },
+      "weightedTokens": 1494.2,
+      "requests": 5,
+      "turns": 1,
+      "elapsedMs": 4998
+    },
+    {
+      "correctness": {
+        "passed": 9,
+        "total": 9
+      },
+      "raw": {
+        "input": 14471,
+        "output": 958,
+        "cacheRead": 13056,
+        "cacheWrite": 0
+      },
+      "weightedTokens": 3678.6,
+      "requests": 8,
+      "turns": 1,
+      "elapsedMs": 8617
+    },
+    {
+      "correctness": {
+        "passed": 9,
+        "total": 9
+      },
+      "raw": {
+        "input": 7346,
+        "output": 508,
+        "cacheRead": 7040,
+        "cacheWrite": 0
+      },
+      "weightedTokens": 1518,
+      "requests": 5,
+      "turns": 1,
+      "elapsedMs": 5350
+    },
+    {
+      "correctness": {
+        "passed": 9,
+        "total": 9
+      },
+      "raw": {
+        "input": 9054,
+        "output": 560,
+        "cacheRead": 8448,
+        "cacheWrite": 0
+      },
+      "weightedTokens": 2010.8,
+      "requests": 6,
+      "turns": 1,
+      "elapsedMs": 7827
+    }
+  ],
+  "naive": [
+    {
+      "correctness": {
+        "passed": 9,
+        "total": 9
+      },
+      "raw": {
+        "input": 44841,
+        "output": 4661,
+        "cacheRead": 22784,
+        "cacheWrite": 0
+      },
+      "weightedTokens": 28996.4,
+      "requests": 10,
+      "turns": 1,
+      "elapsedMs": 59610
+    },
+    {
+      "correctness": {
+        "passed": 9,
+        "total": 9
+      },
+      "raw": {
+        "input": 64289,
+        "output": 3613,
+        "cacheRead": 40704,
+        "cacheWrite": 0
+      },
+      "weightedTokens": 31268.4,
+      "requests": 12,
+      "turns": 1,
+      "elapsedMs": 52752
+    },
+    {
+      "correctness": {
+        "passed": 9,
+        "total": 9
+      },
+      "raw": {
+        "input": 54009,
+        "output": 3072,
+        "cacheRead": 32512,
+        "cacheWrite": 0
+      },
+      "weightedTokens": 27820.2,
+      "requests": 11,
+      "turns": 1,
+      "elapsedMs": 47732
+    },
+    {
+      "correctness": {
+        "passed": 9,
+        "total": 9
+      },
+      "raw": {
+        "input": 44210,
+        "output": 1883,
+        "cacheRead": 30464,
+        "cacheWrite": 0
+      },
+      "weightedTokens": 18675.4,
+      "requests": 10,
+      "turns": 1,
+      "elapsedMs": 25537
+    },
+    {
+      "correctness": {
+        "passed": 9,
+        "total": 9
+      },
+      "raw": {
+        "input": 44440,
+        "output": 3179,
+        "cacheRead": 29184,
+        "cacheWrite": 0
+      },
+      "weightedTokens": 21353.4,
+      "requests": 10,
+      "turns": 1,
+      "elapsedMs": 37654
+    },
+    {
+      "correctness": {
+        "passed": 9,
+        "total": 9
+      },
+      "raw": {
+        "input": 37860,
+        "output": 1738,
+        "cacheRead": 20480,
+        "cacheWrite": 0
+      },
+      "weightedTokens": 21166,
+      "requests": 9,
+      "turns": 1,
+      "elapsedMs": 24576
+    },
+    {
+      "correctness": {
+        "passed": 9,
+        "total": 9
+      },
+      "raw": {
+        "input": 51576,
+        "output": 3617,
+        "cacheRead": 33792,
+        "cacheWrite": 0
+      },
+      "weightedTokens": 24780.2,
+      "requests": 11,
+      "turns": 1,
+      "elapsedMs": 32906
+    },
+    {
+      "correctness": {
+        "passed": 9,
+        "total": 9
+      },
+      "raw": {
+        "input": 55878,
+        "output": 3964,
+        "cacheRead": 33792,
+        "cacheWrite": 0
+      },
+      "weightedTokens": 29429.2,
+      "requests": 11,
+      "turns": 1,
+      "elapsedMs": 37727
+    },
+    {
+      "correctness": {
+        "passed": 9,
+        "total": 9
+      },
+      "raw": {
+        "input": 45538,
+        "output": 5038,
+        "cacheRead": 29184,
+        "cacheWrite": 0
+      },
+      "weightedTokens": 24310.4,
+      "requests": 10,
+      "turns": 1,
+      "elapsedMs": 42948
+    },
+    {
+      "correctness": {
+        "passed": 9,
+        "total": 9
+      },
+      "raw": {
+        "input": 38585,
+        "output": 5929,
+        "cacheRead": 23808,
+        "cacheWrite": 0
+      },
+      "weightedTokens": 23086.8,
+      "requests": 9,
+      "turns": 1,
+      "elapsedMs": 46418
+    }
+  ],
+  "summary": {
+    "expert": {
+      "completed": 10,
+      "failed": 0,
+      "solved": 10,
+      "min": 1494.2,
+      "median": 3120.6,
+      "max": 5945.4,
+      "mean": 3056.7,
+      "stdev": 1374.5
+    },
+    "naive": {
+      "completed": 10,
+      "failed": 0,
+      "solved": 10,
+      "min": 18675.4,
+      "median": 24545.3,
+      "max": 31268.4,
+      "mean": 25088.6,
+      "stdev": 3936.2
+    },
+    "separated": true
+  },
+  "shell": [
+    {
+      "scenario": "expert",
+      "command": "python -m unittest 2>&1 | tail -20",
+      "approved": true
+    },
+    {
+      "scenario": "expert",
+      "command": "python -m unittest -v 2>&1 | tail -20; ls tests 2>/dev/null",
+      "approved": false
+    },
+    {
+      "scenario": "expert",
+      "command": "python -c \"\nfrom billing.storage import load\nfrom billing.promotions import applicable_promotions\ncatalog, customers, orders = load()\na = applicable_promotions(orders[0], customers[orders[0].customer_id])\nb = applicable_promotions(orders[1], customers[orders[1].customer_id])\nprint(len(a), len(b), a is b)\n\"",
+      "approved": false
+    },
+    {
+      "scenario": "naive",
+      "command": "cd . && python -m unittest 2>&1 | tail -40",
+      "approved": true
+    },
+    {
+      "scenario": "naive",
+      "command": "cd . && python -c \"\nfrom billing.storage import load\nfrom billing.promotions import applicable_promotions\ncatalog, customers, orders = load()\no = next(x for x in orders if x.id=='O-1001')\nprint(applicable_promotions(o, customers['C3']))\nprint(applicable_promotions(o, customers['C3']))\nprint(applicable_promotions(o, customers['C3']))\n\"",
+      "approved": false
+    },
+    {
+      "scenario": "naive",
+      "command": "cd . && python -m unittest 2>&1 | tail -20",
+      "approved": true
+    },
+    {
+      "scenario": "naive",
+      "command": "cd . && python -m billing.cli report",
+      "approved": false
+    },
+    {
+      "scenario": "expert",
+      "command": "python -m unittest 2>&1 | tail -20",
+      "approved": true
+    },
+    {
+      "scenario": "expert",
+      "command": "python -m unittest -v 2>&1 | tail -20; ls tests 2>/dev/null",
+      "approved": false
+    },
+    {
+      "scenario": "expert",
+      "command": "python -c \"\nfrom billing.promotions import applicable_promotions\nfrom billing.models import Customer, Order\nimport inspect\nprint(inspect.signature(applicable_promotions))\n\"",
+      "approved": false
+    },
+    {
+      "scenario": "naive",
+      "command": "cd . && python -m unittest -v 2>&1 | tail -40",
+      "approved": true
+    },
+    {
+      "scenario": "naive",
+      "command": "cd . && python -c \"\nfrom billing.storage import load\nfrom billing.promotions import applicable_promotions\nc,cu,orders=load()\nfor o in orders[:4]:\n    print(o.id, applicable_promotions(o, cu[o.customer_id]))\n\"",
+      "approved": false
+    },
+    {
+      "scenario": "naive",
+      "command": "cd . && python -m unittest -v 2>&1 | tail -20",
+      "approved": true
+    },
+    {
+      "scenario": "naive",
+      "command": "cd . && python -m billing.cli report && echo \"---\" && grep -rn \"=\\[\\]\\|={}\\|= \\[\\]\\|= {}\" billing/ || true",
+      "approved": false
+    },
+    {
+      "scenario": "expert",
+      "command": "python -m unittest",
+      "approved": true
+    },
+    {
+      "scenario": "expert",
+      "command": "python -m unittest discover -v 2>&1 | tail -20; ls",
+      "approved": false
+    },
+    {
+      "scenario": "naive",
+      "command": "cd . && python -m unittest -v 2>&1 | tail -40",
+      "approved": true
+    },
+    {
+      "scenario": "naive",
+      "command": "cd . && python -c \"\nfrom billing.storage import load\nfrom billing.promotions import applicable_promotions\nc,cu,orders=load()\nfor o in orders[:4]:\n    print(o.id, applicable_promotions(o,cu[o.customer_id]))\n\"",
+      "approved": false
+    },
+    {
+      "scenario": "naive",
+      "command": "cd . && python -m unittest -v 2>&1 | tail -20",
+      "approved": true
+    },
+    {
+      "scenario": "naive",
+      "command": "cd . && python -m billing.cli report && echo \"---\" && python -m billing.cli invoice O-1002",
+      "approved": false
+    },
+    {
+      "scenario": "expert",
+      "command": "python -m unittest",
+      "approved": true
+    },
+    {
+      "scenario": "naive",
+      "command": "cd . && python -m unittest 2>&1 | tail -40",
+      "approved": true
+    },
+    {
+      "scenario": "naive",
+      "command": "cd . && python -m unittest 2>&1 | tail -30",
+      "approved": true
+    },
+    {
+      "scenario": "naive",
+      "command": "cd . && python -m billing.cli report && python -m billing.cli invoice O-1002",
+      "approved": false
+    },
+    {
+      "scenario": "expert",
+      "command": "python -m unittest",
+      "approved": true
+    },
+    {
+      "scenario": "naive",
+      "command": "cd . && python -m unittest 2>&1 | tail -40",
+      "approved": true
+    },
+    {
+      "scenario": "naive",
+      "command": "cd . && python -c \"\nfrom billing.storage import load\nfrom billing.promotions import applicable_promotions\nc,cu,o = load()\nfor order in o[:4]:\n    print(order.id, applicable_promotions(order, cu[order.customer_id]))\n\"",
+      "approved": false
+    },
+    {
+      "scenario": "naive",
+      "command": "cd . && python -m unittest 2>&1 | tail -20",
+      "approved": true
+    },
+    {
+      "scenario": "naive",
+      "command": "cd . && python -m billing.cli report",
+      "approved": false
+    },
+    {
+      "scenario": "expert",
+      "command": "python -m unittest",
+      "approved": true
+    },
+    {
+      "scenario": "expert",
+      "command": "python -c \"\nfrom billing.storage import load\nfrom billing.promotions import applicable_promotions\ncatalog, customers, orders = load()\nfor o in orders:\n    print(o.id, applicable_promotions(o, customers[o.customer_id]))\n\"",
+      "approved": false
+    },
+    {
+      "scenario": "naive",
+      "command": "cd . && python -m unittest -v 2>&1 | tail -40",
+      "approved": true
+    },
+    {
+      "scenario": "naive",
+      "command": "cd . && python -m unittest -v 2>&1 | tail -30",
+      "approved": true
+    },
+    {
+      "scenario": "naive",
+      "command": "cd . && python -m billing.cli report",
+      "approved": false
+    },
+    {
+      "scenario": "expert",
+      "command": "python -m unittest 2>&1 | tail -20",
+      "approved": true
+    },
+    {
+      "scenario": "naive",
+      "command": "cd . && python -m unittest 2>&1 | tail -40",
+      "approved": true
+    },
+    {
+      "scenario": "naive",
+      "command": "cd . && python -c \"\nfrom billing.storage import load\nfrom billing.invoice import build_invoice\nc,cu,orders=load()\nfor o in orders:\n    i=build_invoice(o,c,cu[o.customer_id])\n    print(o.id,o.placed_on,i.subtotal_cents,i.discount_cents,i.tax_cents)\n\"",
+      "approved": false
+    },
+    {
+      "scenario": "naive",
+      "command": "cd . && python -m unittest 2>&1 | tail -20",
+      "approved": true
+    },
+    {
+      "scenario": "naive",
+      "command": "cd . && python -m billing.cli report",
+      "approved": false
+    },
+    {
+      "scenario": "expert",
+      "command": "python -m unittest",
+      "approved": true
+    },
+    {
+      "scenario": "expert",
+      "command": "python -c \"\nfrom billing.promotions import applicable_promotions\nfrom billing.models import Customer, Order\nc=Customer('c1','A','gold')\no=Order('o1','c1',None,[],__import__('datetime').date(2026,3,1))\nprint(applicable_promotions(o,c))\nprint(applicable_promotions(o,c))\n\"",
+      "approved": false
+    },
+    {
+      "scenario": "naive",
+      "command": "cd . && python -m unittest -v 2>&1 | tail -40",
+      "approved": true
+    },
+    {
+      "scenario": "naive",
+      "command": "cd . && python -c \"\nfrom billing.storage import load\nfrom billing.invoice import build_invoice\nc,cu,o=load()\nfor order in o:\n    inv=build_invoice(order,c,cu[order.customer_id])\n    print(order.id, order.placed_on, inv.subtotal_cents, inv.discount_cents, inv.tax_cents, inv.total_cents)\n\"",
+      "approved": false
+    },
+    {
+      "scenario": "naive",
+      "command": "cd . && python -m unittest -v 2>&1 | tail -20",
+      "approved": true
+    },
+    {
+      "scenario": "naive",
+      "command": "cd . && python -m billing.cli report",
+      "approved": false
+    },
+    {
+      "scenario": "expert",
+      "command": "python -m unittest",
+      "approved": true
+    },
+    {
+      "scenario": "naive",
+      "command": "cd . && python -m unittest 2>&1 | tail -40",
+      "approved": true
+    },
+    {
+      "scenario": "naive",
+      "command": "cd . && python -c \"\nfrom billing.storage import load\nfrom billing.promotions import applicable_promotions\ncatalog, customers, orders = load()\nfor o in orders[:4]:\n    print(o.id, applicable_promotions(o, customers[o.customer_id]))\n\"",
+      "approved": false
+    },
+    {
+      "scenario": "naive",
+      "command": "cd . && python -m unittest 2>&1 | tail -20",
+      "approved": true
+    },
+    {
+      "scenario": "naive",
+      "command": "cd . && python -m billing.cli report",
+      "approved": false
+    },
+    {
+      "scenario": "expert",
+      "command": "python -m unittest 2>&1 | tail -20",
+      "approved": true
+    },
+    {
+      "scenario": "naive",
+      "command": "cd . && python -m unittest 2>&1 | tail -40",
+      "approved": true
+    },
+    {
+      "scenario": "naive",
+      "command": "cd . && python -c \"\nfrom billing.storage import load\nfrom billing.invoice import build_invoice\ncatalog, customers, orders = load()\nfor o in orders:\n    inv = build_invoice(o, catalog, customers[o.customer_id])\n    print(o.id, o.placed_on, 'sub', inv.subtotal_cents, 'disc', inv.discount_cents, 'net', inv.subtotal_cents-inv.discount_cents, 'tax', inv.tax_cents)\n\"",
+      "approved": false
+    }
+  ]
+}

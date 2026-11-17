@@ -1,0 +1,11 @@
+schema: 1
+id: monthly-revenue
+title: Monthly revenue report
+brief: >
+  Finance says the monthly revenue report comes out too low, and the gap is
+  bigger in busier months. Reprinting any single invoice with
+  `python -m billing.cli invoice ORDER_ID` shows the right amount. Fix the
+  report without changing how invoices are priced.
+minimumPython: "3.11"
+timeHintMinutes: 40
+entryFile: billing/report.py

@@ -1,0 +1,13 @@
+
+> factoryze@ factoryze E:\Projects\Factoryze\Factoryze\Factoryze
+> node --experimental-strip-types packages/server/src/cli.ts "--help"
+
+Factoryze lab foundation (draft; no inference or grading)
+  pnpm factoryze server init --data DIR --url https://SERVER:9443 [--openssl PATH]
+  pnpm factoryze server serve --data DIR [--host 127.0.0.1]
+  pnpm factoryze lab create --data DIR --config lab.json
+  pnpm factoryze lab watch LAB --data DIR [--once]
+  pnpm factoryze lab close LAB --data DIR
+  pnpm factoryze lab export LAB --data DIR [--out usage.csv]
+Distribute only DIR/client.json. Protect the entire server state directory.
+Use --host 0.0.0.0 explicitly to accept LAN connections. Docker stays deferred.

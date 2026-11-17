@@ -1,0 +1,11 @@
+unittest.case.FunctionTestCase (test_current_display_name_is_shown) ... ok
+unittest.case.FunctionTestCase (test_empty_workspace_returns_empty_page) ... ok
+unittest.case.FunctionTestCase (test_former_members_keep_their_activity) ... ok
+unittest.case.FunctionTestCase (test_latest_entries_are_first) ... ok
+unittest.case.FunctionTestCase (test_other_workspaces_are_separate) ... ok
+unittest.case.FunctionTestCase (test_page_limit_is_preserved) ... ok
+
+----------------------------------------------------------------------
+Ran 6 tests in 0.003s
+
+OK
