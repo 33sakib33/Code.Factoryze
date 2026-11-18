@@ -21,6 +21,9 @@ initializeServer(join(root,'identity'),'https://localhost:9443');const identity=
 const before=readFileSync(join(repo,'tasks/practice/library-fines/workspace/library/returns.py'),'utf8');
 const fixed=before.replace('from .calendar import open_days_between','from .calendar import open_days_between\nfrom .clock import local_day').replace('returned_on = returned_at.date()','returned_on = local_day(returned_at, branch)');
 let calls=0,app,page,diagnostics='',completed=false;
+// A keychain item created by Node can prompt when the signed macOS app reads it.
+// Solo smoke covers macOS model credentials; preserve this cross-app check on Windows/Linux.
+const byokPreseeded=process.platform!=='darwin';
 const runtime=new LabRuntime(engine,{api:'openai-chat',providerHost:'synthetic.invalid',model:'lab-fixture',contextWindow:32768,maxOutputTokens:2048,provider:{async send(){
  const tool=[{name:'read',arguments:{filePath:'library/returns.py'}},{name:'write',arguments:{filePath:'library/returns.py',content:fixed}},
   {name:'shell',arguments:{command:'python -m unittest discover -s tests'}}][calls++];
@@ -50,7 +53,7 @@ const launch=async()=>{
 };
 const clientDirectory=join(root,'engine','lab-client',createHash('sha256').update(account).digest('hex').slice(0,16));
 try{
- await keytar.setPassword('Factoryze Solo Provider',account,'preserved-lab-test-key');
+ if(byokPreseeded)await keytar.setPassword('Factoryze Solo Provider',account,'preserved-lab-test-key');
  await launch();console.log('Home ready');await page.getByRole('button',{name:'Join a lab',exact:true}).click();let dialog=page.getByRole('dialog',{name:'Join a lab',exact:true});
  await dialog.getByLabel('Lab configuration',{exact:true}).setInputFiles(configPath);await dialog.getByRole('status').getByText(/Server:/).waitFor();
  await dialog.getByLabel('Lab ID',{exact:true}).fill('ui-pilot');await dialog.getByLabel('Student ID',{exact:true}).fill('student-01');await dialog.getByLabel('Join code or recovery token',{exact:true}).fill(code);
@@ -65,7 +68,7 @@ try{
  assert.equal(await dialog.getByRole('textbox').count(),0);await dialog.getByText('Server grading is not enabled.',{exact:false}).waitFor();await dialog.getByRole('button',{name:'Close',exact:true}).last().click();
  await page.screenshot({path:join(output,'attempt.png')});await page.locator('.fz-tb-attempt').getByRole('button',{name:'Submit',exact:true}).click();dialog=page.getByRole('dialog');await dialog.getByRole('button',{name:'Submit',exact:true}).click();
  dialog=page.getByRole('dialog',{name:'Lab submission saved',exact:true});await dialog.waitFor();await dialog.getByText('Submission 1 is saved on the lab server.',{exact:true}).waitFor();await dialog.getByRole('button',{name:'Back to attempt',exact:true}).click();
- assert.equal(engine.overview('ui-pilot').students[0].usage.weighted,48);assert.equal(await keytar.getPassword('Factoryze Solo Provider',account),'preserved-lab-test-key');console.log('Submission saved; restarting');
+ assert.equal(engine.overview('ui-pilot').students[0].usage.weighted,48);if(byokPreseeded)assert.equal(await keytar.getPassword('Factoryze Solo Provider',account),'preserved-lab-test-key');console.log('Submission saved; restarting');
  await app.close();app=undefined;await launch();await page.locator('.fz-home').waitFor();assert.equal(await page.locator('.fz-composer:visible').count(),0);
  await page.getByRole('button',{name:/Continue Library fines/}).click();await page.getByRole('textbox',{name:'Prompt for the agent'}).waitFor();assert.equal(calls,4);
  // Explicit fixture verdict tests release/rendering only. It never executes the private tests.
@@ -76,7 +79,7 @@ try{
  await page.getByRole('button',{name:'View all 9 checks',exact:true}).click();await page.getByRole('dialog',{name:'Hidden-check details'}).getByText('Synthetic fixture check 9',{exact:true}).waitFor();await page.getByRole('button',{name:'Close details',exact:true}).click();
  assert.deepEqual(errors,[]);completed=true;
  const result={passed:true,platform:process.platform,installed:!!process.env.FACTORYZE_SMOKE_EXECUTABLE,viewport:{width:900,height:700},pinnedTLS:true,joinLab:true,pythonPrepared:true,serverBrainLocalHands:true,
-  modelRequests:calls,approvals:2,weightedTokens:48,publicChecks:5,submissionSaved:true,restartToHome:true,sessionResumed:true,readonlyLabSettings:true,byokPreserved:true,instructorReleaseRendered:true,
+  modelRequests:calls,approvals:2,weightedTokens:48,publicChecks:5,submissionSaved:true,restartToHome:true,sessionResumed:true,readonlyLabSettings:true,byokPreserved:byokPreseeded?true:null,instructorReleaseRendered:true,
   gradingVerdictSynthetic:true,checkDetailsModal:true,serverStudentCodeExecutions:0,suggestionsAndPromptScoresAbsent:true,paidModelCalls:0,realEmailsSent:0,pageErrors:errors};
  writeFileSync(join(output,'electron-lab-result.json'),JSON.stringify(result,null,2)+'\n');console.log(JSON.stringify(result));
 }catch(error){writeFileSync(join(output,'diagnostics.log'),diagnostics);await page?.screenshot({path:join(output,'failure.png')}).catch(()=>{});
@@ -85,6 +88,6 @@ try{
  await app?.close().catch(()=>{});await server.disposeLab();server.closeAllConnections();await new Promise(r=>server.close(r));engine.close();
  if(existsSync(clientDirectory)){for(const name of readdirSync(clientDirectory))if(/^(?:[a-f0-9-]{36}|join-[a-f0-9]{64})\.json$/.test(name)){
   const id=JSON.parse(readFileSync(join(clientDirectory,name),'utf8')).id;await keytar.deletePassword('Factoryze Lab Sessions',`${account}:${id}`);}}
- await keytar.deletePassword('Factoryze Solo Provider',account);
+ if(byokPreseeded)await keytar.deletePassword('Factoryze Solo Provider',account);
  if(completed){const scoped=relative(output,root);assert.ok(scoped&&!scoped.startsWith('..')&&!isAbsolute(scoped));rmSync(root,{recursive:true,force:true,maxRetries:10,retryDelay:200});}
 }
