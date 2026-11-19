@@ -1,9 +1,10 @@
 {
   "name": "@factoryze/app",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "private": true,
   "license": "Apache-2.0",
   "productName": "Factoryze",
+  "homepage": "https://code.factoryze.tech",
   "main": "lib/backend/electron-main.js",
   "theia": {
     "target": "electron",
@@ -118,7 +119,9 @@
     },
     "linux": {
       "target": [
-        "AppImage"
+        "AppImage",
+        "deb",
+        "rpm"
       ],
       "category": "Development",
       "icon": "resources/icons/factoryze.png",

@@ -65,7 +65,7 @@ jobs:
           "FACTORYZE_OPENSSL=$labOpenSsl" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
       - name: Install Linux build and smoke prerequisites
         if: runner.os == 'Linux'
-        run: sudo apt-get update && sudo apt-get install -y build-essential pkg-config libx11-dev libxkbfile-dev xvfb libsecret-1-dev dbus-x11 gnome-keyring openssl
+        run: sudo apt-get update && sudo apt-get install -y build-essential pkg-config libx11-dev libxkbfile-dev xvfb libsecret-1-dev dbus-x11 gnome-keyring openssl rpm cpio
       - run: pnpm install --frozen-lockfile
       - run: pnpm test
       - run: pnpm typecheck
@@ -88,7 +88,9 @@ jobs:
           export XDG_DATA_HOME="$factoryze_keyring_dir"
           trap 'rm -rf "$factoryze_keyring_dir"' EXIT
           printf '%s' 'synthetic-smoke-keyring' | gnome-keyring-daemon --unlock --components=secrets > /dev/null
-          xvfb-run -a pnpm --filter @factoryze/app smoke:installer
+          for factoryze_format in AppImage deb rpm; do
+            FACTORYZE_LINUX_INSTALLER="$factoryze_format" xvfb-run -a pnpm --filter @factoryze/app smoke:installer
+          done
           SH
       - uses: actions/upload-artifact@v4
         with:
@@ -97,6 +99,8 @@ jobs:
             dist/*.dmg
             dist/*.exe
             dist/*.AppImage
+            dist/*.deb
+            dist/*.rpm
           if-no-files-found: error
           retention-days: 14
 
