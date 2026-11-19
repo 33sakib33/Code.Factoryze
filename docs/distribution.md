@@ -4,7 +4,7 @@ The `Build release installers` GitHub Actions workflow packages the desktop app 
 
 ## Prepare a release
 
-1. Confirm the release gates in [Phase 1](phase-1.md#release-evidence) are complete and reviewed. The current preview is unreleased; do not tag it as a public release before those gates are cleared.
+1. Review the package and smoke results in [Phase 1](phase-1.md#release-evidence), and record any manual checks still open. Public early previews are not classroom-ready releases.
 2. Set `packages/app/package.json` to the intended desktop version. The tag must match it exactly, with a `v` prefix. For example, package version `0.1.0` requires tag `v0.1.0`.
 3. Merge the approved source to the branch intended for release.
 4. Create and push the matching tag:

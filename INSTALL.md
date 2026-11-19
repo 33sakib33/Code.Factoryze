@@ -1,6 +1,6 @@
 # Install the solo preview
 
-This is an unreleased preview built from this checkout. It needs Python 3.11 or newer installed separately. See [the release checklist](docs/phase-1.md) for verified OS builds and remaining manual checks.
+Factoryze is distributed as an unsigned early preview. It needs Python 3.11 or newer installed separately. Published installers are on [GitHub Releases](https://github.com/33sakib33/Code.Factoryze/releases); this checkout can build the current source. See [the release checklist](docs/phase-1.md) for verified OS builds and remaining manual checks.
 
 Status reconciled 2026-10-24: installed smoke receipts pass on Windows, Linux and macOS arm64. Windows/Linux real-provider workflows, downloaded-artifact Gatekeeper/SmartScreen/direct AppImage launch checks, and recorded human review remain open. Automated extraction/install smoke does not establish those manual results. No new installer was built for this documentation update.
 
@@ -20,7 +20,7 @@ Run the Factoryze `.exe` installer and follow its prompts. For an expected Micro
 
 ## Linux
 
-Choose the package for your distribution: `.deb` for Debian/Ubuntu/Mint, `.rpm` for Fedora/RHEL/openSUSE, or `.AppImage` for a portable launch. The `v0.0.2` release has only an AppImage; Debian and RPM packages first appear in a later release once its Linux build and smoke checks pass. Install a downloaded Debian package with `sudo apt install ./Factoryze-*.deb`, or a Fedora RPM with `sudo dnf install ./Factoryze-*.rpm`. For other RPM distributions, use their native package manager. To use the AppImage, make it executable using file properties or `chmod +x /path/to/Factoryze.AppImage`, then launch it. AppImage runtime/FUSE support depends on your distribution; see the [AppImage FUSE guidance](https://docs.appimage.org/user-guide/troubleshooting/fuse.html) if it does not start.
+Choose the package for your distribution: `.deb` for Debian/Ubuntu/Mint, `.rpm` for Fedora/RHEL/openSUSE, or `.AppImage` for a portable launch. The published `v0.0.2` release has only an AppImage; builds from `v0.0.3` onward also produce Debian and RPM packages. Install a downloaded Debian package with `sudo apt install ./Factoryze-*.deb`, or a Fedora RPM with `sudo dnf install ./Factoryze-*.rpm`. For other RPM distributions, use their native package manager. To use the AppImage, make it executable using file properties or `chmod +x /path/to/Factoryze.AppImage`, then launch it. If it reports `error loading libfuse.so.2`, install `libfuse2t64` on Ubuntu 24.04 or later (`libfuse2` on Ubuntu 22.04), then retry. See the [AppImage FUSE guidance](https://docs.appimage.org/user-guide/troubleshooting/fuse.html) for other distributions and an extraction fallback.
 
 Python must include both `venv` and `ensurepip`. The start sheet checks these before enabling Start. On Debian/Ubuntu, install the package matching the detected Python version, for example `sudo apt-get install python3.11-venv` for Python 3.11, then click Check again. Other distributions package this support differently.
 
