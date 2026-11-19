@@ -4,6 +4,7 @@
   "private": true,
   "license": "Apache-2.0",
   "productName": "Factoryze",
+  "description": "Desktop editor for Factoryze coding challenges",
   "homepage": "https://code.factoryze.tech",
   "main": "lib/backend/electron-main.js",
   "theia": {
@@ -124,6 +125,7 @@
         "rpm"
       ],
       "category": "Development",
+      "maintainer": "Factoryze <33sakib33@users.noreply.github.com>",
       "icon": "resources/icons/factoryze.png",
       "executableName": "factoryze"
     },
