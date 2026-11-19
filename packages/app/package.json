@@ -119,6 +119,7 @@
       "icon": "resources/icons/factoryze.ico"
     },
     "linux": {
+      "artifactName": "Factoryze-${version}-${arch}.${ext}",
       "target": [
         "AppImage",
         "deb",
