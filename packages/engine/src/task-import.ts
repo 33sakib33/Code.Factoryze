@@ -4,6 +4,7 @@ import { basename, join } from 'node:path';
 import { parse } from 'yaml';
 import { taskPackSchema, type TaskPack } from '@factoryze/protocol';
 import { open, type ZipFile, type Entry } from 'yauzl';
+import { packTestFiles, type TestFileRecord } from './test-files.ts';
 
 type Limits = { maxBytes?: number; maxFiles?: number };
 function safePath(path: string): string {
@@ -13,8 +14,26 @@ function safePath(path: string): string {
   return parts.join('/');
 }
 
-/** Import data only. Never run setup hooks or install dependencies supplied by a pack. */
-export async function importTaskPack(source: string, storage: string, limits: Limits = {}): Promise<{ task: TaskPack; packRoot: string }> {
+/** Import data only. Never run setup hooks or install dependencies supplied by a pack.
+ * `tests` describes the pack's own test files as read from the source, before anything is written to disk. */
+export async function importTaskPack(source: string, storage: string, limits: Limits = {}): Promise<{ task: TaskPack; packRoot: string; tests: TestFileRecord }> {
+  const { task, content } = await readTaskPack(source, limits);
+  const tests = packTestFiles(content);
+  const digest = createHash('sha256');
+  for (const [path, bytes] of content) { digest.update(JSON.stringify([path, bytes.length])); digest.update(bytes); }
+  await mkdir(storage, { recursive: true, mode: 0o700 });
+  const packRoot = join(storage, digest.digest('hex'));
+  try { if ((await lstat(packRoot)).isDirectory()) return { task, packRoot, tests }; } catch (error) { if ((error as NodeJS.ErrnoException).code !== 'ENOENT') throw error; }
+  const staging = await mkdtemp(join(storage, '.import-'));
+  try {
+    for (const [path, bytes] of content) { const target = join(staging, task.id, path); await mkdir(join(target, '..'), { recursive: true, mode: 0o700 }); await writeFile(target, bytes, { mode: 0o600, flag: 'wx' }); }
+    try { await rename(staging, packRoot); } catch (error) { if (!['EEXIST', 'ENOTEMPTY'].includes((error as NodeJS.ErrnoException).code ?? '')) throw error; }
+    return { task, packRoot, tests };
+  } finally { await rm(staging, { recursive: true, force: true }); }
+}
+
+/** Validates a task folder or ZIP and returns its files relative to the pack root, sorted by path. Nothing is written. */
+export async function readTaskPack(source: string, limits: Limits = {}): Promise<{ task: TaskPack; content: (readonly [string, Buffer])[] }> {
   const maxBytes = limits.maxBytes ?? 20 * 1024 * 1024, maxFiles = limits.maxFiles ?? 2000;
   const files = new Map<string, Buffer>(); const names = new Set<string>(); let size = 0, count = 0;
   const add = (path: string, bytes: Buffer): void => {
@@ -74,15 +93,5 @@ export async function importTaskPack(source: string, storage: string, limits: Li
   if (!content.some(([path]) => path.startsWith('workspace/'))) throw new Error('Task has no starter workspace files');
   if (content.some(([path]) => /^workspace\/(\.venv|\.git)(\/|$)/.test(path))) throw new Error('Task workspace cannot contain .venv or .git');
   if (task.entryFile && !content.some(([path]) => path === `workspace/${task.entryFile}`)) throw new Error('Task entryFile is missing from workspace');
-  const digest = createHash('sha256');
-  for (const [path, bytes] of content) { digest.update(JSON.stringify([path, bytes.length])); digest.update(bytes); }
-  await mkdir(storage, { recursive: true, mode: 0o700 });
-  const packRoot = join(storage, digest.digest('hex'));
-  try { if ((await lstat(packRoot)).isDirectory()) return { task, packRoot }; } catch (error) { if ((error as NodeJS.ErrnoException).code !== 'ENOENT') throw error; }
-  const staging = await mkdtemp(join(storage, '.import-'));
-  try {
-    for (const [path, bytes] of content) { const target = join(staging, task.id, path); await mkdir(join(target, '..'), { recursive: true, mode: 0o700 }); await writeFile(target, bytes, { mode: 0o600, flag: 'wx' }); }
-    try { await rename(staging, packRoot); } catch (error) { if (!['EEXIST', 'ENOTEMPTY'].includes((error as NodeJS.ErrnoException).code ?? '')) throw error; }
-    return { task, packRoot };
-  } finally { await rm(staging, { recursive: true, force: true }); }
+  return { task, content };
 }

@@ -5,13 +5,17 @@ import { join } from 'node:path';
 import { realpath, stat } from 'node:fs/promises';
 import { labConfigSchema, gatewayConnectionSchema, providerApi, providerBaseURL, practiceReportSchema, practiceWorkspaceSchema, factoryzePublicModelMessage, executionPinSchema, temperatureSchema,
   promptAssessmentSchema, attemptSummarySchema, reportSummarySchema, type AttemptSummary, type ReportSummary, type PromptAssessment, type JudgeVerdict, type Reconciliation,
-  type BaselineComparison, type GatewayConnection, type LabConfig, type UsageTotals, type FactoryzeEvent, type WorkspaceUsage } from '@factoryze/protocol';
+  type BaselineComparison, type GatewayConnection, type LabConfig, type UsageTotals, type FactoryzeEvent, type WorkspaceUsage,
+  type DesktopResultInput, type HostedResultView, type PracticeReport } from '@factoryze/protocol';
 import { createGateway } from '#gateway';
 import { HttpProvider, type ProviderConfig } from '#provider';
 import { TrialProvider } from '#trial-provider';
 import { UsageStore, AccountingError } from '#usage-store';
 import { startPracticeTask, listPracticeTasks } from '#tasks';
-import { importTaskPack } from '#task-import';
+import { importTaskPack, readTaskPack } from '#task-import';
+import { HostedAttemptStore, DEFAULT_BUDGET_TOKENS, hostedResultFacts, solutionFiles, type HostedAttempt } from './hosted-results.ts';
+import { restoreTestFiles, testFilesUnchanged } from './test-files.ts';
+export type { HostedAttempt } from './hosted-results.ts';
 import { preparePythonEnvironment, findPython } from '#python';
 import { gradePracticeTask, runPracticeTests } from '#grader';
 import { compareWithExpertBaseline, loadBenchmarkBaseline } from '#baseline';
@@ -63,6 +67,7 @@ export class SoloEngine {
   private readonly options: { dataDir: string; userId: string; settings?: SoloSettings;
     preparePython?: (workspace: string, minimum: string) => Promise<unknown>; grade?: typeof gradePracticeTask; judge?: JudgeRunner };
   private readonly store: UsageStore;
+  private readonly hosted: HostedAttemptStore;
   private readonly sessions = new Set<MeteredSession>();
   private closed = false;
   private packageIndex?: ReturnType<typeof startPackageIndex>;
@@ -73,6 +78,7 @@ export class SoloEngine {
     const file = join(options.dataDir, 'usage.sqlite');
     this.store = new UsageStore(file);
     chmodSync(file, 0o600);
+    this.hosted = new HostedAttemptStore(join(options.dataDir, 'hosted-attempts.json'));
   }
   async startTask(packRoot: string, taskId: string, workspacesRoot: string) {
     const prepare = this.options.preparePython ?? preparePythonEnvironment;
@@ -88,6 +94,71 @@ export class SoloEngine {
     const packRoot = await realpath(imported.packRoot);
     this.store.assertTaskSource(this.options.userId, imported.task.id, packRoot);
     return this.startTask(packRoot, imported.task.id, workspacesRoot);
+  }
+  /** Imports a verified hosted archive and records its version and test-file digest for this attempt. */
+  async startHostedTask(archive: string, workspacesRoot: string, hosted: { sha256: string; archiveBytes: number }) {
+    const imported = await importTaskPack(archive, join(this.options.dataDir, 'task-packs'));
+    const packRoot = await realpath(imported.packRoot);
+    this.store.assertTaskSource(this.options.userId, imported.task.id, packRoot);
+    const started = await this.startTask(packRoot, imported.task.id, workspacesRoot);
+    await this.hosted.add({ attemptId: this.store.attemptId(started.workspace, this.options.userId), workspace: started.workspace,
+      taskId: imported.task.id, packSha256: hosted.sha256, archiveBytes: hosted.archiveBytes,
+      budgetTokens: imported.task.budgetTokens ?? DEFAULT_BUDGET_TOKENS, tests: imported.tests });
+    return started;
+  }
+  /** The hosted record for an attempt, or undefined for bundled, imported and older attempts. */
+  async hostedAttempt(workspace: string): Promise<HostedAttempt | undefined> {
+    const resolved = await realpath(workspace);
+    let attemptId: string;
+    try { attemptId = this.store.attemptId(resolved, this.options.userId); } catch { return undefined; }
+    const attempt = await this.hosted.get(attemptId);
+    return attempt?.workspace === resolved ? attempt : undefined;
+  }
+  private async hostedPack(workspace: string): Promise<{ attempt: HostedAttempt; packDir: string; resolved: string }> {
+    const attempt = await this.hostedAttempt(workspace);
+    if (!attempt) throw new Error('This attempt did not start from a hosted task.');
+    const resolved = await realpath(workspace);
+    const { packRoot } = this.store.workspace(resolved, this.options.userId);
+    if (!packRoot) throw new Error('This attempt has no stored task copy.');
+    return { attempt, packDir: join(packRoot, attempt.taskId), resolved };
+  }
+  /** Recompute the test-file digest: hidden tests in the stored pack and the shipped public tests in the workspace. */
+  async hostedTestFiles(workspace: string): Promise<'unchanged' | 'edited'> {
+    const { attempt, packDir, resolved } = await this.hostedPack(workspace);
+    return await testFilesUnchanged(attempt.tests, packDir, resolved) ? 'unchanged' : 'edited';
+  }
+  /** Restore test files from a freshly downloaded and verified archive of the same version. */
+  async restoreHostedTests(workspace: string, archive: string): Promise<void> {
+    const { attempt, packDir, resolved } = await this.hostedPack(workspace);
+    const { task, content } = await readTaskPack(archive);
+    if (task.id !== attempt.taskId) throw new Error('The downloaded task does not match this attempt.');
+    await restoreTestFiles(content, attempt.tests, packDir, resolved);
+  }
+  /** Facts and, when eligible, the exact result body for one saved submission. The solution is read only with consent. */
+  async hostedResultPlan(workspace: string, report: PracticeReport, includeSolution: boolean) {
+    const { attempt, packDir, resolved } = await this.hostedPack(workspace);
+    const plan = hostedResultFacts(attempt, report);
+    let solutionNote: string | undefined;
+    if (plan.payload && includeSolution) {
+      const files = await solutionFiles(join(packDir, 'workspace'), resolved);
+      if (files === null) solutionNote = 'Your solution was larger than the upload limit, so it was not included.';
+      else if (!files.length) solutionNote = 'No changed text files were found, so no solution was included.';
+      else plan.payload = { ...plan.payload, solution: { files } };
+    }
+    return { attempt, ...plan, ...(solutionNote ? { solutionNote } : {}) };
+  }
+  async saveHostedResult(workspace: string, submission: number, view: HostedResultView, options: { payload?: DesktopResultInput; sent?: boolean } = {}) {
+    const attempt = await this.hostedAttempt(workspace);
+    if (!attempt) throw new Error('This attempt did not start from a hosted task.');
+    await this.hosted.update(data => {
+      const record = data.attempts[attempt.attemptId]!;
+      record.results[String(submission)] = { view, ...(options.payload ? { payload: options.payload } : {}) };
+      if (options.sent) record.sent = { submission };
+    });
+  }
+  async submissionCount(workspace: string): Promise<number> { return this.store.reports(await realpath(workspace), this.options.userId).length; }
+  async hostedResult(workspace: string, submission: number): Promise<{ view: HostedResultView; payload?: DesktopResultInput } | undefined> {
+    return (await this.hostedAttempt(workspace))?.results[String(submission)];
   }
   assertConnectionIdle(): void { if([...this.sessions].some(s=>s.promptActive?.()))throw new Error('Wait for the current prompt to finish or press Stop before changing the model connection.'); }
   async setTaskBudget(workspace: string, limit: number | null, defaultLimit = 100_000) {

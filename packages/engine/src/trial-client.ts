@@ -1,6 +1,7 @@
 import { createHash } from 'node:crypto';
 import { rm, writeFile } from 'node:fs/promises';
-import { taskPackSchema, trialAccountSchema, trialModelSchema, type TaskPack, type TrialModel } from '@factoryze/protocol';
+import { desktopResultInputSchema, desktopResultResponseSchema, taskPackSchema, trialAccountSchema, trialModelSchema,
+ type DesktopResultInput, type DesktopResultResponse, type TaskPack, type TrialModel } from '@factoryze/protocol';
 
 /** A task published by the service's administrators; its archive must match `sha256` exactly. */
 export type HostedTask = TaskPack & { sha256: string; archiveBytes: number };
@@ -15,9 +16,16 @@ const messages: Record<string,string> = {
  trial_unavailable: 'Trial credit is unavailable. Check enrollment, expiry and remaining credit.',
  email_login_not_configured: 'Email sign-in is not enabled on this trial service.',
  hosted_task_unavailable: 'This task is no longer published. Return to Home to see the current list.',
- hosted_task_corrupt: 'The downloaded task did not match the published version. Try again.'
+ hosted_task_corrupt: 'The downloaded task did not match the published version. Try again.',
+ task_version_mismatch: 'This task changed on the service since you downloaded it, so the result was not sent. Start a new attempt to compete on the current version.',
+ token_mismatch: 'The service could not match this attempt\'s token count or model with its own records, so the result was not counted.',
+ result_exists: 'A different result was already sent for this attempt.',
+ result_limit_reached: 'You have sent the maximum number of results for today. Try again tomorrow.',
+ invalid_result: 'The service did not accept this result.'
 };
-export class TrialError extends Error { readonly code:string; constructor(code:string) { super(messages[code] ?? 'The trial service is unavailable. Try again later.'); this.code=code; } }
+export class TrialError extends Error { readonly code:string; readonly status?:number; constructor(code:string,status?:number) { super(messages[code] ?? 'The trial service is unavailable. Try again later.'); this.code=code; this.status=status; } }
+/** Outcome of sending one hosted result. `unavailable` covers 404/503, other 5xx and network failures, which are shown quietly. */
+export type ResultSubmission = { kind:'recorded'; response:DesktopResultResponse } | { kind:'unavailable' } | { kind:'sign_in' } | { kind:'rejected'; code:string; message:string };
 export function trialOrigin(value: string): string {
  const url=new URL(value);
  if(url.username||url.password||url.search||url.hash||!['','/'].includes(url.pathname)||
@@ -34,10 +42,10 @@ export class TrialClient {
   const reader=res.body?.getReader();let raw='';let bytes=0;const decoder=new TextDecoder();
   try {if(reader)for(;;){const {done,value}=await reader.read();if(done)break;bytes+=value.byteLength;if(bytes>maxBytes)throw new TrialError('service_unavailable');raw+=decoder.decode(value,{stream:true});}raw+=decoder.decode();}
   finally {await reader?.cancel().catch(()=>{});reader?.releaseLock();}
-  let data:Record<string,any>;try{data=JSON.parse(raw);}catch{throw new TrialError('service_unavailable');}
+  let data:Record<string,any>;try{data=JSON.parse(raw);}catch{throw new TrialError('service_unavailable',res.status);}
   if(!res.ok){
    const code=typeof data.error?.code==='string'?data.error.code:'service_unavailable';
-   throw new TrialError(res.status===401&&!['invalid_or_expired_code','access_revoked'].includes(code)?'authentication_required':code);
+   throw new TrialError(res.status===401&&!['invalid_or_expired_code','access_revoked'].includes(code)?'authentication_required':code,res.status);
   }
   return data;
  }
@@ -98,6 +106,21 @@ export class TrialClient {
     result.push({...parsed.data,sha256,archiveBytes:archiveBytes as number});
   }
   return result;
+ }
+ /** Sends one self-reported result for a hosted attempt. Never throws for service or network conditions. */
+ async submitResult(token:string,input:DesktopResultInput):Promise<ResultSubmission> {
+  const body=desktopResultInputSchema.parse(input);
+  try{
+   const data=await this.call('/results',token,body,undefined,65536,'POST');
+   const parsed=desktopResultResponseSchema.safeParse(data);
+   return parsed.success?{kind:'recorded',response:parsed.data}:{kind:'unavailable'};
+  }catch(error){
+   if(!(error instanceof TrialError))return {kind:'unavailable'};
+   if(error.status===401||error.code==='authentication_required'||error.code==='access_revoked')return {kind:'sign_in'};
+   if(error.status===409||error.status===429||(error.status===400&&error.code==='invalid_result'))
+    return {kind:'rejected',code:error.code,message:messages[error.code]??'The service did not accept this result.'};
+   return {kind:'unavailable'};
+  }
  }
  /** Downloads a hosted task's archive and writes it only if its size and SHA-256 match the catalog entry. */
  async downloadTask(token:string,task:HostedTask,destination:string,signal?:AbortSignal):Promise<void> {

@@ -11,6 +11,7 @@ import { ModelSettingsStore } from './model-settings';
 import type { Reconciliation } from '@factoryze/protocol';
 import { isModelConfigured, type LabDesktopJoin } from '@factoryze/protocol';
 import { desktopResultShareInput } from './report-publication';
+import { gradeAndSync, retryHostedResult } from './hosted-result-sync';
 
 function taskRoot(): string {
   const candidates = [
@@ -95,7 +96,7 @@ export class TaskBackendService implements TaskService {
     try {
       const archive = join(folder, `${task.id}.zip`);
       await this.modelSettings.trial.downloadHostedTask(task, archive);
-      return await getSoloEngine().importTask(archive, sessionsRoot);
+      return await getSoloEngine().startHostedTask(archive, sessionsRoot, task);
     } finally { await rm(folder, { recursive: true, force: true }); }
   }
 
@@ -105,10 +106,38 @@ export class TaskBackendService implements TaskService {
   async setTaskBudget(workspace: string, limit: number | null) { if(this.modelSettings.lab.has(workspace))throw Error('The instructor controls lab budgets.');return getSoloEngine().setTaskBudget(workspace, limit, await this.defaultBudget()); }
   private async defaultBudget(): Promise<number> { return (await this.modelSettings.load().catch(() => null))?.budgetTokens ?? 100_000; }
 
-  async submit(workspace: string) {
+  async submit(workspace: string, options: { includeSolution?: boolean } = {}) {
     if(this.modelSettings.lab.has(workspace))throw Error('Use lab submission; hidden checks run on the lab server.');
     const scoring = process.env.FACTORYZE_PROVIDER_URL ? process.env.FACTORYZE_SCORING_ENABLED === '1' : (await this.modelSettings.load())?.modules?.scoring ?? false;
-    return getSoloEngine().submitTask(taskRoot(), workspace, scoring);
+    return gradeAndSync(getSoloEngine(), this.modelSettings.trial, workspace, () => getSoloEngine().submitTask(taskRoot(), workspace, scoring),
+      { includeSolution: options.includeSolution === true });
+  }
+  async hostedSubmitInfo(workspace: string) {
+    if (this.modelSettings.lab.has(workspace)) return null;
+    const attempt = await getSoloEngine().hostedAttempt(workspace).catch(() => undefined);
+    if (!attempt) return null;
+    return { signedIn: await this.modelSettings.trial.signedIn(), ...(attempt.sent ? { sentSubmission: attempt.sent.submission } : {}) };
+  }
+  async hostedResult(workspace: string, submission: number) {
+    if (this.modelSettings.lab.has(workspace)) return null;
+    return (await getSoloEngine().hostedResult(workspace, submission).catch(() => undefined))?.view ?? null;
+  }
+  retryHostedResult(workspace: string, submission: number) {
+    if (this.modelSettings.lab.has(workspace)) return Promise.resolve(null);
+    return retryHostedResult(getSoloEngine(), this.modelSettings.trial, workspace, submission);
+  }
+  async restoreHostedTests(workspace: string) {
+    const engine = getSoloEngine();
+    const attempt = await engine.hostedAttempt(workspace);
+    const info = await engine.workspaceInfo(taskRoot(), workspace, await this.defaultBudget());
+    if (!attempt || !info) throw new Error('This attempt did not start from a hosted task.');
+    // The same verified download as Start: size and SHA-256 must match the version this attempt began with.
+    const folder = await mkdtemp(join(tmpdir(), 'factoryze-hosted-'));
+    try {
+      const archive = join(folder, `${attempt.taskId}.zip`);
+      await this.modelSettings.trial.downloadHostedTask({ ...info.task, sha256: attempt.packSha256, archiveBytes: attempt.archiveBytes }, archive);
+      await engine.restoreHostedTests(workspace, archive);
+    } finally { await rm(folder, { recursive: true, force: true }); }
   }
   async latestReport(workspace: string) { if(this.modelSettings.lab.has(workspace)){const reports=this.modelSettings.lab.reportSummaries().filter(report=>report.workspace===workspace);return reports.length?this.modelSettings.lab.report(workspace,reports.length):null;}return getSoloEngine().latestReport(workspace); }
   async workspaceInfo(workspace: string) { return this.modelSettings.lab.has(workspace)?this.modelSettings.lab.workspaceInfo(workspace):getSoloEngine().workspaceInfo(taskRoot(), workspace, await this.defaultBudget()); }

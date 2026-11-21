@@ -1,11 +1,12 @@
 import { BaseWidget } from '@theia/core/lib/browser/widgets/widget';
-import type { DesktopResultShareState, PracticeReport } from '@factoryze/protocol';
+import type { DesktopResultShareState, HostedResultView, PracticeReport } from '@factoryze/protocol';
 import type { Message } from '@theia/core/shared/@lumino/messaging';
 import { button, el } from './dom';
 import { submittedLabel, tokens } from './flow-model';
 import { renderReportFacts, renderReportLearning, renderReportPrompts } from './report-learning-section';
 import { renderReportResult, type ReportResult } from './report-result';
 import { reportShareCard, reportShareSummary } from './report-share';
+import { hostedResultCopy } from './hosted-result-copy';
 
 export type ReportView = {
   report: PracticeReport; workspace: string; title: string; attempt: number; submission: number; submissions: number;
@@ -15,7 +16,11 @@ export type ReportActions = { back(): void; keepWorking(): void; newAttempt(task
   shareStatus(workspace:string,submission:number):Promise<DesktopResultShareState>;
   publishShare(workspace:string,submission:number):Promise<DesktopResultShareState>;
   revokeShare(workspace:string,submission:number):Promise<void>;
-  signInForSharing():void };
+  signInForSharing():void;
+  hostedResult(workspace:string,submission:number):Promise<HostedResultView|null>;
+  retryHostedResult(workspace:string,submission:number):Promise<HostedResultView|null>;
+  /** Restores the attempt's test files, then offers to submit again. */
+  restoreTests(workspace:string):Promise<void> };
 
 /** A saved submission. It reads as a result first, then the numbers, then each prompt. */
 export class FactoryzeReportWidget extends BaseWidget {
@@ -23,6 +28,7 @@ export class FactoryzeReportWidget extends BaseWidget {
   private readonly content = el('div', { class: 'fz-page-inner fz-report-content' });
   private result?: ReportResult;
   private shareGeneration = 0;
+  private hostedGeneration = 0;
   constructor(private readonly actions: ReportActions) {
     super();
     this.id = FactoryzeReportWidget.ID;
@@ -45,6 +51,7 @@ export class FactoryzeReportWidget extends BaseWidget {
     this.closeCheckDetails();
     this.result = renderReportResult(report);
     const share = !report.lab ? this.renderShare(view) : null;
+    const hosted = !report.lab ? this.renderHosted(view) : null;
 
     const picker = view.submissions > 1 ? el('select', { class: 'fz-input', aria: { label: 'Submission' },
       on: { change: event => this.actions.submission(Number((event.target as HTMLSelectElement).value)) } },
@@ -59,6 +66,7 @@ export class FactoryzeReportWidget extends BaseWidget {
           el('p', { text: report.lab?`Submitted ${submittedLabel(report.submittedAt)}. Lab ${report.lab.id}; released by your instructor.`:`Submitted ${submittedLabel(report.submittedAt)}. Practice result, not checked by an instructor.` })),
         picker ? el('label', { class: 'fz-field' }, el('span', { class: 'fz-muted', text: 'Showing' }), picker) : null),
       this.result.node,
+      hosted,
       el('section', { class: 'fz-report-next', aria: { label: 'Next step' } },
         el('div', {}, el('h2', { text: 'What next?' }),
           el('p', { text: report.correctness.passed === report.correctness.total
@@ -85,6 +93,50 @@ export class FactoryzeReportWidget extends BaseWidget {
       el('div', { class: 'fz-report-actions' },
         button('Back to Home', () => this.actions.home(), { kind: 'quiet' }))].filter((node): node is NonNullable<typeof node> => !!node));
     this.node.scrollTop = 0;
+  }
+
+  /** Hosted tasks only: whether this result was sent to the leaderboard. Empty and hidden for every other attempt. */
+  private renderHosted(view: ReportView): HTMLElement {
+    const generation = ++this.hostedGeneration;
+    const section = el('section', { class: 'fz-report-hosted fz-card', aria: { label: 'Leaderboard result' }, hidden: true });
+    const show = (state: HostedResultView): void => {
+      if (this.hostedGeneration !== generation) return;
+      const copy = hostedResultCopy(state);
+      const status = el('p', { class: 'fz-help', role: 'status', aria: { live: 'polite' } });
+      const fact = (label: string, value: string) => [el('dt', { text: label }), el('dd', { text: value })];
+      const bar = el('span'); bar.style.width = `${copy.percentUsed ?? 0}%`;
+      let action: HTMLElement | null = null;
+      if (copy.action === 'leaderboard' && state.sync.status === 'sent') {
+        const link = el('a', { class: 'fz-btn fz-primary', text: 'See the leaderboard' });
+        link.href = state.sync.leaderboardURL; link.target = '_blank'; link.rel = 'noopener noreferrer'; action = link;
+      } else if (copy.action === 'restore') {
+        const restore = button('Restore tests and run again', () => void (async () => {
+          restore.disabled = true; status.textContent = 'Downloading the task and restoring its test files…';
+          try { await this.actions.restoreTests(view.workspace); status.textContent = 'Test files restored.'; }
+          catch (error) { status.textContent = error instanceof Error ? error.message : 'Could not restore the test files.'; restore.disabled = false; }
+        })(), { kind: 'primary' });
+        action = restore;
+      } else if (copy.action === 'retry') {
+        const retry = button('Try sending again', () => void (async () => {
+          retry.disabled = true; status.textContent = 'Sending…';
+          try { const next = await this.actions.retryHostedResult(view.workspace, view.submission); if (next) show(next); else status.textContent = ''; }
+          catch { status.textContent = 'Still not sent. Your local result is saved.'; retry.disabled = false; }
+        })());
+        action = retry;
+      } else if (copy.action === 'sign-in') action = button('Sign in', () => this.actions.signInForSharing());
+      section.replaceChildren(...[
+        el('div', { class: 'fz-row-between' }, el('h2', { text: 'Leaderboard result' }), el('strong', { class: `fz-report-hosted-head fz-tag ${copy.tone === 'ok' ? 'fz-good' : copy.tone === 'bad' ? 'fz-bad' : ''}`.trim(), text: copy.headline })),
+        el('p', { class: 'fz-report-hosted-tokens', text: copy.tokens }),
+        copy.percentUsed === null ? null : el('div', { class: 'fz-report-hosted-bar', role: 'img', aria: { label: `${copy.percentUsed} percent of the token budget used` } }, bar),
+        el('dl', { class: 'fz-kv' }, ...fact('Model', copy.model), ...fact('Hidden checks', copy.checks), ...fact('Test files', copy.testFiles)),
+        el('p', { class: `fz-report-hosted-message${copy.tone === 'bad' ? ' fz-report-hosted-bad' : ''}`, text: copy.message }),
+        action ? el('div', { class: 'fz-report-actions' }, action) : null,
+        status,
+        el('p', { class: 'fz-note', text: copy.note })].filter((node): node is NonNullable<typeof node> => !!node));
+      section.hidden = false;
+    };
+    void this.actions.hostedResult(view.workspace, view.submission).then(state => { if (state) show(state); }).catch(() => undefined);
+    return section;
   }
 
   private renderShare(view: ReportView): HTMLElement {

@@ -265,6 +265,13 @@ body:has(#window-controls) { --fz-titlebar: calc(32px + var(--fz-toolbar-height)
 .fz-fb { grid-column: 2 / 4; color: var(--fz-muted); }
 .fz-report-actions { display: flex; gap: 8px; flex-wrap: wrap; }
 .fz-report-share { display: grid; gap: 10px; }
+.fz-report-hosted { gap: 12px; }
+.fz-report-hosted-head { font-size: 20px; }
+.fz-report-hosted-tokens { font: 15px/1.4 var(--fz-mono); color: inherit; }
+.fz-report-hosted-bar { height: 8px; border: 1px solid var(--fz-line); border-radius: 4px; overflow: hidden; }
+.fz-report-hosted-bar > span { display: block; height: 100%; background: var(--fz-accent); }
+.fz-report-hosted .fz-report-hosted-message { color: inherit; font-weight: 600; }
+.fz-report-hosted .fz-report-hosted-bad { color: var(--fz-fail); }
 .fz-report-share-preview { white-space: pre-wrap; overflow-wrap: anywhere; padding: 12px; border-radius: 4px; background: var(--fz-chrome); font: 13px/1.6 var(--fz-mono); }
 
 .fz-settings section { display: grid; gap: 12px; }

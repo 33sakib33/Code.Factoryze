@@ -212,6 +212,42 @@ export const desktopResultShareStateSchema = z.union([
   z.strictObject({ published: z.literal(true), url: z.url(), expiresAt: z.iso.datetime() })
 ]);
 export type DesktopResultShareState = z.infer<typeof desktopResultShareStateSchema>;
+/** Draft: one self-reported result for a hosted task attempt (POST /api/desktop/results). The client never sends a rank, score or "solved". */
+const resultCount = z.number().int().min(0).max(1_000_000_000);
+export const desktopResultModelSchema = z.string().regex(/^[A-Za-z0-9._:/-]{1,120}$/);
+export const desktopResultInputSchema = z.strictObject({
+  attemptId: z.uuid(), taskId: identifier.max(100), packSha256: z.string().regex(/^[a-f0-9]{64}$/),
+  funding: z.enum(['hosted', 'own_key']), model: desktopResultModelSchema,
+  budgetTokens: resultCount.min(1), weightedTokens: resultCount,
+  usage: z.strictObject({ inputTokens: resultCount, cachedInputTokens: resultCount, outputTokens: resultCount }),
+  passed: z.number().int().min(0).max(10_000), total: z.number().int().min(1).max(10_000),
+  submittedAt: z.iso.datetime(),
+  solution: z.strictObject({ files: z.array(z.strictObject({ path: z.string().min(1).max(500), content: z.string().max(65_536) })).min(1).max(32) }).optional()
+}).refine(value => value.passed <= value.total && value.usage.cachedInputTokens <= value.usage.inputTokens);
+export type DesktopResultInput = z.infer<typeof desktopResultInputSchema>;
+// Responses tolerate additional server fields so an additive backend change does not break released clients.
+export const desktopResultResponseSchema = z.object({
+  recorded: z.literal(true), counted: z.boolean(), solved: z.boolean(), tokenCheck: z.enum(['checked', 'self_reported']),
+  standing: z.object({ board: z.enum(['hosted', 'own_key']), rank: z.number().int().positive(), solved: z.number().int().nonnegative() }).nullable()
+});
+export type DesktopResultResponse = z.infer<typeof desktopResultResponseSchema>;
+/** What the attempt report shows about a hosted result. Local facts stay visible whether or not anything was sent. */
+export const hostedResultViewSchema = z.strictObject({
+  taskId: identifier, testFiles: z.enum(['unchanged', 'edited']),
+  model: z.string().max(200).optional(), funding: z.enum(['hosted', 'own_key']).optional(),
+  weightedTokens: z.number().nonnegative().optional(), budgetTokens: z.number().int().positive(),
+  passed: z.number().int().nonnegative(), total: z.number().int().positive(),
+  sync: z.discriminatedUnion('status', [
+    z.strictObject({ status: z.literal('sent'), response: desktopResultResponseSchema, leaderboardURL: z.url(), solutionIncluded: z.boolean(), solutionNote: z.string().max(300).optional() }),
+    z.strictObject({ status: z.literal('not_counted_edited') }),
+    z.strictObject({ status: z.literal('already_sent'), submission: z.number().int().positive() }),
+    z.strictObject({ status: z.literal('signed_out') }),
+    z.strictObject({ status: z.literal('not_eligible'), message: z.string().min(1).max(300) }),
+    z.strictObject({ status: z.literal('unavailable'), retry: z.boolean() }),
+    z.strictObject({ status: z.literal('rejected'), code: z.string().max(80), message: z.string().min(1).max(300) })
+  ])
+});
+export type HostedResultView = z.infer<typeof hostedResultViewSchema>;
 /** Home lists attempts and results from these summaries. They hold counts only: no prompt text, paths outside the workspace, or keys. */
 export const attemptSummarySchema = z.strictObject({
   workspace: z.string().min(1), taskId: identifier, title: z.string().min(1), attempt: z.number().int().positive(),

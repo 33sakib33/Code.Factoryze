@@ -46,6 +46,6 @@ The engine keeps a snapshot of imported metadata, hidden tests and baselines, so
 
 Imports reject unsafe paths, symbolic links, encrypted archives, duplicate paths, over 2,000 files/directories, and over 20 MiB of archive or expanded content. Solo reports are practice results; hidden checks remain on the local user's disk.
 
-A Factoryze service can also publish packs as **hosted tasks** for signed-in desktop users (see [trial credits](trial-credits.md#hosted-tasks)). Hosted packs use this same format; the service additionally requires an `id` that starts with a letter and a `minimumPython` of the form `3.11`.
+A Factoryze service can also publish packs as **hosted tasks** for signed-in desktop users (see [trial credits](trial-credits.md#hosted-tasks)). Hosted packs use this same format; the service additionally requires an `id` that starts with a letter and a `minimumPython` of the form `3.11`. For hosted packs the app records a digest of `tests/hidden/` and `workspace/tests/` at download and sends a leaderboard result only while those files are unchanged ([details](trial-credits.md#hosted-task-results-leaderboard)).
 
 To contribute a new bundled public practice problem, follow [the problem contribution guide](contributing-problems.md). It adds the required starter/hidden-check behavior, a local validation command and the PR steps on top of this format reference.

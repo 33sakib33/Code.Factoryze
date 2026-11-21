@@ -223,7 +223,7 @@ export class FactoryzeSoloContribution implements FrontendApplicationContributio
     try { this.tests.display(await this.tasks.runTests(root),this.isLabAttempt()); } catch (error) { this.tests.failed(error); }
   }
 
-  private submit(): void {
+  private async submit(): Promise<void> {
     const root = this.root;
     if (!root) return;
     if(this.isLabAttempt()){
@@ -231,13 +231,14 @@ export class FactoryzeSoloContribution implements FrontendApplicationContributio
         dialog.body.append(el('p',{class:'fz-lead',text:`Submission ${receipt.number} is saved on the lab server.`}),el('p',{class:'fz-help',text:'Your instructor will release the report after server grading. You can keep working while the lab is open; closing the lab saves the final synchronized files.'}));
         dialog.foot.append(button('Back to attempt',()=>dialog.close(),{kind:'primary'}));},true);return;
     }
-    submitDialog(async () => {
-      const report = await this.tasks.submit(root);
+    const hosted = await this.tasks.hostedSubmitInfo(root).catch(() => null);
+    submitDialog(async ({ includeSolution }) => {
+      const report = await this.tasks.submit(root, { includeSolution });
       const attempts = await this.tasks.attempts().catch(() => []);
       this.attempt = attempts.find(item => item.workspace === root) ?? this.attempt;
       const submissions = this.attempt?.submissions ?? 1;
       await this.showReport(report, root, submissions, submissions, 'attempt');
-    });
+    }, false, hosted);
   }
 
   /* ---------- Reports ---------- */
@@ -272,6 +273,13 @@ export class FactoryzeSoloContribution implements FrontendApplicationContributio
       publishShare: (workspace,n) => this.tasks.publishResultShare(workspace,n),
       revokeShare: (workspace,n) => this.tasks.revokeResultShare(workspace,n),
       signInForSharing: () => void this.openSettings(true,true),
+      hostedResult: (workspace,n) => this.tasks.hostedResult(workspace,n),
+      retryHostedResult: (workspace,n) => this.tasks.retryHostedResult(workspace,n),
+      restoreTests: async workspace => {
+        await this.tasks.restoreHostedTests(workspace);
+        // "Run again": the restored files are graded through the normal Submit confirmation.
+        if (workspace === this.root) void this.submit();
+      },
     });
     this.report.display({ report, workspace, title: attempt?.title ?? report.taskId, attempt: attempt?.attempt ?? 1, submission, submissions,
       budgetLimit: attempt?.budgetLimit ?? report.budget?.limit ?? 100_000, startedAt: attempt?.startedAt,

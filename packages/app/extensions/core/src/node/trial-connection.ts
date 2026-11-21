@@ -1,7 +1,7 @@
 import { randomBytes } from 'node:crypto';
-import { TrialClient, TrialError, type HostedTask } from '@factoryze/engine/trial-client';
+import { TrialClient, TrialError, type HostedTask, type ResultSubmission } from '@factoryze/engine/trial-client';
 import type { SoloSettings } from '@factoryze/engine/solo';
-import { desktopResultShareInputSchema, desktopResultShareStateSchema, trialAccountViewSchema, type DesktopResultShareInput, type DesktopResultShareState, type TrialAccountView, type ModelSettingsView } from '@factoryze/protocol';
+import { desktopResultShareInputSchema, desktopResultShareStateSchema, trialAccountViewSchema, type DesktopResultInput, type DesktopResultShareInput, type DesktopResultShareState, type TrialAccountView, type ModelSettingsView } from '@factoryze/protocol';
 
 export type TrialRecord = { schema:'trial-connection@1'; origin:string; selected:boolean; sessionToken?:string; expiresAt?:string; model?:string; budgetTokens?:number; cached?:TrialAccountView };
 type Storage = { read():Promise<string|null>; write(value:string):Promise<void> };
@@ -62,6 +62,14 @@ export class TrialConnectionStore {
  async hostedTaskTopics(){return this.client.publicTaskTopics();}
  async hostedTask(id:string){return this.client.publicTask(id);}
  async downloadHostedTask(task:HostedTask,destination:string){const r=await this.requireSession();await this.client.downloadTask(r.sessionToken!,task,destination);}
+ /** True only when this device holds an unexpired session for the configured service. No network request is made. */
+ async signedIn():Promise<boolean>{return this.requireSession().then(()=>true,()=>false);}
+ /** The public site is served from the same origin as the desktop service, so its leaderboard follows FACTORYZE_TRIAL_URL. */
+ leaderboardURL():string{return `${this.client.origin}/leaderboard/`;}
+ async submitResult(input:DesktopResultInput):Promise<ResultSubmission>{
+  let r:TrialRecord;try{r=await this.requireSession();}catch{return {kind:'sign_in'};}
+  return this.client.submitResult(r.sessionToken!,input);
+ }
  async resultShareStatus(reportKey:string):Promise<DesktopResultShareState>{
   if(!/^[a-f0-9]{64}$/.test(reportKey))throw new Error('Invalid saved report.');
   const r=await this.requireSession();

@@ -1,6 +1,6 @@
 import type { RpcServer } from '@theia/core/lib/common/messaging/proxy-factory';
 import type { AttemptSummary, ModelSettingsInput, ModelSettingsView, PracticeReport, PromptUsage, PythonCheck, ReportSummary, TaskPack, UsageIssue,
-  Reconciliation, TrialAccountView, PracticeWorkspace, PublicTestResult,LabDesktopJoin,LabDesktopStatus,LabSubmission,DesktopResultShareState } from '@factoryze/protocol';
+  Reconciliation, TrialAccountView, PracticeWorkspace, PublicTestResult,LabDesktopJoin,LabDesktopStatus,LabSubmission,DesktopResultShareState,HostedResultView } from '@factoryze/protocol';
 
 /** A task in Practice tasks. `hosted` marks one published by the connected Factoryze service rather than bundled. */
 export type PracticeTask = TaskPack & { hosted?: true };
@@ -39,7 +39,14 @@ export interface TaskService extends RpcServer<object> {
   workspaceInfo(workspace: string): Promise<PracticeWorkspace | null>;
   promptUsage(workspace: string): Promise<PromptUsage[]>;
   runTests(workspace: string): Promise<PublicTestResult>;
-  submit(workspace: string): Promise<PracticeReport>;
+  /** Grades locally. For a hosted attempt while signed in, also sends one result; `includeSolution` is opt-in. */
+  submit(workspace: string, options?: { includeSolution?: boolean }): Promise<PracticeReport>;
+  /** Null unless the attempt started from the hosted catalog. */
+  hostedSubmitInfo(workspace: string): Promise<{ signedIn: boolean; sentSubmission?: number } | null>;
+  hostedResult(workspace: string, submission: number): Promise<HostedResultView | null>;
+  retryHostedResult(workspace: string, submission: number): Promise<HostedResultView | null>;
+  /** Re-downloads the attempt's task version, verifies it and rewrites its hidden and public test files. */
+  restoreHostedTests(workspace: string): Promise<void>;
   latestReport(workspace: string): Promise<PracticeReport | null>;
   trialAccount(): Promise<TrialAccountView>;
   trialRequestCode(email:string): Promise<void>;

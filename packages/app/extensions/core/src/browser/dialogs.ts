@@ -193,9 +193,20 @@ function connectByokDialog(service: TaskService, current: ModelSettingsView | nu
 }
 
 /** Submit confirmation, then the hidden checks run while the dialog shows progress. */
-export function submitDialog(run: () => Promise<void>, lab = false): void {
+export function submitDialog(run: (options: { includeSolution: boolean }) => Promise<void>, lab = false,
+  hosted?: { signedIn: boolean; sentSubmission?: number } | null): void {
   const m = modal('Submit this attempt?');
   m.body.append(el('p', { text: lab ? 'Save a fixed copy of your synchronized files and usage on the lab server. Your instructor releases the report after isolated grading. You can keep working while the lab is open.' : 'Factoryze runs the task\'s hidden checks on your code and saves a report. You can keep working afterwards and submit again. Every submission is kept.' }));
+  // Off by default every time; nothing about the solution is remembered between submissions.
+  const solution = el('input', { type: 'checkbox' });
+  const sending = !lab && hosted?.signedIn && hosted.sentSubmission === undefined;
+  if (!lab && hosted) m.body.append(el('p', { class: 'fz-help', text: hosted.sentSubmission !== undefined
+    ? `This attempt's leaderboard result was already sent with submission ${hosted.sentSubmission}. This submission is graded locally only.`
+    : hosted.signedIn
+      ? 'This is a hosted task, so the result is sent to the leaderboard: checks passed, tokens used, the model and this attempt\'s ID. Only the first sent submission of an attempt counts.'
+      : 'This is a hosted task. Sign in before submitting if you want the result on the leaderboard.' }));
+  if (sending) m.body.append(el('label', { class: 'fz-confirm' }, solution,
+    el('span', {}, 'Include my changed files. ', el('span', { class: 'fz-help', text: 'Kept private for reviewing problems; never shown on any page.' }))));
   const go = button('Submit', () => void confirm(), { kind: 'primary' });
   m.foot.append(button('Cancel', () => m.close()), go);
   go.focus();
@@ -205,7 +216,7 @@ export function submitDialog(run: () => Promise<void>, lab = false): void {
     m.body.replaceChildren(progress.list); m.foot.replaceChildren();
     m.dialog.querySelector('.fz-dialog-head .fz-icon-btn')?.remove();
     m.dialog.addEventListener('cancel', event => event.preventDefault());
-    try { await run(); m.close(); }
+    try { await run({ includeSolution: Boolean(sending && solution.checked) }); m.close(); }
     catch (error) {
       progress.items[0]!.set('failed');
       m.body.append(el('p', { class: 'fz-error', role: 'alert', text: errorText(error) }));
