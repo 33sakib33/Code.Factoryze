@@ -5,7 +5,7 @@ import { button, el } from './dom';
 import { submittedLabel, tokens } from './flow-model';
 import { renderReportFacts, renderReportLearning, renderReportPrompts } from './report-learning-section';
 import { renderReportResult, type ReportResult } from './report-result';
-import { reportShareCard, reportShareSummary } from './report-share';
+import { reportShareCard, reportSharePostURL, reportShareSummary, SHARE_LINK } from './report-share';
 import { hostedResultCopy } from './hosted-result-copy';
 
 export type ReportView = {
@@ -175,6 +175,9 @@ export class FactoryzeReportWidget extends BaseWidget {
       return link;
     };
     const facebook=social('Share on Facebook'),linkedin=social('Share on LinkedIn');
+    /* X takes the words as well as a link, so it works before a public link exists and points at it once one does. */
+    const post=social('Post on X');post.hidden=false;
+    const postTo=(url:string)=>{post.href=reportSharePostURL(view.report, view.title, view.budgetLimit, url);};postTo(SHARE_LINK);
     const publicLink=el('a',{class:'fz-btn',text:'Open public result'});publicLink.hidden=true;publicLink.target='_blank';publicLink.rel='noopener noreferrer';
     const copyLink=button('Copy public link',()=>{if(!shareURL)return;void navigator.clipboard.writeText(shareURL).then(()=>{status.textContent='Public result link copied.';}).catch(()=>{status.textContent='Clipboard unavailable. Copy the address from Open public result.';});});copyLink.hidden=true;
     const publish=button('Publish public link',()=>void change('publish'));publish.hidden=true;
@@ -183,7 +186,7 @@ export class FactoryzeReportWidget extends BaseWidget {
     const refresh=button('Refresh public link',()=>void loadState());
     let shareURL='',busy=false;
     const display=(state:DesktopResultShareState)=>{
-      shareURL=state.published?state.url:'';
+      shareURL=state.published?state.url:'';postTo(shareURL||SHARE_LINK);
       publish.hidden=state.published;revoke.hidden=!state.published;copyLink.hidden=!state.published;
       publicLink.hidden=!state.published;facebook.hidden=!state.published;linkedin.hidden=!state.published;
       if(state.published){publicLink.href=state.url;facebook.href=`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(state.url)}`;
@@ -214,7 +217,7 @@ export class FactoryzeReportWidget extends BaseWidget {
       el('div', { class: 'fz-report-actions' },
         button('Copy result summary', () => void copy()),
         button('Download share card', () => void download()),
-        signIn,publish,copyLink,publicLink,facebook,linkedin,revoke,refresh),
+        post,signIn,publish,copyLink,publicLink,facebook,linkedin,revoke,refresh),
       status);
   }
 }
