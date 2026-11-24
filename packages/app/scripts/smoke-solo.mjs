@@ -277,22 +277,27 @@ try {
   await home(page).getByRole('heading', { name: 'Practice tasks', exact: true }).waitFor();
   await home(page).getByRole('heading', { name: 'Find a task to practice', exact: true }).waitFor();
   await home(page).getByRole('searchbox', { name: 'Search practice tasks' }).waitFor();
-  await home(page).getByRole('button', { name: 'SRE 1', exact: true }).click();
-  await waitForTaskTitles(page, ['Stop a retry storm']);
-  await home(page).getByRole('button', { name: 'All problems', exact: true }).click();
-  await waitForTaskTitles(page, ['Library fines', 'Monthly revenue report', 'Read a Linux process snapshot', 'Stop a retry storm', 'Guard a webhook allowlist']);
-  await page.screenshot({ path: join(output, 'home-catalog-compact.png') });
-  const firstTaskViewport = await home(page).locator('.fz-home-catalog > .fz-task-list li').first().evaluate(node => {
+  // First launch: three starters lead the page until a result exists, so the first starter is what must show without scrolling.
+  // Measured before the catalog is used, because clicking a topic chip scrolls the page down to the catalog.
+  await home(page).getByRole('heading', { name: 'Pick your first bug', exact: true }).waitFor();
+  assert.deepEqual(await home(page).locator('.fz-starter h3').allTextContents(), ['Delivery fee', 'Duplicate customers', 'Latency report']);
+  await home(page).getByRole('button', { name: 'Start with Delivery fee', exact: true }).waitFor();
+  const firstTaskViewport = await home(page).locator('.fz-starter').first().evaluate(node => {
     const box = node.getBoundingClientRect();
     return { top: box.top, bottom: box.bottom, viewportHeight: innerHeight };
   });
   assert.ok(firstTaskViewport.top >= 0 && firstTaskViewport.bottom <= firstTaskViewport.viewportHeight,
-    `The first practice task should be visible without scrolling: ${JSON.stringify(firstTaskViewport)}`);
+    `The first starter task should be visible without scrolling: ${JSON.stringify(firstTaskViewport)}`);
+  await home(page).getByRole('button', { name: 'SRE 1', exact: true }).click();
+  await waitForTaskTitles(page, ['Stop a retry storm']);
+  await home(page).getByRole('button', { name: 'All problems', exact: true }).click();
+  await waitForTaskTitles(page, ['Delivery fee', 'Duplicate customers', 'Latency report', 'Library fines', 'Login lockout', 'Monthly revenue report', 'Read a Linux process snapshot', 'Stop a retry storm', 'Guard a webhook allowlist']);
+  await page.screenshot({ path: join(output, 'home-catalog-compact.png') });
   const taskSearch = home(page).getByRole('searchbox', { name: 'Search practice tasks' });
   await taskSearch.fill('revenue');
   await waitForTaskTitles(page, ['Monthly revenue report']);
   await taskSearch.fill('');
-  await waitForTaskTitles(page, ['Library fines', 'Monthly revenue report', 'Read a Linux process snapshot', 'Stop a retry storm', 'Guard a webhook allowlist']);
+  await waitForTaskTitles(page, ['Delivery fee', 'Duplicate customers', 'Latency report', 'Library fines', 'Login lockout', 'Monthly revenue report', 'Read a Linux process snapshot', 'Stop a retry storm', 'Guard a webhook allowlist']);
   await taskSearch.fill('linux');
   await home(page).getByRole('button', { name: 'Start Read a Linux process snapshot' }).click();
   await page.locator('.fz-dialog').getByText('Linux procfs process records', { exact: false }).waitFor();

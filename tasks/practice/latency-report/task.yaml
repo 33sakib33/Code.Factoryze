@@ -1,0 +1,16 @@
+schema: 1
+id: latency-report
+title: Latency report
+brief: >
+  The daily latency report shows the checkout service with a 95th percentile
+  lower than its median, which cannot be right. The same figure looks plausible
+  for the other services. Find what makes the percentile wrong and repair it
+  without changing the report's layout or how the logs are read.
+minimumPython: "3.11"
+topics: [observability]
+recommendedKnowledge:
+  - Percentiles by the nearest-rank method
+  - Finding the one function a symptom points to
+timeHintMinutes: 7
+budgetTokens: 30000
+entryFile: report/render.py

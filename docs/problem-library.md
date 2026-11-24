@@ -6,6 +6,10 @@ Use this map to choose a distinct learning goal before writing a pack. It is a c
 
 | Problem | Focus | State |
 | --- | --- | --- |
+| `delivery-fee` | Five-minute starter: a boundary comparison in a checkout rule | Active |
+| `duplicate-customers` | Short starter: the rule for which record survives is only in the student's brief, so the agent must be told it | Active |
+| `latency-report` | Short starter: one unsorted percentile in a multi-file report; rewards pointing the agent at the right file | Active |
+| `login-lockout` | A lockout rule enforced in two sign-in paths | Active |
 | `library-fines` | Date and billing rules in a small library service | Active |
 | `monthly-revenue` | Diagnose a report across a multi-file data flow | Active |
 | `proc-stat-parser` | Parse Linux procfs process data without shifting fields | Active |

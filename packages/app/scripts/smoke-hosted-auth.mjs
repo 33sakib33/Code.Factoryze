@@ -46,13 +46,15 @@ try {
   assert.ok(page, 'Home should open');
   page.setDefaultTimeout(30_000);
   await page.getByRole('heading', { name: 'Find a task to practice', exact: true }).waitFor();
+  // First launch leads with the starter tasks. Measured before the catalog is used, because paging the online list scrolls the page.
+  const firstTask = page.locator('.fz-starter').first();
+  await firstTask.waitFor();
+  assert.equal(await firstTask.evaluate(node => {
+    const box = node.getBoundingClientRect(); return box.top >= 0 && box.bottom <= innerHeight;
+  }), true, 'The first starter task should be visible without scrolling');
   await page.getByRole('button', { name: 'Next online page' }).click();
   await page.getByRole('button', { name: 'Start Shipping fee at the cutoff' }).waitFor();
   await page.getByRole('button', { name: 'Previous online page' }).click();
-  const firstTask = page.locator('.fz-task-list li').first();
-  assert.equal(await firstTask.evaluate(node => {
-    const box = node.getBoundingClientRect(); return box.top >= 0 && box.bottom <= innerHeight;
-  }), true, 'The first task should be visible without scrolling');
   const search = page.getByRole('searchbox', { name: 'Search practice tasks' });
   await search.fill('no matching problem');
   await page.getByText('No tasks match your search. Try a different word or topic.').waitFor();

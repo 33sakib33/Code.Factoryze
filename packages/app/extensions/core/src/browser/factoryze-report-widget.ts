@@ -11,8 +11,12 @@ import { hostedResultCopy } from './hosted-result-copy';
 export type ReportView = {
   report: PracticeReport; workspace: string; title: string; attempt: number; submission: number; submissions: number;
   budgetLimit: number; startedAt?: string; current: boolean; from: 'home' | 'attempt';
+  /** A task the student has not tried yet, offered after a result. */
+  next?: { taskId: string; label: string; title: string };
 };
 export type ReportActions = { back(): void; keepWorking(): void; newAttempt(taskId: string): void; home(): void; submission(n: number): void;
+  /** Opens the start sheet of another task. */
+  startTask(taskId: string): void;
   shareStatus(workspace:string,submission:number):Promise<DesktopResultShareState>;
   publishShare(workspace:string,submission:number):Promise<DesktopResultShareState>;
   revokeShare(workspace:string,submission:number):Promise<void>;
@@ -74,7 +78,8 @@ export class FactoryzeReportWidget extends BaseWidget {
             : 'Review the failed checks above, then keep working on your solution.' })),
         el('div', { class: 'fz-report-actions' },
           view.current ? button('Keep working', () => this.actions.keepWorking(), { kind: 'primary' }) : null,
-          report.lab ? null : button('New attempt', () => this.actions.newAttempt(report.taskId), { kind: view.current ? undefined : 'primary' }))),
+          report.lab ? null : button('New attempt', () => this.actions.newAttempt(report.taskId), { kind: view.current ? undefined : 'primary' }),
+          !report.lab && view.next ? button(view.next.label, () => this.actions.startTask(view.next!.taskId), { title: `Next: ${view.next.title}` }) : null)),
       renderReportFacts(report, view.budgetLimit, view.startedAt),
       share,
       report.budget ? el('p', { class: 'fz-para' }, el('strong', { text: 'Budget raised. ' }),

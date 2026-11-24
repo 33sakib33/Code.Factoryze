@@ -23,6 +23,8 @@ import { FactoryzeTestsWidget } from './factoryze-tests-widget';
 import { FactoryzeAgentWidget } from './factoryze-agent-widget';
 import { startAttemptDialog, submitDialog } from './dialogs';
 import { practiceAttempts } from './flow-model';
+import { guideActive, nextTask, nextTaskLabel } from './first-run';
+import { guideDismissed, markGuide } from './first-run-guide';
 import { el, errorText, modal, button } from './dom';
 import { joinLabDialog, labStatusDialog } from './lab-dialog';
 
@@ -191,6 +193,11 @@ export class FactoryzeSoloContribution implements FrontendApplicationContributio
     const settings = await this.tasks.settings().catch(() => null);
     const usage = context.lab?context.usage?.[0]:context.usage?.find(item => item.scope.model === settings?.model);
     if (usage) agent.onUsage(usage);
+    // A first attempt gets the five-step guide. A failed lookup shows no guide rather than a wrong one.
+    void this.tasks.reports().then(reports => {
+      if (guideActive({ reports: reports.length, dismissed: guideDismissed(), lab: !!context.lab }))
+        agent.showGuide(root, this.attempt && this.attempt.weighted > 0 ? { ask: true } : {});
+    }).catch(() => undefined);
     void this.tasks.promptUsage(root).then(prompts => this.metrics.seedPrompts(root, prompts)).catch(() => undefined);
 
     if (consumePracticeLaunch(window.localStorage, root) && context.task.entryFile) {
@@ -220,7 +227,7 @@ export class FactoryzeSoloContribution implements FrontendApplicationContributio
     this.shell.expandPanel('bottom');
     await this.shell.activateWidget(this.tests.id);
     this.tests.running();
-    try { this.tests.display(await this.tasks.runTests(root),this.isLabAttempt()); } catch (error) { this.tests.failed(error); }
+    try { this.tests.display(await this.tasks.runTests(root),this.isLabAttempt()); markGuide('test'); } catch (error) { this.tests.failed(error); }
   }
 
   private async submit(): Promise<void> {
@@ -234,6 +241,7 @@ export class FactoryzeSoloContribution implements FrontendApplicationContributio
     const hosted = await this.tasks.hostedSubmitInfo(root).catch(() => null);
     submitDialog(async ({ includeSolution }) => {
       const report = await this.tasks.submit(root, { includeSolution });
+      markGuide('submit');
       const attempts = await this.tasks.attempts().catch(() => []);
       this.attempt = attempts.find(item => item.workspace === root) ?? this.attempt;
       const submissions = this.attempt?.submissions ?? 1;
@@ -262,6 +270,10 @@ export class FactoryzeSoloContribution implements FrontendApplicationContributio
         const task = await this.tasks.taskByID(taskId);
         if (task) await this.startTask(task, await this.tasks.attempts().catch(() => []));
       },
+      startTask: async taskId => {
+        const task = await this.tasks.taskByID(taskId);
+        if (task) await this.startTask(task, await this.tasks.attempts().catch(() => []));
+      },
       home: () => void this.goHome(),
       submission: async n => {
         const selection = this.reportSelection;
@@ -281,9 +293,13 @@ export class FactoryzeSoloContribution implements FrontendApplicationContributio
         if (workspace === this.root) void this.submit();
       },
     });
+    // After a passing practice result, offer a task the student has not tried yet.
+    const catalog = report.lab || report.correctness.passed !== report.correctness.total ? [] : await this.tasks.localTasks().catch(() => []);
+    const upcoming = nextTask(catalog, attempts, report.taskId);
     this.report.display({ report, workspace, title: attempt?.title ?? report.taskId, attempt: attempt?.attempt ?? 1, submission, submissions,
       budgetLimit: attempt?.budgetLimit ?? report.budget?.limit ?? 100_000, startedAt: attempt?.startedAt,
-      current: from === 'attempt' && workspace === this.root, from });
+      current: from === 'attempt' && workspace === this.root, from,
+      ...(upcoming ? { next: { taskId: upcoming.id, title: upcoming.title, label: nextTaskLabel(catalog.find(item => item.id === report.taskId), upcoming) } } : {}) });
     await this.present(this.report);
     if (!this.overlay && !this.shell.mainPanel.hasClass(MAXIMIZED_CLASS)) {
       this.shell.toggleMaximized(this.report);

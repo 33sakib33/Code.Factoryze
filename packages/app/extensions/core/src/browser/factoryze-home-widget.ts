@@ -6,6 +6,7 @@ import type { TaskService } from '../common/task-service';
 import { button, el, errorText, meter } from './dom';
 import { continueAttempts, dateLabel, relativeTime, taskState, tokens } from './flow-model';
 import { browseTasks, pageSize, topicFacets, topicLabel, untaggedTopic } from './task-browser';
+import { starterPicks } from './first-run';
 
 export type HomeActions = {
   continueAttempt(attempt: AttemptSummary): void;
@@ -65,6 +66,20 @@ export class FactoryzeHomeWidget extends BaseWidget {
       el('div', {}, el('span', { class: 'fz-home-eyebrow', text: 'PRACTICE' }),
         el('h1', { text: 'Find a task to practice' }),
         el('p', { text: 'Choose a problem, work on it in the editor, and submit to see your result.' })));
+
+    // First run: three ways in, above the catalog, until the first result is submitted.
+    const picks = starterPicks(tasks, reports);
+    const starters = picks.length ? el('section', { class: 'fz-home-section fz-home-starters', aria: { label: 'Pick your first bug' } },
+      el('div', { class: 'fz-section-head' }, el('div', {}, el('h2', { text: 'Pick your first bug' }),
+        el('p', { class: 'fz-home-section-description', text: 'Fix it with the agent on a token budget. The fewer tokens you spend, the better.' }))),
+      el('div', { class: 'fz-starter-grid' }, ...picks.map(({ task, recommended }) => el('article', { class: `fz-starter${recommended ? ' fz-starter-first' : ''}` },
+        el('span', { class: 'fz-starter-tag', text: recommended ? 'Start here' : topicLabel(task.topics?.[0] ?? untaggedTopic) }),
+        el('h3', { text: task.title }),
+        el('p', { text: task.brief }),
+        el('ul', { class: 'fz-starter-facts' },
+          el('li', { text: `About ${task.timeHintMinutes ?? 30} minutes` }),
+          el('li', { text: `${tokens(task.budgetTokens ?? settings?.budgetTokens ?? 100_000)} tokens` })),
+        button('Start', () => this.actions.start(task, attempts), { kind: recommended ? 'primary' : undefined, aria: `Start with ${task.title}` }))))) : null;
 
     const recent = continueAttempts(attempts, this.showAllAttempts ? 'all' : 3);
     if (recent.length) main.push(el('section', { class: 'fz-home-section', aria: { label: 'Continue' } }, el('div', { class: 'fz-section-head' }, el('h2', { text: 'Continue' }),
@@ -217,7 +232,7 @@ export class FactoryzeHomeWidget extends BaseWidget {
       !isModelConfigured(settings) ? el('div', { class: 'fz-home-more-card' }, el('h2', { text: 'Want an AI assistant?' }),
         el('p', { text: 'Connect a model to use the agent. You can still edit, run tests, and submit without one.' }),
         button('Connect a model', () => this.actions.connect())) : null);
-    this.content.replaceChildren(intro, ...main, more, results);
+    this.content.replaceChildren(intro, ...(starters ? [starters] : []), ...main, more, results);
     void loadHosted();
   }
 }

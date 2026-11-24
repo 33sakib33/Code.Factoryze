@@ -66,14 +66,21 @@ test('practice task loader rejects invalid metadata', async () => {
 test('bundled practice catalog contains the active Python tasks', async () => {
   const root = fileURLToPath(new URL('../../../tasks/practice/', import.meta.url));
   const tasks = await listPracticeTasks(root);
-  assert.deepEqual(tasks.map(task => task.id), ['library-fines', 'monthly-revenue', 'proc-stat-parser', 'retry-storm', 'webhook-allowlist']);
+  assert.deepEqual(tasks.map(task => task.id), ['delivery-fee', 'duplicate-customers', 'latency-report', 'library-fines', 'login-lockout', 'monthly-revenue', 'proc-stat-parser', 'retry-storm', 'webhook-allowlist']);
+  const starter = tasks.find(task => task.id === 'delivery-fee');
+  assert.deepEqual([starter?.timeHintMinutes, starter?.budgetTokens, starter?.topics], [5, 20000, ['backend']]);
+  // The other two starters are short as well, so nobody picks a card and lands in a long task.
+  assert.deepEqual(tasks.filter(task => ['duplicate-customers', 'login-lockout', 'latency-report'].includes(task.id)).map(task => [task.id, task.timeHintMinutes, task.topics]),
+    [['duplicate-customers', 7, ['backend']], ['latency-report', 7, ['observability']], ['login-lockout', 7, ['security']]]);
+  // This starter turns on a rule only the student's brief states, so the brief must say the agent cannot read it.
+  assert.match(tasks.find(task => task.id === 'duplicate-customers')?.brief ?? '', /agent can't see this brief/);
   assert.ok(tasks.every(task => task.minimumPython === '3.11'));
   assert.deepEqual(tasks.find(task => task.id === 'retry-storm')?.topics, ['sre', 'reliability']);
   assert.deepEqual(tasks.find(task => task.id === 'webhook-allowlist')?.topics, ['security', 'backend']);
   assert.deepEqual(tasks.find(task => task.id === 'proc-stat-parser')?.topics, ['linux', 'observability']);
   const all = await listPracticeTasks(root, { includeRetired: true });
   assert.deepEqual(all.map(task => [task.id, task.retired === true]),
-    [['dedupe-ids', true], ['library-fines', false], ['monthly-revenue', false], ['pagination-api', true], ['proc-stat-parser', false], ['retry-storm', false], ['webhook-allowlist', false]]);
+    [['dedupe-ids', true], ['delivery-fee', false], ['duplicate-customers', false], ['latency-report', false], ['library-fines', false], ['login-lockout', false], ['monthly-revenue', false], ['pagination-api', true], ['proc-stat-parser', false], ['retry-storm', false], ['webhook-allowlist', false]]);
 });
 
 test('retired tasks stay loadable for existing attempts while hidden from the practice catalog', async () => {

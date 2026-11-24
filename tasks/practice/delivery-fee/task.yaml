@@ -1,0 +1,15 @@
+schema: 1
+id: delivery-fee
+title: Delivery fee
+brief: >
+  The shop promises free delivery on orders of £50 or more. A customer whose
+  basket came to exactly £50.00 was still charged the £5.00 delivery fee. Larger
+  orders ship free and smaller ones pay the fee, as expected. Fix the charge
+  without changing the fee or the free-delivery amount.
+minimumPython: "3.11"
+topics: [backend]
+recommendedKnowledge:
+  - Boundary conditions in comparisons
+timeHintMinutes: 5
+budgetTokens: 20000
+entryFile: shop/delivery.py

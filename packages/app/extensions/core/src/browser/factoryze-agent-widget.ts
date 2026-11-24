@@ -10,6 +10,8 @@ import { button, el, icon } from './dom';
 import { followsOutput, labAgentNotice, tokens, toolLabel, unifiedDiff, workspaceRelative } from './flow-model';
 import { rememberPrompt } from './prompt-history';
 import { fixTokenCountDialog, raiseBudgetDialog } from './dialogs';
+import { FirstRunGuide, markGuide } from './first-run-guide';
+import type { GuideProgress } from './first-run';
 
 type Data = Record<string, unknown>;
 const data = (value: unknown): Data => value && typeof value === 'object' ? value as Data : {};
@@ -33,6 +35,7 @@ export class FactoryzeAgentWidget extends BaseWidget implements AgentClient {
   private following = true;
   private labNotice?: { title: string; text: string };
   private readonly banner = el('div', { class: 'fz-banner-slot' });
+  private readonly guide = new FirstRunGuide();
   private readonly promptInput = el('textarea', { aria: { label: 'Prompt for the agent' } });
   private readonly note = el('span', { class: 'fz-composer-note' });
   private readonly sendButton = el('button', { type: 'submit', class: 'fz-btn fz-primary' }, 'Send ', el('kbd', { text: 'Enter' }));
@@ -73,7 +76,10 @@ export class FactoryzeAgentWidget extends BaseWidget implements AgentClient {
     composer.addEventListener('submit', event => { event.preventDefault(); void this.send(); });
     this.stopButton.addEventListener('click', () => void this.stop());
     composer.append(this.promptInput, el('div', { class: 'fz-composer-bar' }, this.note, this.sendButton, this.stopButton));
-    this.node.append(head, this.menu, this.log, this.jump, this.banner, composer);
+    // The guide shares the header's grid row, so the conversation keeps the stretching row.
+    this.node.append(el('div', { class: 'fz-agent-top' }, head, this.guide.node), this.menu, this.log, this.jump, this.banner, composer);
+    this.promptInput.addEventListener('focus', () => markGuide('read'));
+    this.toDispose.push({ dispose: () => this.guide.dispose() });
     this.log.addEventListener('scroll', () => { this.following = followsOutput(this.log); if (this.following) this.jump.hidden = true; });
     this.jump.addEventListener('click', () => this.scrollToEnd(true));
 
@@ -93,6 +99,9 @@ export class FactoryzeAgentWidget extends BaseWidget implements AgentClient {
   }
 
   connect(service: AgentService): void { this.service = service; }
+
+  /** Shows the five-step guide for a first attempt. */
+  showGuide(workspace: string, seed: GuideProgress): void { this.guide.show(workspace, seed); }
 
   private toggleMenu(open = this.menu.hidden): void { this.menu.hidden = !open; this.more.setAttribute('aria-expanded', String(open)); }
   private get root(): string | undefined { return this.workspace.tryGetRoots()[0]?.resource.path.fsPath(); }
@@ -187,6 +196,7 @@ export class FactoryzeAgentWidget extends BaseWidget implements AgentClient {
     this.log.append(this.turn);
     this.reply = undefined; this.lastPrompt = text;
     this.metrics.beginPrompt();
+    markGuide('ask');
     this.render(); this.scrollToEnd(true);
     let ending = '';
     try {
@@ -284,7 +294,7 @@ export class FactoryzeAgentWidget extends BaseWidget implements AgentClient {
     } else {
       card.append(el('div', { class: 'fz-ap-head' }, icon('shield'), el('span', { class: 'fz-ap-title', text: `Allow access to ${path || 'a file'}` })));
     }
-    const allow = button(approveLabel, () => choose(typeof approve?.optionId === 'string' ? approve.optionId : null, diff ? 'Approved' : 'Ran', 'fz-ok'), { kind: 'primary', small: true });
+    const allow = button(approveLabel, () => { if (diff) markGuide('approve'); choose(typeof approve?.optionId === 'string' ? approve.optionId : null, diff ? 'Approved' : 'Ran', 'fz-ok'); }, { kind: 'primary', small: true });
     allow.disabled = !approve;
     actions.append(allow, button(rejectLabel, () => choose(typeof reject?.optionId === 'string' ? reject.optionId : null, diff ? 'Rejected' : 'Declined', 'fz-bad'), { small: true }));
     if (diff && path) actions.append(button('Show file', () => this.actions.openFile(path), { kind: 'quiet', small: true }));

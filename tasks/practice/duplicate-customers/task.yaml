@@ -1,0 +1,17 @@
+schema: 1
+id: duplicate-customers
+title: Duplicate customers
+brief: >
+  The customer export lists some people twice when their email address differs
+  only by letter case. Sales ops has decided which record survives: keep the one
+  with a verified email, even if it is older; if both or neither are verified,
+  keep the most recently updated one. The agent can't see this brief. It only
+  sees the files in the task folder, so it knows this rule only if you tell it.
+minimumPython: "3.11"
+topics: [backend]
+recommendedKnowledge:
+  - Merging duplicate records
+  - Telling an assistant the rules it cannot read for itself
+timeHintMinutes: 7
+budgetTokens: 30000
+entryFile: crm/export.py

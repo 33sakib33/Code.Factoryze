@@ -1,0 +1,17 @@
+schema: 1
+id: login-lockout
+title: Login lockout
+brief: >
+  An account is meant to lock after five failed sign-ins. Someone got ten
+  password guesses at one account on the sign-in page by switching between
+  "alice" and "Alice". Usernames identify the same account however they are
+  typed, on every way of signing in. Make the lockout count per account without
+  changing the limit.
+minimumPython: "3.11"
+topics: [security]
+recommendedKnowledge:
+  - Normalizing identifiers before comparing them
+  - Checking every code path that enforces a rule
+timeHintMinutes: 7
+budgetTokens: 30000
+entryFile: auth/web_login.py

@@ -1,0 +1,8 @@
+schema: 1
+taskId: duplicate-customers
+expert:
+  - "In crm/export.py, merge_duplicates treats emails that differ only by letter case as different customers. Match emails case-insensitively. When several records share an email, keep the one with verified=True even if it is older; if both or neither are verified, keep the one with the latest updated_at. Keep each customer at the position of their first occurrence. Change nothing else."
+middle:
+  - "The customer export lists some people twice when their email differs only by letter case. Fix it so each customer appears once."
+naive:
+  - "The customer export has duplicates. Fix it."

@@ -1,0 +1,8 @@
+schema: 1
+taskId: latency-report
+expert:
+  - "In report/stats.py, percentile() indexes the list without sorting it. Index sorted(values) instead, so the caller's list is left unchanged. Change nothing else."
+middle:
+  - "The latency report shows checkout with a p95 lower than its median, so the percentile calculation must be wrong. Fix it without changing the list it is given."
+naive:
+  - "The latency report is wrong. Fix it."

@@ -1,0 +1,8 @@
+schema: 1
+taskId: delivery-fee
+expert:
+  - "In shop/delivery.py, delivery_fee compares with `subtotal > FREE_DELIVERY_FROM`, so an order of exactly 50.00 is charged. Change the comparison to `>=` and change nothing else."
+middle:
+  - "A basket of exactly £50.00 is charged for delivery, although orders of £50 or more should be free. Fix the fee rule without changing the fee or the free-delivery amount."
+naive:
+  - "Customers are being charged for delivery wrongly. Fix it."

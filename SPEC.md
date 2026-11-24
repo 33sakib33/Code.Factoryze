@@ -486,8 +486,8 @@ reports: { release: on_close }
 
 **Solo**
 1. Install the app. It always opens to **Home** and never reopens the last attempt by itself.
-2. Connect a model from Home or Settings (stored in the OS keychain). Editing, tests and submitting work without one.
-3. Start a practice task from its start sheet (Python check, the task's token budget), import a task folder or ZIP, or **Continue** an earlier attempt.
+2. Connect a model from Home, Settings or a task's start sheet (stored in the OS keychain). Editing, tests and submitting work without one.
+3. Start a practice task from its start sheet (Python check, the task's token budget, and the two ways to connect a model when none is connected), import a task folder or ZIP, or **Continue** an earlier attempt. Until the first submitted result, Home leads with three short starter tasks (`delivery-fee` first, then `duplicate-customers` and `latency-report`), and a practice attempt shows a five-step guide (Read, Ask, Approve, Test, Submit) above the agent conversation; the student can hide it.
 4. Work on it: approve or reject the agent's edits and commands, watch each prompt's cost in the budget meter.
 5. Submit and read the report, which is marked **practice (unverified)**. Keep working and submit again if you like; every submission is kept under Results.
 

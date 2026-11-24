@@ -4,6 +4,7 @@ import type { PracticeTask, TaskService } from '../common/task-service';
 import { button, el, errorText, icon, modal } from './dom';
 import { tokens } from './flow-model';
 import { connectionTabs, trialConnectionDialog } from './trial-dialog';
+import { startSheetModel } from './first-run';
 
 const field = (label: string, control: HTMLElement, help?: string): HTMLLabelElement => {
   if (label && !control.hasAttribute('aria-label')) control.setAttribute('aria-label', label);
@@ -51,6 +52,27 @@ export function startAttemptDialog(task: PracticeTask, options: {
       ' Starting a new attempt keeps it, and you can continue it from Home.') : null,
     el('p', { class: 'fz-help', text: 'Each attempt starts from a fresh copy of the starter code.' }));
   const start = button('Start attempt', () => void begin(), { kind: 'primary' }); start.disabled = true;
+  // No model yet: say so and offer both ways to connect here, so the student never leaves the task they chose.
+  if (!startSheetModel(options.connection).connected) {
+    const model = el('dd', { text: startSheetModel(options.connection).text });
+    facts.prepend(el('dt', { text: 'Model' }), model);
+    const choices = el('div', { class: 'fz-connect-choices', role: 'group', aria: { label: 'Connect a model' } });
+    const note = el('p', { class: 'fz-help', text: 'You can also start without a model. Editing, tests and submitting work without the agent.' });
+    const connected = (view: ModelSettingsView): void => {
+      const next = startSheetModel(view);
+      if (!next.connected) return;
+      model.textContent = next.text; choices.remove(); note.remove();
+      start.classList.add('fz-primary'); start.focus();
+    };
+    const choice = (title: string, text: string, open: () => void): HTMLButtonElement =>
+      el('button', { type: 'button', class: 'fz-connect-choice', aria: { label: title }, on: { click: open } }, el('strong', { text: title }), el('small', { text }));
+    const ownKey = (): void => connectOwnKeyDialog(service, connected);
+    choices.append(
+      choice('Sign in for trial credits', 'Use your email. Credit comes from an invitation; no API key is needed.', () => trialConnectionDialog(service, ownKey, connected)),
+      choice('Use my own key', 'OpenAI, Anthropic, OpenRouter, or a model on this computer.', ownKey));
+    details.append(choices, note);
+    start.classList.remove('fz-primary');
+  }
   let pythonReady = false, accountReady = !task.hosted;
   const updateStart = () => { start.disabled = !pythonReady || !accountReady; };
   const signIn = () => { m.close(); options.openSettings(); };

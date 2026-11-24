@@ -1,0 +1,8 @@
+schema: 1
+taskId: login-lockout
+expert:
+  - "Lockout must count failed sign-ins per account, and a username is the same account whatever its letter case or surrounding spaces. auth/web_login.py and auth/api_login.py both key the attempt log by the username as typed. Add one helper in auth/lockout.py that returns username.strip().lower(), and use it for is_locked, record_failure and clear in both files. Change nothing else."
+middle:
+  - "On the sign-in page someone got ten password guesses at one account by switching between alice and Alice. The lockout should trigger after five failed attempts. Fix it."
+naive:
+  - "The login lockout can be bypassed. Fix it."

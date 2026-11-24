@@ -5,7 +5,7 @@ import { listPracticeTasks, loadBenchmarkPrompts } from '../../engine/src/tasks.
 
 export async function verifyPracticeTaskResources(packRoot) {
   const tasks = await listPracticeTasks(packRoot, { includeRetired: true });
-  for (const id of ['library-fines', 'monthly-revenue', 'proc-stat-parser', 'retry-storm', 'webhook-allowlist']) {
+  for (const id of ['delivery-fee', 'duplicate-customers', 'latency-report', 'library-fines', 'login-lockout', 'monthly-revenue', 'proc-stat-parser', 'retry-storm', 'webhook-allowlist']) {
     assert.ok(tasks.some(task => task.id === id && !task.retired), `Active practice task is missing: ${id}`);
   }
   for (const id of ['dedupe-ids', 'pagination-api']) {
