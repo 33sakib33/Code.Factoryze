@@ -1,7 +1,7 @@
 import type { ModelSettingsView, TrialAccountView } from '@factoryze/protocol';
 import type { TaskService } from '../common/task-service';
 import { button, el, errorText, modal } from './dom';
-import { trialCreditState } from './trial-credit';
+import { trialCreditState, trialFooter, type TrialFooterButton } from './trial-credit';
 
 export function connectionTabs(selected:'byok'|'trial',change:(mode:'byok'|'trial')=>void):HTMLElement {
  const tabs=el('div',{class:'fz-segmented fz-connection-tabs',role:'radiogroup',aria:{label:'Model connection'}});
@@ -14,17 +14,19 @@ const input=(type='text')=>el('input',{class:'fz-input',type});
 export function trialConnectionDialog(service:TaskService,byok:()=>void,saved:(view:ModelSettingsView)=>void):void {
  const m=modal('Connect a model',{wide:true});
  const content=el('div',{class:'fz-trial-content'}),error=el('p',{class:'fz-error',role:'alert'}),status=el('p',{class:'fz-status',role:'status'});
- const tabs=connectionTabs('trial',()=>{m.close();byok();});m.body.append(tabs,content,status,error);
+ // Read aloud only: news the visible text already carries, such as a request that has just been sent.
+ const announce=el('p',{class:'fz-visually-hidden',role:'status'});
+ const tabs=connectionTabs('trial',()=>{m.close();byok();});m.body.append(tabs,content,status,announce,error);
  let view:TrialAccountView|undefined,busy=false,closed=false,email='',codeStep=false,resendAt=0;
  let resend:HTMLButtonElement|undefined,timer:ReturnType<typeof setTimeout>|undefined;
  // Approval can arrive while this dialog is open: look again whenever the window regains focus.
  const refocus=()=>{if(view?.signedIn&&!trialCreditState(view).canUse)void run(async()=>{view=await service.trialAccount();render();});};
  window.addEventListener('focus',refocus);
  void m.closed.then(()=>{closed=true;clearTimeout(timer);window.removeEventListener('focus',refocus);content.querySelectorAll('input').forEach(i=>i.value='');});
- async function run(action:()=>Promise<void>){if(busy||closed)return;busy=true;error.textContent='';status.textContent='';m.dialog.setAttribute('aria-busy','true');
+ async function run(action:()=>Promise<void>){if(busy||closed)return;busy=true;error.textContent='';status.textContent='';announce.textContent='';m.dialog.setAttribute('aria-busy','true');
   for(const b of Array.from(m.dialog.querySelectorAll<HTMLButtonElement>('button')))b.disabled=true;
   try{await action();}catch(e){if(!closed){error.textContent=errorText(e);if(!view)content.replaceChildren(el('p',{class:'fz-help',text:'Your trial account could not be reached. You can try again or use your own API key.'}),button('Try again',()=>void run(async()=>{view=await service.trialAccount();render();}),{small:true}));}}
-  finally{busy=false;m.dialog.removeAttribute('aria-busy');if(!closed){for(const b of Array.from(m.dialog.querySelectorAll<HTMLButtonElement>('button')))b.disabled=b.dataset.unavailable==='true';countdown();}}
+  finally{busy=false;m.dialog.removeAttribute('aria-busy');if(!closed){for(const b of Array.from(m.dialog.querySelectorAll<HTMLButtonElement>('button')))b.disabled=false;countdown();}}
  }
  function countdown(){clearTimeout(timer);if(!resend||closed)return;const remaining=Math.max(0,Math.ceil((resendAt-Date.now())/1000));resend.disabled=busy||remaining>0;resend.textContent=remaining?`Send a new code (${remaining}s)`:'Send a new code';if(remaining)timer=setTimeout(countdown,1000);}
  function footer(primary?:HTMLButtonElement){m.foot.replaceChildren(button('Cancel',()=>m.close()),...(primary?[primary]:[]));}
@@ -49,8 +51,11 @@ export function trialConnectionDialog(service:TaskService,byok:()=>void,saved:(v
    content.append(el('p',{class:'fz-help',text:'Credit is attached to your email, so there is no other code to enter. If none is waiting, you can ask for some after signing in.'}));footer(primary);countdown();control.focus();return;
   }
   const a=view.account!;const credit=trialCreditState(view);
-  const facts=el('dl',{class:'fz-kv'},el('dt',{text:'Available credit'}),el('dd',{text:money(a.availableMicro)}),el('dt',{text:'Trial status'}),el('dd',{text:credit.label}));
-  if(a.dailyLimitMicro)facts.append(el('dt',{text:'Available today'}),el('dd',{text:money(a.dailyAvailableMicro??0)}),el('dt',{text:'Daily reset'}),el('dd',{text:a.dailyResetAt?new Date(a.dailyResetAt).toLocaleString():'00:00 UTC'}));
+  // While a request is waiting, "$0.00" would read as an answer, so the amount is left out until there is one.
+  const facts=el('dl',{class:'fz-kv'});if(credit.kind!=='waiting')facts.append(el('dt',{text:'Available credit'}),el('dd',{text:money(a.availableMicro)}));
+  facts.append(el('dt',{text:'Trial status'}),el('dd',{text:credit.label}));
+  // Today's allowance only means something while there is credit to spend.
+  if(a.dailyLimitMicro&&['ready','daily','paused'].includes(credit.kind))facts.append(el('dt',{text:'Available today'}),el('dd',{text:money(a.dailyAvailableMicro??0)}),el('dt',{text:'Daily reset'}),el('dd',{text:a.dailyResetAt?new Date(a.dailyResetAt).toLocaleString():'00:00 UTC'}));
   if(a.claimed)facts.append(el('dt',{text:'Expires'}),el('dd',{text:new Date(a.expiresAt).toLocaleString()}));
   const account=el('div',{class:'fz-card'},el('div',{class:'fz-row-between'},el('h3',{text:a.email}),button('Sign out',()=>void run(async()=>{try{await service.trialSignOut();}finally{view=await service.trialAccount();codeStep=false;window.dispatchEvent(new Event('factoryze-connection-changed'));window.dispatchEvent(new Event('factoryze-settings-changed'));render();}}),{kind:'quiet',small:true})),facts);
   if(a.reservedMicro>0)account.append(el('p',{class:'fz-help',text:`${money(a.reservedMicro)} is reserved for requests whose final cost is pending.`}));
@@ -58,16 +63,23 @@ export function trialConnectionDialog(service:TaskService,byok:()=>void,saved:(v
   for(const model of view.models){const option=el('option',{text:model.id});option.value=model.id;select.append(option);}
   select.value=view.selectedModel&&view.models.some(x=>x.id===view!.selectedModel)?view.selectedModel:view.models[0]?.id??'';
   const limits=el('p',{class:'fz-help'});const updateLimits=()=>{const model=view!.models.find(x=>x.id===select.value);limits.textContent=model?`Service input ceiling: ${model.maxInputTokens.toLocaleString()} · Maximum reply: ${model.maxOutputTokens.toLocaleString()} tokens.`:'No trial models are available yet.';};select.addEventListener('change',updateLimits);updateLimits();
-  // One plain sentence about where the credit stands, and at most one thing to do about it.
+  // One plain sentence about where the credit stands. What to do about it is the footer's main button.
   const next=el('div',{class:credit.kind==='ready'?'fz-help':'fz-callout'},el('p',{text:credit.message}));
-  if(credit.request)next.append(button(credit.request,()=>void run(async()=>{view=await service.trialRequestCredit();const after=trialCreditState(view);status.textContent=after.canUse||after.kind==='paused'?'Credit added. You can start now.':'Request sent. The project owner will review it.';if(view.selected)window.dispatchEvent(new Event('factoryze-settings-changed'));render();}),{kind:'primary',small:true}));
-  if(credit.kind==='waiting')next.append(button('Check again',()=>void run(async()=>{view=await service.trialAccount();if(!trialCreditState(view).canUse)status.textContent='Not approved yet.';render();}),{kind:'link'}));
-  // Without usable credit the next step comes first and there is no model to choose yet.
-  const choosing=credit.kind==='ready'||credit.kind==='paused'||credit.kind==='daily';
+  // Without usable credit the message comes first and there is no model to choose.
+  const choosing=credit.kind==='ready';
   if(choosing)content.replaceChildren(el('p',{class:'fz-lead',text:'Use the project’s allowance for model requests. Your tools, approvals and task token budget stay on this computer.'}),account,next,field('Trial model',select),limits,el('p',{class:'fz-help',text:'Trial credit is shared across attempts. Each attempt also keeps its own token limit. Factoryze will not switch to your API key automatically.'}));
   else content.replaceChildren(next,account);
-  const use=button('Use trial credits',()=>void run(async()=>{const settings=await service.trialSelect(select.value);window.dispatchEvent(new Event('factoryze-connection-changed'));window.dispatchEvent(new Event('factoryze-settings-changed'));saved(settings);m.close();}),{kind:'primary'});
-  if(!credit.canUse){use.disabled=true;use.dataset.unavailable='true';}footer(use);
+  const actions:Record<TrialFooterButton['action'],()=>void>={
+   close:()=>m.close(),
+   use:()=>void run(async()=>{const settings=await service.trialSelect(select.value);window.dispatchEvent(new Event('factoryze-connection-changed'));window.dispatchEvent(new Event('factoryze-settings-changed'));saved(settings);m.close();}),
+   request:()=>void run(async()=>{view=await service.trialRequestCredit();const after=trialCreditState(view);
+    // The waiting message already says the request was sent; saying it again on screen would be noise.
+    if(after.canUse||after.kind==='paused')status.textContent='Credit added. You can start now.';else announce.textContent='Request sent.';
+    if(view.selected)window.dispatchEvent(new Event('factoryze-settings-changed'));render();}),
+   check:()=>void run(async()=>{view=await service.trialAccount();if(!trialCreditState(view).canUse)status.textContent='Not approved yet.';render();}),
+  };
+  // The footer holds the one next step; nothing in it is ever disabled because it cannot be used.
+  m.foot.replaceChildren(...trialFooter(credit).map(b=>button(b.label,actions[b.action],b.primary?{kind:'primary'}:{})));
  }
  content.append(el('p',{class:'fz-help',text:'Checking your trial account…'}));footer();void run(async()=>{view=await service.trialAccount();render();});
 }

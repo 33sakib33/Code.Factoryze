@@ -24,7 +24,7 @@ export function trialCreditState(view: TrialAccountView): TrialCreditState {
   const expired = a.claimed && Date.parse(a.expiresAt) <= Date.now();
   const usable = a.claimed && !expired && a.availableMicro > 0;
   if (!usable) {
-    if (view.creditRequested) return { kind: 'waiting', label: 'Waiting for approval', message: 'Your request has been sent to the project owner. Credit appears here as soon as it is approved; you do not need to do anything else.', canUse: false };
+    if (view.creditRequested) return { kind: 'waiting', label: 'Waiting for approval', message: 'Request sent. You can close this window; your credit will be here once the project owner approves it. Until then you can work on tasks without the agent, or use your own API key.', canUse: false };
     if (!a.claimed) return { kind: 'none', label: 'No credit yet', message: 'Credit is attached to your email, and none is waiting for this address. Ask the project owner for some.', canUse: false, request: 'Request credit' };
     return expired
       ? { kind: 'expired', label: 'Credit expired', message: 'Your trial credit has expired. You can ask for more, or use your own API key.', canUse: false, request: 'Request more credit' }
@@ -35,4 +35,17 @@ export function trialCreditState(view: TrialAccountView): TrialCreditState {
     return { kind: 'daily', label: 'Daily limit reached', message: `You have reached today's limit. It resets at ${a.dailyResetAt ? new Date(a.dailyResetAt).toLocaleString() : '00:00 UTC'}.`, canUse: false };
   }
   return { kind: 'ready', label: 'Credit ready', message: 'Your credit is ready. Choose a model and start.', canUse: view.models.length > 0 };
+}
+
+export type TrialFooterButton = { action: 'close' | 'request' | 'check' | 'use'; label: string; primary: boolean };
+
+/**
+ * The dialog footer for a signed-in account, left to right. The main button is the one next step and comes last.
+ * A button that cannot be pressed is never shown, and "Cancel" appears only beside a choice that can be abandoned.
+ */
+export function trialFooter(state: TrialCreditState): TrialFooterButton[] {
+  if (state.canUse) return [{ action: 'close', label: 'Cancel', primary: false }, { action: 'use', label: 'Use trial credits', primary: true }];
+  if (state.request) return [{ action: 'close', label: 'Close', primary: false }, { action: 'request', label: state.request, primary: true }];
+  if (state.kind === 'waiting') return [{ action: 'check', label: 'Check again', primary: false }, { action: 'close', label: 'Close', primary: true }];
+  return [{ action: 'close', label: 'Close', primary: true }];
 }
