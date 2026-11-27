@@ -54,7 +54,10 @@ const launch=async()=>{
 const clientDirectory=join(root,'engine','lab-client',createHash('sha256').update(account).digest('hex').slice(0,16));
 try{
  if(byokPreseeded)await keytar.setPassword('Factoryze Solo Provider',account,'preserved-lab-test-key');
- await launch();console.log('Home ready');await page.getByRole('button',{name:'Join a lab',exact:true}).click();let dialog=page.getByRole('dialog',{name:'Join a lab',exact:true});
+ await launch();console.log('Home ready');
+ // A window too narrow for Home's two columns keeps the lab behind the "Your progress" tab.
+ {const tab=page.locator('.fz-home-tab',{hasText:'Your progress'});if(await tab.isVisible())await tab.click();}
+ await page.getByRole('button',{name:'Join a lab',exact:true}).click();let dialog=page.getByRole('dialog',{name:'Join a lab',exact:true});
  await dialog.getByLabel('Lab configuration',{exact:true}).setInputFiles(configPath);await dialog.getByRole('status').getByText(/Server:/).waitFor();
  await dialog.getByLabel('Lab ID',{exact:true}).fill('ui-pilot');await dialog.getByLabel('Student ID',{exact:true}).fill('student-01');await dialog.getByLabel('Join code or recovery token',{exact:true}).fill(code);
  await page.screenshot({path:join(output,'join.png')});await dialog.getByRole('button',{name:'Join lab',exact:true}).click();
@@ -73,7 +76,7 @@ try{
  await page.getByRole('button',{name:/Continue Library fines/}).click();await page.getByRole('textbox',{name:'Prompt for the agent'}).waitFor();assert.equal(calls,4);
  // Explicit fixture verdict tests release/rendering only. It never executes the private tests.
  await runtime.stopStudent('ui-pilot');engine.closeLab('ui-pilot');await engine.gradeQueued(async()=>({passed:9,total:9,checks:Array.from({length:9},(_,i)=>({name:`Synthetic fixture check ${i+1}`,passed:true}))}));engine.release('ui-pilot');
- await page.locator('.factoryze-metrics').getByRole('button',{name:'Home',exact:true}).click();await page.getByRole('button',{name:'Refresh lab results',exact:true}).click();
+ await page.locator('.factoryze-metrics').getByRole('button',{name:'Home',exact:true}).click();{const tab=page.locator('.fz-home-tab',{hasText:'Your progress'});await page.locator('.fz-home').waitFor();if(await tab.isVisible())await tab.click();}await page.getByRole('button',{name:'Refresh lab results',exact:true}).click();
  await page.getByRole('row',{name:/Open the report for Library fines/}).first().click();await page.getByText(/released by your instructor/).waitFor();await page.getByRole('heading',{name:'Activity and token usage',exact:true}).waitFor();
  assert.equal(await page.locator('.fz-prompts .fz-tag, .fz-report-advice').count(),0);assert.equal(await page.getByRole('button',{name:'New attempt',exact:true}).count(),0);await page.screenshot({path:join(output,'released-report.png')});
  await page.getByRole('button',{name:'View all 9 checks',exact:true}).click();await page.getByRole('dialog',{name:'Hidden-check details'}).getByText('Synthetic fixture check 9',{exact:true}).waitFor();await page.getByRole('button',{name:'Close details',exact:true}).click();

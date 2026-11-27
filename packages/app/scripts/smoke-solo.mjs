@@ -142,6 +142,13 @@ const launch = async (useKeychain = false) => {
 };
 const relaunch = async (useKeychain = credentialMode) => { await app.close(); app = undefined; return launch(useKeychain); };
 const home = page => page.locator('.fz-home');
+/** In a window too narrow for two columns, Home shows tasks and the student's progress as two tabs. In a wide window both are in view. */
+const homeTab = async (page, name) => { const tab = home(page).locator('.fz-home-tab', { hasText: name }); if (await tab.isVisible()) await tab.click(); };
+/** Home shows the three newest results; the rest are one click away. */
+const showAllResults = async page => {
+  await homeTab(page, 'Your progress');
+  const all = home(page).getByRole('button', { name: /^Show all \d+ results$/ }); if (await all.count()) await all.click();
+};
 const waitForTaskTitles = async (page, expected) => {
   const selector = '.fz-home-catalog > .fz-task-list h3';
   await page.waitForFunction(({ selector, expected }) => {
@@ -315,15 +322,28 @@ try {
   assert.equal(await home(page).getByRole('button', { name: /^Start (Stable customer IDs|Pagination API)$/ }).count(), 0);
   assert.ok(['', '#'].includes(new URL(page.url()).hash), 'Launch must not open an attempt');
   assert.equal(await page.locator('.fz-agent:visible').count(), 0, 'Home has no agent pane');
+  // Nothing on Home is found by scrolling the page: the narrow window offers results, import and the lab behind a second tab with a visible label.
+  assert.equal(await home(page).locator('.fz-home-tab').count(), 2);
+  assert.equal(await home(page).getByRole('button', { name: 'Open task folder…', exact: true }).isVisible(), false);
+  await homeTab(page, 'Your progress');
   await home(page).getByText('When you submit an attempt, its report appears here.', { exact: true }).waitFor();
   await home(page).getByRole('button', { name: 'Open task folder…', exact: true }).waitFor();
   await home(page).getByRole('button', { name: 'Open task ZIP…', exact: true }).waitFor();
+  await page.screenshot({ path: join(output, 'home-progress-tab.png') });
+  await homeTab(page, 'Tasks');
   assert.equal(await page.getByText(/OpenCode/).count(), 0, 'Factoryze no longer mentions OpenCode');
   await page.screenshot({ path: join(output, 'home.png') });
   const homeWindow = await app.browserWindow(page);
   // Hosted desktops may cap the outer window below the requested size.
   await homeWindow.evaluate(window => window.setContentSize(900, 600));
   await page.waitForFunction(() => innerWidth >= 800 && innerHeight >= 550);
+  // Wide enough for two columns: tasks and progress are both in view, the tabs are gone, and the page itself does not scroll.
+  if (await page.evaluate(() => innerWidth >= 860)) {
+    assert.equal(await home(page).locator('.fz-home-tab:visible').count(), 0);
+    await home(page).getByRole('heading', { name: 'Practice tasks', exact: true }).waitFor(); await home(page).getByRole('heading', { name: 'Results', exact: true }).waitFor();
+    for (const name of ['Open task folder…', 'Open task ZIP…']) assert.ok(await home(page).getByRole('button', { name, exact: true }).isVisible(), name);
+    assert.equal(await home(page).evaluate(node => node.scrollHeight <= node.clientHeight + 1), true, 'Home must not need page scrolling in a wide window');
+  }
   await page.screenshot({ path: join(output, 'home-wide.png') });
   await homeWindow.evaluate(window => window.setContentSize(683, 512));
   await page.waitForFunction(() => innerWidth === 683 && innerHeight === 512);
@@ -447,12 +467,17 @@ try {
   page = await launch();
   await home(page).getByRole('heading', { name: 'Continue', exact: true }).waitFor();
   assert.ok(['', '#'].includes(new URL(page.url()).hash), 'Relaunch must return to Home');
-  assert.equal(await home(page).locator('.fz-results tbody tr').count(), 4);
   await page.screenshot({ path: join(output, 'relaunch-home.png') });
+  await homeTab(page, 'Your progress');
+  assert.equal(await home(page).locator('.fz-results tbody tr').count(), 3, 'Home shows the three newest results first');
+  await showAllResults(page);
+  assert.equal(await home(page).locator('.fz-results tbody tr').count(), 4);
   await home(page).locator('.fz-results tbody tr').filter({ hasText: 'Library fines' }).first().click();
   await page.locator('.fz-overlay .fz-report-result-number').getByText('9 / 9', { exact: true }).waitFor();
   await page.screenshot({ path: join(output, 'report-from-home.png') });
   await page.locator('.fz-overlay').getByRole('button', { name: 'Home', exact: true }).click();
+  // Closing a report opened from Results returns to where it was opened.
+  await homeTab(page, 'Tasks');
 
   assert.equal(await home(page).getByRole('button', { name: 'Continue Stable customer IDs, attempt 1', exact: true }).count(), 0);
   await home(page).getByRole('button', { name: 'Show all attempts', exact: true }).click();
@@ -475,7 +500,9 @@ try {
     assert.equal(saved.workspaceUsage[0].weighted, 14);
     assert.deepEqual(JSON.parse(db.prepare('SELECT report FROM practice_reports WHERE workspace=? ORDER BY id LIMIT 1').get(oldWorkspace).report), previous);
     await page.getByRole('button', { name: 'Keep working', exact: true }).click(); await goHome(page);
+    await showAllResults(page);
     assert.equal(await home(page).locator('.fz-results tbody tr').filter({ hasText: title }).count(), 2);
+    await homeTab(page, 'Tasks');
   }
   await page.screenshot({ path: join(output, 'retired-attempts.png') });
   console.log('Retired tasks stay hidden from Practice; earlier attempts, usage, reports and resubmission survive.');
@@ -544,6 +571,7 @@ try {
   for (const [selection, id, limit, zip] of [[folderTask, 'folder-assessment', 42, false], [zipTask, 'zip-assessment', 84, true]]) {
     await goHome(page);
     await app.evaluate(({ dialog }, selected) => { dialog.showOpenDialog = async () => ({ canceled: false, filePaths: [selected] }); }, selection);
+    await homeTab(page, 'Your progress');
     await home(page).getByRole('button', { name: zip ? 'Open task ZIP…' : 'Open task folder…', exact: true }).click();
     await attemptOpened(page, `${id}-`);
     assert.equal(app.windows().length, initialWindows, 'Task import must preserve the window');
@@ -559,7 +587,9 @@ try {
 
   // Keychain mode with no model: Home asks to connect; an attempt keeps the draft while Settings connects a model.
   page = await relaunch(true);
+  await homeTab(page, 'Your progress');
   await home(page).getByRole('heading', { name: 'Want an AI assistant?', exact: true }).waitFor();
+  await homeTab(page, 'Tasks');
   await page.locator('.fz-chip').getByText('No model connected', { exact: true }).waitFor();
 
   const callsBeforeSetup = modelCalls;
@@ -707,7 +737,7 @@ try {
     factoryzeHarness: { requests: harnessCalls, readEditShell: true, diffAndShellApproved: true, budgetPersistsAfterRestart: true },
     budgetEnforcedAfterNewSession: true, terminalUsesEngineIndex: true, paneTogglesCarryStateOnLoad: true, stopCancelsJudge: true, singleWindowAttempts: true,
     folderImport: true, zipImport: true, draftRetainedDuringSetup: true, keychainSetupEnablesSend: true, forgetConnection: true,
-    publicTestsRun: true, starterFileOpened: true, codeColoured: true, calmChrome: true, noOpenCodeInUi: true, darkAppearance: true, appearancePersists: true, matchSystemAppearance: true,
+    publicTestsRun: true, starterFileOpened: true, codeColoured: true, calmChrome: true, homeWithoutPageScroll: true, noOpenCodeInUi: true, darkAppearance: true, appearancePersists: true, matchSystemAppearance: true,
     toolbarOverlapsAfterLoad };
   writeFileSync(join(output, 'result.json'), JSON.stringify(result, null, 2) + '\n'); console.log(JSON.stringify(result));
 } catch (error) {

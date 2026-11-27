@@ -33,3 +33,29 @@ export function recordSummary(record: HomeRecord): string {
   if (record.tried) parts.push(`${record.tried} more tried`);
   return parts.join(', ');
 }
+
+export type TaskStatus = { kind: 'progress' | 'solved' | 'tried' | 'new'; label: string };
+type Attempt = { taskId: string; attempt: number; submissions: number; lab?: string };
+
+/**
+ * What a task row says about your own work, so the list answers "what should I do next" by itself.
+ * An attempt that is still open comes first, because that is where the work is.
+ */
+export function taskStatus(taskId: string, attempts: readonly Attempt[], results: readonly Result[]): TaskStatus {
+  const open = attempts.filter(item => item.taskId === taskId && !item.lab && item.submissions === 0).sort((a, b) => b.attempt - a.attempt)[0];
+  if (open) return { kind: 'progress', label: `Attempt ${open.attempt} in progress` };
+  const mine = results.filter(result => result.taskId === taskId), solved = mine.filter(result => result.passed === result.total);
+  if (solved.length) {
+    const fewest = Math.min(...solved.map(result => result.weighted));
+    return { kind: 'solved', label: fewest ? `Solved with ${Math.round(fewest).toLocaleString('en-US')} tokens` : 'Solved without the agent' };
+  }
+  const best = [...mine].sort((a, b) => b.passed / b.total - a.passed / a.total)[0];
+  return best ? { kind: 'tried', label: `Best result: ${best.passed} of ${best.total} checks` } : { kind: 'new', label: 'Not attempted yet' };
+}
+
+/** Home shows the newest results first and keeps the rest one click away. */
+export function latestResults<T extends { submittedAt: string }>(results: readonly T[], showAll: boolean, limit = 3): { shown: T[]; hidden: number } {
+  const newest = [...results].sort((a, b) => b.submittedAt.localeCompare(a.submittedAt));
+  const shown = showAll ? newest : newest.slice(0, limit);
+  return { shown, hidden: newest.length - shown.length };
+}

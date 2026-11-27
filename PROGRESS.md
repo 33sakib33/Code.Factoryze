@@ -2,6 +2,18 @@
 
 Source of scope and release order: [PLAN.md](PLAN.md). Browser/community development has a synthetic prototype, Go-backed membership/privacy, a reviewed public catalog, private drafts/check jobs and disabled guided practice with immutable private result copies. Public rollout, tamper-resistant grading and reward services remain open. Desktop/lab implementation and their open release gates remain separate. Dated entries preserve historical checks and decisions.
 
+## 2026-11-28 — Home without the page scroll (desktop, 0.0.11)
+
+The owner pointed out that results, the lab and importing a task sat below the task list on Home, where nobody knows to scroll. Three layouts were proposed in `mockups/home-options.html`; the owner chose option A.
+
+- **Two columns:** tasks on the left; on the right the record, results, "Bring your own task", "Classroom lab" and "Want an AI assistant?". In a window at least 860px wide the page does not scroll: the task list scrolls inside its own panel under a fixed heading, topics and search.
+- **Narrow windows:** the same two groups become two tabs, "Tasks" and "Your progress", each with a count. Opening Home starts on Tasks.
+- **Results:** the three newest are shown, with "Show all N results" for the rest (`latestResults`, tested). The Submitted and Score columns moved into the task cell.
+- **Task rows:** one line of description, and the row says where your own work stands: in progress, solved with its fewest tokens, best partial result, or not attempted (`taskStatus`, tested). The button reads Start, Open or Try again; its accessible name is unchanged.
+- Differences from the mockup: the list scrolls inside its panel instead of paging six at a time, online tasks stay below the bundled list rather than behind a switch, and the latest results expand in place rather than on a separate page.
+
+Verification on macOS/arm64: 331/331 editor tests, typecheck, a tour of the source build at 1360x860 and 683x540, and `smoke-solo.mjs` and `smoke-lab.mjs` against a locally packaged app. Both smoke tests now switch tabs where a narrow window hides the progress column.
+
 ## 2026-11-28 — A calmer workbench and a visible token gauge (desktop, 0.0.10)
 
 The owner asked for the small items from the proposal in `mockups/ide-refresh.html`. Two of them were already half there: the toolbar meter already had one segment per prompt, and the report already opened with a result card and offered the next task. The work was to make them readable.

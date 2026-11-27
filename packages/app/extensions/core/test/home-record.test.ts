@@ -40,3 +40,28 @@ test('the result card says what the submission cost, in one sentence', () => {
   assert.equal(reportCostSentence({ weighted: null, prompts: null }), '');
   assert.equal(reportCostSentence({ weighted: null, prompts: 2 }), '');
 });
+
+test('a task row says where your own work on it stands', async () => {
+  const { taskStatus } = await import('../src/browser/home-record.ts');
+  const attempt = (taskId: string, n: number, submissions: number, lab?: string) => ({ taskId, attempt: n, submissions, ...(lab ? { lab } : {}) });
+  assert.deepEqual(taskStatus('library-fines', [], []), { kind: 'new', label: 'Not attempted yet' });
+  // An open attempt wins over earlier results: that is where the work is.
+  assert.deepEqual(taskStatus('library-fines', [attempt('library-fines', 1, 2), attempt('library-fines', 2, 0)], [result('library-fines', 9, 9, 1840)]), { kind: 'progress', label: 'Attempt 2 in progress' });
+  assert.deepEqual(taskStatus('library-fines', [attempt('library-fines', 1, 2)], [result('library-fines', 5, 9, 300), result('library-fines', 9, 9, 2400), result('library-fines', 9, 9, 1840)]),
+    { kind: 'solved', label: 'Solved with 1,840 tokens' });
+  assert.deepEqual(taskStatus('retry-storm', [], [result('retry-storm', 6, 6, 0)]), { kind: 'solved', label: 'Solved without the agent' });
+  assert.deepEqual(taskStatus('delivery-fee', [attempt('delivery-fee', 1, 2)], [result('delivery-fee', 1, 4, 100), result('delivery-fee', 3, 4, 900)]), { kind: 'tried', label: 'Best result: 3 of 4 checks' });
+  // Lab attempts and other tasks' results say nothing about this practice task.
+  assert.deepEqual(taskStatus('library-fines', [attempt('library-fines', 1, 0, 'lab-a'), attempt('delivery-fee', 1, 0)], [result('delivery-fee', 4, 4, 10)]), { kind: 'new', label: 'Not attempted yet' });
+});
+
+test('Home shows the three newest results and keeps the rest one click away', async () => {
+  const { latestResults } = await import('../src/browser/home-record.ts');
+  const rows = ['2026-11-25T10:00:00.000Z', '2026-11-28T09:00:00.000Z', '2026-11-26T10:00:00.000Z', '2026-11-27T10:00:00.000Z', '2026-11-28T08:00:00.000Z'].map((submittedAt, id) => ({ id, submittedAt }));
+  const latest = latestResults(rows, false);
+  assert.deepEqual([latest.shown.map(row => row.id), latest.hidden], [[1, 4, 3], 2]);
+  const all = latestResults(rows, true);
+  assert.deepEqual([all.shown.map(row => row.id), all.hidden], [[1, 4, 3, 2, 0], 0]);
+  assert.deepEqual(latestResults(rows.slice(0, 2), false), { shown: [rows[1], rows[0]], hidden: 0 });
+  assert.deepEqual(latestResults([], false), { shown: [], hidden: 0 });
+});

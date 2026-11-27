@@ -605,3 +605,54 @@ a.fz-btn { text-decoration: none; }
 
 /* Trial connection reuses existing dialogs, cards, inputs and segmented controls. */
 .fz-connection-tabs{margin:0 0 18px;display:flex;flex-wrap:wrap;gap:4px}.fz-trial-content{display:grid;gap:14px}.fz-trial-content .fz-card{margin:0}.fz-trial-content .fz-actions{margin:12px 0}.fz-trial-invitation{display:flex;align-items:end;flex-wrap:wrap;gap:12px;margin:18px 0}.fz-trial-invitation .fz-field{flex:1;min-width:180px}.fz-trial-content h3,.fz-trial-content dd{overflow-wrap:anywhere}
+
+/* ---------- Home: tasks on the left, your own progress pinned on the right ---------- */
+/* Nothing on Home is reached by scrolling the page. The task list moves inside its own panel; record, results, lab and import stay in view. */
+.fz-home .fz-home-intro h1 { font-size: 22px; line-height: 1.2; }
+.fz-home .fz-home-intro p { font-size: 13px; }
+.fz-home-tabs { display: none; gap: 20px; border-bottom: 1px solid var(--fz-line-strong); }
+.fz-home-tab { padding: 6px 0 8px; margin-bottom: -1px; border: 0; border-bottom: 3px solid transparent; background: none; color: var(--fz-muted); font: 600 13px var(--fz-ui); cursor: pointer; }
+.fz-home-tab span { margin-left: 6px; font-weight: 400; color: var(--fz-faint); }
+.fz-home-tab[aria-pressed="true"] { color: var(--fz-text); border-bottom-color: var(--fz-accent); }
+.fz-home-tab:focus-visible { outline: 2px solid var(--fz-accent); outline-offset: 2px; border-radius: 3px; }
+.fz-home-grid, .fz-home-main, .fz-home-side { display: grid; gap: 16px; min-width: 0; align-content: start; }
+.fz-home .fz-home-section { padding: 16px 18px; }
+.fz-home .fz-home-section h2, .fz-home .fz-home-more-card h2 { font-size: 15px; }
+.fz-home .fz-continue { padding: 10px 14px; }
+/* Task rows: a title, one line of what is wrong, and where your own work on it stands. */
+.fz-home .fz-task-list li { padding: 11px 4px; gap: 3px 16px; }
+.fz-home .fz-task-list p { -webkit-line-clamp: 1; }
+.fz-task-meta .fz-state.fz-state-solved { color: var(--fz-ok); font-weight: 600; }
+.fz-task-meta .fz-state.fz-state-progress { color: var(--fz-accent); font-weight: 600; }
+.fz-home-side .fz-home-record { grid-template-columns: minmax(0, 1fr); gap: 10px; }
+.fz-home-results .fz-results td .fz-muted { display: block; font-size: 12px; }
+.fz-home-results .fz-results th:first-child, .fz-home-results .fz-results td:first-child { padding-left: 0; }
+.fz-home-results .fz-results th:last-child, .fz-home-results .fz-results td:last-child { padding-right: 0; }
+.fz-home-results .fz-results tr:last-child td { border-bottom: 0; }
+.fz-home-results .fz-empty { padding-bottom: 0; }
+/* One-off actions take a row each, not a card each. */
+.fz-home-side .fz-home-more { grid-template-columns: minmax(0, 1fr); gap: 0; border: 1px solid var(--fz-line); border-radius: 10px; background: var(--fz-editor); }
+.fz-home-side .fz-home-more-card { padding: 12px 18px; gap: 6px; border: 0; border-top: 1px solid var(--fz-line); border-radius: 0; background: none; }
+.fz-home-side .fz-home-more-card:first-child { border-top: 0; }
+.fz-home-side .fz-home-more-card { padding: 10px 18px; gap: 4px; }
+.fz-home-side .fz-home-more-card p { font-size: 12px; }
+.fz-home-side .fz-home-more-card .fz-actions { gap: 6px; margin-top: 2px; }
+.fz-home-side .fz-home-more-card .fz-btn:not(.fz-link) { padding: 4px 9px; font-size: 12px; }
+@media (min-width: 860px) {
+  .fz-page.fz-home { overflow: hidden; }
+  .fz-home-inner { height: 100%; max-width: 1320px; padding: 18px 24px 20px; gap: 14px; grid-template-rows: auto minmax(0, 1fr); }
+  .fz-home-grid { grid-template-columns: minmax(0, 1fr) 348px; min-height: 0; align-content: stretch; }
+  .fz-home-main { display: flex; flex-direction: column; min-height: 0; overflow-y: auto; }
+  .fz-home-main > .fz-home-section { flex: none; }
+  .fz-home-main > .fz-home-catalog { flex: 1 1 220px; min-height: 220px; overflow-y: auto; padding-top: 0; }
+  /* First run: the three starter tasks sit in one row, so the task list below them is still on the first screen. */
+  .fz-home-main .fz-starter-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  /* The heading, topics and search stay put while the list scrolls under them. */
+  .fz-catalog-top { position: sticky; top: 0; z-index: 1; margin: 0 -18px; padding: 16px 18px 2px; background: var(--fz-editor); }
+  .fz-home-side { min-height: 0; overflow-y: auto; }
+}
+/* Too narrow for two columns: the same two groups become two tabs, each with a count. */
+@media (max-width: 859px) {
+  .fz-home-tabs { display: flex; }
+  .fz-home-grid[data-tab="tasks"] > .fz-home-side, .fz-home-grid[data-tab="progress"] > .fz-home-main { display: none; }
+}

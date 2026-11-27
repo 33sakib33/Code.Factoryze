@@ -4,10 +4,10 @@ import type { PracticeTask, TaskTopicCount } from '../common/task-service';
 import { isModelConfigured } from '@factoryze/protocol';
 import type { TaskService } from '../common/task-service';
 import { button, el, errorText, meter } from './dom';
-import { continueAttempts, dateLabel, relativeTime, taskState, tokens } from './flow-model';
+import { continueAttempts, dateLabel, relativeTime, tokens } from './flow-model';
 import { browseTasks, pageSize, topicFacets, topicLabel, untaggedTopic } from './task-browser';
 import { starterPicks } from './first-run';
-import { homeRecord, recordCellLabel, recordSummary } from './home-record';
+import { homeRecord, latestResults, recordCellLabel, recordSummary, taskStatus } from './home-record';
 
 export type HomeActions = {
   continueAttempt(attempt: AttemptSummary): void;
@@ -18,12 +18,18 @@ export type HomeActions = {
   joinLab?():void;
 };
 
-/** The first screen. Nothing opens until the student chooses an attempt or a task. */
+/**
+ * The first screen. Nothing opens until the student chooses an attempt or a task.
+ * Tasks are on the left and the student's own progress (record, results, lab and import) stays in view on the right,
+ * so nothing has to be found by scrolling. A window too narrow for two columns shows them as two tabs instead.
+ */
 export class FactoryzeHomeWidget extends BaseWidget {
   static readonly ID = 'factoryze-home';
   private readonly content = el('div', { class: 'fz-home-inner' });
   private generation = 0;
   private showAllAttempts = false;
+  private showAllResults = false;
+  private tab: 'tasks' | 'progress' = 'tasks';
   private taskQuery = '';
   private selectedTopic = '';
   private taskPage = 0;
@@ -44,7 +50,7 @@ export class FactoryzeHomeWidget extends BaseWidget {
     this.toDispose.push({ dispose: () => window.removeEventListener('factoryze-settings-changed', refresh) });
   }
 
-  protected override onActivateRequest(): void { this.node.focus(); void this.refresh(); }
+  protected override onActivateRequest(): void { this.tab = 'tasks'; this.node.focus(); void this.refresh(); }
 
   async refresh(): Promise<void> {
     const generation = ++this.generation;
@@ -64,8 +70,7 @@ export class FactoryzeHomeWidget extends BaseWidget {
     const main: HTMLElement[] = [];
     const taskSearch = el('input', { type: 'search', aria: { label: 'Search practice tasks' } });
     const intro = el('header', { class: 'fz-home-intro' },
-      el('div', {}, el('span', { class: 'fz-home-eyebrow', text: 'PRACTICE' }),
-        el('h1', { text: 'Find a task to practice' }),
+      el('div', {}, el('h1', { text: 'Find a task to practice' }),
         el('p', { text: 'Choose a problem, work on it in the editor, and submit to see your result.' })));
 
     // First run: three ways in, above the catalog, until the first result is submitted.
@@ -83,7 +88,7 @@ export class FactoryzeHomeWidget extends BaseWidget {
         button('Start', () => this.actions.start(task, attempts), { kind: recommended ? 'primary' : undefined, aria: `Start with ${task.title}` }))))) : null;
 
     const recent = continueAttempts(attempts, this.showAllAttempts ? 'all' : 3);
-    if (recent.length) main.push(el('section', { class: 'fz-home-section', aria: { label: 'Continue' } }, el('div', { class: 'fz-section-head' }, el('h2', { text: 'Continue' }),
+    if (recent.length) main.push(el('section', { class: 'fz-home-section fz-home-continue', aria: { label: 'Continue' } }, el('div', { class: 'fz-section-head' }, el('h2', { text: 'Continue' }),
       ...(attempts.length > 3 ? [button(this.showAllAttempts ? 'Show recent attempts' : 'Show all attempts', () => {
         this.showAllAttempts = !this.showAllAttempts;
         this.render(tasks, attempts, reports, settings, remoteTopics);
@@ -124,14 +129,15 @@ export class FactoryzeHomeWidget extends BaseWidget {
     const next = button('Next', () => { this.taskPage++; renderPage(); }, { small: true });
     const pageLabel = el('span', { class: 'fz-home-page-label' });
     const pagination = el('nav', { class: 'fz-home-pagination', aria: { label: 'Practice task pages' } }, previous, pageLabel, next);
-    const row = (task: PracticeTask) => el('li', {},
-      el('div', {}, el('h3', {}, task.title, ...(task.hosted ? [el('span', { class: 'fz-hosted-tag', title: 'Published by your Factoryze service', text: 'Hosted' })] : [])), el('p', { text: task.brief })),
+    const row = (task: PracticeTask) => { const status = taskStatus(task.id, attempts, reports); return el('li', {},
+      el('div', {}, el('h3', {}, task.title, ...(task.hosted ? [el('span', { class: 'fz-hosted-tag', title: 'Published by your Factoryze service', text: 'Hosted' })] : [])), el('p', { text: task.brief, title: task.brief })),
       el('div', { class: 'fz-task-meta' },
         el('span', { text: (task.topics?.length ? task.topics.map(topicLabel).join(' · ') : topicLabel(untaggedTopic)) }),
         el('span', { text: `About ${task.timeHintMinutes ?? 30} minutes` }),
         el('span', { text: `Python ${task.minimumPython}+` }),
-        el('span', { class: 'fz-state', text: taskState(task.id, attempts) })),
-      button('Start practice', () => this.actions.start(task, attempts), { kind: 'primary', aria: `Start ${task.title}` }));
+        el('span', { class: `fz-state fz-state-${status.kind}`, text: status.label })),
+      button(status.kind === 'solved' ? 'Try again' : status.kind === 'progress' ? 'Open' : 'Start', () => this.actions.start(task, attempts),
+        { kind: status.kind === 'solved' ? undefined : 'primary', aria: `Start ${task.title}` })); };
     let remoteVisible = false, remoteLoaded = false, remoteRequest = 0;
     const renderPage = () => {
       const found = browseTasks(tasks, { topic: this.selectedTopic, query: this.taskQuery, page: this.taskPage, pageSize });
@@ -189,37 +195,43 @@ export class FactoryzeHomeWidget extends BaseWidget {
     taskSearch.addEventListener('input', () => { this.taskQuery = taskSearch.value; this.taskPage = 0; clearTimeout(searchTimer); searchTimer = setTimeout(() => { renderPage(); resetHosted(); }, 200); });
     topicSelect.addEventListener('change', () => { this.selectedTopic = topicSelect.value; this.taskPage = 0; renderPage(); resetHosted(); });
     renderPage();
-    main.unshift(el('section', { class: 'fz-home-section fz-home-catalog', aria: { label: 'Practice tasks' } },
-      el('div', { class: 'fz-section-head' }, el('div', {}, el('h2', { text: 'Practice tasks' }), taskCount)),
-      chips,
-      el('div', { class: 'fz-home-search' }, taskSearch, topicSelect,
-        button('Refresh tasks', () => void this.refresh(), { icon: 'refresh', small: true })),
+    // The heading, topics and search stay put while the list below them scrolls inside the panel.
+    main.push(el('section', { class: 'fz-home-section fz-home-catalog', aria: { label: 'Practice tasks' } },
+      el('div', { class: 'fz-catalog-top' },
+        el('div', { class: 'fz-section-head' }, el('div', {}, el('h2', { text: 'Practice tasks' }), taskCount)),
+        chips,
+        el('div', { class: 'fz-home-search' }, taskSearch, topicSelect,
+          button('Refresh tasks', () => void this.refresh(), { icon: 'refresh', small: true }))),
       taskList, pagination,
       el('div', { class: 'fz-section-head fz-online-head' }, el('div', {}, el('h3', { text: 'Online problems' }), remoteCount)),
       remoteList, noMatches, remotePagination, remoteNote));
 
-    const results = el('section', { class: 'fz-home-section', aria: { label: 'Results' } }, el('div', { class: 'fz-section-head' },
+    // The newest results are always in view; older ones are one click away, never below a scroll.
+    const latest = latestResults(reports, this.showAllResults);
+    const results = el('section', { class: 'fz-home-section fz-home-results', aria: { label: 'Results' } }, el('div', { class: 'fz-section-head' },
       el('div', {}, el('h2', { text: 'Results' }), el('p', { class: 'fz-home-section-description', text: reports.length
-        ? `${reports.length} saved ${reports.length === 1 ? 'submission' : 'submissions'} · Open a row for the full report`
-        : 'Your submitted attempts will appear here.' }))));
+        ? `${reports.length} saved ${reports.length === 1 ? 'submission' : 'submissions'}. Open a row for the full report.`
+        : 'Your submitted attempts will appear here.' })),
+      ...(latest.hidden || this.showAllResults && reports.length > 3 ? [button(this.showAllResults ? 'Show latest results' : `Show all ${reports.length} results`, () => {
+        this.showAllResults = !this.showAllResults;
+        this.render(tasks, attempts, reports, settings, remoteTopics);
+      }, { small: true })] : [])));
     if (!reports.length) results.append(el('p', { class: 'fz-empty', text: 'When you submit an attempt, its report appears here.' }));
     else {
       const body = el('tbody');
-      for (const report of reports) {
+      for (const report of latest.shown) {
         const open = () => this.actions.report(report);
         const row = el('tr', { class: 'fz-row', on: { click: open, keydown: event => { if (['Enter', ' '].includes((event as KeyboardEvent).key)) { event.preventDefault(); open(); } } } },
-          el('td', {}, el('strong', { text: report.title }), ' ', el('span', { class: 'fz-muted', text: `Attempt ${report.attempt}${report.submissions > 1 ? `, submission ${report.submission}` : ''}` })),
-          el('td', { class: 'fz-hide-sm', text: dateLabel(report.submittedAt) }),
+          el('td', {}, el('strong', { text: report.title }), ' ',
+            el('span', { class: 'fz-muted', text: `Attempt ${report.attempt}${report.submissions > 1 ? `, submission ${report.submission}` : ''}, ${dateLabel(report.submittedAt)}${report.score === null ? '' : `. Score ${report.score} / 100`}` })),
           el('td', { class: report.passed === report.total ? 'fz-pass' : 'fz-partial', text: `${report.passed} of ${report.total}` }),
-          el('td', { class: 'fz-num', text: tokens(report.weighted) }),
-          el('td', { class: 'fz-hide-sm fz-muted', text: report.score === null ? 'Not scored' : `${report.score} / 100` }));
+          el('td', { class: 'fz-num', text: tokens(report.weighted) }));
         row.tabIndex = 0;
         row.setAttribute('aria-label', `Open the report for ${report.title}, attempt ${report.attempt}`);
         body.append(row);
       }
       results.append(el('div', { class: 'fz-table-wrap' }, el('table', { class: 'fz-results' },
-        el('thead', {}, el('tr', {}, el('th', { text: 'Task' }), el('th', { class: 'fz-hide-sm', text: 'Submitted' }), el('th', { text: 'Hidden checks' }),
-          el('th', { class: 'fz-num', text: 'Tokens' }), el('th', { class: 'fz-hide-sm', text: 'Score' }))), body)));
+        el('thead', {}, el('tr', {}, el('th', { text: 'Task' }), el('th', { text: 'Hidden checks' }), el('th', { class: 'fz-num', text: 'Tokens' }))), body)));
     }
     const more = el('section', { class: 'fz-home-more', aria: { label: 'More ways to practice' } },
       el('div', { class: 'fz-home-more-card' }, el('h2', { text: 'Bring your own task' }),
@@ -246,7 +258,19 @@ export class FactoryzeHomeWidget extends BaseWidget {
           el('li', {}, el('span', { class: 'fz-record-cell fz-record-solved' }), 'Solved'),
           el('li', {}, el('span', { class: 'fz-record-cell fz-record-tried' }), 'Tried'),
           el('li', {}, el('span', { class: 'fz-record-cell fz-record-new' }), 'Not started')))) : null;
-    this.content.replaceChildren(intro, ...(starters ? [starters] : []), ...(recordSection ? [recordSection] : []), ...main, more, results);
+    const grid = el('div', { class: 'fz-home-grid' },
+      el('div', { class: 'fz-home-main' }, ...(starters ? [starters] : []), ...main),
+      el('aside', { class: 'fz-home-side', aria: { label: 'Your progress' } }, ...(recordSection ? [recordSection] : []), results, more));
+    // Only shown when the window is too narrow for two columns. The count on each tab says there is something behind it.
+    const tabs = el('div', { class: 'fz-home-tabs', role: 'group', aria: { label: 'Home sections' } });
+    const showTab = () => { grid.dataset.tab = this.tab; for (const tab of tabs.querySelectorAll<HTMLButtonElement>('button')) tab.setAttribute('aria-pressed', String(tab.dataset.tab === this.tab)); };
+    for (const [id, label, count] of [['tasks', 'Tasks', String(tasks.filter(task => !task.hosted).length)],
+      ['progress', 'Your progress', reports.length ? `${reports.length} ${reports.length === 1 ? 'result' : 'results'}` : '']] as const) {
+      const tab = el('button', { type: 'button', class: 'fz-home-tab' }, label, count ? el('span', { text: count }) : null);
+      tab.dataset.tab = id; tab.addEventListener('click', () => { this.tab = id; showTab(); }); tabs.append(tab);
+    }
+    showTab();
+    this.content.replaceChildren(intro, tabs, grid);
     void loadHosted();
   }
 }
