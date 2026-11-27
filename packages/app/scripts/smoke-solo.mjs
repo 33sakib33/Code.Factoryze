@@ -168,6 +168,9 @@ const toolbarAccessible = async page => {
   for (const deadline = Date.now() + 5000; obscured.length && Date.now() < deadline; obscured = await obscuredButtons()) await page.waitForTimeout(100);
   assert.deepEqual(obscured, [], 'Window controls must not cover or push toolbar buttons outside the window');
 };
+/** Waits until Python keywords in the open editor carry the keyword colour of the light or dark palette. */
+const keywordsColoured = (page, dark) => page.waitForFunction(expected => [...document.querySelectorAll('.monaco-editor .view-line span > span')]
+  .some(span => ['def', 'from', 'import', 'return'].includes(span.textContent.trim()) && getComputedStyle(span).color === expected), dark ? 'rgb(211, 155, 224)' : 'rgb(124, 58, 140)', { timeout: 20000 });
 const attemptOpened = async (page, prefix) => {
   await page.waitForURL(url => decodeURIComponent(url.hash).includes(prefix));
   await page.locator('.fz-agent').waitFor();
@@ -332,6 +335,12 @@ try {
   assert.equal(app.windows().length, initialWindows, 'Starting a task must keep the same window');
   await page.locator('.monaco-editor').first().waitFor();
   await page.locator('.fz-attempt-title').getByText('Attempt 1', { exact: true }).waitFor();
+  // The starter file is Python: the editor names the language and colours words by what they are.
+  await page.locator('#theia-statusBar').getByText('Python', { exact: true }).waitFor({ timeout: 20000 });
+  await keywordsColoured(page, false);
+  const editorColours = await page.evaluate(() => new Set([...document.querySelectorAll('.monaco-editor .view-line span > span')].map(span => getComputedStyle(span).color)).size);
+  assert.ok(editorColours >= 4, `code must not be one colour (found ${editorColours})`);
+  await page.screenshot({ path: join(output, 'editor-colours.png') });
   await runTests(page, '5 of 5 public tests passed');
   console.log('Started an attempt from Home; starter file opened; public tests ran.');
 
@@ -665,6 +674,8 @@ try {
   await home(page).getByRole('button', { name: 'Continue Monthly revenue report, attempt 3', exact: true }).click();
   await attemptOpened(page, 'monthly-revenue-');
   assert.equal(await bodyTheme(), 'dark');
+  // An open Python file follows the dark palette too.
+  if (await page.locator('.monaco-editor .view-line').count()) await keywordsColoured(page, true);
   await page.screenshot({ path: join(output, 'attempt-dark.png') });
   await page.locator('.fz-tb-attempt').getByRole('button', { name: 'Home', exact: true }).click();
   await home(page).waitFor();
@@ -690,7 +701,7 @@ try {
     factoryzeHarness: { requests: harnessCalls, readEditShell: true, diffAndShellApproved: true, budgetPersistsAfterRestart: true },
     budgetEnforcedAfterNewSession: true, terminalUsesEngineIndex: true, paneTogglesCarryStateOnLoad: true, stopCancelsJudge: true, singleWindowAttempts: true,
     folderImport: true, zipImport: true, draftRetainedDuringSetup: true, keychainSetupEnablesSend: true, forgetConnection: true,
-    publicTestsRun: true, starterFileOpened: true, noOpenCodeInUi: true, darkAppearance: true, appearancePersists: true, matchSystemAppearance: true,
+    publicTestsRun: true, starterFileOpened: true, codeColoured: true, noOpenCodeInUi: true, darkAppearance: true, appearancePersists: true, matchSystemAppearance: true,
     toolbarOverlapsAfterLoad };
   writeFileSync(join(output, 'result.json'), JSON.stringify(result, null, 2) + '\n'); console.log(JSON.stringify(result));
 } catch (error) {

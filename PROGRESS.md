@@ -2,6 +2,25 @@
 
 Source of scope and release order: [PLAN.md](PLAN.md). Browser/community development has a synthetic prototype, Go-backed membership/privacy, a reviewed public catalog, private drafts/check jobs and disabled guided practice with immutable private result copies. Public rollout, tamper-resistant grading and reward services remain open. Desktop/lab implementation and their open release gates remain separate. Dated entries preserve historical checks and decisions.
 
+## 2026-11-28 — Coloured code in the editor (desktop, 0.0.9)
+
+The owner asked why code has no colours. The app shipped no language grammars, so every file opened as "Plain Text".
+
+- `language-catalog.ts` (tested) lists six languages (Python, JavaScript, TypeScript, Go, JSON, Markdown) and one colour per kind of word, from the palette in `mockups/ide.html`. Only the comment grey differs, for contrast. Names a person chose and punctuation stay in the text colour.
+- `language-contribution.ts` registers the languages with comment, bracket and indent rules, loads TextMate grammars from the new `tm-grammars` dependency (1.32.22, MIT), and lays the palette over Theia's stock light and dark editor themes under their own names, so Appearance keeps working unchanged.
+- Not included: YAML (its grammar's licence is not declared in the package), underlined problems, and the other workbench changes proposed to the owner in a mockup that is not committed yet.
+
+Verification on macOS/arm64: 325/325 editor tests, including tests that tokenise real lines with the bundled grammars and stock themes in both modes and check every colour for 4.5:1 contrast; typecheck; and the source build opening Library fines with the status bar reading "Python" and keywords in the palette colour in light and dark. `smoke-solo.mjs` now checks the same, but was not run here because it needs a packaged app. The front-end bundle grew by 0.9 MB.
+
+## 2026-11-28 — Trial dialog footer is the one next step (desktop, 0.0.9)
+
+The owner found the waiting state confusing: "you do not need to do anything else" above a Cancel button and a disabled "Use trial credits".
+
+- `trialFooter` in `trial-credit.ts` (tested) picks the footer for a signed-in account. The main button is the next step and comes last: **Use trial credits** when credit is ready, **Request credit** when there is none, **Close** while waiting (beside **Check again**) and in blocked, paused and daily-limit states. A button that cannot be pressed is never shown, and "Cancel" appears only beside a usable choice.
+- Waiting shows one message ("Request sent. You can close this window…"), with the confirmation of the click spoken to screen readers only. The "$0.00" row is left out while a request waits, and today's allowance is shown only when there is credit to spend. The model chooser appears only when credit is ready.
+
+Verification on macOS/arm64: 319/319 editor tests, typecheck, `check-trial-dialog.mjs` at four sizes (footer per state, no disabled buttons, close and reopen while waiting) and `smoke-trial.mjs` on the source build. Not done: Windows and Linux runs, a packaged build. Not built: a note outside the dialog saying a request is waiting or was approved.
+
 ## 2026-11-27 — Trial sign-in without the macOS keychain dialog (desktop, released in 0.0.8)
 
 The owner got the macOS keychain dialog again after installing 0.0.7. Cause: releases are unsigned, so macOS gives a keychain entry back only to the exact build that saved it, and the app read its trial entry at every start because preferences and the sign-in shared that one entry.

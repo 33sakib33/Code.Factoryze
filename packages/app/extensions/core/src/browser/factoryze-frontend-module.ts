@@ -29,6 +29,9 @@ import { AgentService, agentServicePath } from '../common/agent-service';
 import { TaskService, taskServicePath } from '../common/task-service';
 import { FactoryzeSoloContribution } from './factoryze-solo-contribution';
 import { ThemeService } from '@theia/core/lib/browser/theming';
+import { LanguageGrammarDefinitionContribution } from '@theia/monaco/lib/browser/textmate';
+import { MonacoThemeRegistry } from '@theia/monaco/lib/browser/textmate/monaco-theme-registry';
+import { FactoryzeLanguages } from './language-contribution';
 import { PreferenceService } from '@theia/core/lib/common/preferences/preference-service';
 import { AppearanceController } from './appearance-controller';
 
@@ -36,6 +39,7 @@ export default new ContainerModule(bind => {
   bind(WorkbenchMetrics).toSelf().inSingletonScope();
   bind(AppearanceController).toDynamicValue(ctx => new AppearanceController(ctx.container.get(ThemeService), ctx.container.get(PreferenceService))).inSingletonScope();
   bind(FrontendApplicationContribution).toDynamicValue(ctx => ({ onStart: () => ctx.container.get(AppearanceController).apply() })).inSingletonScope();
+  bind(LanguageGrammarDefinitionContribution).toDynamicValue(ctx => new FactoryzeLanguages(ctx.container.get(MonacoThemeRegistry))).inSingletonScope();
   bind(TaskService).toDynamicValue(ctx => WebSocketConnectionProvider.createProxy<TaskService>(ctx.container, taskServicePath)).inSingletonScope();
   bind(FactoryzeSoloContribution).toDynamicValue(ctx => new FactoryzeSoloContribution(
     ctx.container.get(ApplicationShell), ctx.container.get(WidgetManager), ctx.container.get(WorkspaceService),
