@@ -1,0 +1,423 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Factoryze workbench refresh (proposal)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Mono:wght@400;500;600&family=Atkinson+Hyperlegible+Next:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  /* Tokens are the ones in mockups/ide.html and factoryze.css. The only additions are --mark and --mark-soft. */
+  :root {
+    --chrome:#E3E7E8; --chrome-hover:#D6DCDE; --side:#EEF1F1; --editor:#FBFCFB; --panel:#F4F6F6; --page:#F7F8F8;
+    --line:#D2D8DA; --line-strong:#B7C1C4; --text:#1E2A30; --muted:#586770; --faint:#85949B;
+    --accent:#0F6B74; --accent-hover:#0B5960; --accent-soft:#D9ECEC; --on-accent:#FFFFFF; --track:#D2D8DA;
+    --ok:#1D6232; --fail:#9A2B20; --add-bg:#E2F1E5; --del-bg:#F7E2DF;
+    --mark:#A85D00; --mark-soft:#FBF1DE;
+    --sx-k:#7C3A8C; --sx-f:#1F48B8; --sx-s:#8A5A10; --sx-c:#74838A; --sx-n:#A33A2A; --sx-t:#0F6B74;
+    --ui:"Atkinson Hyperlegible Next", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+    --mono:"Atkinson Hyperlegible Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+    --shadow:0 22px 44px -28px rgba(30,42,48,.5);
+    color-scheme: light;
+  }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+    --chrome:#151D21; --chrome-hover:#212C31; --side:#192226; --editor:#1D262A; --panel:#182125; --page:#11181B;
+    --line:#2A363B; --line-strong:#3B494F; --text:#D8E1E4; --muted:#96A6AD; --faint:#6E7E85;
+    --accent:#4FB0B8; --accent-hover:#6CC2C9; --accent-soft:#1E3C40; --on-accent:#0D2326; --track:#2A363B;
+    --ok:#8FD6A4; --fail:#F0A69C; --add-bg:#1C3527; --del-bg:#3B2321; --mark:#E7B45E; --mark-soft:#33291A;
+    --sx-k:#D39BE0; --sx-f:#93B4FF; --sx-s:#E0B872; --sx-c:#71838B; --sx-n:#F29B85; --sx-t:#6CC6CD;
+    --shadow:0 22px 44px -28px rgba(0,0,0,.9); color-scheme: dark; } }
+  :root[data-theme="dark"] {
+    --chrome:#151D21; --chrome-hover:#212C31; --side:#192226; --editor:#1D262A; --panel:#182125; --page:#11181B;
+    --line:#2A363B; --line-strong:#3B494F; --text:#D8E1E4; --muted:#96A6AD; --faint:#6E7E85;
+    --accent:#4FB0B8; --accent-hover:#6CC2C9; --accent-soft:#1E3C40; --on-accent:#0D2326; --track:#2A363B;
+    --ok:#8FD6A4; --fail:#F0A69C; --add-bg:#1C3527; --del-bg:#3B2321; --mark:#E7B45E; --mark-soft:#33291A;
+    --sx-k:#D39BE0; --sx-f:#93B4FF; --sx-s:#E0B872; --sx-c:#71838B; --sx-n:#F29B85; --sx-t:#6CC6CD;
+    --shadow:0 22px 44px -28px rgba(0,0,0,.9); color-scheme: dark; }
+
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--page); color: var(--text); font: 15px/1.5 var(--ui); -webkit-font-smoothing: antialiased; }
+  button { font: inherit; color: inherit; cursor: pointer; }
+  :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 4px; }
+  /* Numbers in running text stay in the interface face; the mono face is for code only. */
+  .num { font-variant-numeric: tabular-nums; }
+
+  /* ---------- The board ---------- */
+  .board { max-width: 1240px; margin: 0 auto; padding: 40px 24px 80px; }
+  .board > header { display: flex; align-items: flex-start; justify-content: space-between; gap: 24px; margin-bottom: 36px; }
+  .board h1 { font-size: 30px; line-height: 1.15; margin: 0 0 10px; font-weight: 700; letter-spacing: -0.01em; }
+  .board .lede { margin: 0; max-width: 62ch; color: var(--muted); font-size: 16px; }
+  .board section { margin-top: 56px; }
+  .board h2 { font-size: 20px; margin: 0 0 4px; }
+  .board .why { margin: 0 0 18px; color: var(--muted); max-width: 70ch; }
+  .scroll { overflow-x: auto; padding-bottom: 6px; }
+  .notes { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px 32px; margin: 18px 0 0; padding: 0; list-style: none; }
+  .notes li { color: var(--muted); font-size: 14px; }
+  .notes b { color: var(--text); display: block; }
+  .toggle { flex: none; border: 1px solid var(--line-strong); background: var(--editor); border-radius: 6px; padding: 6px 12px; }
+  table.plan { width: 100%; border-collapse: collapse; font-size: 14px; }
+  table.plan th { text-align: left; font-weight: 600; color: var(--muted); padding: 8px 12px 8px 0; border-bottom: 1px solid var(--line-strong); }
+  table.plan td { padding: 10px 12px 10px 0; border-bottom: 1px solid var(--line); vertical-align: top; }
+  table.plan td:first-child { font-weight: 600; width: 30%; }
+  .size { display: inline-block; padding: 1px 8px; border-radius: 10px; font-size: 12.5px; white-space: nowrap; background: var(--accent-soft); color: var(--accent); }
+  .size.data { background: var(--mark-soft); color: var(--mark); }
+
+  /* ---------- Shared app pieces ---------- */
+  .win { min-width: 1120px; border: 1px solid var(--line-strong); border-radius: 10px; overflow: hidden; background: var(--editor); box-shadow: var(--shadow); font-size: 13px; line-height: 1.45; }
+  .btn { border: 1px solid var(--line-strong); background: var(--editor); border-radius: 6px; padding: 6px 12px; font-weight: 600; white-space: nowrap; }
+  .btn.primary { background: var(--accent); border-color: var(--accent); color: var(--on-accent); }
+  .btn.small { padding: 3px 9px; font-size: 12.5px; }
+  .chip { display: inline-flex; align-items: center; gap: 6px; padding: 2px 9px; border-radius: 11px; background: var(--side); color: var(--muted); font-size: 12.5px; white-space: nowrap; }
+  .chip.good { background: var(--add-bg); color: var(--ok); }
+  .chip.bad { background: var(--del-bg); color: var(--fail); }
+  .chip.beat { background: var(--mark-soft); color: var(--mark); font-weight: 600; }
+  .dot { width: 7px; height: 7px; border-radius: 50%; background: currentColor; flex: none; }
+
+  /* The gauge: teal is what you spent, one segment per prompt. The amber tick is what the reference AI spent. */
+  .gauge { min-width: 0; }
+  .gauge .read { display: flex; justify-content: space-between; gap: 12px; margin-bottom: 5px; white-space: nowrap; }
+  .gauge .read strong { font-weight: 600; }
+  .gauge .under { color: var(--mark); font-weight: 600; }
+  .gauge .track { position: relative; display: flex; gap: 2px; height: 10px; border-radius: 5px; background: var(--track); }
+  .gauge .seg { background: var(--accent); border-radius: 2px; transform-origin: left; animation: fill .7s cubic-bezier(.2,.7,.2,1) backwards; }
+  .gauge .seg:first-child { border-radius: 5px 2px 2px 5px; }
+  .gauge .seg:nth-child(2) { opacity: .78; animation-delay: .12s; }
+  .gauge .seg:nth-child(3) { opacity: .58; animation-delay: .24s; }
+  .gauge .rest { background: none; }
+  .gauge .mark { position: absolute; top: -4px; bottom: -4px; width: 3px; margin-left: -1.5px; border-radius: 2px; background: var(--mark); }
+  .gauge .mark::after { content: ""; position: absolute; left: -3px; top: -4px; border: 4.5px solid transparent; border-top-color: var(--mark); }
+  .gauge.mini .track { height: 6px; }
+  .gauge.mini .mark { top: -3px; bottom: -3px; }
+  .gauge.mini .mark::after { display: none; }
+  @keyframes fill { from { transform: scaleX(0); } }
+  @media (prefers-reduced-motion: reduce) { .gauge .seg { animation: none; } }
+
+  /* ---------- Attempt ---------- */
+  .attempt { display: grid; grid-template-rows: 58px 548px 26px; }
+  .bar { display: flex; align-items: center; gap: 16px; padding: 0 14px; background: var(--chrome); border-bottom: 1px solid var(--line); }
+  .bar .back { border: 0; background: none; color: var(--muted); padding: 6px 4px; }
+  .bar .what { line-height: 1.25; padding-right: 16px; border-right: 1px solid var(--line-strong); }
+  .bar .what b { display: block; font-size: 14px; }
+  .bar .what span { color: var(--muted); font-size: 12.5px; }
+  .bar .gauge { flex: 1; }
+  .work { display: grid; grid-template-columns: 252px 1fr 372px; min-height: 0; }
+  .work > * { min-height: 0; overflow: hidden; }
+  .brief { background: var(--side); border-right: 1px solid var(--line); padding: 14px 14px 0; }
+  .brief h3, .agent h3 { margin: 0 0 6px; font-size: 12.5px; font-weight: 600; color: var(--muted); }
+  .brief .title { font-size: 15px; font-weight: 700; margin: 0 0 4px; }
+  .brief p { margin: 0 0 14px; color: var(--muted); }
+  .done { list-style: none; margin: 0 0 16px; padding: 0; }
+  .done li { display: grid; grid-template-columns: 18px 1fr; gap: 4px; padding: 3px 0; }
+  .done .y { color: var(--ok); } .done .x { color: var(--fail); font-weight: 600; } .done .h { color: var(--faint); }
+  .tree { list-style: none; margin: 0; padding: 0; }
+  .tree li { display: flex; align-items: center; gap: 6px; padding: 3px 6px; border-radius: 4px; }
+  .tree li.in { padding-left: 22px; }
+  .tree li.open { background: var(--accent-soft); color: var(--accent); font-weight: 600; }
+  .tree .edited { margin-left: auto; color: var(--accent); }
+  .tree .fold { color: var(--faint); width: 10px; }
+  .editor { display: grid; grid-template-rows: 36px 1fr 104px; background: var(--editor); }
+  .tabs { display: flex; background: var(--panel); border-bottom: 1px solid var(--line); }
+  .tabs > span { display: flex; align-items: center; gap: 7px; padding: 0 14px; color: var(--muted); border-right: 1px solid var(--line); }
+  .tabs .on { background: var(--editor); color: var(--text); font-weight: 600; box-shadow: inset 0 2px 0 var(--accent); }
+  .tabs .dot { color: var(--accent); }
+  .code { font: 13px/1.62 var(--mono); padding: 10px 0; overflow: hidden; }
+  .ln { display: grid; grid-template-columns: 44px 1fr; border-left: 3px solid transparent; white-space: pre; }
+  .ln .no { color: var(--faint); text-align: right; padding-right: 14px; user-select: none; }
+  .ln.chg { border-left-color: var(--accent); background: color-mix(in srgb, var(--accent-soft) 45%, transparent); }
+  .ln.cur { background: color-mix(in srgb, var(--line) 38%, transparent); }
+  .ln.msg { color: var(--fail); font-family: var(--ui); font-size: 12.5px; }
+  .k { color: var(--sx-k); } .f { color: var(--sx-f); } .s { color: var(--sx-s); } .c { color: var(--sx-c); font-style: italic; } .n { color: var(--sx-n); } .t { color: var(--sx-t); }
+  .sq { text-decoration: underline wavy var(--fail); text-underline-offset: 3px; }
+  .tests { border-top: 1px solid var(--line); background: var(--panel); padding: 8px 14px; }
+  .tests .head { display: flex; align-items: center; gap: 10px; margin-bottom: 6px; font-weight: 600; }
+  .tests .row { display: grid; grid-template-columns: 18px 1fr; gap: 4px; font-family: var(--mono); font-size: 12.5px; }
+  .tests .row.x { color: var(--fail); } .tests .row.y { color: var(--ok); }
+  .tests .row small { font-family: var(--ui); color: var(--muted); font-size: 12.5px; }
+  .agent { display: grid; grid-template-rows: auto 1fr auto; background: var(--panel); border-left: 1px solid var(--line); }
+  .agent .top { display: flex; align-items: center; justify-content: space-between; padding: 12px 14px 10px; border-bottom: 1px solid var(--line); }
+  .agent .top b { font-size: 14px; }
+  .turns { padding: 12px 14px; overflow: hidden; }
+  .past { display: grid; grid-template-columns: 10px 1fr auto; gap: 8px; align-items: center; padding: 5px 0; color: var(--muted); }
+  .past i { width: 10px; height: 10px; border-radius: 2px; background: var(--accent); }
+  .past:nth-of-type(2) i { opacity: .78; }
+  .you { margin: 12px 0 8px; padding: 9px 11px; border-radius: 8px 8px 2px 8px; background: var(--accent-soft); }
+  .you .cost { display: flex; align-items: center; gap: 6px; margin-top: 5px; color: var(--muted); font-size: 12.5px; }
+  .you .cost i { width: 10px; height: 10px; border-radius: 2px; background: var(--accent); opacity: .58; }
+  .says { margin: 0 0 8px; }
+  .diff { border: 1px solid var(--line-strong); border-radius: 8px; overflow: hidden; background: var(--editor); }
+  .diff .file { display: flex; justify-content: space-between; padding: 6px 10px; background: var(--side); font-weight: 600; }
+  .diff pre { margin: 0; font: 12px/1.6 var(--mono); }
+  .diff pre span { display: block; padding: 0 10px; white-space: pre; overflow: hidden; text-overflow: ellipsis; }
+  .diff .del { background: var(--del-bg); } .diff .add { background: var(--add-bg); }
+  .diff .act { display: flex; gap: 8px; padding: 8px 10px; border-top: 1px solid var(--line); }
+  .ask { margin: 0 14px 14px; border: 1px solid var(--line-strong); border-radius: 8px; background: var(--editor); padding: 9px 11px; }
+  .ask p { margin: 0 0 10px; color: var(--faint); }
+  .ask div { display: flex; justify-content: space-between; align-items: center; color: var(--muted); font-size: 12.5px; }
+  .status { display: flex; align-items: center; gap: 18px; padding: 0 14px; background: var(--chrome); border-top: 1px solid var(--line); color: var(--muted); font-size: 12.5px; }
+  .status .problem { color: var(--fail); font-weight: 600; display: inline-flex; align-items: center; gap: 6px; }
+  .status .right { margin-left: auto; }
+
+  /* ---------- Home ---------- */
+  .home { display: grid; grid-template-rows: 46px auto; }
+  .home .bar { justify-content: space-between; }
+  .home .bar b { font-size: 15px; }
+  .home .body { display: grid; grid-template-columns: 1fr 268px; gap: 36px; padding: 26px 32px 30px; background: var(--page); }
+  .home h3 { margin: 0 0 10px; font-size: 15px; }
+  .resume { display: grid; grid-template-columns: 1fr 300px auto; gap: 24px; align-items: center; padding: 16px 18px; border: 1px solid var(--line-strong); border-left: 4px solid var(--accent); border-radius: 8px; background: var(--editor); margin-bottom: 28px; }
+  .resume b { font-size: 16px; display: block; }
+  .resume span.sub { color: var(--muted); }
+  .filters { display: flex; gap: 6px; margin-bottom: 4px; }
+  .filters .chip.on { background: var(--accent); color: var(--on-accent); }
+  .task { display: grid; grid-template-columns: 1fr 220px 92px; gap: 24px; align-items: center; padding: 14px 0; border-bottom: 1px solid var(--line); }
+  .task b { font-size: 14.5px; }
+  .task p { margin: 2px 0 6px; color: var(--muted); max-width: 58ch; }
+  .task .meta { display: flex; gap: 6px; flex-wrap: wrap; }
+  .task .score { font-size: 12.5px; color: var(--muted); }
+  .task .score .gauge { margin-top: 6px; }
+  .task .btn { justify-self: end; }
+  .record { align-self: start; padding: 16px; border-radius: 8px; background: var(--editor); border: 1px solid var(--line); }
+  .record .big { font-size: 34px; line-height: 1; font-weight: 700; }
+  .record .big small { font-size: 15px; font-weight: 400; color: var(--muted); }
+  .map { display: grid; grid-template-columns: repeat(6, 1fr); gap: 6px; margin: 14px 0; }
+  .map i { aspect-ratio: 1; border-radius: 5px; border: 2px solid var(--line-strong); }
+  .map .solved { border-color: var(--accent); background: var(--accent-soft); }
+  .map .beat { border-color: var(--accent); background: var(--accent); box-shadow: inset 0 -5px 0 var(--mark); }
+  .key { list-style: none; margin: 0; padding: 0; color: var(--muted); font-size: 12.5px; }
+  .key li { display: flex; align-items: center; gap: 8px; padding: 2px 0; }
+  .key i { width: 12px; height: 12px; border-radius: 3px; border: 2px solid var(--line-strong); flex: none; }
+  .record hr { border: 0; border-top: 1px solid var(--line); margin: 14px 0; }
+  .record p { margin: 0; color: var(--muted); }
+
+  /* ---------- Result ---------- */
+  .result { min-width: 0; max-width: 680px; padding: 28px 30px 24px; }
+  .result h3 { margin: 0 0 2px; font-size: 24px; line-height: 1.2; }
+  .result .line { margin: 0 0 22px; font-size: 15px; color: var(--muted); }
+  .result .line b { color: var(--mark); }
+  .result .gauge .track { height: 14px; border-radius: 7px; }
+  .result .gauge .seg:first-child { border-radius: 7px 2px 2px 7px; }
+  .result .legend { display: flex; justify-content: space-between; margin-top: 8px; color: var(--muted); font-size: 12.5px; }
+  .prompts { width: 100%; border-collapse: collapse; margin: 22px 0; }
+  .prompts td { padding: 7px 0; border-top: 1px solid var(--line); }
+  .prompts td:first-child { width: 18px; }
+  .prompts td:first-child i { display: block; width: 10px; height: 10px; border-radius: 2px; background: var(--accent); }
+  .prompts tr:nth-child(2) i { opacity: .78; } .prompts tr:nth-child(3) i { opacity: .58; }
+  .prompts td:last-child { text-align: right; }
+  .result .act { display: flex; justify-content: flex-end; gap: 8px; }
+</style>
+</head>
+<body>
+<div class="board">
+  <header>
+    <div>
+      <h1>A workbench that shows the game you are playing</h1>
+      <p class="lede">Factoryze is a coding test with a budget: fix the task, spend as few tokens as you can. Today the app looks like an editor with a grey bar on top. This proposal keeps the layout, colours and typeface, and makes three things visible: the code, the tests, and the tokens you are spending against the mark to beat.</p>
+    </div>
+    <button class="toggle" type="button" id="theme">Switch to dark</button>
+  </header>
+
+  <section aria-labelledby="s1">
+    <h2 id="s1">During an attempt</h2>
+    <p class="why">The editor is most of the screen, so coloured code does more for the look than any other change. The gauge at the top is the one new idea: teal is what you spent, one block per prompt, and the amber tick is what the reference AI spent on the same task.</p>
+    <div class="scroll">
+      <div class="win attempt" role="img" aria-label="Mockup of the attempt screen: task brief and files on the left, coloured Python in the middle with one problem underlined, the agent on the right, and a token gauge with an amber mark at the top.">
+        <div class="bar">
+          <button class="back" type="button" tabindex="-1">&#8249; Home</button>
+          <div class="what"><b>Library fines</b><span>Attempt 1</span></div>
+          <div class="gauge">
+            <div class="read"><span><strong class="num">1,840</strong> of <span class="num">4,000</span> tokens</span><span class="under"><span class="num">510</span> under the AI's mark</span></div>
+            <div class="track"><i class="seg" style="flex:412"></i><i class="seg" style="flex:980"></i><i class="seg" style="flex:448"></i><i class="rest" style="flex:2160"></i><b class="mark" style="left:58.75%"></b></div>
+          </div>
+          <span class="chip bad"><span class="dot"></span>2 of 3 tests pass</span>
+          <span class="num" style="color:var(--muted)">12:40</span>
+          <button class="btn" type="button" tabindex="-1">Run tests</button>
+          <button class="btn primary" type="button" tabindex="-1">Submit</button>
+        </div>
+        <div class="work">
+          <div class="brief">
+            <h3>Task</h3>
+            <div class="title">Library fines</div>
+            <p>Riverside members are charged a day's fine when they return an item on the due date in the evening.</p>
+            <h3>Done when</h3>
+            <ul class="done">
+              <li><span class="y">&#10003;</span><span>A morning return on the due date costs nothing</span></li>
+              <li><span class="x">&#10007;</span><span class="x">An evening return at Riverside costs nothing</span></li>
+              <li><span class="y">&#10003;</span><span>Central is unchanged</span></li>
+              <li><span class="h">&#9675;</span><span class="h">6 hidden checks run when you submit</span></li>
+            </ul>
+            <h3>Files</h3>
+            <ul class="tree">
+              <li><span class="fold">&#9662;</span>library</li>
+              <li class="in open">fines.py<span class="edited dot" title="Edited"></span></li>
+              <li class="in">models.py</li>
+              <li class="in">returns.py</li>
+              <li><span class="fold">&#9656;</span>tests</li>
+              <li><span class="fold">&#9656;</span>data</li>
+            </ul>
+          </div>
+          <div class="editor">
+            <div class="tabs"><span class="on">fines.py <span class="dot"></span></span><span>test_fines.py</span></div>
+            <div class="code">
+<div class="ln"><span class="no">1</span><span><span class="s">"""Fine rates and the daily fine calculation."""</span></span></div>
+<div class="ln"><span class="no">2</span><span><span class="k">from</span> datetime <span class="k">import</span> <span class="t">datetime</span></span></div>
+<div class="ln chg"><span class="no">3</span><span><span class="k">from</span> zoneinfo <span class="k">import</span> <span class="t">ZoneInfo</span></span></div>
+<div class="ln"><span class="no">4</span><span></span></div>
+<div class="ln"><span class="no">5</span><span><span class="k">from</span> .models <span class="k">import</span> <span class="t">Branch</span>, <span class="t">Loan</span></span></div>
+<div class="ln"><span class="no">6</span><span></span></div>
+<div class="ln"><span class="no">7</span><span>RATE_CENTS = {<span class="s">"book"</span>: <span class="n">25</span>, <span class="s">"dvd"</span>: <span class="n">100</span>}</span></div>
+<div class="ln"><span class="no">8</span><span>CAP_CENTS = {<span class="s">"book"</span>: <span class="n">1000</span>, <span class="s">"dvd"</span>: <span class="n">2000</span>}</span></div>
+<div class="ln"><span class="no">9</span><span></span></div>
+<div class="ln"><span class="no">10</span><span></span></div>
+<div class="ln"><span class="no">11</span><span><span class="k">def</span> <span class="f">fine_for</span>(loan: <span class="t">Loan</span>, returned_at: <span class="t">datetime</span>, branch: <span class="t">Branch</span>) -> <span class="t">int</span>:</span></div>
+<div class="ln"><span class="no">12</span><span>    <span class="s">"""Fine in cents, counted in the branch's own calendar days."""</span></span></div>
+<div class="ln chg"><span class="no">13</span><span>    local = returned_at.<span class="f">astimezone</span>(<span class="t">ZoneInfo</span>(branch.timezone))</span></div>
+<div class="ln chg"><span class="no">14</span><span>    days_late = (local.<span class="f">date</span>() - loan.due_date).days</span></div>
+<div class="ln"><span class="no">15</span><span>    <span class="k">if</span> days_late &lt;= <span class="n">0</span>:</span></div>
+<div class="ln"><span class="no">16</span><span>        <span class="k">return</span> <span class="n">0</span></span></div>
+<div class="ln cur"><span class="no">17</span><span>    fine = <span class="f">min</span>(days_late * RATE_CENTS[loan.kind], <span class="sq">CAP_CENT</span>[loan.kind])</span></div>
+<div class="ln msg"><span class="no"></span><span>    "CAP_CENT" is not defined. Did you mean "CAP_CENTS"?</span></div>
+<div class="ln"><span class="no">18</span><span>    <span class="k">return</span> fine  <span class="c"># capped per item kind</span></span></div>
+            </div>
+            <div class="tests">
+              <div class="head">Tests <span class="chip bad">1 failing</span><span class="chip">ran 4 seconds ago</span></div>
+              <div class="row x"><span>&#10007;</span><span>test_evening_return_riverside <small>NameError on line 17, in fine_for</small></span></div>
+              <div class="row y"><span>&#10003;</span><span>test_morning_return_on_due_date</span></div>
+              <div class="row y"><span>&#10003;</span><span>test_central_unchanged</span></div>
+            </div>
+          </div>
+          <div class="agent">
+            <div class="top"><b>Agent</b><span class="chip"><span class="dot" style="color:var(--ok)"></span>DeepSeek Flash on trial credits</span></div>
+            <div class="turns">
+              <div class="past"><i></i><span>Find where the fine is calculated</span><span class="num">412</span></div>
+              <div class="past"><i></i><span>Count days in the branch's time zone</span><span class="num">980</span></div>
+              <div class="you">The cap on line 17 raises a NameError. Fix it.
+                <div class="cost"><i></i><span><span class="num">448</span> tokens so far</span></div>
+              </div>
+              <p class="says"><code>CAP_CENT</code> is a typo for <code>CAP_CENTS</code>. One line changes in <code>fines.py</code>.</p>
+              <div class="diff">
+                <div class="file"><span>library/fines.py</span><span style="color:var(--muted);font-weight:400">1 line</span></div>
+                <pre><span class="del">-    fine = min(days_late * RATE_CENTS[loan.kind], CAP_CENT[loan.kind])</span><span class="add">+    fine = min(days_late * RATE_CENTS[loan.kind], CAP_CENTS[loan.kind])</span></pre>
+                <div class="act"><button class="btn primary small" type="button" tabindex="-1">Approve</button><button class="btn small" type="button" tabindex="-1">Reject</button></div>
+              </div>
+            </div>
+            <div class="ask">
+              <p>Describe the change. Name the file, the function and what done looks like.</p>
+              <div><span><span class="num">2,160</span> tokens left</span><button class="btn primary small" type="button" tabindex="-1">Send</button></div>
+            </div>
+          </div>
+        </div>
+        <div class="status"><span>Python</span><span class="problem"><span class="dot"></span>1 problem</span><span>Line 17, column 53</span><span class="right">Saved</span></div>
+      </div>
+    </div>
+    <ul class="notes">
+      <li><b>Code has colour and problems are underlined</b>Keywords, names, strings and numbers each get a colour from the palette the original mockup already defined. A mistake is underlined where it is, with the message on the next line.</li>
+      <li><b>The gauge replaces the thin grey bar</b>Each prompt is one block, and the same block colour appears beside that prompt in the agent panel. The amber tick is the number to beat.</li>
+      <li><b>The task tells you what "done" means</b>The public tests appear as plain sentences that turn green or red as you run them, so the goal is always on screen.</li>
+      <li><b>Less editor furniture</b>Headings are in sentence case and never cut off. The status bar says only the language, the problems, the cursor position and whether the file is saved.</li>
+    </ul>
+  </section>
+
+  <section aria-labelledby="s2">
+    <h2 id="s2">Home</h2>
+    <p class="why">Home is a list of paragraphs today. Here each task shows what you did on it, in the same teal and amber as the gauge, and a small map shows how much of the set you have covered. The map is the reason to come back.</p>
+    <div class="scroll">
+      <div class="win home" role="img" aria-label="Mockup of Home: a card to continue the current attempt, a list of tasks with a small gauge on each, and a record panel with a map of eleven tasks.">
+        <div class="bar"><b>Factoryze</b><span class="chip"><span class="dot" style="color:var(--ok)"></span>Trial credits, <span class="num">$1.84</span> left</span></div>
+        <div class="body">
+          <div>
+            <h3>Pick up where you left off</h3>
+            <div class="resume">
+              <div><b>Library fines</b><span class="sub">2 of 3 public tests pass. One change is waiting for your approval.</span></div>
+              <div class="gauge">
+                <div class="read"><span><strong class="num">1,840</strong> of <span class="num">4,000</span></span><span class="under"><span class="num">510</span> under the mark</span></div>
+                <div class="track"><i class="seg" style="flex:412"></i><i class="seg" style="flex:980"></i><i class="seg" style="flex:448"></i><i class="rest" style="flex:2160"></i><b class="mark" style="left:58.75%"></b></div>
+              </div>
+              <button class="btn primary" type="button" tabindex="-1">Continue</button>
+            </div>
+            <h3>Practice tasks</h3>
+            <div class="filters"><span class="chip on">All 11</span><span class="chip">Not started 8</span><span class="chip">Worth another try 1</span></div>
+            <div class="task">
+              <div><b>Delivery fee</b><p>The checkout charges the wrong fee for orders that cross a distance band.</p><div class="meta"><span class="chip">Pricing rules</span><span class="chip">About 20 minutes</span></div></div>
+              <div class="score"><span class="chip beat">Beat the AI by <span class="num">1,150</span></span>
+                <div class="gauge mini"><div class="track"><i class="seg" style="flex:1200"></i><i class="rest" style="flex:2800"></i><b class="mark" style="left:58.75%"></b></div></div></div>
+              <button class="btn" type="button" tabindex="-1">Try again</button>
+            </div>
+            <div class="task">
+              <div><b>Retry storm</b><p>A client retries failed calls so eagerly that it takes the service down with it.</p><div class="meta"><span class="chip">Networking</span><span class="chip">About 40 minutes</span></div></div>
+              <div class="score"><span class="chip good">Solved, <span class="num">300</span> over the mark</span>
+                <div class="gauge mini"><div class="track"><i class="seg" style="flex:3400"></i><i class="rest" style="flex:1600"></i><b class="mark" style="left:62%"></b></div></div></div>
+              <button class="btn" type="button" tabindex="-1">Improve</button>
+            </div>
+            <div class="task">
+              <div><b>Monthly revenue report</b><p>Finance says the report comes out too low, and the gap grows in busy months.</p><div class="meta"><span class="chip">Money and rounding</span><span class="chip">About 40 minutes</span></div></div>
+              <div class="score">The AI used <span class="num">3,100</span> tokens. You have not tried this one.</div>
+              <button class="btn primary" type="button" tabindex="-1">Start</button>
+            </div>
+          </div>
+          <aside class="record">
+            <h3>Your record</h3>
+            <div class="big num">2 <small>of 11 solved</small></div>
+            <div class="map" aria-hidden="true"><i class="beat"></i><i class="solved"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+            <ul class="key">
+              <li><i style="border-color:var(--accent);background:var(--accent);box-shadow:inset 0 -3px 0 var(--mark)"></i>Solved under the AI's mark</li>
+              <li><i style="border-color:var(--accent);background:var(--accent-soft)"></i>Solved</li>
+              <li><i></i>Not solved yet</li>
+            </ul>
+            <hr>
+            <p>Fewest tokens: <b class="num" style="color:var(--text)">1,200</b> on Delivery fee.</p>
+          </aside>
+        </div>
+      </div>
+    </div>
+    <ul class="notes">
+      <li><b>Every task shows your result on it</b>Solved, solved under the mark, or not started, with the same small gauge. A task you have not tried shows the number you would have to beat.</li>
+      <li><b>One sentence per task</b>The full story moves into the attempt, where you need it. Two short tags say what the task is about and how long it takes.</li>
+      <li><b>A record you can fill in</b>Eleven squares, one per task. It gives a reason to open the next one that a list of paragraphs does not.</li>
+    </ul>
+  </section>
+
+  <section aria-labelledby="s3">
+    <h2 id="s3">After you submit</h2>
+    <p class="why">Submitting ends in a long report today. This short screen comes first and answers the two questions people have: did it pass, and how did I do.</p>
+    <div class="win result" role="img" aria-label="Mockup of the result screen: all nine checks passed, 1,840 tokens used against the AI's 2,350, and what each of the three prompts cost.">
+      <h3>All 9 checks passed</h3>
+      <p class="line">You used <span class="num">1,840</span> tokens. The AI used <span class="num">2,350</span>. You are <b><span class="num">510</span> under its mark</b>.</p>
+      <div class="gauge">
+        <div class="track"><i class="seg" style="flex:412"></i><i class="seg" style="flex:980"></i><i class="seg" style="flex:448"></i><i class="rest" style="flex:2160"></i><b class="mark" style="left:58.75%"></b></div>
+        <div class="legend"><span>You, in three prompts</span><span style="color:var(--mark)">The AI's mark: <span class="num">2,350</span></span><span>Budget: <span class="num">4,000</span></span></div>
+      </div>
+      <table class="prompts">
+        <tr><td><i></i></td><td>Find where the fine is calculated</td><td class="num">412</td></tr>
+        <tr><td><i></i></td><td>Count days in the branch's time zone</td><td class="num">980</td></tr>
+        <tr><td><i></i></td><td>Fix the cap on line 17</td><td class="num">448</td></tr>
+      </table>
+      <div class="act"><button class="btn" type="button" tabindex="-1">See the full report</button><button class="btn primary" type="button" tabindex="-1">Next task: Monthly revenue report</button></div>
+    </div>
+  </section>
+
+  <section aria-labelledby="s4">
+    <h2 id="s4">What each change takes</h2>
+    <p class="why">Listed from the least work to the most. The first two need nothing new from the service or the task packs.</p>
+    <table class="plan">
+      <thead><tr><th>Change</th><th>What it takes</th><th>Size</th></tr></thead>
+      <tbody>
+        <tr><td>Coloured code</td><td>The app ships no language grammars, so every file opens as plain text. Add grammars for Python, JavaScript, TypeScript, Go, JSON and Markdown, with the palette from the original mockup.</td><td><span class="size">Small</span></td></tr>
+        <tr><td>Calmer chrome</td><td>Sentence-case headings, wider side panel so names are not cut off, and a status bar with four facts.</td><td><span class="size">Small</span></td></tr>
+        <tr><td>Gauge with one block per prompt</td><td>The cost of each prompt is already recorded. This is a new drawing of data the app has.</td><td><span class="size">Small</span></td></tr>
+        <tr><td>Result screen and record map</td><td>Both are computed from results the app already saves.</td><td><span class="size">Small</span></td></tr>
+        <tr><td>Underlined problems</td><td>Run a Python checker when a file is saved and show what it finds in the editor. Other languages come later.</td><td><span class="size">Medium</span></td></tr>
+        <tr><td>"Done when" list and test strip</td><td>Give each public test a one-sentence name in the task pack, then tie test runs to the list.</td><td><span class="size">Medium</span></td></tr>
+        <tr><td>The AI's mark</td><td>Each task needs a reference run that records how many tokens the AI spent. Until a task has one, its gauge shows no tick.</td><td><span class="size data">Needs new data</span></td></tr>
+      </tbody>
+    </table>
+  </section>
+</div>
+<script>
+  const root = document.documentElement, toggle = document.getElementById('theme');
+  const dark = () => root.dataset.theme ? root.dataset.theme === 'dark' : matchMedia('(prefers-color-scheme: dark)').matches;
+  const label = () => { toggle.textContent = dark() ? 'Switch to light' : 'Switch to dark'; };
+  toggle.addEventListener('click', () => { root.dataset.theme = dark() ? 'light' : 'dark'; label(); });
+  label();
+</script>
+</body>
+</html>
