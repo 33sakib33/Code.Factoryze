@@ -1,12 +1,14 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import { ModelSettingsStore } from '../src/node/model-settings.ts';
-import { TrialConnectionStore } from '../src/node/trial-connection.ts';
+import { TrialConnectionStore, memoryTrialPreferences } from '../src/node/trial-connection.ts';
 import { isModelConfigured } from '@factoryze/protocol';
 
 const setup={schema:1 as const,api:'openai-chat' as const,baseURL:'https://own.example/v1',model:'own-model',contextWindow:8192,maxOutputTokens:1024,budgetTokens:9000};
 function fixture(){
- const values=new Map<string,string>();const credentials={getPassword:async(s:string,a:string)=>values.get(s+':'+a)??null,setPassword:async(s:string,a:string,v:string)=>{values.set(s+':'+a,v);},deletePassword:async(s:string,a:string)=>values.delete(s+':'+a)};
+ // "calls" records every use of the system credential store, so a test can prove when it stays closed.
+ const values=new Map<string,string>(),calls:string[]=[],preferences=memoryTrialPreferences();
+ const credentials={getPassword:async(s:string,a:string)=>{calls.push('get '+s);return values.get(s+':'+a)??null;},setPassword:async(s:string,a:string,v:string)=>{calls.push('set '+s);values.set(s+':'+a,v);},deletePassword:async(s:string,a:string)=>{calls.push('delete '+s);return values.delete(s+':'+a);}};
  const state={issued:0,paused:false,funded:true,revoked:false,offline:false,binding:'',email:'',lastToken:'',requests:[] as string[],asked:false,grantOnRequest:false,notes:[] as string[]};
  const session='s'.repeat(43);
  const fetcher:typeof fetch=async(url,init)=>{
@@ -26,8 +28,8 @@ function fixture(){
   if(path.endsWith('/auth/logout'))return json({ok:true});
   throw new Error('Unexpected test path');
  };
- const create=()=>new ModelSettingsStore(credentials,'test','win32',{origin:'https://trial.example',fetcher});
- return {state,values,create,store:create()};
+ const create=(build?:string)=>new ModelSettingsStore(credentials,'test','win32',{origin:'https://trial.example',fetcher,preferences,build});
+ return {state,values,calls,preferences,session,create,store:create()};
 }
 test('trial signup exposes only account data, preserves BYOK and survives a desktop restart',async()=>{
  const {store,state,values,create}=fixture();await store.save({...setup,apiKey:'synthetic-own-secret'});
@@ -57,8 +59,9 @@ test('revocation, lack of credit and paused service never fall back to BYOK',asy
  assert.equal((await store.loadByok({}))?.model,'own-model');
 });
 test('trial logout clears the device credential and keeps the saved BYOK connection',async()=>{
- const {store,values}=fixture();await store.save({...setup,apiKey:'keep-my-key'});await store.trial.request('logout@example.test');await store.trial.verify('123456');await store.trial.select('trial-coder');await store.trial.logout();
- assert.equal((await store.trial.view()).signedIn,false);assert.ok([...values.values()].every(v=>!v.includes('"sessionToken"')));assert.ok([...values.values()].some(v=>v.includes('keep-my-key')));
+ const {store,values,session}=fixture();await store.save({...setup,apiKey:'keep-my-key'});await store.trial.request('logout@example.test');await store.trial.verify('123456');await store.trial.select('trial-coder');
+ assert.equal(values.get('Factoryze Trial Account:test:trial'),session);await store.trial.logout();
+ assert.equal((await store.trial.view()).signedIn,false);assert.equal(values.has('Factoryze Trial Account:test:trial'),false);assert.ok([...values.values()].some(v=>v.includes('keep-my-key')));
 });
 
 test('an unavailable trial service leaves an explicit BYOK route without selecting it automatically',async()=>{
@@ -68,7 +71,7 @@ test('an unavailable trial service leaves an explicit BYOK route without selecti
 });
 
 test('the desktop uses the hosted trial service on code.factoryze.tech unless FACTORYZE_TRIAL_URL overrides it', () => {
-  const storage = { read: async () => null, write: async () => {} }, saved = process.env.FACTORYZE_TRIAL_URL;
+  const storage = { preferences: memoryTrialPreferences(), secret: { read: async () => null, write: async () => {}, delete: async () => {} } }, saved = process.env.FACTORYZE_TRIAL_URL;
   try {
     delete process.env.FACTORYZE_TRIAL_URL;
     assert.equal(new TrialConnectionStore(storage).client.origin, 'https://code.factoryze.tech');
@@ -84,17 +87,17 @@ test('an expired desktop sign-in is removed from the credential store', async t 
   await store.trial.verify('123456');
   await second.store.trial.request('claim@example.test');
   await second.store.trial.verify('123456');
-  assert.ok([...values.values()].some(value => value.includes('"sessionToken"')));
+  assert.equal(values.get('Factoryze Trial Account:test:trial'), 's'.repeat(43));
   const now = Date.now();
   t.mock.method(Date, 'now', () => now + 9 * 3600000);
   const callsBefore = state.requests.length;
   assert.equal((await store.trial.view()).signedIn, false);
   assert.equal(state.requests.length, callsBefore, 'expired session must not reach the service');
-  assert.ok([...values.values()].every(value => !value.includes('"sessionToken"')));
+  assert.equal(values.has('Factoryze Trial Account:test:trial'), false);
   const secondCalls = second.state.requests.length;
   await assert.rejects(second.store.trial.requestCredit(), /expired/i);
   assert.equal(second.state.requests.length, secondCalls, 'expired session must not request credit');
-  assert.ok([...second.values.values()].every(value => !value.includes('"sessionToken"')));
+  assert.equal(second.values.has('Factoryze Trial Account:test:trial'), false);
 });
 
 test('desktop result sharing uses the native account session without selecting a funded model', async () => {
@@ -115,7 +118,7 @@ test('desktop result sharing uses the native account session without selecting a
   if(method==='DELETE'){published=false;return Response.json({published:false});}
   return Response.json(published?{published:true,url:`https://trial.example/api/desktop-shares/${shareID}`,expiresAt}:{published:false});
  };
- const store=new TrialConnectionStore({read:async()=>values.get('session')??null,write:async value=>{values.set('session',value);}},'https://trial.example',fetcher);
+ const store=new TrialConnectionStore({preferences:memoryTrialPreferences(),secret:{read:async()=>values.get('session')??null,write:async value=>{values.set('session',value);},delete:async()=>{values.delete('session');}}},'https://trial.example',fetcher);
  await assert.rejects(store.resultShareStatus('a'.repeat(64)),/sign-in/i);
  await store.request('share@example.test');await store.verify('123456');
  const input={reportKey:'a'.repeat(64),taskId:'delivery-rule',title:'Delivery rule',submittedAt:'2026-11-17T00:00:00.000Z',passed:2,total:3};
@@ -143,4 +146,60 @@ test('asking for credit needs no code: it records a request, or returns credit t
  const granted=await second.store.trial.requestCredit();assert.equal(granted.account?.claimed,true);assert.equal(granted.creditRequested,false);
  const signedOut=fixture();await assert.rejects(signedOut.store.trial.requestCredit(),/sign-in expired/i);
  assert.equal(signedOut.state.requests.length,0,'a signed-out desktop must not call the service');
+});
+
+// macOS asks the person before an unsigned build may read an entry another build saved. These tests keep that dialog from ever being needed for trial credits.
+const trialCalls=(calls:string[])=>calls.filter(call=>call.endsWith('Factoryze Trial Account'));
+test('starting the app reads trial preferences without opening the credential store', async t => {
+ const {store,calls,create,values}=fixture();
+ // Nobody has signed in: nothing about trial credits touches the credential store.
+ assert.equal(await store.trial.selected(),false);assert.equal((await store.trial.view()).signedIn,false);assert.equal(await store.load({}),null);await store.trial.useByok();
+ assert.deepEqual(trialCalls(calls),[]);
+ await store.trial.request('start@example.test');await store.trial.verify('123456');await store.trial.select('trial-coder');
+ // Signed out again: the choice of trial credits and the model are still known, and the store stays closed.
+ await store.trial.logout();calls.length=0;const signedOut=create();
+ assert.equal(await signedOut.trial.selected(),true);const settings=await signedOut.load({});assert.equal(settings?.model,'trial-coder');assert.equal(settings?.hasKey,false);
+ assert.deepEqual(trialCalls(calls),[]);
+ // An expired sign-in is dropped without being read.
+ await signedOut.trial.request('start@example.test');await signedOut.trial.verify('123456');calls.length=0;
+ const now=Date.now();t.mock.method(Date,'now',()=>now+9*3600000);const later=create();
+ assert.equal((await later.load({}))?.hasKey,false);assert.equal(await later.trial.signedIn(),false);
+ assert.ok(!trialCalls(calls).some(call=>call.startsWith('get')),'an expired sign-in must not be read');assert.equal(values.has('Factoryze Trial Account:test:trial'),false);
+});
+
+test('a sign-in saved by another build is dropped, not read, and the next sign-in replaces the entry', async () => {
+ const {values,calls,state,create,session}=fixture();const first=create('build-one');
+ await first.trial.request('update@example.test');await first.trial.verify('123456');await first.trial.select('trial-coder');await first.trial.preferences(42000);
+ assert.equal((await create('build-one').trial.view()).signedIn,true,'the same build keeps its sign-in across a restart');
+ calls.length=0;const requests=state.requests.length;const updated=create('build-two');
+ assert.equal((await updated.trial.view()).signedIn,false);assert.equal(await updated.trial.signedIn(),false);
+ assert.ok(!trialCalls(calls).some(call=>call.startsWith('get')),'the other build\'s entry must not be read');
+ assert.equal(values.has('Factoryze Trial Account:test:trial'),false);assert.equal(state.requests.length,requests,'no request is sent without a sign-in');
+ // What the person chose survives the update; only the sign-in is asked for again.
+ const settings=await updated.load({});assert.equal(settings?.authentication,'trial');assert.equal(settings?.model,'trial-coder');assert.equal(settings?.budgetTokens,42000);assert.equal(settings?.hasKey,false);
+ calls.length=0;await updated.trial.request('update@example.test');await updated.trial.verify('123456');
+ assert.deepEqual(trialCalls(calls).slice(0,2),['delete Factoryze Trial Account','set Factoryze Trial Account'],'the entry is recreated so this build owns it');
+ assert.equal(values.get('Factoryze Trial Account:test:trial'),session);assert.equal(isModelConfigured(await updated.load({})),true);
+});
+
+test('preferences on disk hold no secret or personal detail, and an entry from an older release is ignored', async () => {
+ const {store,values,calls,preferences,session,state}=fixture();
+ // Releases up to 0.0.7 kept everything in one credential-store entry. It is left alone until the next sign-in replaces it.
+ values.set('Factoryze Trial Account:test:trial',JSON.stringify({schema:'trial-connection@1',origin:'https://trial.example',selected:true,model:'trial-coder',sessionToken:session,expiresAt:new Date(Date.now()+3600000).toISOString()}));
+ assert.equal(await store.trial.selected(),false);assert.equal((await store.trial.view()).signedIn,false);assert.deepEqual(trialCalls(calls),[]);
+ await store.trial.request('Private.Person@example.test');await store.trial.verify('123456');await store.trial.select('trial-coder');
+ const saved=await preferences.read();assert.ok(saved);
+ assert.ok(!saved.includes(session));assert.ok(!saved.includes(state.binding));assert.ok(!saved.toLowerCase().includes('private.person'));assert.ok(!saved.includes('availableMicro'));
+ for(const key of Object.keys(JSON.parse(saved)))assert.ok(['budgetTokens','build','expiresAt','model','models','origin','schema','selected'].includes(key),`unexpected saved preference "${key}"`);
+ assert.equal(values.get('Factoryze Trial Account:test:trial'),session,'the credential store holds the sign-in and nothing else');
+});
+
+test('a credential store that cannot be reached while tidying up never blocks the app from starting', async t => {
+ const {store,create,values,preferences}=fixture();await store.trial.request('locked@example.test');await store.trial.verify('123456');await store.trial.select('trial-coder');
+ const now=Date.now();t.mock.method(Date,'now',()=>now+9*3600000);
+ const locked=new ModelSettingsStore({getPassword:async()=>{throw new Error('locked');},setPassword:async()=>{throw new Error('locked');},deletePassword:async()=>{throw new Error('locked');}},'test','linux',
+  {origin:'https://trial.example',fetcher:async()=>{throw new Error('Unexpected request');},preferences});
+ assert.equal(await locked.trial.selected(),true);assert.equal((await locked.trial.view()).signedIn,false);assert.equal(await locked.trial.signedIn(),false);
+ // The expired entry is still there, but nothing points at it any more; a later sign-in replaces it.
+ assert.equal(values.has('Factoryze Trial Account:test:trial'),true);assert.equal((await create().trial.view()).signedIn,false);
 });

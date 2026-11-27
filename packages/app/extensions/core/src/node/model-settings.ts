@@ -1,13 +1,32 @@
 import { modelSettingsInputSchema, modelSettingsSchema, providerApi, providerBaseURL, factoryzePublicModelMessage, type ModelSettingsInput, type ModelSettingsView } from '@factoryze/protocol';
 import { soloSettings, type SoloSettings } from '@factoryze/engine/solo';
-import { TrialConnectionStore } from '#trial-connection';
+import { TrialConnectionStore, memoryTrialPreferences, type TrialPreferences } from '#trial-connection';
 import { LabConnectionStore } from '#lab-connection';
 import { factoryzeDataDir } from '@factoryze/engine/data-dir';
-import { join } from 'node:path';
+import { dirname, join } from 'node:path';
 import { createHash } from 'node:crypto';
+import { mkdirSync, readFileSync, renameSync, statSync, writeFileSync } from 'node:fs';
 
 type Credentials = Pick<typeof import('keytar'), 'getPassword' | 'setPassword' | 'deletePassword'>;
 const service = 'Factoryze Solo Provider';
+const trialService = 'Factoryze Trial Account';
+
+/** Trial preferences as a private file in the app's data folder. It holds no secret, so reading it never opens the system credential store. */
+export function fileTrialPreferences(path: string): TrialPreferences {
+  return {
+    read: async () => { try { return readFileSync(path, 'utf8'); } catch { return null; } },
+    write: async value => { mkdirSync(dirname(path), { recursive: true, mode: 0o700 }); const scratch = path + '.new'; writeFileSync(scratch, value, { mode: 0o600 }); renameSync(scratch, path); },
+  };
+}
+
+/**
+ * While the macOS app has no developer signature, the keychain hands an entry back only to the exact build that saved it and asks the person about any other build.
+ * This stamp changes with every build, so a sign-in saved by another build is recognised without reading it. Remove it once releases are signed with a stable identity.
+ */
+function keychainBuild(platform: NodeJS.Platform): string | undefined {
+  if (platform !== 'darwin') return undefined;
+  try { const file = statSync(process.execPath); return createHash('sha256').update(`${process.execPath}\n${file.size}\n${file.mtimeMs}`).digest('hex').slice(0, 16); } catch { return undefined; }
+}
 
 export class ModelSettingsStore {
   readonly trial: TrialConnectionStore;
@@ -15,13 +34,24 @@ export class ModelSettingsStore {
   private readonly credentials?: Credentials;
   private readonly account: string;
   private readonly platform: NodeJS.Platform;
-  constructor(credentials?: Credentials, account = 'default', platform: NodeJS.Platform = process.platform, trialOptions?: {origin:string;fetcher?:typeof fetch}) {
+  constructor(credentials?: Credentials, account = 'default', platform: NodeJS.Platform = process.platform, trialOptions?: {origin:string;fetcher?:typeof fetch;preferences?:TrialPreferences;build?:string}) {
     this.credentials = credentials; this.account = account; this.platform = platform;
     this.lab=new LabConnectionStore({get:id=>this.withKeychain(c=>c.getPassword('Factoryze Lab Sessions',account+':'+id)),
       set:(id,value)=>this.withKeychain(c=>c.setPassword('Factoryze Lab Sessions',account+':'+id,value)),delete:id=>this.withKeychain(async c=>{await c.deletePassword('Factoryze Lab Sessions',account+':'+id);})},
       {directory:join(factoryzeDataDir(),'lab-client',createHash('sha256').update(account).digest('hex').slice(0,16))});
-    this.trial = new TrialConnectionStore({ read:()=>this.withKeychain(c=>c.getPassword('Factoryze Trial Account',account+':trial')),
-      write:value=>this.withKeychain(c=>c.setPassword('Factoryze Trial Account',account+':trial',value)) },trialOptions?.origin,trialOptions?.fetcher);
+    const trialAccount = account + ':trial';
+    this.trial = new TrialConnectionStore({
+      // Injected credentials mean a test or a tool: unless it supplies preferences, they stay in memory and the real profile is never read.
+      preferences: trialOptions?.preferences ?? (credentials ? memoryTrialPreferences()
+        : fileTrialPreferences(join(factoryzeDataDir(), 'trial-connection', createHash('sha256').update(account).digest('hex').slice(0, 16) + '.json'))),
+      secret: {
+        read: () => this.withKeychain(c => c.getPassword(trialService, trialAccount)),
+        // The entry is recreated, never updated: an entry left by another build would keep that build as its owner and bring the macOS dialog back.
+        write: value => this.withKeychain(async c => { await c.deletePassword(trialService, trialAccount); await c.setPassword(trialService, trialAccount, value); }),
+        delete: () => this.withKeychain(async c => { await c.deletePassword(trialService, trialAccount); }),
+      },
+      build: trialOptions?.build ?? keychainBuild(platform),
+    }, trialOptions?.origin, trialOptions?.fetcher);
   }
 
   private async keychain(): Promise<Credentials> {

@@ -1,6 +1,9 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import { ModelSettingsStore } from '../src/node/model-settings.ts';
+import { ModelSettingsStore, fileTrialPreferences } from '../src/node/model-settings.ts';
+import { mkdtempSync, readdirSync, rmSync, statSync, writeFileSync } from 'node:fs';
+import { tmpdir } from 'node:os';
+import { join } from 'node:path';
 
 const setup = {
   schema: 1 as const, api: 'openai-chat' as const, baseURL: 'https://api.example.com/v1', model: 'example-model',
@@ -156,4 +159,21 @@ test('legacy OpenCode settings migrate to Factoryze without losing the provider 
   assert.equal((await store.forEngine({}))?.budget.limit, 5000);
   assert.equal((await store.forEngine({}))?.provider.apiKey, 'synthetic-legacy');
   assert.equal((await store.save({ ...setup, agent: 'opencode' })).agent, 'factoryze');
+});
+
+test('trial preferences are a private file that is replaced whole, and a missing or damaged file reads as nothing saved', async () => {
+  const root = mkdtempSync(join(tmpdir(), 'factoryze-trial-preferences-'));
+  try {
+    const path = join(root, 'trial-connection', 'account.json'), preferences = fileTrialPreferences(path);
+    assert.equal(await preferences.read(), null);
+    await preferences.write('{"first":true}'); await preferences.write('{"second":true}');
+    assert.equal(await preferences.read(), '{"second":true}');
+    assert.deepEqual(readdirSync(join(root, 'trial-connection')), ['account.json'], 'no scratch file is left behind');
+    if (process.platform !== 'win32') { assert.equal(statSync(path).mode & 0o777, 0o600); assert.equal(statSync(join(root, 'trial-connection')).mode & 0o777, 0o700); }
+    // The store treats text it cannot parse as a fresh start instead of failing at launch.
+    writeFileSync(path, 'not json');
+    const store = new ModelSettingsStore({ getPassword: async () => { throw new Error('The credential store must stay closed'); }, setPassword: async () => {}, deletePassword: async () => false },
+      'file-check', 'darwin', { origin: 'https://trial.example', preferences });
+    assert.equal(await store.trial.selected(), false); assert.equal((await store.trial.view()).signedIn, false);
+  } finally { rmSync(root, { recursive: true, force: true }); }
 });

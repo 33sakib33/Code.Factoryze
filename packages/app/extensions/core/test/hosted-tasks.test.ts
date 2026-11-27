@@ -6,7 +6,7 @@ import { tmpdir } from 'node:os';
 import { join, resolve } from 'node:path';
 import { TrialClient, TrialError, type HostedTask } from '@factoryze/engine/trial-client';
 import { ModelSettingsStore } from '../src/node/model-settings.ts';
-import { TrialConnectionStore } from '../src/node/trial-connection.ts';
+import { TrialConnectionStore, memoryTrialPreferences } from '../src/node/trial-connection.ts';
 import { listPracticeTasks } from '@factoryze/engine/tasks';
 import { practiceTasks } from '../src/node/hosted-tasks.ts';
 
@@ -66,11 +66,10 @@ test('a hosted task download is written only when its SHA-256 matches the catalo
 
 test('an expired desktop session blocks a hosted download before requesting an archive', async () => {
   let requests = 0;
-  const store = new TrialConnectionStore({
-    read: async () => JSON.stringify({ schema: 'trial-connection@1', origin: 'https://trial.example', selected: true,
-      sessionToken: session, expiresAt: new Date(Date.now() - 1000).toISOString() }),
-    write: async () => undefined,
-  }, 'https://trial.example', async () => { requests++; throw new Error('Unexpected request'); });
+  const preferences = memoryTrialPreferences();
+  await preferences.write(JSON.stringify({ schema: 'trial-connection@2', origin: 'https://trial.example', selected: true, expiresAt: new Date(Date.now() - 1000).toISOString() }));
+  const store = new TrialConnectionStore({ preferences, secret: { read: async () => session, write: async () => undefined, delete: async () => undefined } },
+    'https://trial.example', async () => { requests++; throw new Error('Unexpected request'); });
   assert.equal((await store.view()).signedIn, false);
   await assert.rejects(store.downloadHostedTask(listed() as HostedTask, join(tmpdir(), 'never-created.zip')),
     (error: unknown) => error instanceof TrialError && error.code === 'authentication_required');
@@ -81,11 +80,13 @@ test('Practice tasks browse backend catalog while signed out; bundled tasks win 
   {
     const values = new Map<string, string>(), credentials = { getPassword: async (s: string, a: string) => values.get(s + ':' + a) ?? null, setPassword: async (s: string, a: string, v: string) => { values.set(s + ':' + a, v); }, deletePassword: async (s: string, a: string) => values.delete(s + ':' + a) };
     const { fetcher } = service([listed(), listed({ id: 'library-fines', title: 'Shadow of a bundled task' })]);
-    const settings = new ModelSettingsStore(credentials, 'test', 'win32', { origin: 'https://trial.example', fetcher });
+    const preferences = memoryTrialPreferences();
+    const settings = new ModelSettingsStore(credentials, 'test', 'win32', { origin: 'https://trial.example', fetcher, preferences });
     const tasks = { list: async () => (await practiceTasks(await listPracticeTasks(resolve('tasks/practice')), settings.trial)).tasks };
     const signedOut = await tasks.list();
     assert.deepEqual(signedOut.filter(task=>task.hosted).map(task=>task.id),['hosted-sample']);
-    values.set('Factoryze Trial Account:test:trial', JSON.stringify({ schema: 'trial-connection@1', origin: 'https://trial.example', selected: false, sessionToken: session, expiresAt: new Date(Date.now() + 3600000).toISOString() }));
+    values.set('Factoryze Trial Account:test:trial', session);
+    await preferences.write(JSON.stringify({ schema: 'trial-connection@2', origin: 'https://trial.example', selected: false, expiresAt: new Date(Date.now() + 3600000).toISOString() }));
     const signedIn = await tasks.list();
     assert.deepEqual(signedIn.filter(task => task.hosted).map(task => task.id), ['hosted-sample']);
     assert.equal(signedIn.find(task => task.id === 'library-fines')?.title, 'Library fines');

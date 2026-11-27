@@ -1,7 +1,8 @@
 import assert from 'node:assert/strict';
 import {createRequire} from 'node:module';
 import {randomUUID} from 'node:crypto';
-import {mkdirSync,writeFileSync,readFileSync} from 'node:fs';
+import {mkdirSync,writeFileSync,readFileSync,readdirSync} from 'node:fs';
+import {execFileSync} from 'node:child_process';
 import {dirname,resolve,join} from 'node:path';
 import {fileURLToPath} from 'node:url';
 import {_electron,request} from 'playwright';
@@ -47,10 +48,16 @@ const launch=async()=>{
  const win=await app.browserWindow(page);await win.evaluate(async w=>{if(w.isMaximized())await new Promise(r=>{w.once('unmaximize',r);w.unmaximize();});w.setContentSize(683,512);});
  await page.waitForFunction(()=>innerWidth===683&&innerHeight===512);return page;
 };
+// Trial preferences live in a private file; the sign-in itself stays in the system credential store.
+const savedPreferences=()=>{const folder=join(root,'engine','trial-connection'),files=readdirSync(folder).filter(name=>name.endsWith('.json'));assert.equal(files.length,1);const raw=readFileSync(join(folder,files[0]),'utf8');
+ assert.ok(!/[A-Za-z0-9_-]{43}/.test(raw),'preferences must not hold a sign-in');assert.ok(!raw.includes(email),'preferences must not hold the email address');return JSON.parse(raw);};
 const openSettings=async()=>{await page.locator('.factoryze-metrics').getByRole('button',{name:'Settings',exact:true}).click();await page.locator('.fz-settings h1').waitFor();};
 try{
  let res=await api.post('/api/admin/auth/request-otp',{data:{email:'operations@example.test'}});assert.equal(res.status(),202);
  const adminCode=await inbox('operations@example.test');res=await api.post('/api/admin/auth/verify-otp',{data:{email:'operations@example.test',code:adminCode}});assert.equal(res.status(),200);
+ // An older release kept everything in one keychain entry, and macOS gives an unsigned build's entry only to that exact build.
+ // This entry belongs to another program, so reading it would stop on a system dialog and this run would time out. The app must never read it.
+ if(process.platform==='darwin')execFileSync('security',['add-generic-password','-s','Factoryze Trial Account','-a',account+':trial','-w',JSON.stringify({schema:'trial-connection@1',origin:base,selected:true,model:'fixture-coder'}),'-T','/usr/bin/security']);
  await launch();await openSettings();await page.getByRole('button',{name:'Connect a model',exact:true}).click();let dialog=page.getByRole('dialog',{name:'Connect a model',exact:true});
  // Save a BYOK connection first; it must survive trial sign-in, restart and sign-out.
  await dialog.getByLabel('Base URL',{exact:true}).fill(base+'/v1');await dialog.getByLabel('API key',{exact:true}).fill('synthetic-preserved-byok');await dialog.getByLabel('Model ID',{exact:true}).fill('byok-preserved');await dialog.getByRole('button',{name:'Save connection',exact:true}).click();await dialog.waitFor({state:'detached'});
@@ -64,6 +71,7 @@ try{
  res=await api.post(`/api/admin/gateway/accounts/${encodeURIComponent(asked.id)}`,{data:{action:'grant',creditMicro:1000000,expiresAt:new Date(Date.now()+86400000).toISOString(),reason:'Local desktop trial integration verification'}});assert.equal(res.status(),200);
  await dialog.getByRole('button',{name:'Check again',exact:true}).click();await dialog.getByText('Credit ready',{exact:true}).waitFor();await dialog.getByText('$1.00',{exact:true}).waitFor();await page.screenshot({path:join(output,'electron-trial-account.png')});
  await dialog.getByLabel('Trial model',{exact:true}).selectOption('fixture-coder');await dialog.getByRole('button',{name:'Use trial credits',exact:true}).click();await dialog.waitFor({state:'detached'});await page.locator('.fz-settings').getByRole('heading',{name:'Factoryze trial credits',exact:true}).waitFor();
+ let preferences=savedPreferences();assert.equal(preferences.schema,'trial-connection@2');assert.equal(preferences.selected,true);assert.equal(preferences.model,'fixture-coder');assert.ok(Date.parse(preferences.expiresAt)>Date.now());
  await page.locator('.fz-settings').getByRole('button',{name:'Back',exact:true}).click();await page.locator('.fz-home').getByRole('button',{name:'Start Library fines',exact:true}).click();dialog=page.getByRole('dialog');await dialog.locator('.fz-check.fz-ok').waitFor({timeout:60000});await dialog.getByText(/Trial credits · fixture-coder/).waitFor();await dialog.getByRole('button',{name:'Start attempt',exact:true}).click();
  const prompt=page.getByRole('textbox',{name:'Prompt for the agent'});await prompt.waitFor({timeout:90000});await prompt.fill('DESKTOP_TRIAL_PROBE: inspect library/returns.py, make the proposed small edit and run the public tests.');await page.locator('.fz-composer button[type=submit]').click();
  await page.locator('.fz-approval').getByRole('button',{name:'Approve',exact:true}).click({timeout:60000});
@@ -73,11 +81,11 @@ try{
  await page.screenshot({path:join(output,'electron-trial-attempt.png')});
  await page.locator('.fz-tb-attempt').getByRole('button',{name:'Submit',exact:true}).click();const submission=page.getByRole('dialog');await submission.getByRole('button',{name:'Submit',exact:true}).click();await submission.waitFor({state:'detached',timeout:150000});await page.getByRole('heading',{name:'Activity and token usage',exact:true}).waitFor();await page.waitForFunction(()=>document.querySelector('.fz-report-view')?.getBoundingClientRect().width>=600);assert.equal(await page.locator('.fz-prompts .fz-tag, .fz-report-advice').count(),0);await page.screenshot({path:join(output,'electron-trial-report.png')});
  await app.close();app=undefined;await launch();await openSettings();await page.locator('.fz-settings').getByRole('heading',{name:'Factoryze trial credits',exact:true}).waitFor();
- await page.locator('.fz-settings').getByRole('button',{name:'Manage trial account',exact:true}).click();dialog=page.getByRole('dialog');await dialog.getByRole('button',{name:'Sign out',exact:true}).click();await dialog.getByLabel('Email address',{exact:true}).waitFor();await dialog.getByRole('radio',{name:'My API key',exact:true}).click();await dialog.getByLabel('Model ID',{exact:true}).waitFor();assert.equal(await dialog.getByLabel('Model ID',{exact:true}).inputValue(),'byok-preserved');
+ await page.locator('.fz-settings').getByRole('button',{name:'Manage trial account',exact:true}).click();dialog=page.getByRole('dialog');await dialog.getByRole('button',{name:'Sign out',exact:true}).click();await dialog.getByLabel('Email address',{exact:true}).waitFor();preferences=savedPreferences();assert.equal(preferences.expiresAt,undefined,'signing out forgets the saved sign-in');await dialog.getByRole('radio',{name:'My API key',exact:true}).click();await dialog.getByLabel('Model ID',{exact:true}).waitFor();assert.equal(await dialog.getByLabel('Model ID',{exact:true}).inputValue(),'byok-preserved');
  await dialog.getByRole('button',{name:'Save connection',exact:true}).click();await dialog.waitFor({state:'detached'});await page.locator('.fz-settings').getByRole('heading',{name:'byok-preserved',exact:true}).waitFor();
  await page.locator('.fz-settings').getByRole('button',{name:'Forget connection',exact:true}).click();
  const requests=await (await api.get('/api/admin/gateway/requests')).json();const native=requests.items.filter(x=>x.model.id==='fixture-coder');assert.ok(native.length>=4);assert.ok(native.every(x=>x.state==='finished'&&x.outcome==='completed'&&x.costKind==='measured'));
- const result={passed:true,platform:process.platform,viewport:{width:683,height:512},smtpLocalOnly:true,modelSynthetic:true,otpSignIn:true,wrongCodeRejected:true,creditRequestApproved:true,noInvitationCode:true,trialModelSelection:true,localReadEditShell:true,approvals:2,usageMetered:true,reportSaved:true,restartRetainsTrial:true,byokPreserved:true,signOut:true,adminGranted:false,modelRequests:native.length,realEmailsSent:0,paidModelCalls:0,pageErrors:errors};
+ const result={passed:true,platform:process.platform,viewport:{width:683,height:512},smtpLocalOnly:true,modelSynthetic:true,otpSignIn:true,wrongCodeRejected:true,creditRequestApproved:true,noInvitationCode:true,trialModelSelection:true,localReadEditShell:true,approvals:2,usageMetered:true,reportSaved:true,restartRetainsTrial:true,preferencesHoldNoSecret:true,otherBuildKeychainEntryNeverRead:process.platform==='darwin',byokPreserved:true,signOut:true,adminGranted:false,modelRequests:native.length,realEmailsSent:0,paidModelCalls:0,pageErrors:errors};
  assert.deepEqual(errors,[]);writeFileSync(join(output,'electron-trial-result.json'),JSON.stringify(result,null,2)+'\n');console.log(JSON.stringify(result));
 }catch(error){writeFileSync(join(output,'electron-trial-diagnostics.log'),diagnostics);await page?.screenshot({path:join(output,'electron-trial-failure.png')}).catch(()=>{});writeFileSync(join(output,'electron-trial-result.json'),JSON.stringify({passed:false,error:error.message},null,2));throw error;}
 finally{await app?.close().catch(()=>{});await api.dispose();await keytar.deletePassword('Factoryze Solo Provider',account).catch(()=>{});await keytar.deletePassword('Factoryze Trial Account',account+':trial').catch(()=>{});}

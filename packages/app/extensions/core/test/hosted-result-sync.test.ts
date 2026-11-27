@@ -3,7 +3,7 @@ import test from 'node:test';
 import type { DesktopResultInput, HostedResultView, PracticeReport } from '@factoryze/protocol';
 import type { HostedAttempt } from '@factoryze/engine/solo';
 import { TrialClient, type ResultSubmission } from '@factoryze/engine/trial-client';
-import { TrialConnectionStore } from '../src/node/trial-connection.ts';
+import { TrialConnectionStore, memoryTrialPreferences } from '../src/node/trial-connection.ts';
 import { gradeAndSync, retryHostedResult, type HostedEngine, type ResultService } from '../src/node/hosted-result-sync.ts';
 import { hostedResultCopy, ordinal } from '../src/browser/hosted-result-copy.ts';
 
@@ -123,7 +123,7 @@ test('the client maps the results route responses, including a missing route, wi
 
 test('a signed-out store never sends, and the leaderboard follows the configured service origin', async () => {
   let requests = 0;
-  const store = new TrialConnectionStore({ read: async () => null, write: async () => {} }, 'http://127.0.0.1:8091', async () => { requests++; return new Response('{}'); });
+  const store = new TrialConnectionStore({ preferences: memoryTrialPreferences(), secret: { read: async () => null, write: async () => {}, delete: async () => {} } }, 'http://127.0.0.1:8091', async () => { requests++; return new Response('{}'); });
   assert.equal(await store.signedIn(), false);
   assert.deepEqual(await store.submitResult(payload), { kind: 'sign_in' }); assert.equal(requests, 0);
   assert.equal(store.leaderboardURL(), 'http://127.0.0.1:8091/leaderboard/');
