@@ -42,7 +42,8 @@ export class TrialConnectionStore {
    await this.save({...r,cached:view});return view;
   }catch(error){if(error instanceof TrialError&&['authentication_required','access_revoked'].includes(error.code)){await this.clearSession(r);return empty;}throw error;}
  }
- async claim(code:string){const r=await this.requireSession();await this.client.call('/trial/claim',r.sessionToken,{code});return this.view();}
+ /** Asks the project owner for credit. Credit already meant for this email is applied by the service instead, so the returned view may be funded. */
+ async requestCredit(note=''):Promise<TrialAccountView>{const r=await this.requireSession();await this.client.call('/trial/request-credit',r.sessionToken,{note:note.trim().slice(0,200)});return this.view();}
  async select(model:string):Promise<ModelSettingsView>{
   const view=await this.view();if(!view.signedIn)throw new Error('Sign in to your trial account first.');
   if(!view.models.some(m=>m.id===model))throw new Error('Select an available trial model.');

@@ -51,7 +51,8 @@ export interface TaskService extends RpcServer<object> {
   trialAccount(): Promise<TrialAccountView>;
   trialRequestCode(email:string): Promise<void>;
   trialVerifyCode(code:string): Promise<TrialAccountView>;
-  trialClaim(code:string): Promise<TrialAccountView>;
+  /** Asks for trial credit. Returns the account as it stands afterwards: funded, or waiting for approval. */
+  trialRequestCredit(note?:string): Promise<TrialAccountView>;
   trialSelect(model:string): Promise<ModelSettingsView>;
   trialSignOut(): Promise<void>;
   byokSettings(): Promise<ModelSettingsView|null>;

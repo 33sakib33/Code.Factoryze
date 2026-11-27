@@ -280,7 +280,9 @@ export const trialAccountSchema = z.strictObject({ id: z.string(), email: z.stri
   dailyLimitMicro: z.number().int().nonnegative().optional(), dailySpentMicro: z.number().int().nonnegative().optional(),
   dailyReservedMicro: z.number().int().nonnegative().optional(), dailyAvailableMicro: z.number().int().nonnegative().optional(), dailyResetAt: z.string().optional() });
 export const trialAccountViewSchema = z.strictObject({ origin: z.url(), selected: z.boolean(), signedIn: z.boolean(),
-  sessionExpiresAt: z.string().optional(), account: trialAccountSchema.optional(), models: z.array(trialModelSchema), selectedModel: z.string().optional(),
+  sessionExpiresAt: z.string().optional(), account: trialAccountSchema.optional(),
+  /** True while the account waits for the project owner to answer a credit request. */
+  creditRequested: z.boolean().optional(), models: z.array(trialModelSchema), selectedModel: z.string().optional(),
   programEnabled: z.boolean(), inferenceEnabled: z.boolean(), maxRequestBytes: z.number().int(), maxMessages: z.number().int(), maxTools: z.number().int() });
 export type TrialAccountView = z.infer<typeof trialAccountViewSchema>;
 export const gatewayConnectionSchema = z.strictObject({

@@ -7,7 +7,7 @@ import { isModelConfigured } from '@factoryze/protocol';
 const setup={schema:1 as const,api:'openai-chat' as const,baseURL:'https://own.example/v1',model:'own-model',contextWindow:8192,maxOutputTokens:1024,budgetTokens:9000};
 function fixture(){
  const values=new Map<string,string>();const credentials={getPassword:async(s:string,a:string)=>values.get(s+':'+a)??null,setPassword:async(s:string,a:string,v:string)=>{values.set(s+':'+a,v);},deletePassword:async(s:string,a:string)=>values.delete(s+':'+a)};
- const state={issued:0,paused:false,funded:true,revoked:false,offline:false,binding:'',email:'',lastToken:'',requests:[] as string[]};
+ const state={issued:0,paused:false,funded:true,revoked:false,offline:false,binding:'',email:'',lastToken:'',requests:[] as string[],asked:false,grantOnRequest:false,notes:[] as string[]};
  const session='s'.repeat(43);
  const fetcher:typeof fetch=async(url,init)=>{
   if(state.offline)throw new Error('synthetic network outage');
@@ -19,9 +19,10 @@ function fixture(){
   if(path.endsWith('/verify-otp')){assert.equal(body.binding,state.binding);if(body.code!=='123456')return json({error:{code:'invalid_or_expired_code',message:'private'}},401);return json({sessionToken:session,expiresAt:new Date(Date.now()+8*3600000).toISOString()});}
   assert.equal(headers.Authorization,`Bearer ${session}`);
   if(state.revoked)return json({error:{code:'authentication_required'}},401);
-  if(path.endsWith('/account'))return json({account:{id:'email:synthetic',email:state.email,claimed:state.funded,suspended:false,grantedMicro:state.funded?1000000:0,spentMicro:100,reservedMicro:0,availableMicro:state.funded?999900:0,expiresAt:new Date(Date.now()+86400000).toISOString()},sessionExpiresAt:new Date(Date.now()+8*3600000).toISOString(),inferenceEnabled:true,programEnabled:!state.paused,
+  if(path.endsWith('/account'))return json({account:{id:'email:synthetic',email:state.email,claimed:state.funded,suspended:false,grantedMicro:state.funded?1000000:0,spentMicro:100,reservedMicro:0,availableMicro:state.funded?999900:0,expiresAt:new Date(Date.now()+86400000).toISOString()},sessionExpiresAt:new Date(Date.now()+8*3600000).toISOString(),inferenceEnabled:true,programEnabled:!state.paused,creditRequested:state.asked,starterCreditFutureField:true,
    models:[{id:'trial-coder',object:'model',owned_by:'factoryze',maxInputTokens:32768,maxOutputTokens:1024,outputParameter:'max_tokens'}],maxRequestBytes:65536,maxMessages:128,maxTools:32});
   if(path.endsWith('/trial/token')){state.issued++;state.lastToken=String(state.issued%10).repeat(43);return json({token:state.lastToken,basePath:'/api/gateway/v1',expiresAt:new Date(Date.now()+60000).toISOString()},201);}
+  if(path.endsWith('/trial/request-credit')){state.notes.push(body.note);if(state.grantOnRequest){state.funded=true;return json({status:'granted'});}state.asked=true;return json({status:'requested'});}
   if(path.endsWith('/auth/logout'))return json({ok:true});
   throw new Error('Unexpected test path');
  };
@@ -91,8 +92,8 @@ test('an expired desktop sign-in is removed from the credential store', async t 
   assert.equal(state.requests.length, callsBefore, 'expired session must not reach the service');
   assert.ok([...values.values()].every(value => !value.includes('"sessionToken"')));
   const secondCalls = second.state.requests.length;
-  await assert.rejects(second.store.trial.claim('synthetic-invitation'), /expired/i);
-  assert.equal(second.state.requests.length, secondCalls, 'expired session must not claim an invitation');
+  await assert.rejects(second.store.trial.requestCredit(), /expired/i);
+  assert.equal(second.state.requests.length, secondCalls, 'expired session must not request credit');
   assert.ok([...second.values.values()].every(value => !value.includes('"sessionToken"')));
 });
 
@@ -125,4 +126,21 @@ test('desktop result sharing uses the native account session without selecting a
  assert.equal((await store.resultShareStatus(input.reportKey)).published,false);
  assert.equal(calls.filter(call=>call.method==='POST'&&call.path.endsWith('/result-shares'))[0].body,JSON.stringify(input));
  assert.ok(calls.some(call=>call.method==='DELETE'));
+});
+
+test('asking for credit needs no code: it records a request, or returns credit that was already waiting', async () => {
+ const {store,state}=fixture();state.funded=false;
+ await store.trial.request('ask@example.test');const signedIn=await store.trial.verify('123456');
+ assert.equal(signedIn.account?.claimed,false);assert.equal(signedIn.creditRequested,false);
+ const waiting=await store.trial.requestCredit('  Trying the starter tasks  ');
+ assert.equal(waiting.creditRequested,true);assert.equal(waiting.account?.claimed,false);assert.deepEqual(state.notes,['Trying the starter tasks']);
+ assert.ok(state.requests.some(path=>path.endsWith('/api/desktop/trial/request-credit')));
+ // Approval shows up on the next look at the account, with no further step.
+ state.funded=true;state.asked=false;const approved=await store.trial.view();
+ assert.equal(approved.account?.claimed,true);assert.equal(approved.creditRequested,false);
+ const second=fixture();second.state.funded=false;second.state.grantOnRequest=true;
+ await second.store.trial.request('starter@example.test');await second.store.trial.verify('123456');
+ const granted=await second.store.trial.requestCredit();assert.equal(granted.account?.claimed,true);assert.equal(granted.creditRequested,false);
+ const signedOut=fixture();await assert.rejects(signedOut.store.trial.requestCredit(),/sign-in expired/i);
+ assert.equal(signedOut.state.requests.length,0,'a signed-out desktop must not call the service');
 });

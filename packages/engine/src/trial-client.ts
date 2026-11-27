@@ -10,10 +10,9 @@ const maxHostedArchive = 20 * 1024 * 1024;
 const messages: Record<string,string> = {
  invalid_or_expired_code: 'The code is incorrect or expired. Request a new code if needed.',
  rate_limited: 'Too many requests. Wait before trying again.',
- invalid_invitation: 'This invitation is invalid, expired or belongs to another account.',
- trial_already_claimed_or_revoked: 'This account has already claimed its trial or access was revoked.',
+ invalid_credit_request: 'The credit request could not be sent. Try again.',
  authentication_required: 'Your trial sign-in expired. Sign in again.', access_revoked: 'Your trial access was revoked. Sign in again or contact the owner.',
- trial_unavailable: 'Trial credit is unavailable. Check enrollment, expiry and remaining credit.',
+ trial_unavailable: 'Trial credit is unavailable. Check your remaining credit and its expiry.',
  email_login_not_configured: 'Email sign-in is not enabled on this trial service.',
  hosted_task_unavailable: 'This task is no longer published. Return to Home to see the current list.',
  hosted_task_corrupt: 'The downloaded task did not match the published version. Try again.',
@@ -53,7 +52,7 @@ export class TrialClient {
   const r=await this.call('/account',token);
   const models:TrialModel[]=(Array.isArray(r.models)?r.models:[]).map((m:any)=>trialModelSchema.parse({id:m.id,maxInputTokens:m.maxInputTokens,maxOutputTokens:m.maxOutputTokens,outputParameter:m.outputParameter}));
   if(typeof r.inferenceEnabled!=='boolean'||typeof r.programEnabled!=='boolean'||!Number.isFinite(Date.parse(r.sessionExpiresAt)))throw new TrialError('service_unavailable');
-  return {account:trialAccountSchema.parse(r.account),models,sessionExpiresAt:r.sessionExpiresAt as string,inferenceEnabled:r.inferenceEnabled,programEnabled:r.programEnabled,
+  return {account:trialAccountSchema.parse(r.account),creditRequested:r.creditRequested===true,models,sessionExpiresAt:r.sessionExpiresAt as string,inferenceEnabled:r.inferenceEnabled,programEnabled:r.programEnabled,
    maxRequestBytes:Math.min(65536,Number(r.maxRequestBytes)||65536),maxMessages:Math.min(128,Number(r.maxMessages)||128),maxTools:Math.min(32,Number(r.maxTools)||32)};
  }
  /** Enabled hosted tasks for a signed-in account. Malformed entries are skipped rather than trusted. */

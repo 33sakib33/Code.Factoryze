@@ -77,7 +77,7 @@ export class FactoryzeSettingsWidget extends BaseWidget {
     budget.addEventListener('change', () => { const value = Number(budget.value); if (Number.isSafeInteger(value) && value > 0) void save({ budgetTokens: value }, `Default budget set to ${tokens(value)} tokens.`); });
 
     const model = trial && settings
-      ? el('div',{class:'fz-card'},el('div',{class:'fz-row-between'},el('div',{},el('h3',{text:'Factoryze trial credits'}),el('p',{text:settings.hasKey?`Using ${settings.model}. Your provider key is not used.`:'Review your sign-in, invitation, balance and model selection.'})),el('span',{class:`fz-dot${settings.hasKey?'':' fz-off'}`})),
+      ? el('div',{class:'fz-card'},el('div',{class:'fz-row-between'},el('div',{},el('h3',{text:'Factoryze trial credits'}),el('p',{text:settings.hasKey?`Using ${settings.model}. Your provider key is not used.`:'Review your sign-in, credit and model selection.'})),el('span',{class:`fz-dot${settings.hasKey?'':' fz-off'}`})),
         ...(this.trial?.account?[el('dl',{class:'fz-kv'},el('dt',{text:'Account'}),el('dd',{text:this.trial.account.email}),el('dt',{text:'Available credit'}),el('dd',{text:new Intl.NumberFormat('en-US',{style:'currency',currency:'USD',maximumFractionDigits:6}).format(this.trial.account.availableMicro/1000000)}))]:[]),
         el('div',{class:'fz-actions'},button('Manage trial account',()=>this.connect(),{small:true}),button('Use my API key',()=>{connectOwnKeyDialog(this.service,updated=>{this.settings=updated;this.render();});},{small:true,kind:'quiet'})))
       : connected && settings

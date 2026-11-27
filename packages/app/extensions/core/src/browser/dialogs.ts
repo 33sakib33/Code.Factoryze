@@ -68,7 +68,7 @@ export function startAttemptDialog(task: PracticeTask, options: {
       el('button', { type: 'button', class: 'fz-connect-choice', aria: { label: title }, on: { click: open } }, el('strong', { text: title }), el('small', { text }));
     const ownKey = (): void => connectOwnKeyDialog(service, connected);
     choices.append(
-      choice('Sign in for trial credits', 'Use your email. Credit comes from an invitation; no API key is needed.', () => trialConnectionDialog(service, ownKey, connected)),
+      choice('Sign in for trial credits', 'Use your email. Credit is attached to your address; no API key or code is needed.', () => trialConnectionDialog(service, ownKey, connected)),
       choice('Use my own key', 'OpenAI, Anthropic, OpenRouter, or a model on this computer.', ownKey));
     details.append(choices, note);
     start.classList.remove('fz-primary');

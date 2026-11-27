@@ -6,7 +6,7 @@ Factoryze offers two model connections in the existing **Connect a model** dialo
 
 1. Open Settings → Model connection → Connect a model (or Change). Select Trial credits.
 2. Enter your email and the SMTP-delivered six-digit code. First verification creates an unfunded account; subsequent logins use the same verified email account as the website.
-3. Claim an invitation targeted to that email. Signup alone does not grant credit. Email and GitHub accounts are separate; their invitations and credit are not automatically transferred.
+3. Use the credit attached to that email. There is no invitation or other code to enter: credit is either already there (starter credit for a new account, or the owner pre-approved the address) or the dialog offers **Request credit**, after which it shows "Waiting for approval" and picks up the owner's approval when the window regains focus. Email and GitHub accounts are separate; credit is not transferred between them.
 4. Review available credit, expiry and the allowed model. Choose Use trial credits. The agent is available only while the account, selected model and sponsored program permit requests.
 5. Start or continue an attempt normally. The start sheet identifies the trial connection; the existing header/prompt meters show task tokens. Manage the account through the same model-connection controls.
 
@@ -56,11 +56,11 @@ The editor sends only the saved task title, task ID, submission date, check coun
 
 Deploy the sibling Go backend with its desktop endpoints, MongoDB replica set, verified-TLS SMTP and trial provider configuration. Configure approved models, prices, a program budget and targeted credit through the restricted admin console. Provider configuration and credit are not bundled in the desktop installer.
 
-The admin console can also set a daily sponsored limit per account in USD. It resets at 00:00 UTC, does not refill the account's lifetime invitation credit, and must cover a model request's maximum reservation. The desktop shows today's remaining amount and reset time. Each practice workspace has a persistent random attempt ID; sponsored requests include that ID and the task ID for the admin's day/person/problem cost reports. These are client-reported analytics fields, not verified completion evidence. Existing requests without task metadata appear as unattributed.
+The admin console can also set a daily sponsored limit per account in USD. It resets at 00:00 UTC, does not refill the account's lifetime credit, and must cover a model request's maximum reservation. The desktop shows today's remaining amount and reset time. Each practice workspace has a persistent random attempt ID; sponsored requests include that ID and the task ID for the admin's day/person/problem cost reports. These are client-reported analytics fields, not verified completion evidence. Existing requests without task metadata appear as unattributed.
 
 The desktop service origin defaults to `https://code.factoryze.tech`, a subdomain kept separate from the company site on `factoryze.tech`. Operators/developers can set the backend environment variable `FACTORYZE_TRIAL_URL` to another HTTPS origin; loopback HTTP is allowed for local development, for example `http://127.0.0.1:8091`. A different origin requires its own sign-in. Setting a URL does not deploy a service or enable sponsored inference. Production must expose the gateway at that origin before distribution.
 
-The desktop RPC offers redacted account inspection, request/verify code, invitation claim, model selection and sign-out. Native service routes reject browser-origin requests; existing web CSRF rules are unchanged. Session-credential APIs and model calls are distinct scopes. There is no admin bootstrap or client-side promotion path.
+The desktop RPC offers redacted account inspection, request/verify code, credit request, model selection and sign-out. Native service routes reject browser-origin requests; existing web CSRF rules are unchanged. Session-credential APIs and model calls are distinct scopes. There is no admin bootstrap or client-side promotion path.
 
 ## Verification
 

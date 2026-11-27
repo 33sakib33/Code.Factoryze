@@ -150,7 +150,7 @@ export class TaskBackendService implements TaskService {
   trialAccount() { return this.modelSettings.trial.view(); }
   trialRequestCode(email:string) { return this.modelSettings.trial.request(email); }
   trialVerifyCode(code:string) { return this.modelSettings.trial.verify(code); }
-  trialClaim(code:string) { return this.modelSettings.trial.claim(code); }
+  trialRequestCredit(note?:string) { return this.modelSettings.trial.requestCredit(note); }
   trialSelect(model:string) { this.mutableConnection(); return this.modelSettings.trial.select(model); }
   trialSignOut() { this.mutableConnection(); return this.modelSettings.trial.logout(); }
   byokSettings() { return this.modelSettings.loadByok(); }
