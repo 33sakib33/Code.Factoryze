@@ -7,6 +7,7 @@ import { button, el, errorText, meter } from './dom';
 import { continueAttempts, dateLabel, relativeTime, taskState, tokens } from './flow-model';
 import { browseTasks, pageSize, topicFacets, topicLabel, untaggedTopic } from './task-browser';
 import { starterPicks } from './first-run';
+import { homeRecord, recordCellLabel, recordSummary } from './home-record';
 
 export type HomeActions = {
   continueAttempt(attempt: AttemptSummary): void;
@@ -232,7 +233,20 @@ export class FactoryzeHomeWidget extends BaseWidget {
       !isModelConfigured(settings) ? el('div', { class: 'fz-home-more-card' }, el('h2', { text: 'Want an AI assistant?' }),
         el('p', { text: 'Connect a model to use the agent. You can still edit, run tests, and submit without one.' }),
         button('Connect a model', () => this.actions.connect())) : null);
-    this.content.replaceChildren(intro, ...(starters ? [starters] : []), ...main, more, results);
+    // After the first result the starter picks give way to the record: one square per task, filled in as tasks are solved.
+    const record = homeRecord(tasks, reports);
+    const recordSection = reports.length && record.total ? el('section', { class: 'fz-home-section fz-home-record', aria: { label: 'Your record' } },
+      el('div', { class: 'fz-record-count' }, el('h2', { text: 'Your record' }),
+        el('p', {}, el('strong', { text: String(record.solved) }), ` of ${record.total} tasks solved`),
+        record.best ? el('p', { class: 'fz-home-section-description', text: record.best.tokens
+          ? `Fewest tokens: ${tokens(record.best.tokens)} on ${record.best.title}.` : `${record.best.title} was solved without the agent.` }) : null),
+      el('div', {}, el('div', { class: 'fz-record-map', role: 'img', aria: { label: recordSummary(record) } },
+        ...record.cells.map(cell => el('span', { class: `fz-record-cell fz-record-${cell.state}`, title: recordCellLabel(cell) }))),
+        el('ul', { class: 'fz-record-key', aria: { hidden: 'true' } },
+          el('li', {}, el('span', { class: 'fz-record-cell fz-record-solved' }), 'Solved'),
+          el('li', {}, el('span', { class: 'fz-record-cell fz-record-tried' }), 'Tried'),
+          el('li', {}, el('span', { class: 'fz-record-cell fz-record-new' }), 'Not started')))) : null;
+    this.content.replaceChildren(intro, ...(starters ? [starters] : []), ...(recordSection ? [recordSection] : []), ...main, more, results);
     void loadHosted();
   }
 }

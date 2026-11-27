@@ -341,6 +341,10 @@ try {
   const editorColours = await page.evaluate(() => new Set([...document.querySelectorAll('.monaco-editor .view-line span > span')].map(span => getComputedStyle(span).color)).size);
   assert.ok(editorColours >= 4, `code must not be one colour (found ${editorColours})`);
   await page.screenshot({ path: join(output, 'editor-colours.png') });
+  // Calmer chrome: the status bar drops line endings, encoding and indent size; panel headings are in sentence case; the file tree is titled "Files".
+  for (const id of ['editor-status-eol', 'editor-status-encoding', 'editor-status-tabbing-config']) assert.equal(await page.locator(`#status-bar-${id}`).isVisible(), false, id);
+  assert.deepEqual(await page.evaluate(() => [...document.querySelectorAll('.theia-sidepanel-title, .theia-view-container-part-header .label')].map(node => getComputedStyle(node).textTransform).filter(value => value !== 'none')), []);
+  assert.equal(await page.evaluate(() => getComputedStyle(document.querySelector('.part[id$="--files"] > .theia-view-container-part-header .label'), '::before').content), '"Files"');
   await runTests(page, '5 of 5 public tests passed');
   console.log('Started an attempt from Home; starter file opened; public tests ran.');
 
@@ -670,6 +674,8 @@ try {
   page = await relaunch(true);
   await home(page).getByRole('heading', { name: 'Practice tasks', exact: true }).waitFor();
   assert.equal(await bodyTheme(), 'dark', 'Dark appearance persists after relaunch');
+  // Once there are results, Home shows the record: one square per task on this computer.
+  if (await home(page).locator('.fz-home-record').count()) assert.match(await home(page).locator('.fz-record-map').getAttribute('aria-label'), /^\d+ of \d+ tasks solved/);
   await page.screenshot({ path: join(output, 'home-dark.png') });
   await home(page).getByRole('button', { name: 'Continue Monthly revenue report, attempt 3', exact: true }).click();
   await attemptOpened(page, 'monthly-revenue-');
@@ -701,7 +707,7 @@ try {
     factoryzeHarness: { requests: harnessCalls, readEditShell: true, diffAndShellApproved: true, budgetPersistsAfterRestart: true },
     budgetEnforcedAfterNewSession: true, terminalUsesEngineIndex: true, paneTogglesCarryStateOnLoad: true, stopCancelsJudge: true, singleWindowAttempts: true,
     folderImport: true, zipImport: true, draftRetainedDuringSetup: true, keychainSetupEnablesSend: true, forgetConnection: true,
-    publicTestsRun: true, starterFileOpened: true, codeColoured: true, noOpenCodeInUi: true, darkAppearance: true, appearancePersists: true, matchSystemAppearance: true,
+    publicTestsRun: true, starterFileOpened: true, codeColoured: true, calmChrome: true, noOpenCodeInUi: true, darkAppearance: true, appearancePersists: true, matchSystemAppearance: true,
     toolbarOverlapsAfterLoad };
   writeFileSync(join(output, 'result.json'), JSON.stringify(result, null, 2) + '\n'); console.log(JSON.stringify(result));
 } catch (error) {

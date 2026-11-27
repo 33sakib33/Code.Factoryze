@@ -2,6 +2,18 @@
 
 Source of scope and release order: [PLAN.md](PLAN.md). Browser/community development has a synthetic prototype, Go-backed membership/privacy, a reviewed public catalog, private drafts/check jobs and disabled guided practice with immutable private result copies. Public rollout, tamper-resistant grading and reward services remain open. Desktop/lab implementation and their open release gates remain separate. Dated entries preserve historical checks and decisions.
 
+## 2026-11-28 — A calmer workbench and a visible token gauge (desktop, 0.0.10)
+
+The owner asked for the small items from the proposal in `mockups/ide-refresh.html`. Two of them were already half there: the toolbar meter already had one segment per prompt, and the report already opened with a result card and offered the next task. The work was to make them readable.
+
+- **Gauge:** prompt segments are teal in three alternating shades, taller, rounded, and never thinner than 6px, so a 336-token prompt on a 100,000 budget is visible. The running prompt keeps its hatching. Data and tooltips are unchanged.
+- **Chrome:** panel headings are in sentence case, the file tree is titled "Files" instead of the generated folder name, and the status bar no longer shows line endings, encoding, indent size, language status or the bottom-panel toggle.
+- **Result card:** the report's result card adds one sentence on cost, for example "You used 1,840 tokens in 3 prompts." (`reportCostSentence`, tested).
+- **Home record:** after the first result, Home shows one square per task on this computer, filled when solved and outlined when tried, with the fewest tokens among solved tasks (`home-record.ts`, tested).
+- Not built from the proposal: underlined problems, the "Done when" list, and the AI's mark, which needs a reference run per task.
+
+Verification on macOS/arm64: 329/329 editor tests, typecheck, `check-trial-dialog.mjs`, `mockups/check-report.mjs`, a tour of the source build (attempt, submit, report, Home) and `smoke-trial.mjs` with a real prompt on the simulated model. `smoke-solo.mjs` gains checks for the status bar and headings; it runs in the release build.
+
 ## 2026-11-28 — Coloured code in the editor (desktop, 0.0.9)
 
 The owner asked why code has no colours. The app shipped no language grammars, so every file opened as "Plain Text".

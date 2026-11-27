@@ -40,3 +40,11 @@ export function reportFacts(report: PracticeReport, budgetLimit: number, started
     minutes: Number.isFinite(duration) && duration >= 0 ? Math.max(1, Math.round(duration / 60_000)) : null,
     models: report.workspaceUsage ? [...new Set(report.workspaceUsage.filter(item => item.requests).map(item => item.scope.model))] : null };
 }
+
+/** One sentence for the result card: what the submission cost. Empty when usage was not recorded. */
+export function reportCostSentence(facts: { weighted: number | null; prompts: number | null }): string {
+  if (facts.weighted === null) return '';
+  if (facts.prompts === 0 && facts.weighted === 0) return 'You did not use the agent.';
+  const spent = `${Math.round(facts.weighted).toLocaleString('en-US')} tokens`;
+  return facts.prompts ? `You used ${spent} in ${facts.prompts} prompt${facts.prompts === 1 ? '' : 's'}.` : `You used ${spent}.`;
+}

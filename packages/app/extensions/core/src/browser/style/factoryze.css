@@ -36,6 +36,14 @@ body {
   --theia-statusBar-noFolderBackground: var(--fz-chrome); --theia-statusBar-noFolderForeground: var(--fz-muted); --theia-statusBar-noFolderBorder: var(--fz-line);
 }
 #theia-statusBar { background: var(--fz-chrome); color: var(--fz-muted); }
+/* Calmer chrome. The status bar keeps what a person working on a task reads: problems, cursor position and language. */
+#status-bar-editor-status-eol, #status-bar-editor-status-encoding, #status-bar-editor-status-tabbing-config,
+  #status-bar-editor-language-status-items, #status-bar-bottom-panel-toggle { display: none !important; }
+/* Panel headings in sentence case, like every other heading in the app. */
+#theia-app-shell .theia-sidepanel-toolbar .theia-sidepanel-title, .theia-view-container-part-header .label { text-transform: none; letter-spacing: 0; }
+/* The file tree is titled with the attempt's folder name, which is a generated name. Show what the panel is instead. */
+.part[id$="--files"] > .theia-view-container-part-header .label { font-size: 0; }
+.part[id$="--files"] > .theia-view-container-part-header .label::before { content: 'Files'; font-size: var(--theia-ui-font-size0, 11px); }
 #theia-top-panel { width: 100% !important; min-height: var(--fz-titlebar); background: var(--fz-chrome); border-bottom: 1px solid var(--fz-line); }
 /* Custom Windows/Linux chrome has its own menu and window controls. Give those a
    separate row so the absolute-positioned controls cannot cover the budget. */
@@ -91,12 +99,18 @@ a.fz-btn { text-decoration: none; }
 .fz-tag.fz-good { color: var(--fz-ok); } .fz-tag.fz-mid { color: var(--fz-warn); } .fz-tag.fz-bad { color: var(--fz-fail); }
 
 /* ---------- Budget meter ---------- */
-.fz-meter { display: flex; gap: 2px; height: 8px; width: 100%; }
+/* The gauge: one teal block per prompt, in three shades so neighbours can be told apart, then the unused track. A block never gets too thin to see. */
+.fz-meter { display: flex; gap: 2px; height: 10px; width: 100%; }
 .fz-meter.fz-meter-small { height: 6px; width: 180px; }
-.fz-seg { height: 100%; background: var(--fz-seg); border-radius: 1px; position: relative; }
+.fz-seg { height: 100%; background: var(--fz-accent); border-radius: 2px; position: relative; flex: 0 1 auto; min-width: 6px; }
+.fz-seg:nth-child(3n+2) { background: color-mix(in srgb, var(--fz-accent) 76%, var(--fz-track)); }
+.fz-seg:nth-child(3n) { background: color-mix(in srgb, var(--fz-accent) 56%, var(--fz-track)); }
+.fz-seg:first-child { border-top-left-radius: 5px; border-bottom-left-radius: 5px; }
+.fz-meter-small .fz-seg { min-width: 3px; }
+.fz-budget.fz-full .fz-seg:nth-last-child(2) { border-top-right-radius: 5px; border-bottom-right-radius: 5px; }
 .fz-seg.fz-now { background: repeating-linear-gradient(135deg, var(--fz-accent) 0 4px, var(--fz-accent-soft) 4px 7px); box-shadow: inset 0 0 0 1px var(--fz-accent); }
 .fz-seg.fz-unknown { background: repeating-linear-gradient(135deg, var(--fz-warn) 0 4px, var(--fz-warn-bg) 4px 7px); }
-.fz-seg.fz-rest { flex: 1; background: var(--fz-track); }
+.fz-seg.fz-rest { flex: 1; min-width: 0; background: var(--fz-track); border-top-right-radius: 5px; border-bottom-right-radius: 5px; }
 .fz-budget-btn .fz-seg:hover:not(.fz-rest) { background: var(--fz-text); }
 .fz-seg[data-tip]:hover::after, .fz-seg[data-tip]:focus-visible::after { content: attr(data-tip); position: absolute; top: calc(100% + 8px); left: 50%;
   transform: translateX(-50%); white-space: nowrap; background: var(--fz-tip-bg); color: var(--fz-tip-fg); padding: 6px 9px; border-radius: 4px;
@@ -162,6 +176,17 @@ a.fz-btn { text-decoration: none; }
 .fz-home-section .fz-section-head { margin-bottom: 16px; }
 .fz-home-section h2, .fz-home-more-card h2 { font-size: 17px; font-weight: 700; }
 .fz-home-section-description { margin-top: 2px!important; color: var(--fz-muted); font-size: 12px; }
+.fz-home-record { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr); gap: 16px 32px; align-items: center; }
+.fz-record-count p { color: var(--fz-muted); font-size: 14px; }
+.fz-record-count strong { font-size: 30px; line-height: 1.1; font-weight: 700; color: var(--fz-text); font-variant-numeric: tabular-nums; margin-right: 2px; }
+.fz-record-map { display: flex; flex-wrap: wrap; gap: 6px; }
+.fz-record-cell { width: 26px; height: 26px; border-radius: 6px; border: 2px solid var(--fz-line-strong); box-sizing: border-box; }
+.fz-record-cell.fz-record-solved { border-color: var(--fz-accent); background: var(--fz-accent); }
+.fz-record-cell.fz-record-tried { border-color: var(--fz-accent); background: var(--fz-accent-soft); }
+.fz-record-key { display: flex; flex-wrap: wrap; gap: 4px 16px; list-style: none; margin: 10px 0 0; padding: 0; color: var(--fz-muted); font-size: 12px; }
+.fz-record-key li { display: flex; align-items: center; gap: 6px; }
+.fz-record-key .fz-record-cell { width: 12px; height: 12px; border-radius: 3px; }
+@media (max-width: 760px) { .fz-home-record { grid-template-columns: 1fr; } }
 .fz-home-search { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: start; gap: 10px; margin-bottom: 12px; }
 .fz-home-catalog .fz-home-search { grid-template-columns: minmax(190px, 1fr) minmax(170px, 220px) auto; }
 .fz-topic-chips { display: flex; flex-wrap: wrap; gap: 7px; margin: 0 0 13px; }

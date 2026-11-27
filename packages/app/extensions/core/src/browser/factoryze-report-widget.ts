@@ -5,6 +5,7 @@ import { button, el } from './dom';
 import { submittedLabel, tokens } from './flow-model';
 import { renderReportFacts, renderReportLearning, renderReportPrompts } from './report-learning-section';
 import { renderReportResult, type ReportResult } from './report-result';
+import { reportCostSentence, reportFacts } from './report-learning';
 import { reportShareCard, reportSharePostURL, reportShareSummary, SHARE_LINK } from './report-share';
 import { hostedResultCopy } from './hosted-result-copy';
 
@@ -53,7 +54,7 @@ export class FactoryzeReportWidget extends BaseWidget {
     const { report } = view;
     this.title.label = `Report, attempt ${view.attempt}`;
     this.closeCheckDetails();
-    this.result = renderReportResult(report);
+    this.result = renderReportResult(report, reportCostSentence(reportFacts(report, view.budgetLimit, view.startedAt)));
     const share = !report.lab ? this.renderShare(view) : null;
     const hosted = !report.lab ? this.renderHosted(view) : null;
 

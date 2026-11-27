@@ -4,8 +4,11 @@ import { checkLabel } from './flow-model';
 
 export type ReportResult = { node: HTMLElement; closeDetails(): void };
 
-/** One segment per recorded check position. Older reports keep missing check details unknown. */
-export function renderReportResult(report: PracticeReport): ReportResult {
+/**
+ * One segment per recorded check position. Older reports keep missing check details unknown.
+ * `cost` is one sentence about tokens spent, so the card answers both "did it pass" and "what did it cost".
+ */
+export function renderReportResult(report: PracticeReport, cost = ''): ReportResult {
   const { passed, total } = report.correctness, allPassed = passed === total, failed = Math.max(0, total - passed);
   let activeDialog: HTMLDialogElement | undefined;
   const closeDetails = () => { activeDialog?.close(); activeDialog?.remove(); activeDialog = undefined; };
@@ -68,5 +71,5 @@ export function renderReportResult(report: PracticeReport): ReportResult {
     el('div', { class: 'fz-report-result-copy' }, el('p', { class: 'fz-report-result-label', text: 'Correctness' }),
       el('h2', { id: 'fz-report-result-title' }, el('strong', { class: 'fz-report-result-number', text: `${passed} / ${total}` }),
         el('span', { text: `hidden check${total === 1 ? '' : 's'} passed` })),
-      el('p', { class: 'fz-report-result-message', text: allPassed ? 'All checks passed.' : `${failed} check${failed === 1 ? ' needs' : 's need'} attention.` })), details) };
+      el('p', { class: 'fz-report-result-message', text: `${allPassed ? 'All checks passed.' : `${failed} check${failed === 1 ? ' needs' : 's need'} attention.`}${cost ? ` ${cost}` : ''}` })), details) };
 }
