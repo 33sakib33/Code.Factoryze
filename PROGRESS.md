@@ -2,7 +2,7 @@
 
 Source of scope and release order: [PLAN.md](PLAN.md). Browser/community development has a synthetic prototype, Go-backed membership/privacy, a reviewed public catalog, private drafts/check jobs and disabled guided practice with immutable private result copies. Public rollout, tamper-resistant grading and reward services remain open. Desktop/lab implementation and their open release gates remain separate. Dated entries preserve historical checks and decisions.
 
-## 2026-11-27 — Trial sign-in without the macOS keychain dialog (desktop, awaiting owner review)
+## 2026-11-27 — Trial sign-in without the macOS keychain dialog (desktop, released in 0.0.8)
 
 The owner got the macOS keychain dialog again after installing 0.0.7. Cause: releases are unsigned, so macOS gives a keychain entry back only to the exact build that saved it, and the app read its trial entry at every start because preferences and the sign-in shared that one entry.
 
@@ -12,7 +12,7 @@ The owner got the macOS keychain dialog again after installing 0.0.7. Cause: rel
 - Not migrated: the entry written by releases up to 0.0.7 is never read. After updating, a person who used trial credits signs in and picks the model once more.
 - Unchanged: a saved own-key connection and lab sessions still live in the keychain, so they still raise the dialog once per update until releases are signed.
 
-Verification on macOS/arm64: 316/316 editor tests, typecheck, source build, and `smoke-trial.mjs`, which now plants a keychain entry owned by another program before launch and checks the preferences file. Not done: Windows and Linux runs, a packaged build, and a run of the old code against the planted entry (it would raise the dialog on the owner's screen). Key handling changed, so this needs the owner's review before merging.
+Verification on macOS/arm64: 316/316 editor tests, typecheck, source build, and `smoke-trial.mjs`, which now plants a keychain entry owned by another program before launch and checks the preferences file. The owner approved the release; v0.0.8 was published on 2026-11-27 and its packaged macOS build passed the same `smoke-trial.mjs` run. The release build's Windows job timed out once in the lab smoke test and passed on a rerun; the same commit passed that test on Windows in the `main` build. Not done: a hand install on Windows or Linux, a trial sign-in on those systems, and a run of the old code against the planted entry (it would raise the dialog on the owner's screen).
 
 ## 2026-11-27 — Trial credit follows the email (desktop, website, backend)
 
